@@ -114,3 +114,4 @@ server/firebase-admin.ts
 screenshots/
 server/firebase-credentials.json
 server/firebase-credentials.json
+functions/serviceAccountKey.json
