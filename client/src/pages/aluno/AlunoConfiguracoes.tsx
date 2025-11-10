@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import { trpc } from "@/lib/trpc"; // TODO: Implementar com alunoApi
+import { useState, useEffect } from "react";
+import { alunoApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,10 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Settings, User, Lock, Loader2 } from "lucide-react";
-// Firebase removido - usando autenticação própria
+import { getAuth, updateEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "firebase/auth";
 
 export default function AlunoConfiguracoes() {
-  const { data: aluno, refetch } = trpc.aluno.me.useQuery();
+  const [aluno, setAluno] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [loadingPassword, setLoadingPassword] = useState(false);
 
@@ -26,28 +27,26 @@ export default function AlunoConfiguracoes() {
     confirmarSenha: "",
   });
 
-  const updateAluno = trpc.aluno.updateProfile.useMutation({
-    onSuccess: () => {
-      toast.success("Perfil atualizado com sucesso!");
-      refetch();
-      setLoadingProfile(false);
-    },
-    onError: (error: any) => {
-      toast.error(error.message || "Erro ao atualizar perfil");
-      setLoadingProfile(false);
-    },
-  });
-
-  // Preencher dados quando aluno carregar
-  useState(() => {
-    if (aluno) {
+  const loadAluno = async () => {
+    try {
+      setIsLoading(true);
+      const data = await alunoApi.getMe();
+      setAluno(data);
       setProfileData({
-        nome: aluno.nome || "",
-        email: aluno.email || "",
-        celular: aluno.celular || "",
+        nome: data.nome || "",
+        email: data.email || "",
+        celular: data.celular || "",
       });
+    } catch (error: any) {
+      toast.error(error.message || "Erro ao carregar dados do aluno");
+    } finally {
+      setIsLoading(false);
     }
-  });
+  };
+
+  useEffect(() => {
+    loadAluno();
+  }, []);
 
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,15 +59,19 @@ export default function AlunoConfiguracoes() {
     }
 
     try {
+      const auth = getAuth();
       // Atualizar email no Firebase se mudou
       if (auth.currentUser && profileData.email !== aluno?.email) {
         await updateEmail(auth.currentUser, profileData.email);
       }
 
       // Atualizar no banco de dados
-      updateAluno.mutate(profileData);
+      await alunoApi.updateProfile({ nome: profileData.nome, celular: profileData.celular });
+      toast.success("Perfil atualizado com sucesso!");
+      await loadAluno();
     } catch (error: any) {
-      toast.error(error.message || "Erro ao atualizar email");
+      toast.error(error.message || "Erro ao atualizar perfil");
+    } finally {
       setLoadingProfile(false);
     }
   };
@@ -96,6 +99,7 @@ export default function AlunoConfiguracoes() {
     }
 
     try {
+      const auth = getAuth();
       const user = auth.currentUser;
       if (!user || !user.email) {
         toast.error("Usuário não autenticado");
@@ -116,18 +120,18 @@ export default function AlunoConfiguracoes() {
         novaSenha: "",
         confirmarSenha: "",
       });
-      setLoadingPassword(false);
     } catch (error: any) {
       if (error.code === "auth/wrong-password") {
         toast.error("Senha atual incorreta");
       } else {
         toast.error(error.message || "Erro ao alterar senha");
       }
+    } finally {
       setLoadingPassword(false);
     }
   };
 
-  if (!aluno) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -180,7 +184,7 @@ export default function AlunoConfiguracoes() {
                 placeholder="seu@email.com"
               />
               <p className="text-xs text-muted-foreground">
-                Alterar o email requer reautenticação
+                Alterar o email pode exigir reautenticação.
               </p>
             </div>
 

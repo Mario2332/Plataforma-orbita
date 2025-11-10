@@ -4,9 +4,9 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-// import { trpc } from "@/lib/trpc"; // TODO: Implementar com alunoApi
+import { alunoApi } from "@/lib/api";
 import { BookOpen, Clock, Edit, Play, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 export default function AlunoEstudos() {
@@ -14,28 +14,9 @@ export default function AlunoEstudos() {
   const [cronometroAtivo, setCronometroAtivo] = useState(false);
   const [tempoDecorrido, setTempoDecorrido] = useState(0);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
-
-  const { data: estudos, isLoading, refetch } = trpc.aluno.getEstudos.useQuery();
-  const createMutation = trpc.aluno.createEstudo.useMutation({
-    onSuccess: () => {
-      toast.success("Estudo registrado com sucesso!");
-      refetch();
-      setDialogOpen(false);
-    },
-    onError: (error) => {
-      toast.error("Erro ao registrar estudo: " + error.message);
-    },
-  });
-
-  const deleteMutation = trpc.aluno.deleteEstudo.useMutation({
-    onSuccess: () => {
-      toast.success("Estudo excluído com sucesso!");
-      refetch();
-    },
-    onError: (error) => {
-      toast.error("Erro ao excluir estudo: " + error.message);
-    },
-  });
+  const [estudos, setEstudos] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   const [formData, setFormData] = useState({
     data: new Date().toISOString().split("T")[0],
@@ -47,17 +28,49 @@ export default function AlunoEstudos() {
     flashcardsRevisados: 0,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    createMutation.mutate({
-      ...formData,
-      data: new Date(formData.data),
-    });
+  const loadEstudos = async () => {
+    try {
+      setIsLoading(true);
+      const data = await alunoApi.getEstudos();
+      setEstudos(data as any[]);
+    } catch (error: any) {
+      toast.error(error.message || "Erro ao carregar estudos");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleDelete = (id: number) => {
+  useEffect(() => {
+    loadEstudos();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setIsSaving(true);
+      await alunoApi.createEstudo({
+        ...formData,
+        data: new Date(formData.data),
+      });
+      toast.success("Estudo registrado com sucesso!");
+      setDialogOpen(false);
+      await loadEstudos();
+    } catch (error: any) {
+      toast.error(error.message || "Erro ao registrar estudo");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
     if (confirm("Tem certeza que deseja excluir este registro?")) {
-      deleteMutation.mutate({ id });
+      try {
+        await alunoApi.deleteEstudo(id);
+        toast.success("Estudo excluído com sucesso!");
+        await loadEstudos();
+      } catch (error: any) {
+        toast.error(error.message || "Erro ao excluir estudo");
+      }
     }
   };
 
@@ -101,99 +114,99 @@ export default function AlunoEstudos() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className=\"flex items-center justify-center min-h-[400px]\">
+        <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-primary\"></div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className=\"space-y-6\">
+      <div className=\"flex items-center justify-between\">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Estudos</h1>
-          <p className="text-muted-foreground mt-2">Registre e acompanhe suas sessões de estudo</p>
+          <h1 className=\"text-3xl font-bold tracking-tight\">Estudos</h1>
+          <p className=\"text-muted-foreground mt-2\">Registre e acompanhe suas sessões de estudo</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button>
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className=\"h-4 w-4 mr-2\" />
               Registrar Estudo
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className=\"max-w-2xl max-h-[90vh] overflow-y-auto\">
             <DialogHeader>
               <DialogTitle>Registrar Sessão de Estudo</DialogTitle>
               <DialogDescription>Preencha os detalhes da sua sessão de estudo</DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit}>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="data">Data</Label>
+              <div className=\"grid gap-4 py-4\">
+                <div className=\"grid grid-cols-2 gap-4\">
+                  <div className=\"space-y-2\">
+                    <Label htmlFor=\"data\">Data</Label>
                     <Input
-                      id="data"
-                      type="date"
+                      id=\"data\"
+                      type=\"date\"
                       value={formData.data}
                       onChange={(e) => setFormData({ ...formData, data: e.target.value })}
                       required
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="tempoMinutos">Tempo (minutos)</Label>
+                  <div className=\"space-y-2\">
+                    <Label htmlFor=\"tempoMinutos\">Tempo (minutos)</Label>
                     <Input
-                      id="tempoMinutos"
-                      type="number"
+                      id=\"tempoMinutos\"
+                      type=\"number\"
                       value={formData.tempoMinutos}
                       onChange={(e) => setFormData({ ...formData, tempoMinutos: parseInt(e.target.value) || 0 })}
                       required
                     />
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="materia">Matéria</Label>
+                <div className=\"space-y-2\">
+                  <Label htmlFor=\"materia\">Matéria</Label>
                   <Input
-                    id="materia"
-                    placeholder="Ex: Matemática, Português, Física..."
+                    id=\"materia\"
+                    placeholder=\"Ex: Matemática, Português, Física...\"
                     value={formData.materia}
                     onChange={(e) => setFormData({ ...formData, materia: e.target.value })}
                     required
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="conteudo">Conteúdo Específico</Label>
+                <div className=\"space-y-2\">
+                  <Label htmlFor=\"conteudo\">Conteúdo Específico</Label>
                   <Input
-                    id="conteudo"
-                    placeholder="Ex: Geometria Plana, Sintaxe, Cinemática..."
+                    id=\"conteudo\"
+                    placeholder=\"Ex: Geometria Plana, Sintaxe, Cinemática...\"
                     value={formData.conteudo}
                     onChange={(e) => setFormData({ ...formData, conteudo: e.target.value })}
                     required
                   />
                 </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="questoesFeitas">Questões Feitas</Label>
+                <div className=\"grid grid-cols-3 gap-4\">
+                  <div className=\"space-y-2\">
+                    <Label htmlFor=\"questoesFeitas\">Questões Feitas</Label>
                     <Input
-                      id="questoesFeitas"
-                      type="number"
+                      id=\"questoesFeitas\"
+                      type=\"number\"
                       value={formData.questoesFeitas}
                       onChange={(e) => setFormData({ ...formData, questoesFeitas: parseInt(e.target.value) || 0 })}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="questoesAcertadas">Acertos</Label>
+                  <div className=\"space-y-2\">
+                    <Label htmlFor=\"questoesAcertadas\">Acertos</Label>
                     <Input
-                      id="questoesAcertadas"
-                      type="number"
+                      id=\"questoesAcertadas\"
+                      type=\"number\"
                       value={formData.questoesAcertadas}
                       onChange={(e) => setFormData({ ...formData, questoesAcertadas: parseInt(e.target.value) || 0 })}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="flashcardsRevisados">Flashcards</Label>
+                  <div className=\"space-y-2\">
+                    <Label htmlFor=\"flashcardsRevisados\">Flashcards</Label>
                     <Input
-                      id="flashcardsRevisados"
-                      type="number"
+                      id=\"flashcardsRevisados\"
+                      type=\"number\"
                       value={formData.flashcardsRevisados}
                       onChange={(e) => setFormData({ ...formData, flashcardsRevisados: parseInt(e.target.value) || 0 })}
                     />
@@ -201,8 +214,8 @@ export default function AlunoEstudos() {
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit" disabled={createMutation.isPending}>
-                  {createMutation.isPending ? "Salvando..." : "Salvar"}
+                <Button type=\"submit\" disabled={isSaving}>
+                  {isSaving ? \"Salvando...\" : \"Salvar\"}
                 </Button>
               </DialogFooter>
             </form>
@@ -213,32 +226,32 @@ export default function AlunoEstudos() {
       {/* Cronômetro */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Clock className="h-5 w-5" />
+          <CardTitle className=\"flex items-center gap-2\">
+            <Clock className=\"h-5 w-5\" />
             Cronômetro de Estudos
           </CardTitle>
           <CardDescription>Use o cronômetro para medir o tempo de estudo</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col items-center gap-4">
-            <div className="text-6xl font-bold font-mono">{formatarTempo(tempoDecorrido)}</div>
-            <div className="flex gap-2">
+          <div className=\"flex flex-col items-center gap-4\">
+            <div className=\"text-6xl font-bold font-mono\">{formatarTempo(tempoDecorrido)}</div>
+            <div className=\"flex gap-2\">
               {!cronometroAtivo ? (
-                <Button onClick={iniciarCronometro} size="lg">
-                  <Play className="h-5 w-5 mr-2" />
+                <Button onClick={iniciarCronometro} size=\"lg\">
+                  <Play className=\"h-5 w-5 mr-2\" />
                   Iniciar
                 </Button>
               ) : (
-                <Button onClick={pausarCronometro} variant="secondary" size="lg">
+                <Button onClick={pausarCronometro} variant=\"secondary\" size=\"lg\">
                   Pausar
                 </Button>
               )}
-              <Button onClick={resetarCronometro} variant="outline" size="lg">
+              <Button onClick={resetarCronometro} variant=\"outline\" size=\"lg\">
                 Resetar
               </Button>
               {tempoDecorrido > 0 && (
-                <Button onClick={salvarCronometro} variant="default" size="lg">
-                  <BookOpen className="h-5 w-5 mr-2" />
+                <Button onClick={salvarCronometro} variant=\"default\" size=\"lg\">
+                  <BookOpen className=\"h-5 w-5 mr-2\" />
                   Salvar Sessão
                 </Button>
               )}
@@ -255,7 +268,7 @@ export default function AlunoEstudos() {
         </CardHeader>
         <CardContent>
           {estudos && estudos.length > 0 ? (
-            <div className="rounded-md border">
+            <div className=\"rounded-md border\">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -266,31 +279,31 @@ export default function AlunoEstudos() {
                     <TableHead>Questões</TableHead>
                     <TableHead>Acertos</TableHead>
                     <TableHead>Flashcards</TableHead>
-                    <TableHead className="text-right">Ações</TableHead>
+                    <TableHead className=\"text-right\">Ações</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {estudos.map((estudo) => (
                     <TableRow key={estudo.id}>
-                      <TableCell>{new Date(estudo.data).toLocaleDateString("pt-BR")}</TableCell>
-                      <TableCell className="font-medium">{estudo.materia}</TableCell>
+                      <TableCell>{new Date(estudo.data).toLocaleDateString(\"pt-BR\")}</TableCell>
+                      <TableCell className=\"font-medium\">{estudo.materia}</TableCell>
                       <TableCell>{estudo.conteudo}</TableCell>
                       <TableCell>{estudo.tempoMinutos}min</TableCell>
                       <TableCell>{estudo.questoesFeitas}</TableCell>
                       <TableCell>{estudo.questoesAcertadas}</TableCell>
                       <TableCell>{estudo.flashcardsRevisados}</TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button variant="ghost" size="icon" disabled>
-                            <Edit className="h-4 w-4" />
+                      <TableCell className=\"text-right\">
+                        <div className=\"flex justify-end gap-2\">
+                          <Button variant=\"ghost\" size=\"icon\" disabled>
+                            <Edit className=\"h-4 w-4\" />
                           </Button>
                           <Button
-                            variant="ghost"
-                            size="icon"
+                            variant=\"ghost\"
+                            size=\"icon\"
                             onClick={() => handleDelete(estudo.id)}
-                            disabled={deleteMutation.isPending}
+                            disabled={isSaving}
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className=\"h-4 w-4\" />
                           </Button>
                         </div>
                       </TableCell>
@@ -300,10 +313,10 @@ export default function AlunoEstudos() {
               </Table>
             </div>
           ) : (
-            <div className="text-center py-12 text-muted-foreground">
-              <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <div className=\"text-center py-12 text-muted-foreground\">
+              <BookOpen className=\"h-12 w-12 mx-auto mb-4 opacity-50\" />
               <p>Nenhum estudo registrado ainda.</p>
-              <p className="text-sm mt-2">Comece registrando sua primeira sessão de estudos!</p>
+              <p className=\"text-sm mt-2\">Comece registrando sua primeira sessão de estudos!</p>
             </div>
           )}
         </CardContent>

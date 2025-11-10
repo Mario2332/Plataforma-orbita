@@ -4,29 +4,16 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-// import { trpc } from "@/lib/trpc"; // TODO: Implementar com alunoApi
+import { alunoApi } from "@/lib/api";
 import { FileText, Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 export default function AlunoSimulados() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { data: simulados, isLoading, refetch } = trpc.aluno.getSimulados.useQuery();
-
-  const createMutation = trpc.aluno.createSimulado.useMutation({
-    onSuccess: () => {
-      toast.success("Simulado registrado!");
-      refetch();
-      setDialogOpen(false);
-    },
-  });
-
-  const deleteMutation = trpc.aluno.deleteSimulado.useMutation({
-    onSuccess: () => {
-      toast.success("Simulado excluído!");
-      refetch();
-    },
-  });
+  const [simulados, setSimulados] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
 
   const [formData, setFormData] = useState({
     nome: "",
@@ -43,12 +30,50 @@ export default function AlunoSimulados() {
     redacaoTempo: 0,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const loadSimulados = async () => {
+    try {
+      setIsLoading(true);
+      const data = await alunoApi.getSimulados();
+      setSimulados(data as any[]);
+    } catch (error: any) {
+      toast.error(error.message || "Erro ao carregar simulados");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadSimulados();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    createMutation.mutate({
-      ...formData,
-      data: new Date(formData.data),
-    });
+    try {
+      setIsSaving(true);
+      await alunoApi.createSimulado({
+        ...formData,
+        data: new Date(formData.data),
+      });
+      toast.success("Simulado registrado!");
+      setDialogOpen(false);
+      await loadSimulados();
+    } catch (error: any) {
+      toast.error(error.message || "Erro ao registrar simulado");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Tem certeza que deseja excluir este simulado?")) {
+      try {
+        await alunoApi.deleteSimulado(id);
+        toast.success("Simulado excluído!");
+        await loadSimulados();
+      } catch (error: any) {
+        toast.error(error.message || "Erro ao excluir simulado");
+      }
+    }
   };
 
   if (isLoading) {
@@ -137,8 +162,8 @@ export default function AlunoSimulados() {
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit" disabled={createMutation.isPending}>
-                  {createMutation.isPending ? "Salvando..." : "Salvar"}
+                <Button type="submit" disabled={isSaving}>
+                  {isSaving ? "Salvando..." : "Salvar"}
                 </Button>
               </DialogFooter>
             </form>
@@ -182,7 +207,7 @@ export default function AlunoSimulados() {
                         <TableCell className="font-bold">{total}/180</TableCell>
                         <TableCell>{s.redacaoNota}</TableCell>
                         <TableCell className="text-right">
-                          <Button variant="ghost" size="icon" onClick={() => deleteMutation.mutate({id: s.id})}>
+                          <Button variant="ghost" size="icon" onClick={() => handleDelete(s.id)} disabled={isSaving}>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </TableCell>

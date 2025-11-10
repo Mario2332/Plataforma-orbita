@@ -89,6 +89,12 @@ export const mentorApi = {
 // ============================================
 
 export const alunoApi = {
+  // Profile
+  getMe: () => callFunction("aluno_getMe"),
+  updateProfile: (data: {
+    nome?: string;
+    celular?: string;
+  }) => callFunction("aluno_updateProfile", data),
   // Estudos
   getEstudos: () => callFunction("aluno_getEstudos"),
   createEstudo: (data: {
