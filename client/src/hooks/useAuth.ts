@@ -114,7 +114,7 @@ export function useAuth() {
   };
 
   // Função de cadastro (apenas para alunos)
-  const signUp = async (email: string, password: string, name: string, mentorId: string) => {
+  const signUp = async (email: string, password: string, name: string, mentorId: string | null) => {
     try {
       setAuthState((prev) => ({ ...prev, loading: true, error: null }));
       

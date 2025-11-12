@@ -8,7 +8,7 @@ interface AuthContextType {
   loading: boolean;
   error: string | null;
   signIn: (email: string, password: string) => Promise<FirebaseUser>;
-  signUp: (email: string, password: string, name: string, mentorId: string) => Promise<FirebaseUser>;
+  signUp: (email: string, password: string, name: string, mentorId: string | null) => Promise<FirebaseUser>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updateUserProfile: (updates: { name?: string; email?: string }) => Promise<void>;

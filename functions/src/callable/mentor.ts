@@ -31,9 +31,9 @@ const getAlunos = functions
     const auth = await getAuthContext(context);
     requireRole(auth, "mentor");
 
+    // Retornar todos os alunos (sem filtro de mentorId)
     const alunosSnapshot = await db
       .collection("alunos")
-      .where("mentorId", "==", auth.uid)
       .get();
 
     return alunosSnapshot.docs.map((doc) => ({
@@ -63,14 +63,8 @@ const getAlunoById = functions
       throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
     }
 
-    const alunoData = alunoDoc.data()!;
-
-    // Verificar se o aluno pertence ao mentor
-    if (alunoData.mentorId !== auth.uid) {
-      throw new functions.https.HttpsError("permission-denied", "Acesso negado");
-    }
-
-    return { id: alunoDoc.id, ...alunoData };
+    // Permitir acesso a qualquer aluno (sem verificação de mentorId)
+    return { id: alunoDoc.id, ...alunoDoc.data() };
   });
 
 /**
@@ -146,10 +140,10 @@ const updateAluno = functions
     }
 
     try {
-      // Verificar se o aluno pertence ao mentor
+      // Verificar se o aluno existe
       const alunoDoc = await db.collection("alunos").doc(alunoId).get();
-      if (!alunoDoc.exists || alunoDoc.data()!.mentorId !== auth.uid) {
-        throw new functions.https.HttpsError("permission-denied", "Acesso negado");
+      if (!alunoDoc.exists) {
+        throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
       }
 
       const updates: any = {
@@ -200,10 +194,10 @@ const deleteAluno = functions
     }
 
     try {
-      // Verificar se o aluno pertence ao mentor
+      // Verificar se o aluno existe
       const alunoDoc = await db.collection("alunos").doc(alunoId).get();
-      if (!alunoDoc.exists || alunoDoc.data()!.mentorId !== auth.uid) {
-        throw new functions.https.HttpsError("permission-denied", "Acesso negado");
+      if (!alunoDoc.exists) {
+        throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
       }
 
       // Deletar documento do aluno
@@ -237,10 +231,10 @@ const getAlunoEstudos = functions
       throw new functions.https.HttpsError("invalid-argument", "ID do aluno é obrigatório");
     }
 
-    // Verificar se o aluno pertence ao mentor
+    // Verificar se o aluno existe
     const alunoDoc = await db.collection("alunos").doc(alunoId).get();
-    if (!alunoDoc.exists || alunoDoc.data()!.mentorId !== auth.uid) {
-      throw new functions.https.HttpsError("permission-denied", "Acesso negado");
+    if (!alunoDoc.exists) {
+      throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
     }
 
     const estudosSnapshot = await db
@@ -271,10 +265,10 @@ const getAlunoSimulados = functions
       throw new functions.https.HttpsError("invalid-argument", "ID do aluno é obrigatório");
     }
 
-    // Verificar se o aluno pertence ao mentor
+    // Verificar se o aluno existe
     const alunoDoc = await db.collection("alunos").doc(alunoId).get();
-    if (!alunoDoc.exists || alunoDoc.data()!.mentorId !== auth.uid) {
-      throw new functions.https.HttpsError("permission-denied", "Acesso negado");
+    if (!alunoDoc.exists) {
+      throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
     }
 
     const simuladosSnapshot = await db
@@ -305,10 +299,10 @@ const getAlunoDashboard = functions
       throw new functions.https.HttpsError("invalid-argument", "ID do aluno é obrigatório");
     }
 
-    // Verificar se o aluno pertence ao mentor
+    // Verificar se o aluno existe
     const alunoDoc = await db.collection("alunos").doc(alunoId).get();
-    if (!alunoDoc.exists || alunoDoc.data()!.mentorId !== auth.uid) {
-      throw new functions.https.HttpsError("permission-denied", "Acesso negado");
+    if (!alunoDoc.exists) {
+      throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
     }
 
     // Buscar estudos

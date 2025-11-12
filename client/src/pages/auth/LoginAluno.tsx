@@ -80,8 +80,8 @@ export default function LoginAluno() {
       return;
     }
 
-    // TODO: Obter mentorId de forma dinâmica (query params, subdomínio, etc.)
-    const mentorId = cadastroData.mentorId || "DEFAULT_MENTOR_ID";
+    // Alunos que se cadastram diretamente não têm mentor associado inicialmente
+    const mentorId = cadastroData.mentorId || null;
 
     setLoading(true);
 
