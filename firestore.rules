@@ -84,8 +84,11 @@ service cloud.firestore {
                        isOwner(alunoId) && 
                        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['userId', 'mentorId', 'ativo']);
       
-      // Criação e deleção apenas via Cloud Functions
-      allow create, delete: if false;
+      // Permitir criação durante cadastro (usuário autenticado criando seu próprio documento)
+      allow create: if isAuthenticated() && request.auth.uid == alunoId;
+      
+      // Deleção apenas via Cloud Functions
+      allow delete: if false;
       
       // ============================================
       // ESTUDOS (subcoleção)
