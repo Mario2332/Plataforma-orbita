@@ -5,18 +5,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { alunoApi } from "@/lib/api";
-import { BookOpen, Clock, Edit, Play, Plus, Trash2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { BookOpen, Clock, Edit, Play, Plus, Trash2, Pause, RotateCcw, Save } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
+
+const CRONOMETRO_STORAGE_KEY = "aluno_cronometro_estado";
+
+interface CronometroEstado {
+  ativo: boolean;
+  tempoInicio: number | null;
+  tempoAcumulado: number;
+}
 
 export default function AlunoEstudos() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [cronometroAtivo, setCronometroAtivo] = useState(false);
   const [tempoDecorrido, setTempoDecorrido] = useState(0);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [estudos, setEstudos] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const [formData, setFormData] = useState({
     data: new Date().toISOString().split("T")[0],
@@ -27,6 +35,59 @@ export default function AlunoEstudos() {
     questoesAcertadas: 0,
     flashcardsRevisados: 0,
   });
+
+  // Carregar estado do cronômetro do localStorage
+  useEffect(() => {
+    const estadoSalvo = localStorage.getItem(CRONOMETRO_STORAGE_KEY);
+    if (estadoSalvo) {
+      try {
+        const estado: CronometroEstado = JSON.parse(estadoSalvo);
+        
+        if (estado.ativo && estado.tempoInicio) {
+          // Calcular tempo decorrido desde o início
+          const agora = Date.now();
+          const tempoTotal = estado.tempoAcumulado + Math.floor((agora - estado.tempoInicio) / 1000);
+          setTempoDecorrido(tempoTotal);
+          setCronometroAtivo(true);
+        } else {
+          setTempoDecorrido(estado.tempoAcumulado);
+          setCronometroAtivo(false);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar estado do cronômetro:", error);
+      }
+    }
+  }, []);
+
+  // Atualizar cronômetro a cada segundo
+  useEffect(() => {
+    if (cronometroAtivo) {
+      intervalRef.current = setInterval(() => {
+        setTempoDecorrido((prev) => prev + 1);
+      }, 1000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [cronometroAtivo]);
+
+  // Salvar estado do cronômetro no localStorage
+  useEffect(() => {
+    const estado: CronometroEstado = {
+      ativo: cronometroAtivo,
+      tempoInicio: cronometroAtivo ? Date.now() - (tempoDecorrido * 1000) : null,
+      tempoAcumulado: tempoDecorrido,
+    };
+    localStorage.setItem(CRONOMETRO_STORAGE_KEY, JSON.stringify(estado));
+  }, [cronometroAtivo, tempoDecorrido]);
 
   const loadEstudos = async () => {
     try {
@@ -54,6 +115,15 @@ export default function AlunoEstudos() {
       });
       toast.success("Estudo registrado com sucesso!");
       setDialogOpen(false);
+      setFormData({
+        data: new Date().toISOString().split("T")[0],
+        materia: "",
+        conteudo: "",
+        tempoMinutos: 0,
+        questoesFeitas: 0,
+        questoesAcertadas: 0,
+        flashcardsRevisados: 0,
+      });
       await loadEstudos();
     } catch (error: any) {
       toast.error(error.message || "Erro ao registrar estudo");
@@ -74,32 +144,31 @@ export default function AlunoEstudos() {
     }
   };
 
-  // Cronômetro
+  // Funções do cronômetro
   const iniciarCronometro = () => {
     setCronometroAtivo(true);
-    const id = setInterval(() => {
-      setTempoDecorrido((prev) => prev + 1);
-    }, 1000);
-    setIntervalId(id);
   };
 
   const pausarCronometro = () => {
     setCronometroAtivo(false);
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId(null);
-    }
   };
 
   const resetarCronometro = () => {
-    pausarCronometro();
+    setCronometroAtivo(false);
     setTempoDecorrido(0);
+    localStorage.removeItem(CRONOMETRO_STORAGE_KEY);
   };
 
   const salvarCronometro = () => {
+    const minutos = Math.floor(tempoDecorrido / 60);
+    if (minutos === 0) {
+      toast.error("O tempo deve ser maior que zero");
+      return;
+    }
+    
     setFormData({
       ...formData,
-      tempoMinutos: Math.floor(tempoDecorrido / 60),
+      tempoMinutos: minutos,
     });
     setDialogOpen(true);
     resetarCronometro();
@@ -157,63 +226,73 @@ export default function AlunoEstudos() {
                     <Input
                       id="tempoMinutos"
                       type="number"
+                      min="1"
                       value={formData.tempoMinutos}
                       onChange={(e) => setFormData({ ...formData, tempoMinutos: parseInt(e.target.value) || 0 })}
                       required
                     />
                   </div>
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="materia">Matéria</Label>
                   <Input
                     id="materia"
-                    placeholder="Ex: Matemática, Português, Física..."
                     value={formData.materia}
                     onChange={(e) => setFormData({ ...formData, materia: e.target.value })}
+                    placeholder="Ex: Matemática, Português..."
                     required
                   />
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="conteudo">Conteúdo Específico</Label>
+                  <Label htmlFor="conteudo">Conteúdo Estudado</Label>
                   <Input
                     id="conteudo"
-                    placeholder="Ex: Geometria Plana, Sintaxe, Cinemática..."
                     value={formData.conteudo}
                     onChange={(e) => setFormData({ ...formData, conteudo: e.target.value })}
-                    required
+                    placeholder="Ex: Funções quadráticas, Análise sintática..."
                   />
                 </div>
+
                 <div className="grid grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="questoesFeitas">Questões Feitas</Label>
                     <Input
                       id="questoesFeitas"
                       type="number"
+                      min="0"
                       value={formData.questoesFeitas}
                       onChange={(e) => setFormData({ ...formData, questoesFeitas: parseInt(e.target.value) || 0 })}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="questoesAcertadas">Acertos</Label>
+                    <Label htmlFor="questoesAcertadas">Questões Acertadas</Label>
                     <Input
                       id="questoesAcertadas"
                       type="number"
+                      min="0"
                       value={formData.questoesAcertadas}
                       onChange={(e) => setFormData({ ...formData, questoesAcertadas: parseInt(e.target.value) || 0 })}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="flashcardsRevisados">Flashcards</Label>
+                    <Label htmlFor="flashcardsRevisados">Flashcards Revisados</Label>
                     <Input
                       id="flashcardsRevisados"
                       type="number"
+                      min="0"
                       value={formData.flashcardsRevisados}
                       onChange={(e) => setFormData({ ...formData, flashcardsRevisados: parseInt(e.target.value) || 0 })}
                     />
                   </div>
                 </div>
               </div>
+
               <DialogFooter>
+                <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
+                  Cancelar
+                </Button>
                 <Button type="submit" disabled={isSaving}>
                   {isSaving ? "Salvando..." : "Salvar"}
                 </Button>
@@ -228,47 +307,70 @@ export default function AlunoEstudos() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Clock className="h-5 w-5" />
-            Cronômetro de Estudos
+            Cronômetro de Estudo
           </CardTitle>
-          <CardDescription>Use o cronômetro para medir o tempo de estudo</CardDescription>
+          <CardDescription>
+            Inicie o cronômetro para registrar o tempo de estudo em tempo real
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col items-center gap-4">
-            <div className="text-6xl font-bold font-mono">{formatarTempo(tempoDecorrido)}</div>
-            <div className="flex gap-2">
+          <div className="flex flex-col items-center gap-6">
+            <div className="text-6xl font-mono font-bold tabular-nums">
+              {formatarTempo(tempoDecorrido)}
+            </div>
+            <div className="flex gap-3">
               {!cronometroAtivo ? (
                 <Button onClick={iniciarCronometro} size="lg">
                   <Play className="h-5 w-5 mr-2" />
                   Iniciar
                 </Button>
               ) : (
-                <Button onClick={pausarCronometro} variant="secondary" size="lg">
+                <Button onClick={pausarCronometro} size="lg" variant="secondary">
+                  <Pause className="h-5 w-5 mr-2" />
                   Pausar
                 </Button>
               )}
-              <Button onClick={resetarCronometro} variant="outline" size="lg">
+              <Button onClick={resetarCronometro} size="lg" variant="outline">
+                <RotateCcw className="h-5 w-5 mr-2" />
                 Resetar
               </Button>
-              {tempoDecorrido > 0 && (
-                <Button onClick={salvarCronometro} variant="default" size="lg">
-                  <BookOpen className="h-5 w-5 mr-2" />
-                  Salvar Sessão
-                </Button>
-              )}
+              <Button 
+                onClick={salvarCronometro} 
+                size="lg" 
+                variant="default"
+                disabled={tempoDecorrido === 0}
+              >
+                <Save className="h-5 w-5 mr-2" />
+                Salvar Sessão
+              </Button>
             </div>
+            {cronometroAtivo && (
+              <p className="text-sm text-muted-foreground">
+                ⏱️ Cronômetro ativo - Continue estudando! O tempo será salvo mesmo se você trocar de aba.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
 
-      {/* Histórico de Estudos */}
+      {/* Lista de Estudos */}
       <Card>
         <CardHeader>
-          <CardTitle>Histórico de Estudos</CardTitle>
-          <CardDescription>Todos os seus registros de estudo</CardDescription>
+          <CardTitle className="flex items-center gap-2">
+            <BookOpen className="h-5 w-5" />
+            Histórico de Estudos
+          </CardTitle>
+          <CardDescription>Suas sessões de estudo registradas</CardDescription>
         </CardHeader>
         <CardContent>
-          {estudos && estudos.length > 0 ? (
-            <div className="rounded-md border">
+          {estudos.length === 0 ? (
+            <div className="text-center py-12 text-muted-foreground">
+              <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <p>Nenhum estudo registrado ainda</p>
+              <p className="text-sm mt-2">Comece registrando sua primeira sessão de estudo!</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -285,38 +387,26 @@ export default function AlunoEstudos() {
                 <TableBody>
                   {estudos.map((estudo) => (
                     <TableRow key={estudo.id}>
-                      <TableCell>{new Date(estudo.data).toLocaleDateString("pt-BR")}</TableCell>
+                      <TableCell>{new Date(estudo.data.seconds * 1000).toLocaleDateString("pt-BR")}</TableCell>
                       <TableCell className="font-medium">{estudo.materia}</TableCell>
-                      <TableCell>{estudo.conteudo}</TableCell>
-                      <TableCell>{estudo.tempoMinutos}min</TableCell>
-                      <TableCell>{estudo.questoesFeitas}</TableCell>
-                      <TableCell>{estudo.questoesAcertadas}</TableCell>
-                      <TableCell>{estudo.flashcardsRevisados}</TableCell>
+                      <TableCell>{estudo.conteudo || "-"}</TableCell>
+                      <TableCell>{estudo.tempoMinutos} min</TableCell>
+                      <TableCell>{estudo.questoesFeitas || 0}</TableCell>
+                      <TableCell>{estudo.questoesAcertadas || 0}</TableCell>
+                      <TableCell>{estudo.flashcardsRevisados || 0}</TableCell>
                       <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button variant="ghost" size="icon" disabled>
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDelete(estudo.id)}
-                            disabled={isSaving}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(estudo.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-            </div>
-          ) : (
-            <div className="text-center py-12 text-muted-foreground">
-              <BookOpen className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>Nenhum estudo registrado ainda.</p>
-              <p className="text-sm mt-2">Comece registrando sua primeira sessão de estudos!</p>
             </div>
           )}
         </CardContent>
