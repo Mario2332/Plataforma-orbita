@@ -36,7 +36,7 @@ export const createHorario = functions
     const auth = await getAuthContext(context);
     requireRole(auth, "aluno");
 
-    const { diaSemana, horaInicio, horaFim, materia, descricao } = data;
+    const { diaSemana, horaInicio, horaFim, materia, descricao, cor } = data;
 
     if (
       diaSemana === undefined ||
@@ -61,6 +61,7 @@ export const createHorario = functions
           horaFim,
           materia,
           descricao: descricao || null,
+          cor: cor || "#FFFFFF",
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         });
@@ -81,7 +82,7 @@ export const updateHorario = functions
     const auth = await getAuthContext(context);
     requireRole(auth, "aluno");
 
-    const { horarioId, diaSemana, horaInicio, horaFim, materia, descricao } = data;
+    const { horarioId, diaSemana, horaInicio, horaFim, materia, descricao, cor } = data;
 
     if (!horarioId) {
       throw new functions.https.HttpsError("invalid-argument", "ID do horário é obrigatório");
@@ -97,6 +98,7 @@ export const updateHorario = functions
       if (horaFim !== undefined) updates.horaFim = horaFim;
       if (materia !== undefined) updates.materia = materia;
       if (descricao !== undefined) updates.descricao = descricao;
+      if (cor !== undefined) updates.cor = cor;
 
       await db
         .collection("alunos")

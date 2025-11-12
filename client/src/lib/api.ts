@@ -196,6 +196,7 @@ export const alunoApi = {
     horaFim: string;
     materia: string;
     descricao?: string;
+    cor?: string;
   }) => callFunction("createHorario", data),
   updateHorario: (data: {
     horarioId: string;
@@ -204,6 +205,7 @@ export const alunoApi = {
     horaFim?: string;
     materia?: string;
     descricao?: string;
+    cor?: string;
   }) => callFunction("updateHorario", data),
   deleteHorario: (horarioId: string) => callFunction("deleteHorario", { horarioId }),
 

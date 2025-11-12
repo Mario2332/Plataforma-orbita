@@ -89,7 +89,7 @@ export default function AlunoCronograma() {
             hour: currentHour,
             minute: currentMinute,
             activity: h.materia + (h.descricao ? ` - ${h.descricao}` : ''),
-            color: COLORS[Math.floor(Math.random() * COLORS.length)].value, // Cor aleatória por enquanto
+            color: h.cor || "#FFFFFF",
           });
           
           // Avançar 30 minutos
@@ -217,6 +217,7 @@ export default function AlunoCronograma() {
           horaFim: `${String(s.hour).padStart(2, '0')}:${String(s.minute + 30).padStart(2, '0')}`,
           materia: s.activity.split(' - ')[0].trim(),
           descricao: s.activity.split(' - ').slice(1).join(' - ').trim() || undefined,
+          cor: s.color,
         }));
       
       await alunoApi.saveTemplate({
@@ -266,13 +267,13 @@ export default function AlunoCronograma() {
     try {
       setIsSaving(true);
       
-      // Agrupar slots consecutivos do mesmo dia e atividade
-      const groupedSlots: Map<string, { day: number; startHour: number; startMinute: number; endHour: number; endMinute: number; activity: string }> = new Map();
+      // Agrupar slots consecutivos do mesmo dia, atividade e cor
+      const groupedSlots: Map<string, { day: number; startHour: number; startMinute: number; endHour: number; endMinute: number; activity: string; color: string }> = new Map();
       
       schedule.forEach(slot => {
         if (!slot.activity) return; // Ignorar slots vazios
         
-        const key = `${slot.day}-${slot.activity}`;
+        const key = `${slot.day}-${slot.activity}-${slot.color}`;
         const existing = groupedSlots.get(key);
         
         if (existing) {
@@ -297,6 +298,7 @@ export default function AlunoCronograma() {
             endHour: slot.hour,
             endMinute: slot.minute + 30,
             activity: slot.activity,
+            color: slot.color,
           });
           
           if (groupedSlots.get(key)!.endMinute >= 60) {
@@ -319,6 +321,7 @@ export default function AlunoCronograma() {
           horaFim: `${String(group.endHour).padStart(2, '0')}:${String(group.endMinute).padStart(2, '0')}`,
           materia: materia.trim(),
           descricao: descricaoParts.join(' - ').trim() || undefined,
+          cor: group.color,
         });
       });
       
