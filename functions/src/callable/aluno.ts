@@ -16,7 +16,24 @@ const getMe = functions
     const alunoDoc = await db.collection("alunos").doc(auth.uid).get();
 
     if (!alunoDoc.exists) {
-      throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
+      // Se documento aluno não existe, buscar dados básicos do users
+      const userDoc = await db.collection("users").doc(auth.uid).get();
+      
+      if (!userDoc.exists) {
+        throw new functions.https.HttpsError("not-found", "Usuário não encontrado");
+      }
+      
+      const userData = userDoc.data()!;
+      return {
+        id: auth.uid,
+        userId: auth.uid,
+        nome: userData.name || "",
+        email: userData.email || "",
+        mentorId: null,
+        celular: null,
+        plano: null,
+        ativo: true,
+      };
     }
 
     return { id: alunoDoc.id, ...alunoDoc.data() };
