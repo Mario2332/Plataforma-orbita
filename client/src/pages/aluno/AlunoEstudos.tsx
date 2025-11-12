@@ -448,20 +448,46 @@ export default function AlunoEstudos() {
                   {estudos.map((estudo) => {
                     // Lidar com diferentes formatos de data
                     let dataFormatada = "Data inválida";
+                    
+                    // LOG DE DIAGNÓSTICO
+                    console.log("=== DIAGNÓSTICO DE DATA ===");
+                    console.log("Estudo ID:", estudo.id);
+                    console.log("Data raw:", estudo.data);
+                    console.log("Tipo:", typeof estudo.data);
+                    console.log("Tem seconds?", estudo.data?.seconds);
+                    console.log("Tem toDate?", typeof estudo.data?.toDate);
+                    console.log("É objeto?", estudo.data && typeof estudo.data === 'object');
+                    console.log("Keys:", estudo.data && typeof estudo.data === 'object' ? Object.keys(estudo.data) : 'N/A');
+                    
                     try {
                       if (estudo.data?.seconds) {
                         // Timestamp do Firestore
-                        dataFormatada = new Date(estudo.data.seconds * 1000).toLocaleDateString("pt-BR");
-                      } else if (estudo.data?.toDate) {
+                        const date = new Date(estudo.data.seconds * 1000);
+                        console.log("Convertido (seconds):", date);
+                        if (!isNaN(date.getTime())) {
+                          dataFormatada = date.toLocaleDateString("pt-BR");
+                        }
+                      } else if (estudo.data?.toDate && typeof estudo.data.toDate === 'function') {
                         // Timestamp do Firestore (método toDate)
-                        dataFormatada = estudo.data.toDate().toLocaleDateString("pt-BR");
+                        const date = estudo.data.toDate();
+                        console.log("Convertido (toDate):", date);
+                        if (!isNaN(date.getTime())) {
+                          dataFormatada = date.toLocaleDateString("pt-BR");
+                        }
                       } else if (estudo.data) {
                         // String ou Date
-                        dataFormatada = new Date(estudo.data).toLocaleDateString("pt-BR");
+                        const date = new Date(estudo.data);
+                        console.log("Convertido (new Date):", date);
+                        if (!isNaN(date.getTime())) {
+                          dataFormatada = date.toLocaleDateString("pt-BR");
+                        }
                       }
                     } catch (error) {
                       console.error("Erro ao formatar data:", error);
                     }
+                    
+                    console.log("Data formatada final:", dataFormatada);
+                    console.log("=========================");
                     
                     return (
                     <TableRow key={estudo.id}>
