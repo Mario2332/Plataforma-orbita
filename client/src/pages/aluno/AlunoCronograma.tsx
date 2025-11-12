@@ -114,12 +114,30 @@ export default function AlunoCronograma() {
   const loadTemplates = async () => {
     try {
       const data = await alunoApi.getTemplates();
-      setTemplates(data.map((t: any) => ({
-        id: t.id,
-        name: t.nome,
-        schedule: t.horarios || [],
-        createdAt: t.createdAt?.toDate ? t.createdAt.toDate() : new Date(t.createdAt),
-      })));
+      setTemplates(data.map((t: any) => {
+        let createdAtDate: Date;
+        if (t.createdAt?.toDate) {
+          // Firestore Timestamp
+          createdAtDate = t.createdAt.toDate();
+        } else if (t.createdAt?.seconds || t.createdAt?._seconds) {
+          // Timestamp serializado
+          const seconds = t.createdAt.seconds || t.createdAt._seconds;
+          createdAtDate = new Date(seconds * 1000);
+        } else if (t.createdAt) {
+          // String ou número
+          createdAtDate = new Date(t.createdAt);
+        } else {
+          // Fallback
+          createdAtDate = new Date();
+        }
+        
+        return {
+          id: t.id,
+          name: t.nome,
+          schedule: t.horarios || [],
+          createdAt: createdAtDate,
+        };
+      }));
     } catch (error: any) {
       console.error("Erro ao carregar templates:", error);
     }

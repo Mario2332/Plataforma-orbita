@@ -187,7 +187,18 @@ export default function GestorAlunos() {
                       <TableCell>{aluno.email}</TableCell>
                       <TableCell>{getMentorNome(aluno.mentorId)}</TableCell>
                       <TableCell>
-                        {new Date(aluno.createdAt).toLocaleDateString("pt-BR")}
+                        {(() => {
+                          let date: Date;
+                          if (aluno.createdAt?.toDate) {
+                            date = aluno.createdAt.toDate();
+                          } else if (aluno.createdAt?.seconds || aluno.createdAt?._seconds) {
+                            const seconds = aluno.createdAt.seconds || aluno.createdAt._seconds;
+                            date = new Date(seconds * 1000);
+                          } else {
+                            date = new Date(aluno.createdAt);
+                          }
+                          return date.toLocaleDateString("pt-BR");
+                        })()}
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
