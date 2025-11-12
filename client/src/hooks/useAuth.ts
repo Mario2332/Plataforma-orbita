@@ -142,8 +142,32 @@ export function useAuth() {
         updatedAt: serverTimestamp(),
       });
 
-      // Forçar reload do userData após cadastro
+      // Buscar userData recém-criado
       await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        const data = userDocSnap.data();
+        const userData: UserData = {
+          uid: user.uid,
+          email: data.email,
+          name: data.name,
+          role: data.role as UserRole,
+          createdAt: data.createdAt?.toDate() || new Date(),
+          updatedAt: data.updatedAt?.toDate() || new Date(),
+          lastSignedIn: data.lastSignedIn?.toDate() || new Date(),
+        };
+
+        // Atualizar estado com userData
+        setAuthState({
+          user: user,
+          userData,
+          loading: false,
+          error: null,
+        });
+      }
 
       return user;
     } catch (error: any) {
