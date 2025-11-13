@@ -81,6 +81,13 @@ export const mentorApi = {
     logoUrl?: string;
     corPrincipal?: string;
   }) => callFunction("mentorFunctions-updateConfig", data),
+
+  // Métricas e Evolução
+  getAlunosMetricas: () => callFunction("mentorFunctions-getAlunosMetricas"),
+  getEvolucaoAlunos: () => callFunction("mentorFunctions-getEvolucaoAlunos"),
+  
+  // Visualização da área do aluno
+  getAlunoAreaCompleta: (alunoId: string) => callFunction("mentorFunctions-getAlunoAreaCompleta", { alunoId }),
 };
 
 // ============================================

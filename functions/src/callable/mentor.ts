@@ -391,6 +391,173 @@ const updateConfig = functions
     }
   });
 
+/**
+ * Obter métricas de todos os alunos
+ */
+const getAlunosMetricas = functions
+  .region("southamerica-east1")
+  .https.onCall(async (data, context) => {
+    const auth = await getAuthContext(context);
+    requireRole(auth, "mentor");
+
+    try {
+      const alunosSnapshot = await db.collection("alunos").get();
+      
+      const metricas = await Promise.all(
+        alunosSnapshot.docs.map(async (alunoDoc) => {
+          const alunoId = alunoDoc.id;
+          
+          // Buscar estudos
+          const estudosSnapshot = await db
+            .collection("alunos")
+            .doc(alunoId)
+            .collection("estudos")
+            .get();
+          
+          const estudos = estudosSnapshot.docs.map((doc) => doc.data());
+          
+          // Calcular métricas
+          const questoesFeitas = estudos.reduce((acc, e: any) => acc + (e.questoesFeitas || 0), 0);
+          const questoesAcertadas = estudos.reduce((acc, e: any) => acc + (e.questoesAcertadas || 0), 0);
+          const tempoMinutos = estudos.reduce((acc, e: any) => acc + (e.tempoMinutos || 0), 0);
+          const horasEstudo = Math.round((tempoMinutos / 60) * 10) / 10;
+          const desempenho = questoesFeitas > 0 ? Math.round((questoesAcertadas / questoesFeitas) * 100) : 0;
+          
+          return {
+            alunoId,
+            questoesFeitas,
+            desempenho,
+            horasEstudo,
+          };
+        })
+      );
+      
+      return metricas;
+    } catch (error: any) {
+      functions.logger.error("Erro ao buscar métricas dos alunos:", error);
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });
+
+/**
+ * Obter evolução do número de alunos ao longo do tempo
+ */
+const getEvolucaoAlunos = functions
+  .region("southamerica-east1")
+  .https.onCall(async (data, context) => {
+    const auth = await getAuthContext(context);
+    requireRole(auth, "mentor");
+
+    try {
+      const alunosSnapshot = await db
+        .collection("alunos")
+        .orderBy("createdAt", "asc")
+        .get();
+      
+      const evolucao: { data: string; total: number }[] = [];
+      let contador = 0;
+      
+      alunosSnapshot.docs.forEach((doc) => {
+        const data = doc.data();
+        contador++;
+        
+        let dataFormatada = "Data desconhecida";
+        if (data.createdAt) {
+          const timestamp = data.createdAt;
+          let date: Date;
+          
+          if (timestamp.toDate) {
+            date = timestamp.toDate();
+          } else if (timestamp.seconds || timestamp._seconds) {
+            const seconds = timestamp.seconds || timestamp._seconds;
+            date = new Date(seconds * 1000);
+          } else {
+            date = new Date(timestamp);
+          }
+          
+          dataFormatada = date.toISOString().split("T")[0];
+        }
+        
+        evolucao.push({
+          data: dataFormatada,
+          total: contador,
+        });
+      });
+      
+      return evolucao;
+    } catch (error: any) {
+      functions.logger.error("Erro ao buscar evolução de alunos:", error);
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });
+
+/**
+ * Obter dados completos do aluno para visualização pelo mentor
+ */
+const getAlunoAreaCompleta = functions
+  .region("southamerica-east1")
+  .https.onCall(async (data, context) => {
+    const auth = await getAuthContext(context);
+    requireRole(auth, "mentor");
+
+    const { alunoId } = data;
+
+    if (!alunoId) {
+      throw new functions.https.HttpsError("invalid-argument", "ID do aluno é obrigatório");
+    }
+
+    try {
+      const alunoDoc = await db.collection("alunos").doc(alunoId).get();
+
+      if (!alunoDoc.exists) {
+        throw new functions.https.HttpsError("not-found", "Aluno não encontrado");
+      }
+
+      // Buscar estudos
+      const estudosSnapshot = await db
+        .collection("alunos")
+        .doc(alunoId)
+        .collection("estudos")
+        .orderBy("data", "desc")
+        .get();
+
+      // Buscar simulados
+      const simuladosSnapshot = await db
+        .collection("alunos")
+        .doc(alunoId)
+        .collection("simulados")
+        .orderBy("data", "desc")
+        .get();
+
+      // Buscar diário emocional
+      const diarioSnapshot = await db
+        .collection("alunos")
+        .doc(alunoId)
+        .collection("diario_emocional")
+        .orderBy("data", "desc")
+        .get();
+
+      // Buscar autodiagnósticos
+      const autodiagnosticosSnapshot = await db
+        .collection("alunos")
+        .doc(alunoId)
+        .collection("autodiagnosticos")
+        .orderBy("createdAt", "desc")
+        .get();
+
+      return {
+        aluno: { id: alunoDoc.id, ...alunoDoc.data() },
+        estudos: estudosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+        simulados: simuladosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+        diarioEmocional: diarioSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+        autodiagnosticos: autodiagnosticosSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+      };
+    } catch (error: any) {
+      functions.logger.error("Erro ao buscar área completa do aluno:", error);
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });
+
 // Exportar todas as funções do mentor
 export const mentorFunctions = {
   getMe,
@@ -404,4 +571,7 @@ export const mentorFunctions = {
   getAlunoDashboard,
   getConfig,
   updateConfig,
+  getAlunosMetricas,
+  getEvolucaoAlunos,
+  getAlunoAreaCompleta,
 };

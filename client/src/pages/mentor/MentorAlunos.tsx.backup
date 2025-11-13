@@ -1,32 +1,26 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Checkbox } from "@/components/ui/checkbox";
 import { mentorApi } from "@/lib/api";
-import { Plus, Users, ArrowUpDown, Edit, Trash2, Search, TrendingUp, Eye } from "lucide-react";
+import { Plus, Users, ArrowUpDown, Edit, Trash2, Search } from "lucide-react";
 import { toast } from "sonner";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function MentorAlunos() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [alunos, setAlunos] = useState<any[]>([]);
-  const [metricas, setMetricas] = useState<any[]>([]);
-  const [evolucao, setEvolucao] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [periodoFiltro, setPeriodoFiltro] = useState("todo");
   const [selectedAluno, setSelectedAluno] = useState<any>(null);
   const [formData, setFormData] = useState({
     nome: "",
@@ -42,26 +36,20 @@ export default function MentorAlunos() {
     ativo: true,
   });
 
-  const loadData = async () => {
+  const loadAlunos = async () => {
     try {
       setIsLoading(true);
-      const [alunosData, metricasData, evolucaoData] = await Promise.all([
-        mentorApi.getAlunos(),
-        mentorApi.getAlunosMetricas(),
-        mentorApi.getEvolucaoAlunos(),
-      ]);
-      setAlunos(alunosData as any[]);
-      setMetricas(metricasData as any[]);
-      setEvolucao(evolucaoData as any[]);
+      const data = await mentorApi.getAlunos();
+      setAlunos(data as any[]);
     } catch (error: any) {
-      toast.error(error.message || "Erro ao carregar dados");
+      toast.error(error.message || "Erro ao carregar alunos");
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    loadData();
+    loadAlunos();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,7 +66,7 @@ export default function MentorAlunos() {
         celular: "",
         plano: "",
       });
-      await loadData();
+      await loadAlunos();
     } catch (error: any) {
       toast.error(error.message || "Erro ao adicionar aluno");
     } finally {
@@ -121,7 +109,7 @@ export default function MentorAlunos() {
       toast.success("Aluno atualizado!");
       setEditDialogOpen(false);
       setSelectedAluno(null);
-      await loadData();
+      await loadAlunos();
     } catch (error: any) {
       toast.error(error.message || "Erro ao atualizar aluno");
     } finally {
@@ -143,7 +131,7 @@ export default function MentorAlunos() {
       toast.success("Aluno excluído!");
       setDeleteDialogOpen(false);
       setSelectedAluno(null);
-      await loadData();
+      await loadAlunos();
     } catch (error: any) {
       toast.error(error.message || "Erro ao excluir aluno");
     } finally {
@@ -151,58 +139,9 @@ export default function MentorAlunos() {
     }
   };
 
-  // Filtrar evolução por período
-  const evolucaoFiltrada = useMemo(() => {
-    if (!evolucao || evolucao.length === 0) return [];
-    
-    const hoje = new Date();
-    let dataLimite: Date;
-    
-    switch (periodoFiltro) {
-      case "7d":
-        dataLimite = new Date(hoje.getTime() - 7 * 24 * 60 * 60 * 1000);
-        break;
-      case "30d":
-        dataLimite = new Date(hoje.getTime() - 30 * 24 * 60 * 60 * 1000);
-        break;
-      case "3m":
-        dataLimite = new Date(hoje.getTime() - 90 * 24 * 60 * 60 * 1000);
-        break;
-      case "6m":
-        dataLimite = new Date(hoje.getTime() - 180 * 24 * 60 * 60 * 1000);
-        break;
-      case "12m":
-        dataLimite = new Date(hoje.getTime() - 365 * 24 * 60 * 60 * 1000);
-        break;
-      case "24m":
-        dataLimite = new Date(hoje.getTime() - 730 * 24 * 60 * 60 * 1000);
-        break;
-      default:
-        return evolucao.map(e => ({
-          ...e,
-          dataFormatada: new Date(e.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
-        }));
-    }
-    
-    return evolucao
-      .filter(e => new Date(e.data) >= dataLimite)
-      .map(e => ({
-        ...e,
-        dataFormatada: new Date(e.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
-      }));
-  }, [evolucao, periodoFiltro]);
-
-  // Filtrar e ordenar alunos com métricas
-  const filteredAndSortedAlunos = useMemo(() => {
-    let result = alunos.map(aluno => {
-      const metrica = metricas.find(m => m.alunoId === aluno.id);
-      return {
-        ...aluno,
-        questoesFeitas: metrica?.questoesFeitas || 0,
-        desempenho: metrica?.desempenho || 0,
-        horasEstudo: metrica?.horasEstudo || 0,
-      };
-    });
+  // Filtrar e ordenar alunos
+  const filteredAndSortedAlunos = () => {
+    let result = [...alunos];
     
     // Filtrar por nome
     if (searchTerm) {
@@ -218,16 +157,17 @@ export default function MentorAlunos() {
         let bVal = b[sortColumn];
         
         // Tratar valores nulos
-        if (aVal === null || aVal === undefined) aVal = sortColumn === 'nome' || sortColumn === 'email' ? "" : 0;
-        if (bVal === null || bVal === undefined) bVal = sortColumn === 'nome' || sortColumn === 'email' ? "" : 0;
+        if (!aVal) aVal = "";
+        if (!bVal) bVal = "";
         
-        // Comparar
+        // Comparar strings
         if (typeof aVal === 'string' && typeof bVal === 'string') {
           return sortDirection === 'asc' 
             ? aVal.localeCompare(bVal)
             : bVal.localeCompare(aVal);
         }
         
+        // Comparar outros tipos
         if (sortDirection === 'asc') {
           return aVal > bVal ? 1 : -1;
         } else {
@@ -237,9 +177,7 @@ export default function MentorAlunos() {
     }
     
     return result;
-  }, [alunos, metricas, searchTerm, sortColumn, sortDirection]);
-
-  const alunosAtivos = alunos.filter(a => a.ativo !== false).length;
+  };
 
   if (isLoading) {
     return <div className="flex items-center justify-center min-h-[400px]">
@@ -252,7 +190,7 @@ export default function MentorAlunos() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Alunos</h1>
-          <p className="text-muted-foreground mt-2">Gerencie e acompanhe seus alunos</p>
+          <p className="text-muted-foreground mt-2">Gerencie seus alunos</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -292,99 +230,6 @@ export default function MentorAlunos() {
         </Dialog>
       </div>
 
-      {/* Cards de Métricas */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Alunos</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{alunos.length}</div>
-            <p className="text-xs text-muted-foreground">{alunosAtivos} ativos</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Crescimento</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {evolucao.length > 0 ? `+${evolucao.length}` : "0"}
-            </div>
-            <p className="text-xs text-muted-foreground">Alunos cadastrados</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Gráfico de Evolução */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Evolução de Alunos</CardTitle>
-              <CardDescription>Crescimento ao longo do tempo</CardDescription>
-            </div>
-            <Select value={periodoFiltro} onValueChange={setPeriodoFiltro}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Selecione o período" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="todo">Todo o período</SelectItem>
-                <SelectItem value="7d">Últimos 7 dias</SelectItem>
-                <SelectItem value="30d">Últimos 30 dias</SelectItem>
-                <SelectItem value="3m">Últimos 3 meses</SelectItem>
-                <SelectItem value="6m">Últimos 6 meses</SelectItem>
-                <SelectItem value="12m">Últimos 12 meses</SelectItem>
-                <SelectItem value="24m">Últimos 24 meses</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {evolucaoFiltrada.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={evolucaoFiltrada}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="dataFormatada" 
-                  tick={{ fontSize: 12 }}
-                />
-                <YAxis />
-                <Tooltip 
-                  content={({ active, payload }) => {
-                    if (active && payload && payload.length) {
-                      return (
-                        <div className="bg-background border rounded-lg p-2 shadow-lg">
-                          <p className="text-sm font-medium">{payload[0].payload.data}</p>
-                          <p className="text-sm text-muted-foreground">
-                            Total: {payload[0].value} alunos
-                          </p>
-                        </div>
-                      );
-                    }
-                    return null;
-                  }}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="total" 
-                  stroke="#3b82f6" 
-                  strokeWidth={2}
-                  dot={{ fill: '#3b82f6', r: 4 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          ) : (
-            <p className="text-center text-muted-foreground py-8">
-              Nenhum dado disponível para o período selecionado
-            </p>
-          )}
-        </CardContent>
-      </Card>
-
       {/* Campo de Pesquisa */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -396,11 +241,10 @@ export default function MentorAlunos() {
         />
       </div>
 
-      {/* Tabela de Alunos */}
       <Card>
         <CardHeader>
           <CardTitle>Lista de Alunos</CardTitle>
-          <CardDescription>Todos os alunos cadastrados com suas métricas</CardDescription>
+          <CardDescription>Todos os alunos cadastrados</CardDescription>
         </CardHeader>
         <CardContent>
           {alunos && alunos.length > 0 ? (
@@ -420,47 +264,22 @@ export default function MentorAlunos() {
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                       </Button>
                     </TableHead>
-                    <TableHead>
-                      <Button variant="ghost" size="sm" onClick={() => handleSort('questoesFeitas')} className="h-8 px-2">
-                        Questões
-                        <ArrowUpDown className="ml-2 h-4 w-4" />
-                      </Button>
-                    </TableHead>
-                    <TableHead>
-                      <Button variant="ghost" size="sm" onClick={() => handleSort('desempenho')} className="h-8 px-2">
-                        Desempenho
-                        <ArrowUpDown className="ml-2 h-4 w-4" />
-                      </Button>
-                    </TableHead>
-                    <TableHead>
-                      <Button variant="ghost" size="sm" onClick={() => handleSort('horasEstudo')} className="h-8 px-2">
-                        Horas de Estudo
-                        <ArrowUpDown className="ml-2 h-4 w-4" />
-                      </Button>
-                    </TableHead>
+                    <TableHead>Celular</TableHead>
+                    <TableHead>Plano</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead className="text-right">Ações</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredAndSortedAlunos.map((aluno) => (
+                  {filteredAndSortedAlunos().map((aluno) => (
                     <TableRow key={aluno.id}>
                       <TableCell className="font-medium">{aluno.nome}</TableCell>
                       <TableCell>{aluno.email}</TableCell>
-                      <TableCell>{aluno.questoesFeitas}</TableCell>
+                      <TableCell>{aluno.celular || "-"}</TableCell>
+                      <TableCell>{aluno.plano || "-"}</TableCell>
                       <TableCell>
-                        <span className={`font-medium ${
-                          aluno.desempenho >= 80 ? 'text-green-600' :
-                          aluno.desempenho >= 60 ? 'text-yellow-600' :
-                          'text-red-600'
-                        }`}>
-                          {aluno.desempenho}%
-                        </span>
-                      </TableCell>
-                      <TableCell>{aluno.horasEstudo}h</TableCell>
-                      <TableCell>
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${aluno.ativo !== false ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}>
-                          {aluno.ativo !== false ? "Ativo" : "Inativo"}
+                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${aluno.ativo ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}>
+                          {aluno.ativo ? "Ativo" : "Inativo"}
                         </span>
                       </TableCell>
                       <TableCell className="text-right">
@@ -489,14 +308,15 @@ export default function MentorAlunos() {
               </Table>
             </div>
           ) : (
-            <p className="text-center text-muted-foreground py-8">
-              Nenhum aluno cadastrado ainda
-            </p>
+            <div className="text-center py-12 text-muted-foreground">
+              <Users className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <p>Nenhum aluno cadastrado ainda.</p>
+            </div>
           )}
         </CardContent>
       </Card>
 
-      {/* Dialog de Edição */}
+      {/* Diálogo de Edição */}
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <DialogContent>
           <DialogHeader>
@@ -537,20 +357,20 @@ export default function MentorAlunos() {
                 />
               </div>
               <div className="flex items-center space-x-2">
-                <Checkbox 
-                  id="ativo" 
+                <input
+                  type="checkbox"
+                  id="ativo"
                   checked={editFormData.ativo}
-                  onCheckedChange={(checked) => setEditFormData({...editFormData, ativo: checked as boolean})}
+                  onChange={(e) => setEditFormData({...editFormData, ativo: e.target.checked})}
+                  className="h-4 w-4"
                 />
-                <label
-                  htmlFor="ativo"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  Aluno ativo
-                </label>
+                <Label htmlFor="ativo" className="cursor-pointer">Aluno ativo</Label>
               </div>
             </div>
             <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setEditDialogOpen(false)}>
+                Cancelar
+              </Button>
               <Button type="submit" disabled={isSaving}>
                 {isSaving ? "Salvando..." : "Salvar Alterações"}
               </Button>
@@ -559,18 +379,22 @@ export default function MentorAlunos() {
         </DialogContent>
       </Dialog>
 
-      {/* Dialog de Exclusão */}
+      {/* Diálogo de Exclusão */}
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirmar Exclusão</AlertDialogTitle>
+            <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta ação não pode ser desfeita. O aluno <strong>{selectedAluno?.nome}</strong> será excluído permanentemente, incluindo todos os seus dados de estudos, simulados e métricas.
+              Esta ação não pode ser desfeita. O aluno <strong>{selectedAluno?.nome}</strong> será excluído permanentemente, incluindo todos os seus dados de estudos e simulados.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            <AlertDialogAction 
+              onClick={handleDelete} 
+              disabled={isDeleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
               {isDeleting ? "Excluindo..." : "Excluir"}
             </AlertDialogAction>
           </AlertDialogFooter>
