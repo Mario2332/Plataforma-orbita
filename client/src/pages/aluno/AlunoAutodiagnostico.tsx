@@ -229,7 +229,7 @@ export default function AlunoAutodiagnostico() {
                         <div className="space-y-2">
                           <Label>Macroassunto *</Label>
                           <Input
-                            placeholder="Ex: Matemática, Biologia..."
+                            placeholder="Ex: Ecologia, Termologia..."
                             value={questao.macroassunto}
                             onChange={(e) => updateQuestao(index, "macroassunto", e.target.value)}
                           />
@@ -238,7 +238,7 @@ export default function AlunoAutodiagnostico() {
                         <div className="space-y-2">
                           <Label>Microassunto *</Label>
                           <Input
-                            placeholder="Ex: Funções, Genética..."
+                            placeholder="Ex: Relações ecológicas, Calorimetria..."
                             value={questao.microassunto}
                             onChange={(e) => updateQuestao(index, "microassunto", e.target.value)}
                           />
