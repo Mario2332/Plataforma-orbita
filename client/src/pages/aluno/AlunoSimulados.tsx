@@ -649,7 +649,7 @@ export default function AlunoSimulados() {
                         const dia2Acertos = natureza + matematica;
                         const total = dia1Acertos + dia2Acertos;
                         
-                        const tempoDia1 = (simulado.linguagensTempo || 0) + (simulado.humanasTempo || 0);
+                        const tempoDia1 = (simulado.linguagensTempo || 0) + (simulado.humanasTempo || 0) + (simulado.redacaoTempo || 0);
                         const tempoDia2 = (simulado.naturezaTempo || 0) + (simulado.matematicaTempo || 0);
 
                         return (
