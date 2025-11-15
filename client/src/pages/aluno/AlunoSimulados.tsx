@@ -587,7 +587,12 @@ export default function AlunoSimulados() {
                   <LineChart data={dadosGrafico}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="data" />
-                    <YAxis />
+                    <YAxis 
+                      domain={metricaFiltro === "acertos" 
+                        ? [0, areaFiltro === "total" ? 180 : 45] 
+                        : [0, "auto"]
+                      }
+                    />
                     <Tooltip />
                     <Legend />
                     <Line 
