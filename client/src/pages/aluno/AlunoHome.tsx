@@ -20,6 +20,14 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 
+// Função auxiliar para formatar data no fuso horário brasileiro (GMT-3)
+const formatarDataBrasil = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 // Matérias padronizadas do ENEM
 const MATERIAS_ENEM = [
   "Matemática",
@@ -183,7 +191,7 @@ export default function AlunoHome() {
           return;
         }
         
-        const dataStr = data.toISOString().split('T')[0];
+        const dataStr = formatarDataBrasil(data);
         contagemPorDia.set(dataStr, (contagemPorDia.get(dataStr) || 0) + 1);
       } catch (error) {
         console.error('Erro ao processar data no mapa de calor:', error);
@@ -194,7 +202,7 @@ export default function AlunoHome() {
     for (let i = 149; i >= 0; i--) {
       const data = new Date(hoje);
       data.setDate(data.getDate() - i);
-      const dataStr = data.toISOString().split('T')[0];
+      const dataStr = formatarDataBrasil(data);
       
       dias.push({
         data: data,
