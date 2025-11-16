@@ -54,13 +54,15 @@ export function useAuth() {
               uid: firebaseUser.uid,
               email: data.email,
               name: data.name,
+              nome: data.nome,
               role: data.role,
               hasRole: !!data.role
             });
             
             // Se dados estiverem faltando, buscar de outras fontes e corrigir
+            // Suportar tanto 'nome' (português) quanto 'name' (inglês)
             let email = data.email || firebaseUser.email || "";
-            let name = data.name || firebaseUser.displayName || "Usuário";
+            let name = data.name || data.nome || firebaseUser.displayName || "Usuário";
             let role = data.role as UserRole;
             
             // Se role estiver faltando, tentar descobrir
@@ -99,7 +101,8 @@ export function useAuth() {
               console.log('[useAuth] Atualizando documento users com dados corrigidos');
               await setDoc(userDocRef, {
                 email,
-                name,
+                name,  // Padronizar para 'name' em inglês
+                nome: name,  // Manter 'nome' para compatibilidade
                 role,
                 updatedAt: serverTimestamp()
               }, { merge: true });
