@@ -48,9 +48,14 @@ function Router() {
       
       {/* Rotas do Aluno */}
       <Route path="/aluno">
-        <DashboardLayout>
-          <AlunoHome />
-        </DashboardLayout>
+        {() => {
+          console.log('[App] Rota /aluno renderizando');
+          return (
+            <DashboardLayout>
+              <AlunoHome />
+            </DashboardLayout>
+          );
+        }}
       </Route>
       <Route path="/aluno/estudos">
         <DashboardLayout>

@@ -42,6 +42,7 @@ const MATERIAS_ENEM = [
 ] as const;
 
 export default function AlunoHome() {
+  console.log('[AlunoHome] Componente montado!');
   const api = useAlunoApi();
   const [, setLocation] = useLocation();
   const { userData } = useAuthContext();

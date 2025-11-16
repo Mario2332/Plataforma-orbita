@@ -39,11 +39,16 @@ export default function LoginAluno() {
     }
 
     setLoading(true);
+    console.log('[LoginAluno] Iniciando login...');
 
     try {
+      console.log('[LoginAluno] Chamando signIn...');
       await signIn(loginData.email, loginData.senha);
+      console.log('[LoginAluno] signIn retornou com sucesso');
       toast.success("Login realizado com sucesso!");
+      console.log('[LoginAluno] Navegando para /aluno');
       setLocation("/aluno");
+      console.log('[LoginAluno] setLocation executado');
     } catch (error: any) {
       console.error("Erro ao fazer login:", error);
       
