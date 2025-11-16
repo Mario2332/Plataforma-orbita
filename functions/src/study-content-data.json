@@ -1,0 +1,2105 @@
+{
+  "matematica": {
+    "displayName": "Matemática",
+    "topics": [
+      {
+        "id": "mat-1",
+        "name": "As quatro operações e Expressões numéricas",
+        "incidenceValue": 0.0398,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-2",
+        "name": "Frações, dízimas periódicas e operações com números decimais",
+        "incidenceValue": 0.0582,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "mat-3",
+        "name": "Unidades de medida (distância, massa, volume, tempo) e conversões",
+        "incidenceValue": 0.0536,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "mat-4",
+        "name": "Potenciação, notação científica e radiciação",
+        "incidenceValue": 0.0092,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-5",
+        "name": "Produtos notáveis e Fatoração",
+        "incidenceValue": 0.0015,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-6",
+        "name": "Equações e Sistemas do primeiro grau",
+        "incidenceValue": 0.0268,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-7",
+        "name": "Equações do segundo grau",
+        "incidenceValue": 0.0077,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-8",
+        "name": "Critérios de divisibilidade, números primos, MMC e MDC",
+        "incidenceValue": 0.0061,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-9",
+        "name": "Razão e proporção, Regras de 3 e Escalas",
+        "incidenceValue": 0.1027,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "mat-10",
+        "name": "Porcentagem",
+        "incidenceValue": 0.0768,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "mat-11",
+        "name": "Lucro, Juros simples e juros compostos",
+        "incidenceValue": 0.015,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-12",
+        "name": "Teoria dos conjuntos",
+        "incidenceValue": 0.0008,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-13",
+        "name": "Conjuntos numéricos e Intervalos reais",
+        "incidenceValue": 0.0015,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-14",
+        "name": "Progressão aritmética (PA) e sequências lógicas",
+        "incidenceValue": 0.0122,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-15",
+        "name": "Progressão geométrica (PG)",
+        "incidenceValue": 0.0031,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-16",
+        "name": "Teoria geral de funções",
+        "incidenceValue": 0.0069,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-17",
+        "name": "Função constante e Função afim",
+        "incidenceValue": 0.023,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-18",
+        "name": "Função do segundo grau (quadrática)",
+        "incidenceValue": 0.0169,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-19",
+        "name": "Inequações do primeiro e do segundo grau",
+        "incidenceValue": 0.0038,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-20",
+        "name": "Função exponencial",
+        "incidenceValue": 0.0084,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-21",
+        "name": "Propriedades dos logaritmos",
+        "incidenceValue": 0.0046,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-22",
+        "name": "Função logarítmica e Função modular - Apenas saber como são os gráficos",
+        "incidenceValue": 0.0031,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-23",
+        "name": "Matriz (introdução)",
+        "incidenceValue": 0.0023,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-24",
+        "name": "Ângulos",
+        "incidenceValue": 0.0031,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-25",
+        "name": "Triângulos",
+        "incidenceValue": 0.0061,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-26",
+        "name": "Triângulo retângulo: Teorema de Pitágoras e relações trigonométricas",
+        "incidenceValue": 0.0092,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-27",
+        "name": "Semelhança de triângulos",
+        "incidenceValue": 0.0015,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-28",
+        "name": "Lei dos senos e cossenos",
+        "incidenceValue": 0.0008,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-29",
+        "name": "Teorema de Tales",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-30",
+        "name": "Polígonos: Quadriláteros",
+        "incidenceValue": 0.0521,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "mat-31",
+        "name": "Polígonos: Hexágonos e outros polígonos",
+        "incidenceValue": 0.01,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-32",
+        "name": "Circunferência e Círculo",
+        "incidenceValue": 0.0245,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-33",
+        "name": "Posições relativas no plano, projeção ortogonal e sólidos planificados",
+        "incidenceValue": 0.0359,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-34",
+        "name": "Poliedros",
+        "incidenceValue": 0.0176,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-35",
+        "name": "Prismas",
+        "incidenceValue": 0.0253,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-36",
+        "name": "Cilindros",
+        "incidenceValue": 0.0268,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-37",
+        "name": "Pirâmides e Troncos de pirâmides",
+        "incidenceValue": 0.0107,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-38",
+        "name": "Cones e Troncos de cones",
+        "incidenceValue": 0.0169,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-39",
+        "name": "Esferas",
+        "incidenceValue": 0.0054,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "mat-40",
+        "name": "Estudo do ponto, da reta e das cônicas (circunferência, parábola, elipse e hipérbole)",
+        "incidenceValue": 0.0176,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "mat-41",
+        "name": "Estatística: Médias, Medidas de tendência central e de dispersão",
+        "incidenceValue": 0.065,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "mat-42",
+        "name": "Interpretação de gráficos e tabelas",
+        "incidenceValue": 0.0888,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "mat-43",
+        "name": "Análise combinatória",
+        "incidenceValue": 0.0322,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "mat-44",
+        "name": "Probabilidade",
+        "incidenceValue": 0.0506,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "mat-45",
+        "name": "Trigonometria: conceitos básicos e funções trigonométricas",
+        "incidenceValue": 0.0069,
+        "incidenceLevel": "Muito baixa"
+      }
+    ]
+  },
+  "biologia": {
+    "displayName": "Biologia",
+    "topics": [
+      {
+        "id": "bio-1",
+        "name": "Introdução à Biologia e Método Científico",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-2",
+        "name": "Água e Sais Minerais",
+        "incidenceValue": 0.004,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-3",
+        "name": "Carboidratos",
+        "incidenceValue": 0.0078,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-4",
+        "name": "Lipídios e Colesterol",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-5",
+        "name": "Aminoácidos e Proteínas",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-6",
+        "name": "Enzimas e Anticorpos",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-7",
+        "name": "Vitaminas",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-8",
+        "name": "Ácidos nucleicos",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-9",
+        "name": "Citologia: Membrana plasmática: Classificação e Fisiologia",
+        "incidenceValue": 0.0078,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-10",
+        "name": "Membrana plasmática: Transporte passivo e transporte ativo",
+        "incidenceValue": 0.0176,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-11",
+        "name": "Citoplasma: Visão geral e citoesqueleto",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-12",
+        "name": "Citoplasma: Organelas citoplasmáticas",
+        "incidenceValue": 0.0235,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-13",
+        "name": "Metabolismo energético (Fotossíntese, Quimiossíntese, Respiração celular e Fermentação)",
+        "incidenceValue": 0.0451,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "bio-14",
+        "name": "Núcleo celular",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-15",
+        "name": "Ciclo celular, mitose e meiose",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-16",
+        "name": "Gametogênese e tipos de reprodução",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-17",
+        "name": "Visão geral de Genética e Código genético",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-18",
+        "name": "Leis de Mendel e Heredogramas",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-19",
+        "name": "Polialelia e Genes letais",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-20",
+        "name": "Interação Gênica",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-21",
+        "name": "Tipos sanguíneos, Sistema ABO e Fator RH",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-22",
+        "name": "Herança sexual",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-23",
+        "name": "Linkage e mapeamento de genes",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-24",
+        "name": "Mutações e Anomalias cromossômicas",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-25",
+        "name": "Engenharia genética, citogenética, genoma e biotecnologia",
+        "incidenceValue": 0.0412,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "bio-26",
+        "name": "Embriologia: Fecundação, segmentação ou clivagem",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-27",
+        "name": "Embriologia: Gastrulação, Neurulação e Organogênese",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-28",
+        "name": "Anexos embrionários",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-29",
+        "name": "Tecido epitelial",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-30",
+        "name": "Tecido conjuntivo propriamente dito",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-31",
+        "name": "Tecido adiposo",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-32",
+        "name": "Tecido cartilaginoso",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-33",
+        "name": "Tecido ósseo",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-34",
+        "name": "Tecidos sanguíneo e hematopoiético",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-35",
+        "name": "Tecido muscular",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-36",
+        "name": "Tecido nervoso",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-37",
+        "name": "Visão geral da fisiologia",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-38",
+        "name": "Fisiologia animal",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-39",
+        "name": "Sistema digestório",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-40",
+        "name": "Sistema respiratório",
+        "incidenceValue": 0.0078,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-41",
+        "name": "Sistema cardiovascular",
+        "incidenceValue": 0.0098,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-42",
+        "name": "Sistemas linfático e imunológico",
+        "incidenceValue": 0.0216,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-43",
+        "name": "Sistema excretor",
+        "incidenceValue": 0.0078,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-44",
+        "name": "Sistema endócrino",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-45",
+        "name": "Sistema nervoso",
+        "incidenceValue": 0.0098,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-46",
+        "name": "Sistema sensorial",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-47",
+        "name": "Sistema reprodutor",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-48",
+        "name": "Ciclo menstrual",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-49",
+        "name": "Métodos contraceptivos",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-50",
+        "name": "Classificação Biológica",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-51",
+        "name": "Vírus e Viroses",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-52",
+        "name": "Reino Monera, Bacterioses e algas",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-53",
+        "name": "Protozoários e Protozooses",
+        "incidenceValue": 0.0137,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "bio-54",
+        "name": "Reino Fungi e Micoses",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-55",
+        "name": "Poríferos",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-56",
+        "name": "Cnidários",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-57",
+        "name": "Platelmintos, nematelmintos e suas verminoses",
+        "incidenceValue": 0.0098,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-58",
+        "name": "Anelídeos",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-59",
+        "name": "Artrópodes",
+        "incidenceValue": 0.0098,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-60",
+        "name": "Moluscos",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-61",
+        "name": "Equinodermos",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-62",
+        "name": "Peixes",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-63",
+        "name": "Anfíbios",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-64",
+        "name": "Répteis",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-65",
+        "name": "Aves",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-66",
+        "name": "Mamíferos",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-67",
+        "name": "Botânica: Briófitas, pteridófitas, gimnospermas e angiospermas",
+        "incidenceValue": 0.0098,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-68",
+        "name": "Morfologia vegetal: Flor, semente e fruto",
+        "incidenceValue": 0.0078,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-69",
+        "name": "Morfologia vegetal: Raiz, caule e folha",
+        "incidenceValue": 0.0079,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-70",
+        "name": "Histologia vegetal",
+        "incidenceValue": 0.002,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-71",
+        "name": "Fisiologia e Transpiração vegetal",
+        "incidenceValue": 0.0471,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "bio-72",
+        "name": "Hormônios e Movimentos vegetais",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-73",
+        "name": "Origem da vida",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-74",
+        "name": "Teorias evolutivas",
+        "incidenceValue": 0.0431,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "bio-75",
+        "name": "Filogenia e cladogramas",
+        "incidenceValue": 0.0098,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-76",
+        "name": "Genética das populações, especiação e Lei de Hardy-Weinberg",
+        "incidenceValue": 0.0039,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-77",
+        "name": "Introdução à ecologia",
+        "incidenceValue": 0.0353,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "bio-78",
+        "name": "Dinâmica populacional, potencial biótico e fluxo gênico",
+        "incidenceValue": 0.0333,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-79",
+        "name": "Fluxo de energia , pirâmides ecológicas, cadeias e teias alimentares",
+        "incidenceValue": 0.0333,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-80",
+        "name": "Relações ecológicas",
+        "incidenceValue": 0.0255,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-81",
+        "name": "Sucessão ecológica",
+        "incidenceValue": 0.0059,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "bio-82",
+        "name": "Ecossistemas e Biomas",
+        "incidenceValue": 0.0216,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-83",
+        "name": "Ciclos biogeoquímicos",
+        "incidenceValue": 0.0275,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "bio-84",
+        "name": "Desequilíbrios ecológicos e poluição ambiental",
+        "incidenceValue": 0.0902,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "bio-85",
+        "name": "Saneamento",
+        "incidenceValue": 0.0412,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "bio-86",
+        "name": "Outros tópicos e questões mescladas de biologia",
+        "incidenceValue": 0.0216,
+        "incidenceLevel": "Média"
+      }
+    ]
+  },
+  "fisica": {
+    "displayName": "Física",
+    "topics": [
+      {
+        "id": "fis-1",
+        "name": "Vetores",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-2",
+        "name": "Ordem de grandeza e sistema de unidades",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-3",
+        "name": "Movimento uniforme",
+        "incidenceValue": 0.0175,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-4",
+        "name": "Movimento uniformemente variado",
+        "incidenceValue": 0.0225,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-5",
+        "name": "Lançamentos vertical e horizontal e queda livre",
+        "incidenceValue": 0.0125,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-6",
+        "name": "Lançamento oblíquo",
+        "incidenceValue": 0.01,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-7",
+        "name": "Movimento circular uniforme",
+        "incidenceValue": 0.0201,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-8",
+        "name": "Leis de Newton",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-9",
+        "name": "Máquinas simples (polias)",
+        "incidenceValue": 0.0075,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-10",
+        "name": "Força elástica",
+        "incidenceValue": 0.005,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-11",
+        "name": "Força de atrito",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-12",
+        "name": "Estática e centro de massa",
+        "incidenceValue": 0.005,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-13",
+        "name": "Energia cinética, potencial e mecânica, trabalho, potência e rendimento",
+        "incidenceValue": 0.0727,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "fis-14",
+        "name": "Impulso, quantidade de movimento e colisões",
+        "incidenceValue": 0.015,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-15",
+        "name": "Leis de Kepler e da gravitação universal",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-16",
+        "name": "Fluidostática (densidade, pressão e hidrostática)",
+        "incidenceValue": 0.0251,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-17",
+        "name": "Hidrodinâmica",
+        "incidenceValue": 0.0025,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-18",
+        "name": "Luz e Câmara de orifício",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-19",
+        "name": "Princípios da óptica geométrica",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-20",
+        "name": "Espelhos planos",
+        "incidenceValue": 0.0075,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-21",
+        "name": "Espelhos esféricos",
+        "incidenceValue": 0.01,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-22",
+        "name": "Refração",
+        "incidenceValue": 0.0175,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-23",
+        "name": "Dioptro plano, Ângulo limite e Reflexão total",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-24",
+        "name": "Lentes esféricas",
+        "incidenceValue": 0.0175,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-25",
+        "name": "Óptica da Visão e instrumentos ópticos",
+        "incidenceValue": 0.0075,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-26",
+        "name": "Ondulatória",
+        "incidenceValue": 0.0902,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "fis-27",
+        "name": "Oscilações e MHS",
+        "incidenceValue": 0.0025,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-28",
+        "name": "Temperatura, Calor e Energia térmica",
+        "incidenceValue": 0.0175,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-29",
+        "name": "Dilatação térmica",
+        "incidenceValue": 0.0075,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-30",
+        "name": "Calorimetria",
+        "incidenceValue": 0.0326,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-31",
+        "name": "Propagação do calor",
+        "incidenceValue": 0.0255,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-32",
+        "name": "Estudo dos gases",
+        "incidenceValue": 0.005,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-33",
+        "name": "Ciclos, ciclos de Carnot, máquinas térmicas, rendimento e Leis da termodinâmica",
+        "incidenceValue": 0.0276,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-34",
+        "name": "Escalas termométricas, mudanças de fase, diagramas de fase e outros tópicos de termologia",
+        "incidenceValue": 0.0297,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-35",
+        "name": "Carga elétrica e processos de eletrização",
+        "incidenceValue": 0.0025,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-36",
+        "name": "Força elétrica (Lei de Coulomb)",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-37",
+        "name": "Campo elétrico e Linhas de força",
+        "incidenceValue": 0.015,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-38",
+        "name": "Potencial elétrico, Trabalho e Energia",
+        "incidenceValue": 0.005,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-39",
+        "name": "Circuitos elétricos",
+        "incidenceValue": 0.1704,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "fis-40",
+        "name": "Leis de Kirchhoff e Ponte de Wheatstone",
+        "incidenceValue": 0.0226,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fis-41",
+        "name": "Capacitores",
+        "incidenceValue": 0.005,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-42",
+        "name": "Eletromagnetismo",
+        "incidenceValue": 0.01,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-43",
+        "name": "Indução Eletromagnética",
+        "incidenceValue": 0.0201,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fis-44",
+        "name": "Física moderna",
+        "incidenceValue": 0.005,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fis-45",
+        "name": "Outras questõs de física",
+        "incidenceValue": 0.0025,
+        "incidenceLevel": "Muito baixa"
+      }
+    ]
+  },
+  "quimica": {
+    "displayName": "Química",
+    "topics": [
+      {
+        "id": "qui-1",
+        "name": "Modelos atômicos",
+        "incidenceValue": 0.0102,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-2",
+        "name": "Distribuição eletrônica",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-3",
+        "name": "Classificação e propriedades periódicas",
+        "incidenceValue": 0.0102,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-4",
+        "name": "Ligações químicas",
+        "incidenceValue": 0.0026,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-5",
+        "name": "Hibridização e geometria molecular",
+        "incidenceValue": 0.0051,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-6",
+        "name": "Polaridade das ligações e das moléculas",
+        "incidenceValue": 0.0077,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-7",
+        "name": "Forças intermoleculares",
+        "incidenceValue": 0.0281,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-8",
+        "name": "Radioatividade",
+        "incidenceValue": 0.0358,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-9",
+        "name": "Propriedades da matéria",
+        "incidenceValue": 0.0358,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-10",
+        "name": "Substâncias puras e misturas",
+        "incidenceValue": 0.0077,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-11",
+        "name": "Separação de misturas",
+        "incidenceValue": 0.0434,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "qui-12",
+        "name": "Funções inorgânicas",
+        "incidenceValue": 0.0511,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "qui-13",
+        "name": "Tipos de reações químicas, grandezas químicas e fórmulas químicas",
+        "incidenceValue": 0.0204,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "qui-14",
+        "name": "Cálculo estequiométrico",
+        "incidenceValue": 0.0843,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "qui-15",
+        "name": "Gases",
+        "incidenceValue": 0.0051,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-16",
+        "name": "Termoquímica",
+        "incidenceValue": 0.0537,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "qui-17",
+        "name": "Soluções e coloides",
+        "incidenceValue": 0.0052,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-18",
+        "name": "Diluição e mistura de soluções",
+        "incidenceValue": 0.0332,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-19",
+        "name": "Propriedades coligativas",
+        "incidenceValue": 0.0102,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "qui-20",
+        "name": "Cinética química",
+        "incidenceValue": 0.0153,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "qui-21",
+        "name": "Equilíbrios químicos",
+        "incidenceValue": 0.0717,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "qui-22",
+        "name": "Reações de oxirredução",
+        "incidenceValue": 0.0486,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "qui-23",
+        "name": "Pilhas",
+        "incidenceValue": 0.0256,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-24",
+        "name": "Eletrólise e corrosão",
+        "incidenceValue": 0.0153,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "qui-25",
+        "name": "Química Orgânica: Introdução",
+        "incidenceValue": 0.0485,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "qui-26",
+        "name": "Funções orgânicas",
+        "incidenceValue": 0.0639,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "qui-27",
+        "name": "Isomeria",
+        "incidenceValue": 0.0281,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-28",
+        "name": "Reações orgânicas",
+        "incidenceValue": 0.0715,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "qui-29",
+        "name": "Polímeros",
+        "incidenceValue": 0.0204,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "qui-30",
+        "name": "Biomoléculas",
+        "incidenceValue": 0.0179,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "qui-31",
+        "name": "Química analítica",
+        "incidenceValue": 0.023,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "qui-32",
+        "name": "Química ambiental",
+        "incidenceValue": 0.0537,
+        "incidenceLevel": "Alta!"
+      }
+    ]
+  },
+  "historia": {
+    "displayName": "História",
+    "topics": [
+      {
+        "id": "his-1",
+        "name": "Historiografia e Linha do tempo",
+        "incidenceValue": 0.0071,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-2",
+        "name": "Pré-História",
+        "incidenceValue": 0.0071,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-3",
+        "name": "Egito e Mesopotâmia",
+        "incidenceValue": 0.0071,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-4",
+        "name": "Hebreus, fenícios, persas e cretenses",
+        "incidenceValue": 0.0024,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-5",
+        "name": "Grécia Antiga",
+        "incidenceValue": 0.0212,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-6",
+        "name": "Roma Antiga",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-7",
+        "name": "Alta Idade Média: Sistema Feudal e Igreja medieval",
+        "incidenceValue": 0.0306,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-8",
+        "name": "Idade Média no Oriente, Civilização muçulmana e Cruzadas",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-9",
+        "name": "Baixa Idade Média e transição feudo-capitalista",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-10",
+        "name": "Antigo Regime: Absolutismo e Mercantilismo",
+        "incidenceValue": 0.0141,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-11",
+        "name": "Reformas religiosas, Liberalismo e Iluminismo",
+        "incidenceValue": 0.0188,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-12",
+        "name": "Civilizações pré-colombianas e colonização espanhola na América",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-13",
+        "name": "Colonização inglesa na América",
+        "incidenceValue": 0.0024,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-14",
+        "name": "Revoluções Inglesas",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-15",
+        "name": "Independência dos EUA",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-16",
+        "name": "Revolução Francesa, Era Napoleônica e Congresso de Viena",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-17",
+        "name": "Artes, culturas e sociedades: do Renascimento ao pré-romantismo",
+        "incidenceValue": 0.0141,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-18",
+        "name": "Revolução Industrial",
+        "incidenceValue": 0.0235,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-19",
+        "name": "Independência da América espanhola e EUA no século XIX",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-20",
+        "name": "Revoluções liberais de 1830 e 1848",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-21",
+        "name": "Ideias sociais e políticas do Século XIX e unificações tardias",
+        "incidenceValue": 0.0071,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-22",
+        "name": "América no século XIX",
+        "incidenceValue": 0.0024,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-23",
+        "name": "Imperialismo",
+        "incidenceValue": 0.0141,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-24",
+        "name": "Primeira Guerra Mundial",
+        "incidenceValue": 0.0094,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-25",
+        "name": "Economia no século XX e crise de 1929",
+        "incidenceValue": 0.0141,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-26",
+        "name": "Período entre guerras, Revolução Russa e Totalitarismo",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-27",
+        "name": "Segunda Guerra mundial",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-28",
+        "name": "América Latina no século XX",
+        "incidenceValue": 0.0047,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-29",
+        "name": "Descolonização afro-asiática e o pós-descolonização",
+        "incidenceValue": 0.0141,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-30",
+        "name": "Guerra Fria",
+        "incidenceValue": 0.0188,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-31",
+        "name": "A Nova Ordem Mundial",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-32",
+        "name": "Questões de temas variados",
+        "incidenceValue": 0.0439,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-33",
+        "name": "Expansão marítima portuguesa",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-34",
+        "name": "Período pré-colonial e início da colonização",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-35",
+        "name": "Arte, cultura e sociedade coloniais",
+        "incidenceValue": 0.0353,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-36",
+        "name": "Política e economia coloniais",
+        "incidenceValue": 0.0306,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-37",
+        "name": "Ocupação e expansão territorial",
+        "incidenceValue": 0.0259,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "his-38",
+        "name": "Invasões estrangeiras",
+        "incidenceValue": 0.0071,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-39",
+        "name": "Revoltas nativistas e movimentos emancipacionistas",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-40",
+        "name": "Família Real portuguesa no Brasil",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-41",
+        "name": "Processo de independência do Brasil",
+        "incidenceValue": 0.0024,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-42",
+        "name": "Primeiro Reinado",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-43",
+        "name": "Período Regencial",
+        "incidenceValue": 0.0118,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "his-44",
+        "name": "Segundo Reinado",
+        "incidenceValue": 0.0824,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "his-45",
+        "name": "Primeira República",
+        "incidenceValue": 0.0706,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "his-46",
+        "name": "Era Vargas",
+        "incidenceValue": 0.0635,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "his-47",
+        "name": "República Liberal",
+        "incidenceValue": 0.0306,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-48",
+        "name": "Regime Militar",
+        "incidenceValue": 0.0376,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "his-49",
+        "name": "Redemocratização e Nova República",
+        "incidenceValue": 0.0306,
+        "incidenceLevel": "Média"
+      }
+    ]
+  },
+  "geografia": {
+    "displayName": "Geografia",
+    "topics": [
+      {
+        "id": "geo-1",
+        "name": "Cartografia",
+        "incidenceValue": 0.0375,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-2",
+        "name": "Movimentos da Terra e da lua",
+        "incidenceValue": 0.0042,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "geo-3",
+        "name": "Geologia e Geomorfologia",
+        "incidenceValue": 0.0354,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-4",
+        "name": "Pedologia",
+        "incidenceValue": 0.0125,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "geo-5",
+        "name": "Meteorologia e climatologia",
+        "incidenceValue": 0.0208,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-6",
+        "name": "Vegetação",
+        "incidenceValue": 0.0167,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-7",
+        "name": "Hidrografia",
+        "incidenceValue": 0.0146,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-8",
+        "name": "Relevo brasileiro",
+        "incidenceValue": 0.0229,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-9",
+        "name": "Clima do Brasil",
+        "incidenceValue": 0.0104,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "geo-10",
+        "name": "Recursos hídricos e Bacias hidrográficas do Brasil",
+        "incidenceValue": 0.0146,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-11",
+        "name": "Dinâmica dos ventos e Zonas climáticas",
+        "incidenceValue": 0.0208,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-12",
+        "name": "Grandes biomas terrestres",
+        "incidenceValue": 0.0188,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-13",
+        "name": "Urbanização mundial e Hierarquias urbanas",
+        "incidenceValue": 0.0188,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-14",
+        "name": "Urbanização do Brasil",
+        "incidenceValue": 0.0438,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "geo-15",
+        "name": "Movimentos migratórios",
+        "incidenceValue": 0.0375,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-16",
+        "name": "Geografia populacional",
+        "incidenceValue": 0.0458,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "geo-17",
+        "name": "Regiões e classificações regionais do Brasil",
+        "incidenceValue": 0.0272,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-18",
+        "name": "Energias renováveis e não renováveis",
+        "incidenceValue": 0.0354,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-19",
+        "name": "Industrialização brasileira",
+        "incidenceValue": 0.0271,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-20",
+        "name": "Transportes",
+        "incidenceValue": 0.0208,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-21",
+        "name": "Globalização e Regionalização",
+        "incidenceValue": 0.0396,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "geo-22",
+        "name": "Sistemas político-econômicos",
+        "incidenceValue": 0.0208,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-23",
+        "name": "Comércio mundial",
+        "incidenceValue": 0.0083,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "geo-24",
+        "name": "Blocos econômicos",
+        "incidenceValue": 0.0188,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "geo-25",
+        "name": "Geografia econômica no Brasil e no mundo",
+        "incidenceValue": 0.0621,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "geo-26",
+        "name": "Sistemas agrícolas",
+        "incidenceValue": 0.0104,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "geo-27",
+        "name": "Agropecuária no Brasil",
+        "incidenceValue": 0.1188,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "geo-28",
+        "name": "Geografia política mundial",
+        "incidenceValue": 0.0563,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "geo-29",
+        "name": "Geografia e meio ambiente",
+        "incidenceValue": 0.1042,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "geo-30",
+        "name": "Geografia cultural",
+        "incidenceValue": 0.0188,
+        "incidenceLevel": "Baixa"
+      }
+    ]
+  },
+  "linguagens": {
+    "displayName": "Linguagens",
+    "topics": [
+      {
+        "id": "lin-1",
+        "name": "Inglês/espanhol",
+        "incidenceValue": 0.1065,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "lin-2",
+        "name": "Interpretação de textos",
+        "incidenceValue": 0.4901,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "lin-3",
+        "name": "Gramática",
+        "incidenceValue": 0.0328,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "lin-4",
+        "name": "Tipos e Gêneros textuais",
+        "incidenceValue": 0.0677,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "lin-5",
+        "name": "Variações linguísticas",
+        "incidenceValue": 0.0395,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "lin-6",
+        "name": "Funções da Linguagem",
+        "incidenceValue": 0.0251,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "lin-7",
+        "name": "Figuras de Linguagem",
+        "incidenceValue": 0.0069,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-8",
+        "name": "Gêneros literários",
+        "incidenceValue": 0.0122,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-9",
+        "name": "Classicismo",
+        "incidenceValue": 0.0008,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-10",
+        "name": "Trovadorismo",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-11",
+        "name": "Quinhentismo",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-12",
+        "name": "Barroco",
+        "incidenceValue": 0.0015,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-13",
+        "name": "Arcadismo",
+        "incidenceValue": 0.0023,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-14",
+        "name": "Romantismo",
+        "incidenceValue": 0.0107,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-15",
+        "name": "Realismo e naturalismo",
+        "incidenceValue": 0.0114,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-16",
+        "name": "Parnasianismo",
+        "incidenceValue": 0.003,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-17",
+        "name": "Simbolismo",
+        "incidenceValue": 0.0015,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-18",
+        "name": "Pré-Modernismo e vanguardas europeias",
+        "incidenceValue": 0.0061,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-19",
+        "name": "Modernismo: primeira geração",
+        "incidenceValue": 0.013,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-20",
+        "name": "Modernismo: segunda geração",
+        "incidenceValue": 0.013,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-21",
+        "name": "Modernismo: terceira geração",
+        "incidenceValue": 0.0099,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-22",
+        "name": "Pós-modernismo",
+        "incidenceValue": 0.0069,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "lin-23",
+        "name": "Arte",
+        "incidenceValue": 0.061,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "lin-24",
+        "name": "Educação física",
+        "incidenceValue": 0.0099,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "lin-25",
+        "name": "Questões diversas",
+        "incidenceValue": 0.0251,
+        "incidenceLevel": "Média"
+      }
+    ]
+  },
+  "filosofia": {
+    "displayName": "Filosofia",
+    "topics": [
+      {
+        "id": "fil-1",
+        "name": "Origem da filosofia",
+        "incidenceValue": 0.0321,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-2",
+        "name": "Pré-Socráticos",
+        "incidenceValue": 0.0577,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fil-3",
+        "name": "Sofistas, Sócrates, Platão e Aristóteles",
+        "incidenceValue": 0.2244,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "fil-4",
+        "name": "Filosofia Helenística",
+        "incidenceValue": 0.0321,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-5",
+        "name": "Filosofia Medieval: Patrística e escolástica",
+        "incidenceValue": 0.0385,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-6",
+        "name": "Filosofia Moderna: Racionalismo",
+        "incidenceValue": 0.0577,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fil-7",
+        "name": "Filosofia Moderna: Empirismo",
+        "incidenceValue": 0.0321,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-8",
+        "name": "Filosofia Moderna: Iluminismo",
+        "incidenceValue": 0.0385,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-9",
+        "name": "Filosofia Moderna: Immanuel Kant",
+        "incidenceValue": 0.0449,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fil-10",
+        "name": "Filosofia Moderna: Friedrich Nietzsche",
+        "incidenceValue": 0.0192,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-11",
+        "name": "Filosofia moral e ética",
+        "incidenceValue": 0.0833,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fil-12",
+        "name": "Filosofia Política",
+        "incidenceValue": 0.1474,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "fil-13",
+        "name": "Outros ramos da filosofia",
+        "incidenceValue": 0.0769,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "fil-14",
+        "name": "Escola de Frankfurt",
+        "incidenceValue": 0.0192,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "fil-15",
+        "name": "Existencialismo",
+        "incidenceValue": 0.0064,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "fil-16",
+        "name": "Outras questões de filosofia",
+        "incidenceValue": 0.0128,
+        "incidenceLevel": "Muito baixa"
+      }
+    ]
+  },
+  "sociologia": {
+    "displayName": "Sociologia",
+    "topics": [
+      {
+        "id": "soc-1",
+        "name": "Surgimento e princípios de Sociologia",
+        "incidenceValue": 0.0,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "soc-2",
+        "name": "Émile Durkheim",
+        "incidenceValue": 0.0043,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "soc-3",
+        "name": "Max Weber",
+        "incidenceValue": 0.0085,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "soc-4",
+        "name": "Pensadores contemporâneos",
+        "incidenceValue": 0.0043,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "soc-5",
+        "name": "Karl Marx, trabalho, economia e sociedade",
+        "incidenceValue": 0.1234,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "soc-6",
+        "name": "Estratificação, Classe e Mobilidade social",
+        "incidenceValue": 0.017,
+        "incidenceLevel": "Muito baixa"
+      },
+      {
+        "id": "soc-7",
+        "name": "Revolução Industrial e Globalização",
+        "incidenceValue": 0.0681,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "soc-8",
+        "name": "Poder, Política e Estado",
+        "incidenceValue": 0.1787,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "soc-9",
+        "name": "Direitos, Cidadania e Movimentos sociais",
+        "incidenceValue": 0.1532,
+        "incidenceLevel": "Alta!"
+      },
+      {
+        "id": "soc-10",
+        "name": "Instituições Sociais",
+        "incidenceValue": 0.0213,
+        "incidenceLevel": "Baixa"
+      },
+      {
+        "id": "soc-11",
+        "name": "Cultura, Indústria cultural e Educação",
+        "incidenceValue": 0.2468,
+        "incidenceLevel": "Muito alta!"
+      },
+      {
+        "id": "soc-12",
+        "name": "Gênero e sexualidade",
+        "incidenceValue": 0.0511,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "soc-13",
+        "name": "Raça, etnia e migração",
+        "incidenceValue": 0.0553,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "soc-14",
+        "name": "Pobreza e desenvolvimento",
+        "incidenceValue": 0.0426,
+        "incidenceLevel": "Média"
+      },
+      {
+        "id": "soc-15",
+        "name": "Conceitos e tipos de políticas públicas",
+        "incidenceValue": 0.0085,
+        "incidenceLevel": "Muito baixa"
+      }
+    ]
+  }
+}

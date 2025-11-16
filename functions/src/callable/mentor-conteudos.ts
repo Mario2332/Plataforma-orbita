@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { getAuthContext, requireRole } from "../utils/auth";
-const studyData = require("../../../shared/study-content-data.json");
+const studyData = require("../study-content-data.json");
 
 const db = admin.firestore();
 
