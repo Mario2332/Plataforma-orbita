@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAlunoApi } from "@/hooks/useAlunoApi";
 import { Heart, Battery, Calendar, Trash2, TrendingUp, TrendingDown, Minus, BarChart3, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer } from "recharts";
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, Cell } from "recharts";
 
 // Opções de estado emocional
 const ESTADOS_EMOCIONAIS = [
