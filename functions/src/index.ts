@@ -11,3 +11,4 @@ export { gestorFunctions } from "./callable/gestor";
 export { mentorFunctions } from "./callable/mentor";
 export { alunoFunctions } from "./callable/aluno";
 export * from "./callable/aluno-extras";
+export * from "./callable/mentor-conteudos";
