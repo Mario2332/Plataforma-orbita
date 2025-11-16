@@ -338,7 +338,7 @@ export const updateProgresso = functions
     const auth = await getAuthContext(context);
     requireRole(auth, "aluno");
 
-    const { topicoId, estudado, questoesFeitas, questoesAcertos } = data;
+    const { topicoId, estudado, questoesFeitas, questoesAcertos, anotacoes } = data;
 
     if (!topicoId) {
       throw new functions.https.HttpsError("invalid-argument", "ID do tópico é obrigatório");
@@ -362,6 +362,7 @@ export const updateProgresso = functions
       if (estudado !== undefined) updates.estudado = estudado;
       if (questoesFeitas !== undefined) updates.questoesFeitas = questoesFeitas;
       if (questoesAcertos !== undefined) updates.questoesAcertos = questoesAcertos;
+      if (anotacoes !== undefined) updates.anotacoes = anotacoes;
 
       if (conteudosQuery.empty) {
         // Criar novo documento

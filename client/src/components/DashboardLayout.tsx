@@ -61,7 +61,23 @@ const getMenuItems = (role?: string) => {
     case "mentor":
       return [
         { icon: Users, label: "Alunos", path: "/mentor/alunos" },
-        { icon: BookOpen, label: "Conteúdos", path: "/mentor/conteudos" },
+        { 
+          icon: BookOpen, 
+          label: "Conteúdos", 
+          path: "/mentor/conteudos",
+          subItems: [
+            { label: "Painel Geral", path: "/mentor/conteudos" },
+            { label: "Matemática", path: "/mentor/conteudos/matematica" },
+            { label: "Biologia", path: "/mentor/conteudos/biologia" },
+            { label: "Física", path: "/mentor/conteudos/fisica" },
+            { label: "Química", path: "/mentor/conteudos/quimica" },
+            { label: "História", path: "/mentor/conteudos/historia" },
+            { label: "Geografia", path: "/mentor/conteudos/geografia" },
+            { label: "Linguagens", path: "/mentor/conteudos/linguagens" },
+            { label: "Filosofia", path: "/mentor/conteudos/filosofia" },
+            { label: "Sociologia", path: "/mentor/conteudos/sociologia" },
+          ]
+        },
         { icon: Settings, label: "Configurações", path: "/mentor/configuracoes" },
       ];
     case "gestor":

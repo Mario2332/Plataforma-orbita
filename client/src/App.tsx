@@ -27,7 +27,16 @@ import MentorHome from "./pages/mentor/MentorHome";
 import MentorAlunos from "./pages/mentor/MentorAlunos";
 import MentorConfiguracoes from "./pages/mentor/MentorConfiguracoes";
 import MentorViewAluno from "./pages/mentor/MentorViewAluno";
-import MentorConteudos from "./pages/mentor/MentorConteudos";
+import MentorPainelGeral from "./pages/mentor/conteudos/MentorPainelGeral";
+import MentorMatematica from "./pages/mentor/conteudos/Matematica";
+import MentorBiologia from "./pages/mentor/conteudos/Biologia";
+import MentorFisica from "./pages/mentor/conteudos/Fisica";
+import MentorQuimica from "./pages/mentor/conteudos/Quimica";
+import MentorHistoria from "./pages/mentor/conteudos/Historia";
+import MentorGeografia from "./pages/mentor/conteudos/Geografia";
+import MentorLinguagens from "./pages/mentor/conteudos/Linguagens";
+import MentorFilosofia from "./pages/mentor/conteudos/Filosofia";
+import MentorSociologia from "./pages/mentor/conteudos/Sociologia";
 import GestorHome from "./pages/gestor/GestorHome";
 import GestorMentores from "./pages/gestor/GestorMentores";
 import GestorAlunos from "./pages/gestor/GestorAlunos";
@@ -158,9 +167,55 @@ function Router() {
           <MentorViewAluno />
         </DashboardLayout>
       </Route>
+      {/* Rotas de Conteúdos do Mentor */}
       <Route path="/mentor/conteudos">
         <DashboardLayout>
-          <MentorConteudos />
+          <MentorPainelGeral />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/matematica">
+        <DashboardLayout>
+          <MentorMatematica />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/biologia">
+        <DashboardLayout>
+          <MentorBiologia />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/fisica">
+        <DashboardLayout>
+          <MentorFisica />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/quimica">
+        <DashboardLayout>
+          <MentorQuimica />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/historia">
+        <DashboardLayout>
+          <MentorHistoria />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/geografia">
+        <DashboardLayout>
+          <MentorGeografia />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/linguagens">
+        <DashboardLayout>
+          <MentorLinguagens />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/filosofia">
+        <DashboardLayout>
+          <MentorFilosofia />
+        </DashboardLayout>
+      </Route>
+      <Route path="/mentor/conteudos/sociologia">
+        <DashboardLayout>
+          <MentorSociologia />
         </DashboardLayout>
       </Route>
       <Route path="/mentor/configuracoes">
