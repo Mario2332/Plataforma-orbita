@@ -100,13 +100,14 @@ export function useAuth() {
                 }
               }
               
-              // Atualizar documento users com dados corretos
+              // Atualizar documento users com dados corretos (preservando photoURL)
               console.log('[useAuth] Atualizando documento users com dados corrigidos');
               await setDoc(userDocRef, {
                 email,
                 name,  // Padronizar para 'name' em inglês
                 nome: name,  // Manter 'nome' para compatibilidade
                 role,
+                photoURL: data.photoURL || null,  // Preservar photoURL existente
                 updatedAt: serverTimestamp()
               }, { merge: true });
             }
