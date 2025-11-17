@@ -1,4 +1,8 @@
 import * as admin from "firebase-admin";
+import * as dotenv from "dotenv";
+
+// Carregar variáveis de ambiente
+dotenv.config();
 
 // Inicializar Firebase Admin
 // Em produção, as credenciais são obtidas automaticamente do ambiente Firebase
