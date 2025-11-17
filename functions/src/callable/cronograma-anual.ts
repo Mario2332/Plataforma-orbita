@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { getAuthContext, requireRole } from "../utils/auth";
+import { initializeTemplatesIfNeeded } from "./init-cronograma-templates";
 
 const db = admin.firestore();
 
@@ -30,6 +31,9 @@ export const getCronogramaAnual = functions
 
       const auth = await getAuthContext(context);
       const { tipo = "extensive" } = data; // extensive ou intensive
+
+      // Inicializar templates se necessário
+      await initializeTemplatesIfNeeded();
 
       // Buscar cronograma do aluno
       const cronogramaRef = db.collection("cronogramas_anuais").doc(context.auth.uid);
