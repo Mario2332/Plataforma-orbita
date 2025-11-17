@@ -114,6 +114,7 @@ export const uploadProfilePhoto = functions
       });
 
       functions.logger.info(`✅ Perfil atualizado com nova foto`);
+      functions.logger.info(`🔗 photoURL salvo no Firestore: ${photoURL}`);
 
       return {
         success: true,

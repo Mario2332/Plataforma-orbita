@@ -40,6 +40,8 @@ const getMe = functions
     const userDoc = await db.collection("users").doc(auth.uid).get();
     const photoURL = userDoc.exists ? userDoc.data()?.photoURL : null;
 
+    functions.logger.info(`📸 getMe: photoURL do usuário ${auth.uid}: ${photoURL || 'null'}`);
+
     return { id: alunoDoc.id, ...alunoDoc.data(), photoURL };
   });
 

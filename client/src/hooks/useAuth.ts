@@ -10,7 +10,7 @@ import {
   updateEmail,
   updatePassword
 } from "firebase/auth";
-import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, getDocFromServer, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../lib/firebase";
 
 export type UserRole = "gestor" | "mentor" | "aluno";
@@ -102,14 +102,24 @@ export function useAuth() {
               
               // Atualizar documento users com dados corretos (preservando photoURL)
               console.log('[useAuth] Atualizando documento users com dados corrigidos');
-              await setDoc(userDocRef, {
+              
+              const updateData: any = {
                 email,
                 name,  // Padronizar para 'name' em inglês
                 nome: name,  // Manter 'nome' para compatibilidade
                 role,
-                photoURL: data.photoURL || null,  // Preservar photoURL existente
                 updatedAt: serverTimestamp()
-              }, { merge: true });
+              };
+              
+              // Só incluir photoURL se existir (evita remover campo)
+              if (data.photoURL) {
+                updateData.photoURL = data.photoURL;
+                console.log('[useAuth] Preservando photoURL:', data.photoURL);
+              } else {
+                console.log('[useAuth] photoURL não existe, não será incluído no update');
+              }
+              
+              await setDoc(userDocRef, updateData, { merge: true });
             }
             
             const userData: UserData = {
@@ -311,8 +321,9 @@ export function useAuth() {
     if (!authState.user) return;
 
     try {
+      console.log('[useAuth] refreshUserData: buscando dados do servidor (ignorando cache)');
       const userDocRef = doc(db, "users", authState.user.uid);
-      const userDocSnap = await getDoc(userDocRef);
+      const userDocSnap = await getDocFromServer(userDocRef);  // Força leitura do servidor
 
       if (userDocSnap.exists()) {
         const data = userDocSnap.data();
@@ -326,6 +337,11 @@ export function useAuth() {
           lastSignedIn: data.lastSignedIn?.toDate() || new Date(),
           photoURL: data.photoURL,
         };
+
+        console.log('[useAuth] refreshUserData: dados atualizados:', {
+          hasPhotoURL: !!userData.photoURL,
+          photoURL: userData.photoURL
+        });
 
         setAuthState((prev) => ({
           ...prev,
