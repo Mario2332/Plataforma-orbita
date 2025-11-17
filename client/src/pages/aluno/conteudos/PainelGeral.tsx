@@ -1,12 +1,12 @@
 import { useMemo, useState, useEffect } from "react";
 import { alunoApi } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, BookOpen, CheckCircle2 } from "lucide-react";
+import { Loader2, BookOpen, CheckCircle2, Zap, BarChart3, PieChart as PieChartIcon, Sparkles } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import studyData from "@shared/study-content-data.json";
 import { toast } from "sonner";
 
-const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899", "#14b8a6", "#f97316", "#6366f1"];
+const COLORS = ["#3b82f6", "#06b6d4", "#0ea5e9", "#3b82f6", "#6366f1", "#8b5cf6", "#0891b2", "#0284c7", "#2563eb"];
 
 export default function PainelGeral() {
   const [progressoMap, setProgressoMap] = useState<any>(null);
@@ -72,7 +72,12 @@ export default function PainelGeral() {
   if (isLoading || !stats) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <div className="relative">
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+          </div>
+        </div>
       </div>
     );
   }
@@ -87,67 +92,101 @@ export default function PainelGeral() {
     value: m.estudados
   }));
 
+  const percentualGeral = ((stats.topicosEstudados / stats.totalTopicos) * 100).toFixed(1);
+
   return (
-    <div className="container mx-auto py-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Painel Geral - Controle de Conteúdos</h1>
-        <p className="text-muted-foreground mt-2">
-          Visão completa do seu progresso em todas as matérias do ENEM
-        </p>
+    <div className="container mx-auto py-6 space-y-8 pb-8 animate-fade-in">
+      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-8 text-white animate-slide-up">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+        <div className="relative flex items-center gap-4">
+          <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
+            <BookOpen className="w-10 h-10" />
+          </div>
+          <div>
+            <h1 className="text-4xl font-black mb-2">Painel Geral - Controle de Conteúdos</h1>
+            <p className="text-blue-50 text-lg">Visão completa do seu progresso em todas as matérias do ENEM</p>
+          </div>
+        </div>
       </div>
 
-      {/* Cards de Métricas */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <Card className="border-2 hover:shadow-2xl transition-all rounded-2xl group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Tópicos</CardTitle>
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-lg font-black">Total de Tópicos</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+              <BookOpen className="h-5 w-5 text-white" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalTopicos}</div>
-            <p className="text-xs text-muted-foreground">
+            <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              {stats.totalTopicos}
+            </div>
+            <p className="text-sm text-muted-foreground font-semibold mt-2">
               Disponíveis para estudo
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-2 hover:shadow-2xl transition-all rounded-2xl group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Tópicos Estudados</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-lg font-black">Tópicos Estudados</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+              <CheckCircle2 className="h-5 w-5 text-white" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.topicosEstudados}</div>
-            <p className="text-xs text-muted-foreground">
-              {((stats.topicosEstudados / stats.totalTopicos) * 100).toFixed(1)}% do total
+            <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              {stats.topicosEstudados}
+            </div>
+            <p className="text-sm text-muted-foreground font-semibold mt-2">
+              {percentualGeral}% do total
             </p>
+            <div className="mt-3 w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-1000"
+                style={{ width: `${percentualGeral}%` }}
+              />
+            </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Gráficos */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl">
           <CardHeader>
-            <CardTitle>Progresso por Matéria</CardTitle>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+                <BarChart3 className="w-6 h-6 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-black">Progresso por Matéria</CardTitle>
+            </div>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={dadosGraficoBarras}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="% Estudado" fill="#3b82f6" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} stroke="#6b7280" style={{ fontWeight: 'bold', fontSize: '12px' }} />
+                <YAxis stroke="#6b7280" style={{ fontWeight: 'bold' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#fff', border: '2px solid #3b82f6', borderRadius: '12px', fontWeight: 'bold' }} />
+                <Legend wrapperStyle={{ fontWeight: 'bold' }} />
+                <Bar dataKey="% Estudado" fill="#3b82f6" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl">
           <CardHeader>
-            <CardTitle>Distribuição de Tópicos Estudados</CardTitle>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+                <PieChartIcon className="w-6 h-6 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-black">Distribuição de Tópicos Estudados</CardTitle>
+            </div>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -166,36 +205,52 @@ export default function PainelGeral() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ backgroundColor: '#fff', border: '2px solid #3b82f6', borderRadius: '12px', fontWeight: 'bold' }} />
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
 
-      {/* Tabela Resumo */}
-      <Card>
+      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
-          <CardTitle>Resumo por Matéria</CardTitle>
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <Sparkles className="w-6 h-6 text-white" />
+            </div>
+            <CardTitle className="text-2xl font-black">Resumo por Matéria</CardTitle>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b">
-                  <th className="text-left p-3 font-semibold">Matéria</th>
-                  <th className="text-center p-3 font-semibold">Total Tópicos</th>
-                  <th className="text-center p-3 font-semibold">Estudados</th>
-                  <th className="text-center p-3 font-semibold">% Estudado</th>
+                <tr className="border-b-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50">
+                  <th className="text-left p-4 font-black text-blue-900">Matéria</th>
+                  <th className="text-center p-4 font-black text-blue-900">Total Tópicos</th>
+                  <th className="text-center p-4 font-black text-blue-900">Estudados</th>
+                  <th className="text-center p-4 font-black text-blue-900">% Estudado</th>
                 </tr>
               </thead>
               <tbody>
                 {stats.resumoPorMateria.map((m, idx) => (
-                  <tr key={idx} className="border-b hover:bg-muted/50">
-                    <td className="p-3 font-medium">{m.materia}</td>
-                    <td className="p-3 text-center">{m.topicos}</td>
-                    <td className="p-3 text-center">{m.estudados}</td>
-                    <td className="p-3 text-center font-semibold">{m.percentualEstudado}%</td>
+                  <tr key={idx} className="border-b hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-cyan-50/50 transition-all">
+                    <td className="p-4 font-bold">{m.materia}</td>
+                    <td className="p-4 text-center font-semibold">{m.topicos}</td>
+                    <td className="p-4 text-center font-semibold">{m.estudados}</td>
+                    <td className="p-4 text-center">
+                      <div className="inline-flex items-center gap-2">
+                        <span className="font-black text-lg bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                          {m.percentualEstudado}%
+                        </span>
+                        <div className="w-20 bg-gray-200 rounded-full h-2 overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
+                            style={{ width: `${m.percentualEstudado}%` }}
+                          />
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -203,6 +258,17 @@ export default function PainelGeral() {
           </div>
         </CardContent>
       </Card>
+
+      <style>{`
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes float-delayed { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-30px); } }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slide-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 10s ease-in-out infinite; }
+        .animate-fade-in { animation: fade-in 0.8s ease-out; }
+        .animate-slide-up { animation: slide-up 0.6s ease-out; }
+      `}</style>
     </div>
   );
 }

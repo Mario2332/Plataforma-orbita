@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { alunoApi } from "@/lib/api";
 import { mentorConteudosApi } from "@/lib/api-mentor-conteudos";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowUpDown, ArrowUp, ArrowDown, Filter, Loader2, FileText } from "lucide-react";
+import { ArrowUpDown, ArrowUp, ArrowDown, Filter, Loader2, FileText, Zap, BookOpen, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 interface Topic {
@@ -59,11 +59,8 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
     loadAll();
   }, [materiaKey]);
 
-  // Estados de ordenação
   const [sortColumn, setSortColumn] = useState<"name" | "incidence">("name");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-
-  // Estados de filtro
   const [filterIncidence, setFilterIncidence] = useState<string>("todos");
   const [filterStatus, setFilterStatus] = useState<string>("todos");
 
@@ -100,13 +97,11 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
     filtered.sort((a, b) => {
       let comparison = 0;
-      
       if (sortColumn === "name") {
         comparison = a.name.localeCompare(b.name);
       } else if (sortColumn === "incidence") {
         comparison = a.incidenceValue - b.incidenceValue;
       }
-      
       return sortDirection === "asc" ? comparison : -comparison;
     });
     
@@ -115,10 +110,10 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
   const getIncidenceBadgeColor = (level: string) => {
     switch (level) {
-      case "Muito alta!": return "bg-red-500 text-white hover:bg-red-600";
-      case "Alta!": return "bg-orange-500 text-white hover:bg-orange-600";
-      case "Média": return "bg-yellow-500 text-black hover:bg-yellow-600";
-      case "Baixa": return "bg-blue-500 text-white hover:bg-blue-600";
+      case "Muito alta!": return "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg";
+      case "Alta!": return "bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 shadow-lg";
+      case "Média": return "bg-cyan-500 text-white hover:bg-cyan-600 shadow-md";
+      case "Baixa": return "bg-sky-500 text-white hover:bg-sky-600 shadow-md";
       case "Muito baixa": return "bg-gray-400 text-white hover:bg-gray-500";
       default: return "bg-gray-300 text-black hover:bg-gray-400";
     }
@@ -146,35 +141,84 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
     setOpenDialog(topicoId);
   };
 
+  const topicosEstudados = topics.filter(t => progressoMap?.[t.id]?.estudado).length;
+  const percentualEstudado = topics.length > 0 ? ((topicosEstudados / topics.length) * 100).toFixed(1) : "0";
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <div className="relative">
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
-      <Card>
+    <div className="container mx-auto py-6 space-y-6 pb-8 animate-fade-in">
+      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+
+      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up">
         <CardHeader>
-          <CardTitle className="text-3xl">{materia?.displayName}</CardTitle>
-          <p className="text-muted-foreground">
-            {topics.length} tópicos • {filteredAndSortedTopics.length} exibidos • Marque como estudado e adicione anotações
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-lg">
+              <BookOpen className="w-8 h-8 text-white" />
+            </div>
+            <div className="flex-1">
+              <CardTitle className="text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                {materia?.displayName}
+              </CardTitle>
+              <p className="text-muted-foreground font-semibold mt-2">
+                {topics.length} tópicos • {filteredAndSortedTopics.length} exibidos • Marque como estudado e adicione anotações
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-xl border-2 border-blue-200/50">
+              <div className="text-sm font-bold text-blue-900 dark:text-blue-300 mb-1">Total de Tópicos</div>
+              <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                {topics.length}
+              </div>
+            </div>
+            <div className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-xl border-2 border-blue-200/50">
+              <div className="text-sm font-bold text-blue-900 dark:text-blue-300 mb-1">Estudados</div>
+              <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                {topicosEstudados}
+              </div>
+            </div>
+            <div className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-xl border-2 border-blue-200/50">
+              <div className="text-sm font-bold text-blue-900 dark:text-blue-300 mb-1">Progresso</div>
+              <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                {percentualEstudado}%
+              </div>
+              <div className="mt-2 w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-1000"
+                  style={{ width: `${percentualEstudado}%` }}
+                />
+              </div>
+            </div>
+          </div>
         </CardHeader>
+
         <CardContent className="space-y-4">
-          {/* Seção de Filtros */}
-          <div className="flex flex-col sm:flex-row gap-4 p-4 bg-muted/50 rounded-lg">
+          <div className="flex flex-col sm:flex-row gap-4 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-xl border-2 border-blue-200/50">
             <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm font-medium">Filtros:</span>
+              <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg shadow-md">
+                <Filter className="w-4 h-4 text-white" />
+              </div>
+              <span className="text-sm font-black">Filtros:</span>
             </div>
             
             <div className="flex-1 flex flex-col sm:flex-row gap-3">
               <div className="flex-1">
                 <Select value={filterIncidence} onValueChange={setFilterIncidence}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full border-2 font-semibold">
                     <SelectValue placeholder="Incidência" />
                   </SelectTrigger>
                   <SelectContent>
@@ -190,7 +234,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
               <div className="flex-1">
                 <Select value={filterStatus} onValueChange={setFilterStatus}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full border-2 font-semibold">
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -209,7 +253,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                     setFilterIncidence("todos");
                     setFilterStatus("todos");
                   }}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap border-2 font-bold hover:bg-blue-100"
                 >
                   Limpar filtros
                 </Button>
@@ -217,42 +261,46 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
             </div>
           </div>
 
-          {/* Tabela */}
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-xl border-2 border-blue-200/50">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b bg-muted/30">
-                  <th className="text-left p-3 font-semibold">
+                <tr className="border-b-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20">
+                  <th className="text-left p-4">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSort("name")}
-                      className="flex items-center gap-1 hover:bg-muted"
+                      className="flex items-center gap-1 hover:bg-blue-100 font-black"
                     >
                       Conteúdo
                       {getSortIcon("name")}
                     </Button>
                   </th>
-                  <th className="text-center p-3 font-semibold">
+                  <th className="text-center p-4">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSort("incidence")}
-                      className="flex items-center gap-1 mx-auto hover:bg-muted"
+                      className="flex items-center gap-1 mx-auto hover:bg-blue-100 font-black"
                     >
                       Incidência
                       {getSortIcon("incidence")}
                     </Button>
                   </th>
-                  <th className="text-center p-3 font-semibold w-24">Estudado</th>
-                  <th className="text-center p-3 font-semibold w-32">Anotações</th>
+                  <th className="text-center p-4 font-black w-24">Estudado</th>
+                  <th className="text-center p-4 font-black w-32">Anotações</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredAndSortedTopics.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="p-8 text-center text-muted-foreground">
-                      Nenhum tópico encontrado com os filtros selecionados.
+                    <td colSpan={4} className="p-12 text-center">
+                      <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full flex items-center justify-center">
+                        <Sparkles className="w-12 h-12 text-blue-500" />
+                      </div>
+                      <p className="text-lg font-semibold text-gray-600 dark:text-gray-400">
+                        Nenhum tópico encontrado com os filtros selecionados.
+                      </p>
                     </td>
                   </tr>
                 ) : (
@@ -261,52 +309,55 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                     const hasNotes = progresso?.anotacoes && progresso.anotacoes.trim().length > 0;
 
                     return (
-                      <tr key={topic.id} className="border-b hover:bg-muted/50 transition-colors">
-                        <td className="p-3">{topic.name}</td>
-                        <td className="p-3 text-center">
-                          <Badge className={getIncidenceBadgeColor(topic.incidenceLevel)}>
+                      <tr key={topic.id} className="border-b hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-cyan-50/50 transition-all">
+                        <td className="p-4 font-semibold">{topic.name}</td>
+                        <td className="p-4 text-center">
+                          <Badge className={`${getIncidenceBadgeColor(topic.incidenceLevel)} font-bold px-3 py-1`}>
                             {topic.incidenceLevel}
                           </Badge>
                         </td>
-                        <td className="p-3 text-center">
+                        <td className="p-4 text-center">
                           <div className="flex justify-center">
                             <Checkbox
                               checked={progresso?.estudado || false}
                               onCheckedChange={(checked) =>
                                 handleUpdateProgresso(topic.id, { estudado: checked as boolean })
                               }
+                              className="w-5 h-5 border-2"
                             />
                           </div>
                         </td>
-                        <td className="p-3 text-center">
+                        <td className="p-4 text-center">
                           <Dialog open={openDialog === topic.id} onOpenChange={(open) => !open && setOpenDialog(null)}>
                             <DialogTrigger asChild>
                               <Button
                                 variant={hasNotes ? "default" : "outline"}
                                 size="sm"
                                 onClick={() => handleOpenDialog(topic.id)}
-                                className={hasNotes ? "bg-blue-500 hover:bg-blue-600" : ""}
+                                className={hasNotes ? "bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold shadow-lg" : "border-2 font-bold hover:bg-blue-100"}
                               >
                                 <FileText className="w-4 h-4 mr-1" />
                                 {hasNotes ? "Ver" : "Adicionar"}
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-2xl">
+                            <DialogContent className="max-w-2xl border-2 rounded-2xl">
                               <DialogHeader>
-                                <DialogTitle>Anotações - {topic.name}</DialogTitle>
+                                <DialogTitle className="text-2xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                                  Anotações - {topic.name}
+                                </DialogTitle>
                               </DialogHeader>
                               <div className="space-y-4">
                                 <Textarea
                                   value={editingNotes[topic.id] || ""}
                                   onChange={(e) => setEditingNotes({ ...editingNotes, [topic.id]: e.target.value })}
                                   placeholder="Digite suas anotações sobre este tópico..."
-                                  className="min-h-[200px]"
+                                  className="min-h-[200px] border-2 font-semibold"
                                 />
                                 <div className="flex justify-end gap-2">
-                                  <Button variant="outline" onClick={() => setOpenDialog(null)}>
+                                  <Button variant="outline" onClick={() => setOpenDialog(null)} className="border-2 font-bold">
                                     Cancelar
                                   </Button>
-                                  <Button onClick={() => handleSaveNotes(topic.id)}>
+                                  <Button onClick={() => handleSaveNotes(topic.id)} className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold">
                                     Salvar
                                   </Button>
                                 </div>
@@ -323,6 +374,17 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
           </div>
         </CardContent>
       </Card>
+
+      <style>{`
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes float-delayed { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-30px); } }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slide-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 10s ease-in-out infinite; }
+        .animate-fade-in { animation: fade-in 0.8s ease-out; }
+        .animate-slide-up { animation: slide-up 0.6s ease-out; }
+      `}</style>
     </div>
   );
 }
