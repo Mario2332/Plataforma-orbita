@@ -79,7 +79,7 @@ export const mentorConteudosApi = {
    * Obter conteúdos mesclados de uma matéria
    */
   getConteudos: async (materiaKey?: string) => {
-    return callWithRetry("getConteudos", { materiaKey });
+    return callWithRetry("getConteudosSimples", { materiaKey });
   },
 
   /**
