@@ -6,26 +6,26 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useAlunoApi } from "@/hooks/useAlunoApi";
-import { Heart, Battery, Calendar, Trash2, TrendingUp, TrendingDown, Minus, BarChart3, AlertTriangle } from "lucide-react";
+import { Heart, Battery, Calendar, Trash2, TrendingUp, TrendingDown, Minus, BarChart3, AlertTriangle, BookHeart, Zap, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, Cell } from "recharts";
 
 // Opções de estado emocional
 const ESTADOS_EMOCIONAIS = [
-  { value: "otimo", label: "Ótimo", emoji: "😄", color: "bg-green-500" },
+  { value: "otimo", label: "Ótimo", emoji: "😄", color: "bg-gradient-to-br from-blue-500 to-cyan-500" },
   { value: "bom", label: "Bom", emoji: "🙂", color: "bg-blue-500" },
   { value: "neutro", label: "Neutro", emoji: "😐", color: "bg-gray-500" },
-  { value: "ruim", label: "Ruim", emoji: "😟", color: "bg-orange-500" },
-  { value: "pessimo", label: "Péssimo", emoji: "😢", color: "bg-red-500" },
+  { value: "ruim", label: "Ruim", emoji: "😟", color: "bg-blue-400" },
+  { value: "pessimo", label: "Péssimo", emoji: "😢", color: "bg-blue-300" },
 ];
 
 // Opções de nível de cansaço
 const NIVEIS_CANSACO = [
-  { value: "descansado", label: "Descansado", icon: Battery, color: "bg-green-500", level: 100 },
+  { value: "descansado", label: "Descansado", icon: Battery, color: "bg-gradient-to-br from-blue-500 to-cyan-500", level: 100 },
   { value: "normal", label: "Normal", icon: Battery, color: "bg-blue-500", level: 75 },
-  { value: "cansado", label: "Cansado", icon: Battery, color: "bg-yellow-500", level: 50 },
-  { value: "muito_cansado", label: "Muito Cansado", icon: Battery, color: "bg-orange-500", level: 25 },
-  { value: "exausto", label: "Exausto", icon: Battery, color: "bg-red-500", level: 10 },
+  { value: "cansado", label: "Cansado", icon: Battery, color: "bg-cyan-500", level: 50 },
+  { value: "muito_cansado", label: "Muito Cansado", icon: Battery, color: "bg-sky-500", level: 25 },
+  { value: "exausto", label: "Exausto", icon: Battery, color: "bg-indigo-500", level: 10 },
 ];
 
 export default function AlunoDiario() {
