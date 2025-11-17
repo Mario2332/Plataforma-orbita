@@ -27,8 +27,8 @@ export const updateTemplatesNow = functions
         cycles: cronogramaExtensivo,
         tipo: "extensive",
         nome: "Cronograma Extensivo",
-        descricao: "Cronograma completo para preparação ao longo do ano",
-        version: 2,
+        descricao: "Cronograma completo para prepara\u00e7\u00e3o ao longo do ano",
+        version: 3,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
@@ -38,8 +38,8 @@ export const updateTemplatesNow = functions
         cycles: cronogramaIntensivo,
         tipo: "intensive",
         nome: "Cronograma Intensivo",
-        descricao: "Cronograma focado para preparação intensiva",
-        version: 2,
+        descricao: "Cronograma focado para prepara\u00e7\u00e3o intensiva",
+        version: 3,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
