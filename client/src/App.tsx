@@ -19,7 +19,7 @@ const AlunoHome = lazy(() => import("./pages/aluno/AlunoHome"));
 const AlunoEstudos = lazy(() => import("./pages/aluno/AlunoEstudos"));
 const AlunoSimulados = lazy(() => import("./pages/aluno/AlunoSimulados"));
 const AlunoMetricas = lazy(() => import("./pages/aluno/AlunoMetricas"));
-const AlunoCronograma = lazy(() => import("./pages/aluno/AlunoCronograma"));
+const CronogramaWrapper = lazy(() => import("./pages/aluno/CronogramaWrapper"));
 const AlunoConfiguracoes = lazy(() => import("./pages/aluno/AlunoConfiguracoes"));
 const AlunoDiario = lazy(() => import("./pages/aluno/AlunoDiario"));
 const PainelGeral = lazy(() => import("./pages/aluno/conteudos/PainelGeral"));
@@ -121,7 +121,7 @@ function Router() {
       <Route path="/aluno/cronograma">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <AlunoCronograma />
+            <CronogramaWrapper />
           </Suspense>
         </DashboardLayout>
       </Route>

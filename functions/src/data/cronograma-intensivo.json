@@ -1,0 +1,26 @@
+[
+  { "cycle": 1, "subjects": [
+    { "name": "Mat. Básica", "topics": ["Sistemas de numeração e Sistema métrico", "As quatro operações e Expressões numéricas", "Múltiplos, Divisores, Critérios de divisibilidade, Números primos, MMC e MDC", "Frações e Dízimas periódicas"] },
+    { "name": "Biologia", "topics": ["Origem da vida", "Água e Sais Minerais", "Carboidratos", "Lipídios"] },
+    { "name": "Física", "topics": ["Ordem de grandeza e sistemas de unidades", "Temperatura, Calor e Energia térmica"] },
+    { "name": "História", "topics": ["Grécia Antiga", "Roma Antiga"] },
+    { "name": "Química", "topics": ["Classificações e propriedades periódicas", "Propriedades da matéria", "Modelos atômicos"] },
+    { "name": "Geografia", "topics": ["Orientação e Coordenadas geográficas", "Cartografia"] }
+  ]},
+  { "cycle": 2, "subjects": [
+    { "name": "Mat. Básica", "topics": ["Potenciação e notação científica", "Radiciação", "Produtos notáveis e Fatoração", "Equações e Sistemas do primeiro grau"] },
+    { "name": "Biologia", "topics": ["Aminoácidos e Proteínas", "Enzimas", "Vitaminas", "Ácidos nucleicos"] },
+    { "name": "Física", "topics": ["Escalas termométricas", "Mudanças de fase", "Calorimetria", "Dilatação térmica"] },
+    { "name": "História", "topics": ["Alta Idade Média", "Baixa Idade Média", "Transição feudo-capitalista"] },
+    { "name": "Química", "topics": ["Distribuição eletrônica", "Ligações químicas", "Geometria molecular"] },
+    { "name": "Geografia", "topics": ["Projeções cartográficas", "Fuso horário"] }
+  ]},
+  { "cycle": 3, "subjects": [
+    { "name": "Matemática", "topics": ["Razão e proporção", "Regras de 3", "Porcentagem", "Juros simples e compostos"] },
+    { "name": "Biologia", "topics": ["Replicação do DNA", "Transcrição e Tradução", "Membrana plasmática", "Citoplasma"] },
+    { "name": "Física", "topics": ["Propagação do calor", "Gases ideais", "Termodinâmica"] },
+    { "name": "História", "topics": ["Absolutismo e Mercantilismo", "Expansão marítima", "Renascimento"] },
+    { "name": "Química", "topics": ["Hibridização", "Polaridade", "Forças intermoleculares", "Radioatividade"] },
+    { "name": "Geografia", "topics": ["Energias renováveis", "Revolução Industrial", "Modelos produtivos"] }
+  ]}
+]

@@ -17,5 +17,6 @@ export { alunoFunctions } from "./callable/aluno";
 export * from "./callable/aluno-extras";
 export * from "./callable/mentor-conteudos";
 export * from "./callable/conteudos-simples";
+export * from "./callable/cronograma-anual";
 export * from "./webhooks/kiwify";
 export * from "./triggers/email-sender";
