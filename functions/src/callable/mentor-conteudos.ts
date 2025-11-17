@@ -20,12 +20,26 @@ const INCIDENCE_MAP: Record<string, number> = {
  */
 export const getConteudos = functions
   .region("southamerica-east1")
+  .runWith({
+    cors: true, // Habilitar CORS explicitamente
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
   .https.onCall(async (data, context) => {
     functions.logger.info("🔵 getConteudos chamada", { 
       data, 
       hasAuth: !!context.auth,
       uid: context.auth?.uid 
     });
+    
+    // Verificar autenticação
+    if (!context.auth) {
+      functions.logger.error("❌ Usuário não autenticado");
+      throw new functions.https.HttpsError(
+        "unauthenticated",
+        "Você precisa estar autenticado para acessar este recurso"
+      );
+    }
     
     const auth = await getAuthContext(context);
     functions.logger.info("✅ Auth OK", { uid: auth.uid, role: auth.role });
@@ -89,6 +103,11 @@ export const getConteudos = functions
           }
         });
 
+        functions.logger.info("✅ Conteúdos carregados", { 
+          materiaKey, 
+          topicsCount: mergedTopics.length 
+        });
+
         return {
           ...materia,
           topics: mergedTopics,
@@ -146,6 +165,7 @@ export const getConteudos = functions
           };
         }
 
+        functions.logger.info("✅ Todas as matérias carregadas");
         return allMaterias;
       }
     } catch (error: any) {
@@ -154,6 +174,12 @@ export const getConteudos = functions
         code: error.code,
         stack: error.stack
       });
+      
+      // Se já for um HttpsError, re-lançar
+      if (error.code && error.code.startsWith('functions/')) {
+        throw error;
+      }
+      
       throw new functions.https.HttpsError("internal", error.message);
     }
   });
@@ -163,6 +189,11 @@ export const getConteudos = functions
  */
 export const createTopico = functions
   .region("southamerica-east1")
+  .runWith({
+    cors: true,
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
   .https.onCall(async (data, context) => {
     const auth = await getAuthContext(context);
     requireRole(auth, "mentor");
@@ -217,6 +248,11 @@ export const createTopico = functions
  */
 export const updateTopico = functions
   .region("southamerica-east1")
+  .runWith({
+    cors: true,
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
   .https.onCall(async (data, context) => {
     const auth = await getAuthContext(context);
     requireRole(auth, "mentor");
@@ -282,6 +318,11 @@ export const updateTopico = functions
  */
 export const deleteTopico = functions
   .region("southamerica-east1")
+  .runWith({
+    cors: true,
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
   .https.onCall(async (data, context) => {
     const auth = await getAuthContext(context);
     requireRole(auth, "mentor");
