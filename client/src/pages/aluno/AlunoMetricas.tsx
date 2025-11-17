@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAlunoApi } from "@/hooks/useAlunoApi";
-import { BarChart3, Calendar, TrendingUp, PieChart, Activity } from "lucide-react";
+import { BarChart3, Calendar, TrendingUp, PieChart, Activity, Zap, Target, Award, Clock } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import {
   BarChart,
@@ -23,7 +23,6 @@ import { toast } from "sonner";
 
 type PeriodoFiltro = "7d" | "30d" | "3m" | "6m" | "1a" | "all";
 
-// Matérias padronizadas do ENEM
 const MATERIAS_ENEM = [
   "Matemática",
   "Biologia",
@@ -113,7 +112,6 @@ export default function AlunoMetricas() {
     });
   }, [estudos, periodo]);
 
-  // Dados para gráfico de evolução temporal
   const dadosEvolucao = useMemo(() => {
     if (!estudosFiltrados.length) return [];
     
@@ -149,15 +147,12 @@ export default function AlunoMetricas() {
     }));
   }, [estudosFiltrados]);
 
-  // Dados para gráfico por matéria
   const dadosPorMateria = useMemo(() => {
-    // Inicializar todas as matérias com valores zero
     const porMateria: Record<string, any> = {};
     MATERIAS_ENEM.forEach(materia => {
       porMateria[materia] = { materia, tempo: 0, questoes: 0, acertos: 0 };
     });
     
-    // Adicionar dados dos estudos
     estudosFiltrados.forEach(estudo => {
       const materia = estudo.materia;
       if (!porMateria[materia]) {
@@ -168,7 +163,6 @@ export default function AlunoMetricas() {
       porMateria[materia].acertos += estudo.questoesAcertadas;
     });
     
-    // Retornar na ordem das matérias definidas
     return MATERIAS_ENEM.map(materia => ({
       ...porMateria[materia],
       percentual: porMateria[materia].questoes > 0 
@@ -177,9 +171,7 @@ export default function AlunoMetricas() {
     }));
   }, [estudosFiltrados]);
 
-  // Dados para gráfico de pizza (distribuição de tempo)
   const dadosDistribuicaoTempo = useMemo(() => {
-    // Filtrar apenas matérias com tempo > 0 para o gráfico de pizza
     return dadosPorMateria
       .filter(d => d.tempo > 0)
       .map((d, index) => ({
@@ -189,14 +181,12 @@ export default function AlunoMetricas() {
       }));
   }, [dadosPorMateria]);
 
-  // Métricas gerais
   const metricas = useMemo(() => {
     const tempoTotal = estudosFiltrados.reduce((acc, e) => acc + e.tempoMinutos, 0);
     const questoesTotal = estudosFiltrados.reduce((acc, e) => acc + e.questoesFeitas, 0);
     const acertosTotal = estudosFiltrados.reduce((acc, e) => acc + e.questoesAcertadas, 0);
     const percentualAcerto = questoesTotal > 0 ? Math.round((acertosTotal / questoesTotal) * 100) : 0;
     
-    // Calcular dias únicos de estudo (lidar com Timestamps do Firestore)
     const diasUnicos = new Set(
       estudosFiltrados
         .map(e => {
@@ -212,17 +202,16 @@ export default function AlunoMetricas() {
               data = new Date(e.data);
             }
             
-            // Validar se a data é válida
             if (isNaN(data.getTime())) {
               return null;
             }
             
-            return data.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+            return data.toISOString().split('T')[0];
           } catch (error) {
             return null;
           }
         })
-        .filter((v): v is string => v !== null) // Remover datas inválidas
+        .filter((v): v is string => v !== null)
     );
     
     return {
@@ -237,190 +226,328 @@ export default function AlunoMetricas() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="relative">
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-primary"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Zap className="h-8 w-8 text-primary animate-pulse" />
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header com filtro */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Análise de Desempenho</h1>
-          <p className="text-muted-foreground">Acompanhe sua evolução nos estudos</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Calendar className="h-4 w-4 text-muted-foreground" />
-          <Select value={periodo} onValueChange={(v) => setPeriodo(v as PeriodoFiltro)}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Selecione o período" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="7d">Últimos 7 dias</SelectItem>
-              <SelectItem value="30d">Últimos 30 dias</SelectItem>
-              <SelectItem value="3m">Últimos 3 meses</SelectItem>
-              <SelectItem value="6m">Últimos 6 meses</SelectItem>
-              <SelectItem value="1a">Último ano</SelectItem>
-              <SelectItem value="all">Todo o período</SelectItem>
-            </SelectContent>
-          </Select>
+    <div className="space-y-8 pb-8 animate-fade-in">
+      {/* Elementos decorativos */}
+      <div className="fixed top-20 right-10 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+
+      {/* Header Premium */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-pink-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        
+        <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
+                <div className="relative bg-gradient-to-br from-purple-500 via-blue-500 to-pink-500 p-4 rounded-2xl shadow-2xl">
+                  <BarChart3 className="h-10 w-10 text-white" />
+                </div>
+              </div>
+              <div>
+                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+                  Análise de Desempenho
+                </h1>
+              </div>
+            </div>
+            <p className="text-lg text-muted-foreground font-medium">
+              Acompanhe sua evolução nos estudos 📊
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-black/30 rounded-2xl border-2 border-white/30 backdrop-blur-sm">
+            <Calendar className="h-5 w-5 text-purple-500" />
+            <Select value={periodo} onValueChange={(v) => setPeriodo(v as PeriodoFiltro)}>
+              <SelectTrigger className="w-[180px] border-2 font-semibold">
+                <SelectValue placeholder="Selecione o período" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="7d">Últimos 7 dias</SelectItem>
+                <SelectItem value="30d">Últimos 30 dias</SelectItem>
+                <SelectItem value="3m">Últimos 3 meses</SelectItem>
+                <SelectItem value="6m">Últimos 6 meses</SelectItem>
+                <SelectItem value="1a">Último ano</SelectItem>
+                <SelectItem value="all">Todo o período</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
 
-      {/* Cards de métricas resumidas */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Tempo Total</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+      {/* Cards de métricas premium */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl" />
+          <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-bold">Tempo Total</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <Clock className="h-4 w-4 text-white" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{Math.floor(metricas.tempoTotal / 60)}h {metricas.tempoTotal % 60}m</div>
+          <CardContent className="relative">
+            <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              {Math.floor(metricas.tempoTotal / 60)}h {metricas.tempoTotal % 60}m
+            </div>
+            <p className="text-xs text-muted-foreground mt-1 font-medium">de estudo dedicado</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Questões</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+
+        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.15s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl" />
+          <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-bold">Questões</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-lg">
+              <BarChart3 className="h-4 w-4 text-white" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{metricas.questoesTotal}</div>
+          <CardContent className="relative">
+            <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+              {metricas.questoesTotal}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1 font-medium">questões resolvidas</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Acertos</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+
+        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
+          <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-bold">Acertos</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg">
+              <TrendingUp className="h-4 w-4 text-white" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{metricas.acertosTotal}</div>
+          <CardContent className="relative">
+            <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              {metricas.acertosTotal}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1 font-medium">questões corretas</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Taxa de Acerto</CardTitle>
-            <PieChart className="h-4 w-4 text-muted-foreground" />
+
+        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.25s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl" />
+          <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-bold">Taxa de Acerto</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow-lg">
+              <Target className="h-4 w-4 text-white" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{metricas.percentualAcerto}%</div>
+          <CardContent className="relative">
+            <div className="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+              {metricas.percentualAcerto}%
+            </div>
+            <p className="text-xs text-muted-foreground mt-1 font-medium">de aproveitamento</p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Dias de Estudo</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
+
+        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-rose-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl" />
+          <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-bold">Dias de Estudo</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-rose-500 to-red-500 rounded-xl shadow-lg">
+              <Award className="h-4 w-4 text-white" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{metricas.diasEstudo}</div>
+          <CardContent className="relative">
+            <div className="text-3xl font-black bg-gradient-to-r from-rose-600 to-red-600 bg-clip-text text-transparent">
+              {metricas.diasEstudo}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1 font-medium">dias praticados</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Gráficos */}
-      <Tabs defaultValue="evolucao" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="evolucao">Evolução Temporal</TabsTrigger>
-          <TabsTrigger value="materias">Por Matéria</TabsTrigger>
-          <TabsTrigger value="distribuicao">Distribuição</TabsTrigger>
+      {/* Gráficos Premium */}
+      <Tabs defaultValue="evolucao" className="space-y-6 animate-slide-up" style={{ animationDelay: '0.35s' }}>
+        <TabsList className="grid w-full grid-cols-3 p-1 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-2">
+          <TabsTrigger value="evolucao" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
+            Evolução Temporal
+          </TabsTrigger>
+          <TabsTrigger value="materias" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
+            Por Matéria
+          </TabsTrigger>
+          <TabsTrigger value="distribuicao" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
+            Distribuição
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="evolucao" className="space-y-4">
-          <Card>
+          <Card className="border-2 hover:shadow-xl transition-shadow">
             <CardHeader>
-              <CardTitle>Evolução do Desempenho</CardTitle>
-              <CardDescription>Acompanhe sua progressão ao longo do tempo</CardDescription>
+              <CardTitle className="text-2xl font-black flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+                  <TrendingUp className="h-5 w-5 text-white" />
+                </div>
+                Evolução do Desempenho
+              </CardTitle>
+              <CardDescription className="text-base">Acompanhe sua progressão ao longo do tempo</CardDescription>
             </CardHeader>
             <CardContent>
               {dadosEvolucao.length > 0 ? (
-                <ResponsiveContainer width="100%" height={350}>
+                <ResponsiveContainer width="100%" height={400}>
                   <LineChart data={dadosEvolucao}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="data" />
-                    <YAxis yAxisId="left" />
-                    <YAxis yAxisId="right" orientation="right" />
-                    <Tooltip />
-                    <Legend />
+                    <defs>
+                      <linearGradient id="colorTempo" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorPercentual" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="data" stroke="#6b7280" style={{ fontSize: '12px', fontWeight: 600 }} />
+                    <YAxis yAxisId="left" stroke="#3b82f6" style={{ fontSize: '12px', fontWeight: 600 }} />
+                    <YAxis yAxisId="right" orientation="right" stroke="#10b981" style={{ fontSize: '12px', fontWeight: 600 }} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                        border: '2px solid #e5e7eb',
+                        borderRadius: '12px',
+                        fontWeight: 600
+                      }} 
+                    />
+                    <Legend wrapperStyle={{ fontWeight: 600 }} />
                     <Line
                       yAxisId="left"
                       type="monotone"
                       dataKey="tempo"
                       stroke="#3b82f6"
+                      strokeWidth={3}
                       name="Tempo (min)"
-                      strokeWidth={2}
+                      dot={{ fill: '#3b82f6', r: 5 }}
+                      activeDot={{ r: 8 }}
                     />
                     <Line
                       yAxisId="right"
                       type="monotone"
                       dataKey="percentual"
                       stroke="#10b981"
+                      strokeWidth={3}
                       name="Taxa de Acerto (%)"
-                      strokeWidth={2}
+                      dot={{ fill: '#10b981', r: 5 }}
+                      activeDot={{ r: 8 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="flex items-center justify-center h-[350px] text-muted-foreground">
-                  Nenhum dado disponível para o período selecionado
+                <div className="flex flex-col items-center justify-center h-[400px]">
+                  <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full mb-4">
+                    <BarChart3 className="h-12 w-12 text-blue-500" />
+                  </div>
+                  <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
+                  <p className="text-sm text-muted-foreground">para o período selecionado</p>
                 </div>
               )}
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="materias" className="space-y-4">
-          <Card>
+        <TabsContent value="materias" className="space-y-6">
+          <Card className="border-2 hover:shadow-xl transition-shadow">
             <CardHeader>
-              <CardTitle>Desempenho por Matéria</CardTitle>
-              <CardDescription>Compare seu progresso em cada disciplina</CardDescription>
+              <CardTitle className="text-2xl font-black flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-lg">
+                  <BarChart3 className="h-5 w-5 text-white" />
+                </div>
+                Desempenho por Matéria
+              </CardTitle>
+              <CardDescription className="text-base">Compare seu progresso em cada disciplina</CardDescription>
             </CardHeader>
             <CardContent>
               {dadosPorMateria.length > 0 ? (
-                <ResponsiveContainer width="100%" height={350}>
+                <ResponsiveContainer width="100%" height={400}>
                   <BarChart data={dadosPorMateria}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="materia" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="questoes" fill="#3b82f6" name="Questões Feitas" />
-                    <Bar dataKey="acertos" fill="#10b981" name="Acertos" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="materia" stroke="#6b7280" style={{ fontSize: '11px', fontWeight: 600 }} angle={-15} textAnchor="end" height={80} />
+                    <YAxis stroke="#6b7280" style={{ fontSize: '12px', fontWeight: 600 }} />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                        border: '2px solid #e5e7eb',
+                        borderRadius: '12px',
+                        fontWeight: 600
+                      }} 
+                    />
+                    <Legend wrapperStyle={{ fontWeight: 600 }} />
+                    <Bar dataKey="questoes" fill="#3b82f6" name="Questões Feitas" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="acertos" fill="#10b981" name="Acertos" radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="flex items-center justify-center h-[350px] text-muted-foreground">
-                  Nenhum dado disponível para o período selecionado
+                <div className="flex flex-col items-center justify-center h-[400px]">
+                  <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-full mb-4">
+                    <BarChart3 className="h-12 w-12 text-emerald-500" />
+                  </div>
+                  <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
+                  <p className="text-sm text-muted-foreground">para o período selecionado</p>
                 </div>
               )}
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-2 hover:shadow-xl transition-shadow">
             <CardHeader>
-              <CardTitle>Taxa de Acerto por Matéria</CardTitle>
-              <CardDescription>Identifique seus pontos fortes e fracos</CardDescription>
+              <CardTitle className="text-2xl font-black flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg">
+                  <Target className="h-5 w-5 text-white" />
+                </div>
+                Taxa de Acerto por Matéria
+              </CardTitle>
+              <CardDescription className="text-base">Identifique seus pontos fortes e fracos</CardDescription>
             </CardHeader>
             <CardContent>
               {dadosPorMateria.length > 0 ? (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {dadosPorMateria.map((item, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="font-medium">{item.materia}</span>
-                        <span className="text-muted-foreground">
-                          {item.percentual}% ({item.acertos}/{item.questoes})
-                        </span>
-                      </div>
-                      <div className="w-full bg-secondary rounded-full h-2">
-                        <div
-                          className={`h-2 rounded-full transition-all ${
+                    <div key={index} className="space-y-3 p-4 rounded-2xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/10 hover:border-purple-500/30 transition-all">
+                      <div className="flex items-center justify-between">
+                        <span className="font-black text-base">{item.materia}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm text-muted-foreground font-semibold">
+                            {item.acertos}/{item.questoes} questões
+                          </span>
+                          <span className={`px-4 py-1.5 rounded-full font-black text-sm ${
                             item.percentual >= 80
-                              ? "bg-green-500"
+                              ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
                               : item.percentual >= 60
-                              ? "bg-blue-500"
+                              ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
                               : item.percentual >= 40
-                              ? "bg-amber-500"
-                              : "bg-red-500"
+                              ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
+                              : "bg-gradient-to-r from-red-500 to-rose-500 text-white"
+                          }`}>
+                            {item.percentual}%
+                          </span>
+                        </div>
+                      </div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
+                        <div
+                          className={`h-3 rounded-full transition-all duration-1000 ${
+                            item.percentual >= 80
+                              ? "bg-gradient-to-r from-emerald-500 to-green-500"
+                              : item.percentual >= 60
+                              ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                              : item.percentual >= 40
+                              ? "bg-gradient-to-r from-amber-500 to-orange-500"
+                              : "bg-gradient-to-r from-red-500 to-rose-500"
                           }`}
                           style={{ width: `${item.percentual}%` }}
                         />
@@ -429,8 +556,12 @@ export default function AlunoMetricas() {
                   ))}
                 </div>
               ) : (
-                <div className="flex items-center justify-center h-[200px] text-muted-foreground">
-                  Nenhum dado disponível para o período selecionado
+                <div className="flex flex-col items-center justify-center h-[300px]">
+                  <div className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full mb-4">
+                    <Target className="h-12 w-12 text-purple-500" />
+                  </div>
+                  <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
+                  <p className="text-sm text-muted-foreground">para o período selecionado</p>
                 </div>
               )}
             </CardContent>
@@ -438,14 +569,19 @@ export default function AlunoMetricas() {
         </TabsContent>
 
         <TabsContent value="distribuicao" className="space-y-4">
-          <Card>
+          <Card className="border-2 hover:shadow-xl transition-shadow">
             <CardHeader>
-              <CardTitle>Distribuição de Tempo por Matéria</CardTitle>
-              <CardDescription>Veja como você distribui seu tempo de estudo</CardDescription>
+              <CardTitle className="text-2xl font-black flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-lg">
+                  <PieChart className="h-5 w-5 text-white" />
+                </div>
+                Distribuição de Tempo por Matéria
+              </CardTitle>
+              <CardDescription className="text-base">Veja como você distribui seu tempo de estudo</CardDescription>
             </CardHeader>
             <CardContent>
               {dadosDistribuicaoTempo.length > 0 ? (
-                <ResponsiveContainer width="100%" height={350}>
+                <ResponsiveContainer width="100%" height={450}>
                   <RechartsPie>
                     <Pie
                       data={dadosDistribuicaoTempo}
@@ -453,26 +589,101 @@ export default function AlunoMetricas() {
                       cy="50%"
                       labelLine={false}
                       label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                      outerRadius={120}
+                      outerRadius={140}
                       fill="#8884d8"
                       dataKey="value"
+                      style={{ fontSize: '13px', fontWeight: 700 }}
                     >
                       {dadosDistribuicaoTempo.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                        border: '2px solid #e5e7eb',
+                        borderRadius: '12px',
+                        fontWeight: 600
+                      }} 
+                    />
                   </RechartsPie>
                 </ResponsiveContainer>
               ) : (
-                <div className="flex items-center justify-center h-[350px] text-muted-foreground">
-                  Nenhum dado disponível para o período selecionado
+                <div className="flex flex-col items-center justify-center h-[450px]">
+                  <div className="p-6 bg-gradient-to-br from-pink-500/10 to-rose-500/10 rounded-full mb-4">
+                    <PieChart className="h-12 w-12 text-pink-500" />
+                  </div>
+                  <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
+                  <p className="text-sm text-muted-foreground">para o período selecionado</p>
                 </div>
               )}
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
+
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-30px); }
+        }
+        
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 0.8; }
+        }
+        
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slide-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-float {
+          animation: float 8s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+          animation: float-delayed 10s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out;
+        }
+        
+        .animate-slide-up {
+          animation: slide-up 0.6s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
