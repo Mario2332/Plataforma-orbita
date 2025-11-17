@@ -204,7 +204,8 @@ export default function AlunoConfiguracoes() {
         toast.success("Foto de perfil removida com sucesso!");
         await refreshUserData(); // Atualizar contexto
         await loadAluno(); // Recarregar dados do aluno
-      }atch (error: any) {
+      }
+    } catch (error: any) {
       console.error("Erro ao deletar foto:", error);
       toast.error(error.message || "Erro ao remover foto");
     } finally {
