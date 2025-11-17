@@ -35,7 +35,7 @@ export const getCronogramaAnual = functions
       const cronogramaRef = db.collection("cronogramas_anuais").doc(context.auth.uid);
       const cronogramaDoc = await cronogramaRef.get();
 
-      let cronogramaData;
+      let cronogramaData: any;
       
       if (!cronogramaDoc.exists) {
         // Se não existe, criar com template padrão
@@ -64,14 +64,15 @@ export const getCronogramaAnual = functions
 
         await cronogramaRef.set(cronogramaData);
       } else {
-        cronogramaData = cronogramaDoc.data();
+        cronogramaData = cronogramaDoc.data() || {};
         
         // Se o tipo solicitado não existe, buscar do template
-        if (!cronogramaData[tipo]) {
+        if (!cronogramaData || !cronogramaData[tipo]) {
           const templateRef = db.collection("templates_cronograma").doc(tipo);
           const templateDoc = await templateRef.get();
           
           if (templateDoc.exists) {
+            if (!cronogramaData) cronogramaData = {};
             cronogramaData[tipo] = templateDoc.data();
             await cronogramaRef.update({
               [tipo]: templateDoc.data(),
@@ -81,13 +82,21 @@ export const getCronogramaAnual = functions
         }
       }
 
+      // Garantir que cronogramaData existe
+      if (!cronogramaData) {
+        throw new functions.https.HttpsError(
+          "internal",
+          "Erro ao carregar dados do cronograma"
+        );
+      }
+
       functions.logger.info("✅ Cronograma carregado", {
         tipo,
         hasCycles: !!cronogramaData[tipo]?.cycles
       });
 
       return {
-        cronograma: cronogramaData[tipo],
+        cronograma: cronogramaData[tipo] || null,
         completedTopics: cronogramaData.completedTopics || {},
         activeSchedule: cronogramaData.activeSchedule || tipo,
       };
