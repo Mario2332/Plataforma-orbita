@@ -56,6 +56,13 @@ export default function AlunoConfiguracoes() {
     loadAluno();
   }, []);
 
+  // Atualizar preview quando userData.photoURL mudar (após login ou refresh)
+  useEffect(() => {
+    if (userData?.photoURL && !photoPreview) {
+      setPhotoPreview(userData.photoURL);
+    }
+  }, [userData?.photoURL]);
+
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoadingProfile(true);

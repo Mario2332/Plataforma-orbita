@@ -404,8 +404,13 @@ function DashboardLayoutContent({
             
             <div className="flex items-center gap-3 rounded-lg px-1 py-1 w-full group-data-[collapsible=icon]:justify-center">
               <Avatar className="h-9 w-9 border shrink-0">
-                {userData?.photoURL && (
-                  <AvatarImage src={userData.photoURL} alt={user?.name || "Foto de perfil"} />
+                {userData?.photoURL ? (
+                  <>
+                    {console.log('[DashboardLayout] Renderizando Avatar com photoURL:', userData.photoURL)}
+                    <AvatarImage src={userData.photoURL} alt={user?.name || "Foto de perfil"} />
+                  </>
+                ) : (
+                  console.log('[DashboardLayout] Sem photoURL, mostrando fallback')
                 )}
                 <AvatarFallback className="text-xs font-medium">
                   {user?.name?.charAt(0).toUpperCase()}

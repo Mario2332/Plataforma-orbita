@@ -57,7 +57,9 @@ export function useAuth() {
               name: data.name,
               nome: data.nome,
               role: data.role,
-              hasRole: !!data.role
+              hasRole: !!data.role,
+              photoURL: data.photoURL,
+              hasPhotoURL: !!data.photoURL
             });
             
             // Se dados estiverem faltando, buscar de outras fontes e corrigir
@@ -120,7 +122,11 @@ export function useAuth() {
               photoURL: data.photoURL,
             };
 
-            console.log('[useAuth] Definindo authState com userData completo, loading=false');
+            console.log('[useAuth] Definindo authState com userData completo:', {
+              loading: false,
+              hasPhotoURL: !!userData.photoURL,
+              photoURL: userData.photoURL
+            });
             setAuthState({
               user: firebaseUser,
               userData,
@@ -322,7 +328,7 @@ export function useAuth() {
 
         setAuthState((prev) => ({
           ...prev,
-          userData: { ...userData, photoURL: data.photoURL } as any,
+          userData,
         }));
       }
     } catch (error) {
