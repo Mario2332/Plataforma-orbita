@@ -8,7 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { Settings, User, Lock, Loader2, Camera, Trash2, Upload } from "lucide-react";
 import { getAuth, updateEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "firebase/auth";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "@/lib/firebase";
 
 export default function AlunoConfiguracoes() {
   const [aluno, setAluno] = useState<any>(null);
@@ -167,7 +168,6 @@ export default function AlunoConfiguracoes() {
   const uploadPhoto = async (imageData: string) => {
     try {
       setLoadingPhoto(true);
-      const functions = getFunctions();
       const uploadProfilePhoto = httpsCallable(functions, "uploadProfilePhoto");
       
       const result = await uploadProfilePhoto({ imageData });
@@ -193,7 +193,6 @@ export default function AlunoConfiguracoes() {
 
     try {
       setLoadingPhoto(true);
-      const functions = getFunctions();
       const deleteProfilePhoto = httpsCallable(functions, "deleteProfilePhoto");
       
       const result = await deleteProfilePhoto();
