@@ -1,3 +1,4 @@
+[
     { "cycle": 1, "subjects": [
         { "name": "Mat. Básica", "topics": ["Sistemas de numeração e Sistema métrico", "As quatro operações e Expressões numéricas", "Múltiplos, Divisores, Critérios de divisibilidade, Números primos, MMC e MDC"] },
         { "name": "Biologia 3", "topics": ["Origem da vida: Abiogênese e biogênese", "Origem da vida: Evolução química", "Origem da vida: Hipótese autotrófica e heterotrófica", "Origem da vida: Teoria da endossimbiose"] },
@@ -352,4 +353,4 @@
     { "cycle": 39, "subjects": [
         { "name": "Biologia 3", "topics": ["Répteis", "Aves", "Mamíferos"] }
     ]}
-];
+]
