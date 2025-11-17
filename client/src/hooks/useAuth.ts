@@ -104,6 +104,11 @@ export function useAuth() {
               // Atualizar documento users com dados corretos (preservando photoURL)
               console.log('[useAuth] Atualizando documento users com dados corrigidos');
               
+              // SOLUÇÃO ROBUSTA: Buscar photoURL atual do servidor antes de atualizar
+              const currentDocSnap = await getDocFromServer(userDocRef);
+              const currentPhotoURL = currentDocSnap.exists() ? currentDocSnap.data()?.photoURL : null;
+              console.log('[useAuth] photoURL atual no servidor:', currentPhotoURL);
+              
               const updateData: any = {
                 email,
                 name,  // Padronizar para 'name' em inglês
@@ -112,12 +117,12 @@ export function useAuth() {
                 updatedAt: serverTimestamp()
               };
               
-              // Só incluir photoURL se existir (evita remover campo)
-              if (data.photoURL) {
-                updateData.photoURL = data.photoURL;
-                console.log('[useAuth] Preservando photoURL:', data.photoURL);
+              // Preservar photoURL se existir no servidor (ignora cache)
+              if (currentPhotoURL) {
+                updateData.photoURL = currentPhotoURL;
+                console.log('[useAuth] Preservando photoURL do servidor:', currentPhotoURL);
               } else {
-                console.log('[useAuth] photoURL não existe, não será incluído no update');
+                console.log('[useAuth] Nenhum photoURL encontrado no servidor');
               }
               
               await setDoc(userDocRef, updateData, { merge: true });
