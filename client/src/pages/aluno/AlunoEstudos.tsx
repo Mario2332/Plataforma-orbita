@@ -331,24 +331,24 @@ export default function AlunoEstudos() {
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
       <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/20 via-emerald-500/10 to-purple-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/20 via-cyan-500/10 to-sky-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
         <div className="relative flex items-center justify-between">
           <div className="space-y-3">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-                <div className="relative bg-gradient-to-br from-blue-500 via-emerald-500 to-purple-500 p-4 rounded-2xl shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
+                <div className="relative bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-4 rounded-2xl shadow-2xl">
                   <BookOpen className="h-10 w-10 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-emerald-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-cyan-600 to-sky-600 bg-clip-text text-transparent animate-gradient">
                   Estudos
                 </h1>
               </div>
@@ -362,7 +362,7 @@ export default function AlunoEstudos() {
             <DialogTrigger asChild>
               <Button 
                 size="lg"
-                className="relative overflow-hidden bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-500 hover:from-blue-600 hover:via-emerald-600 hover:to-purple-600 shadow-xl hover:shadow-2xl transition-all duration-300 font-bold border-0"
+                className="relative overflow-hidden bg-gradient-to-r from-blue-500 via-cyan-500 to-sky-500 hover:from-blue-600 hover:via-cyan-600 hover:to-sky-600 shadow-xl hover:shadow-2xl transition-all duration-300 font-bold border-0"
                 onClick={() => {
                   setEditandoId(null);
                   setFormData({
@@ -490,7 +490,7 @@ export default function AlunoEstudos() {
                   <Button 
                     type="submit" 
                     disabled={isSaving}
-                    className="bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 font-bold"
+                    className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold"
                   >
                     {isSaving ? "Salvando..." : "Salvar"}
                   </Button>
@@ -539,7 +539,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={iniciarCronometro} 
                   size="lg"
-                  className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg"
                 >
                   <Play className="h-6 w-6 mr-2" />
                   Iniciar
@@ -548,7 +548,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={pausarCronometro} 
                   size="lg"
-                  className="relative overflow-hidden bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-xl hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg"
                 >
                   <Pause className="h-6 w-6 mr-2" />
                   Pausar
@@ -569,7 +569,7 @@ export default function AlunoEstudos() {
                 onClick={salvarCronometro} 
                 size="lg"
                 disabled={tempoDecorrido === 0}
-                className="relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg disabled:opacity-50"
+                className="relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 shadow-xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg disabled:opacity-50"
               >
                 <Save className="h-6 w-6 mr-2" />
                 Salvar Sessão
@@ -577,9 +577,9 @@ export default function AlunoEstudos() {
             </div>
 
             {cronometroAtivo && (
-              <div className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full border-2 border-emerald-500/30 backdrop-blur-sm animate-pulse-slow">
-                <div className="w-3 h-3 bg-emerald-500 rounded-full animate-ping" />
-                <p className="text-sm font-bold text-emerald-700 dark:text-emerald-300">
+              <div className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500/20 to-sky-500/20 rounded-full border-2 border-cyan-500/30 backdrop-blur-sm animate-pulse-slow">
+                <div className="w-3 h-3 bg-cyan-500 rounded-full animate-ping" />
+                <p className="text-sm font-bold text-cyan-700 dark:text-cyan-300">
                   Cronômetro ativo - Continue estudando!
                 </p>
               </div>
@@ -593,8 +593,8 @@ export default function AlunoEstudos() {
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl font-black">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl blur-md opacity-50" />
-              <div className="relative p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-xl blur-md opacity-50" />
+              <div className="relative p-3 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-xl shadow-xl">
                 <BookOpen className="h-6 w-6 text-white" />
               </div>
             </div>
@@ -606,8 +606,8 @@ export default function AlunoEstudos() {
           {estudos.length === 0 ? (
             <div className="text-center py-16">
               <div className="relative mx-auto w-24 h-24 mb-6">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full blur-xl opacity-30" />
-                <div className="relative p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full flex items-center justify-center border-2 border-blue-200 dark:border-blue-800">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full blur-xl opacity-30" />
+                <div className="relative p-6 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full flex items-center justify-center border-2 border-blue-200 dark:border-blue-800">
                   <BookOpen className="h-12 w-12 text-blue-500" />
                 </div>
               </div>
@@ -684,7 +684,7 @@ export default function AlunoEstudos() {
                     <TableRow key={estudo.id} className="hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent transition-all">
                       <TableCell className="font-medium">{dataFormatada}</TableCell>
                       <TableCell>
-                        <span className="px-3 py-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-sm font-semibold border border-blue-500/30">
+                        <span className="px-3 py-1 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-full text-sm font-semibold border border-blue-500/30">
                           {estudo.materia}
                         </span>
                       </TableCell>
@@ -697,7 +697,7 @@ export default function AlunoEstudos() {
                       </TableCell>
                       <TableCell className="font-semibold">{estudo.questoesFeitas || 0}</TableCell>
                       <TableCell>
-                        <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
+                        <span className="flex items-center gap-1.5 font-semibold text-cyan-600 dark:text-cyan-400">
                           <CheckCircle2 className="h-4 w-4" />
                           {estudo.questoesAcertadas || 0}
                         </span>
@@ -719,7 +719,7 @@ export default function AlunoEstudos() {
                             size="icon"
                             onClick={() => handleDelete(estudo.id)}
                             title="Excluir"
-                            className="hover:bg-red-500/20 hover:text-red-600 transition-colors"
+                            className="hover:bg-blue-500/20 hover:text-blue-600 transition-colors"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
