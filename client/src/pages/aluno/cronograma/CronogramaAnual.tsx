@@ -53,6 +53,7 @@ export default function CronogramaAnual() {
       setError(null);
       const data = await cronogramaAnualApi.getCronograma(tipo);
       setCronograma(data.cronograma);
+      // Sempre usar os dados mais recentes do servidor
       setCompletedTopics(data.completedTopics || {});
       setActiveSchedule(data.activeSchedule || "extensive");
       

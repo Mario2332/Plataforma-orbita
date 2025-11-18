@@ -65,7 +65,11 @@ const getMe = functions
             ativo: true,
         };
     }
-    return { id: alunoDoc.id, ...alunoDoc.data() };
+    // Buscar photoURL do documento users
+    const userDoc = await db.collection("users").doc(auth.uid).get();
+    const photoURL = userDoc.exists ? userDoc.data()?.photoURL : null;
+    functions.logger.info(`📸 getMe: photoURL do usuário ${auth.uid}: ${photoURL || 'null'}`);
+    return { id: alunoDoc.id, ...alunoDoc.data(), photoURL };
 });
 /**
  * Obter dados do dashboard

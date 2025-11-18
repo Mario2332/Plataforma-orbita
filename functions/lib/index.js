@@ -60,6 +60,8 @@ __exportStar(require("./callable/conteudos-simples"), exports);
 __exportStar(require("./callable/cronograma-anual"), exports);
 __exportStar(require("./callable/init-cronograma-templates"), exports);
 __exportStar(require("./callable/update-templates-http"), exports);
+__exportStar(require("./callable/reset-templates"), exports);
+__exportStar(require("./callable/upload-profile-photo"), exports);
 __exportStar(require("./webhooks/kiwify"), exports);
 __exportStar(require("./triggers/email-sender"), exports);
 //# sourceMappingURL=index.js.map

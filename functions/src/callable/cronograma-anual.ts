@@ -149,9 +149,18 @@ export const toggleTopicoCompleto = functions
       }
 
       const cronogramaRef = db.collection("cronogramas_anuais").doc(context.auth.uid);
+      const cronogramaDoc = await cronogramaRef.get();
       
+      // Obter completedTopics atual ou criar novo objeto
+      const currentData = cronogramaDoc.data() || {};
+      const completedTopics = currentData.completedTopics || {};
+      
+      // Atualizar o tópico específico
+      completedTopics[topicoId] = completed;
+      
+      // Salvar de volta
       await cronogramaRef.set({
-        [`completedTopics.${topicoId}`]: completed,
+        completedTopics,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       }, { merge: true });
 
