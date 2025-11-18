@@ -82,7 +82,8 @@ export default function AlunoDiario() {
   const getNivelCansaco = (value: string) => NIVEIS_CANSACO.find(n => n.value === value);
 
   const prepararDadosGrafico = () => {
-    const dados = registros.map(registro => {
+    const registrosFiltrados = filtrarPorPeriodo();
+    const dados = registrosFiltrados.map(registro => {
       const dataStr = formatData(registro.data);
       const estadoMap: any = { 'pessimo': 1, 'ruim': 2, 'neutro': 3, 'bom': 4, 'otimo': 5 };
       const cansacoMap: any = { 'exausto': 1, 'muito_cansado': 2, 'cansado': 3, 'normal': 4, 'descansado': 5 };
@@ -195,7 +196,7 @@ export default function AlunoDiario() {
     return { dadosEstados, dadosCansaco, dadosSono, dadosAtividade };
   };
 
-  const dadosGrafico = useMemo(() => prepararDadosGrafico(), [registros]);
+  const dadosGrafico = useMemo(() => prepararDadosGrafico(), [registros, periodoFiltro]);
   const analise = useMemo(() => analisarCorrelacao(), [registros, estudos]);
   const dadosDistribuicao = useMemo(() => prepararDadosDistribuicao(), [registros, periodoFiltro]);
 
