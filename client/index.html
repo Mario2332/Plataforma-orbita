@@ -6,6 +6,11 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    
+    <!-- Meta tags anti-cache agressivas -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
     <title>Mentoria Mário Machado</title>
@@ -17,6 +22,9 @@
   </head>
 
   <body>
+    <!-- Script de verificação de versão - DEVE rodar ANTES de tudo -->
+    <script src="/version-check.js"></script>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- Analytics script removido - adicione manualmente se necessário -->
