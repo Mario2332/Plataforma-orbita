@@ -16,10 +16,15 @@ import {
   BookOpen,
   FileText,
   BarChart3,
-  Trophy
+  Trophy,
+  ChevronDown
 } from "lucide-react";
 import { toast } from "sonner";
 import { toDate, timestampToInputDate, formatDateBR, getTodayString, addDays } from "@/utils/dateHelpers";
+import { EstatisticasMetasCards } from "@/components/metas/EstatisticasMetasCards";
+import { GraficoMetasPorDia } from "@/components/metas/GraficoMetasPorDia";
+import { GraficosStatusETipo } from "@/components/metas/GraficosStatusETipo";
+import { FiltrosPeriodoGraficos, PeriodoGrafico } from "@/components/metas/FiltrosPeriodoGraficos";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -151,6 +156,14 @@ export default function AlunoMetas() {
   const [dataFim, setDataFim] = useState('');
   const [materia, setMateria] = useState('');
   const [repetirDiariamente, setRepetirDiariamente] = useState(false);
+  
+  // Filtro de período para gráficos
+  const [periodoGraficos, setPeriodoGraficos] = useState<PeriodoGrafico>('30');
+  
+  // Estados de expansão das seções
+  const [metasAtivasExpanded, setMetasAtivasExpanded] = useState(true);
+  const [metasConcluidasExpanded, setMetasConcluidasExpanded] = useState(false);
+  const [metasNaoAlcancadasExpanded, setMetasNaoAlcancadasExpanded] = useState(false);
 
   const loadMetas = async () => {
     try {
@@ -358,8 +371,8 @@ export default function AlunoMetas() {
   // Calcular estatísticas
   const metasAtivas = metasExibir.filter(m => m.status === 'ativa');
   const metasConcluidas = metasExibir.filter(m => m.status === 'concluida');
-  const metasFalhadas = metasExibir.filter(m => m.status === 'expirada' || m.status === 'cancelada');
-  const totalMetasFinalizadas = metasAtivas.length + metasConcluidas.length + metasFalhadas.length;
+  const metasNaoAlcancadas = metasExibir.filter(m => m.status === 'expirada' || m.status === 'cancelada');
+  const totalMetasFinalizadas = metasAtivas.length + metasConcluidas.length + metasNaoAlcancadas.length;
   const taxaConclusao = totalMetasFinalizadas > 0 
     ? Math.round((metasConcluidas.length / totalMetasFinalizadas) * 100) 
     : 0;
@@ -403,64 +416,41 @@ export default function AlunoMetas() {
         </div>
       </div>
 
-      {/* Cards de Resumo */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <Card className="relative overflow-hidden border-2 hover:border-blue-500 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 group">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
-          
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <Target className="h-5 w-5 text-blue-500" />
-              Metas Ativas
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{metasAtivas.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">em andamento</p>
-          </CardContent>
-        </Card>
+      {/* Cards de Estatísticas */}
+      <EstatisticasMetasCards metas={metasExibir} />
 
-        <Card className="relative overflow-hidden border-2 hover:border-green-500 transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/20 group">
-          <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
-          
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-500" />
-              Metas Concluídas
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400">{metasConcluidas.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">alcançadas</p>
-          </CardContent>
-        </Card>
+      {/* Filtro de Período */}
+      <div className="flex justify-end animate-slide-up" style={{ animationDelay: '0.15s' }}>
+        <FiltrosPeriodoGraficos periodo={periodoGraficos} onPeriodoChange={setPeriodoGraficos} />
+      </div>
 
-        <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 group">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
-          
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-purple-500" />
-              Taxa de Conclusão
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{taxaConclusao}%</div>
-            <p className="text-xs text-muted-foreground mt-1">de sucesso</p>
-          </CardContent>
-        </Card>
+      {/* Gráficos de Análise */}
+      <div className="space-y-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        {/* Gráfico de Linhas - Evolução */}
+        <GraficoMetasPorDia 
+          metas={metasExibir} 
+          diasPeriodo={periodoGraficos === 'todos' ? 365 : Number(periodoGraficos)} 
+        />
+        
+        {/* Gráficos de Pizza e Barras */}
+        <GraficosStatusETipo metas={metasExibir} />
       </div>
 
       {/* Metas Ativas */}
       {metasAtivas.length > 0 && (
         <div className="space-y-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Flame className="h-6 w-6 text-orange-500" />
-            Metas Ativas
-          </h2>
+          <button
+            onClick={() => setMetasAtivasExpanded(!metasAtivasExpanded)}
+            className="w-full flex items-center justify-between text-left hover:bg-accent/50 p-4 rounded-lg transition-colors"
+          >
+            <h2 className="text-2xl font-bold flex items-center gap-2">
+              <Flame className="h-6 w-6 text-orange-500" />
+              Metas Ativas
+              <Badge variant="secondary" className="ml-2">{metasAtivas.length}</Badge>
+            </h2>
+            <ChevronDown className={`h-6 w-6 transition-transform duration-300 ${metasAtivasExpanded ? 'rotate-180' : ''}`} />
+          </button>
+          {metasAtivasExpanded && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {metasAtivas.map((meta, index) => {
               const Icon = TIPOS_META[meta.tipo].icon;
@@ -580,13 +570,24 @@ export default function AlunoMetas() {
               );
             })}
           </div>
+          )}
         </div>
       )}
 
       {/* Metas Concluídas */}
       {metasConcluidas.length > 0 && (
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Metas Concluídas</h2>
+          <button
+            onClick={() => setMetasConcluidasExpanded(!metasConcluidasExpanded)}
+            className="w-full flex items-center justify-between text-left hover:bg-accent/50 p-4 rounded-lg transition-colors"
+          >
+            <h2 className="text-xl font-semibold flex items-center gap-2">
+              ✅ Metas Concluídas
+              <Badge variant="secondary" className="ml-2">{metasConcluidas.length}</Badge>
+            </h2>
+            <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${metasConcluidasExpanded ? 'rotate-180' : ''}`} />
+          </button>
+          {metasConcluidasExpanded && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {metasConcluidas.map((meta) => {
               const Icon = TIPOS_META[meta.tipo].icon;
@@ -628,18 +629,27 @@ export default function AlunoMetas() {
               );
             })}
           </div>
+          )}
         </div>
       )}
 
-      {/* Metas Falhadas */}
-      {metasFalhadas.length > 0 && (
-        <div className="space-y-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <XCircle className="h-6 w-6 text-red-500" />
-            Metas Falhadas
-          </h2>
+      {/* Metas Não Alcançadas */}
+      {metasNaoAlcancadas.length > 0 && (
+        <div className="space-y-4">
+          <button
+            onClick={() => setMetasNaoAlcancadasExpanded(!metasNaoAlcancadasExpanded)}
+            className="w-full flex items-center justify-between text-left hover:bg-accent/50 p-4 rounded-lg transition-colors"
+          >
+            <h2 className="text-xl font-semibold flex items-center gap-2">
+              <XCircle className="h-5 w-5 text-red-500" />
+              Metas Não Alcançadas
+              <Badge variant="secondary" className="ml-2">{metasNaoAlcancadas.length}</Badge>
+            </h2>
+            <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${metasNaoAlcancadasExpanded ? 'rotate-180' : ''}`} />
+          </button>
+          {metasNaoAlcancadasExpanded && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {metasFalhadas.map((meta, index) => {
+            {metasNaoAlcancadas.map((meta, index) => {
               const Icon = TIPOS_META[meta.tipo].icon;
               
               return (
@@ -685,6 +695,7 @@ export default function AlunoMetas() {
               );
             })}
           </div>
+          )}
         </div>
       )}
 
