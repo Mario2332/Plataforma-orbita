@@ -12,6 +12,17 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsToolti
 import { db, auth } from "@/lib/firebase";
 import { collection, doc, getDocs, addDoc, updateDoc, deleteDoc, query, orderBy, Timestamp, setDoc } from "firebase/firestore";
 
+// Função para formatar data sem problema de fuso horário
+// A data vem no formato "YYYY-MM-DD" e deve ser exibida como "DD/MM/YYYY"
+const formatarData = (dataString: string, formato: 'completo' | 'curto' = 'completo'): string => {
+  if (!dataString) return '';
+  const [ano, mes, dia] = dataString.split('-');
+  if (formato === 'curto') {
+    return `${dia}/${mes}`;
+  }
+  return `${dia}/${mes}/${ano}`;
+};
+
 // Valores fixos das notas do ENEM por competência
 const NOTAS_COMPETENCIA = [0, 40, 80, 120, 160, 200];
 
@@ -361,7 +372,7 @@ export default function AlunoRedacoes() {
       .reverse()
       .map((r, index) => ({
         nome: `#${index + 1}`,
-        data: new Date(r.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }),
+        data: formatarData(r.data, 'curto'),
         nota: r.notaTotal,
         titulo: r.titulo,
       }));
@@ -1106,7 +1117,7 @@ export default function AlunoRedacoes() {
                         <h4 className="font-bold text-lg">{redacao.titulo}</h4>
                         <div className="flex flex-wrap gap-4 mt-2 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1">
-                            📅 {new Date(redacao.data).toLocaleDateString('pt-BR')}
+                            📅 {formatarData(redacao.data)}
                           </span>
                           <span className="flex items-center gap-1">
                             ⏱️ {redacao.tempoHoras}h {redacao.tempoMinutos}min
