@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -58,6 +58,9 @@ export default function AlunoCronograma() {
   const [isSaving, setIsSaving] = useState(false);
   
   const [templates, setTemplates] = useState<Template[]>([]);
+  
+  // Estado para Popover global de cores (otimização: evita 336 Popovers)
+  const [colorPickerCell, setColorPickerCell] = useState<{ day: number; hour: number; minute: number } | null>(null);
   const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [showLoadDialog, setShowLoadDialog] = useState(false);
   const [templateName, setTemplateName] = useState("");
@@ -141,28 +144,33 @@ export default function AlunoCronograma() {
   const getCellKey = (day: number, hour: number, minute: number) => 
     `${day}-${hour}-${minute}`;
 
-  const getSlot = (day: number, hour: number, minute: number): TimeSlot => {
-    const existing = schedule.find(
-      s => s.day === day && s.hour === hour && s.minute === minute
-    );
-    return existing || { day, hour, minute, activity: "", color: "#FFFFFF" };
-  };
+  // Otimização: Converter schedule para Map para lookup O(1) em vez de O(N)
+  const scheduleMap = useMemo(() => {
+    const map = new Map<string, TimeSlot>();
+    schedule.forEach(s => map.set(getCellKey(s.day, s.hour, s.minute), s));
+    return map;
+  }, [schedule]);
 
-  const updateSlot = (day: number, hour: number, minute: number, updates: Partial<TimeSlot>) => {
-    const existing = schedule.find(
-      s => s.day === day && s.hour === hour && s.minute === minute
-    );
+  // Otimizado: usa Map em vez de .find()
+  const getSlot = useCallback((day: number, hour: number, minute: number): TimeSlot => {
+    const key = getCellKey(day, hour, minute);
+    return scheduleMap.get(key) || { day, hour, minute, activity: "", color: "#FFFFFF" };
+  }, [scheduleMap]);
+
+  const updateSlot = useCallback((day: number, hour: number, minute: number, updates: Partial<TimeSlot>) => {
+    const key = getCellKey(day, hour, minute);
+    const existing = scheduleMap.has(key);
 
     if (existing) {
-      setSchedule(schedule.map(s => 
+      setSchedule(prev => prev.map(s => 
         s.day === day && s.hour === hour && s.minute === minute
           ? { ...s, ...updates }
           : s
       ));
     } else {
-      setSchedule([...schedule, { day, hour, minute, activity: "", color: "#FFFFFF", ...updates }]);
+      setSchedule(prev => [...prev, { day, hour, minute, activity: "", color: "#FFFFFF", ...updates }]);
     }
-  };
+  }, [scheduleMap]);
 
   const handleCopy = (day: number, hour: number, minute: number) => {
     const slot = getSlot(day, hour, minute);
@@ -336,11 +344,8 @@ export default function AlunoCronograma() {
         cor: g.color,
       }));
       
-      console.log('Salvando horários:', horarios);
-      // Salvar cada horário individualmente
-      for (const horario of horarios) {
-        await api.createHorario(horario);
-      }
+      // Otimização: Salvar todos os horários em PARALELO (muito mais rápido)
+      await Promise.all(horarios.map(horario => api.createHorario(horario)));
       toast.success("Cronograma salvo com sucesso!");
     } catch (error: any) {
       toast.error(error.message || "Erro ao salvar cronograma");
@@ -552,33 +557,16 @@ export default function AlunoCronograma() {
                                 >
                                   <span className="truncate flex-1">{slot.activity}</span>
                                   <div className="opacity-0 group-hover:opacity-100 flex gap-1 transition-opacity">
-                                    <Popover>
-                                      <PopoverTrigger asChild>
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                          }}
-                                          className="p-1 hover:bg-black/20 dark:hover:bg-white/20 rounded transition-colors"
-                                        >
-                                          <Palette className="h-3.5 w-3.5" />
-                                        </button>
-                                      </PopoverTrigger>
-                                      <PopoverContent className="w-auto p-3 border-2">
-                                        <div className="grid grid-cols-3 gap-2">
-                                          {COLORS.map((color) => (
-                                            <button
-                                              key={color.value}
-                                              onClick={() => {
-                                                updateSlot(dayIndex, hour, minute, { color: color.value });
-                                              }}
-                                              className="w-10 h-10 rounded-lg border-2 border-border hover:scale-110 hover:shadow-lg transition-all"
-                                              style={{ backgroundColor: color.value }}
-                                              title={color.name}
-                                            />
-                                          ))}
-                                        </div>
-                                      </PopoverContent>
-                                    </Popover>
+                                    {/* Otimização: Botão que abre Popover global em vez de 336 Popovers */}
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setColorPickerCell({ day: dayIndex, hour, minute });
+                                      }}
+                                      className="p-1 hover:bg-black/20 dark:hover:bg-white/20 rounded transition-colors"
+                                    >
+                                      <Palette className="h-3.5 w-3.5" />
+                                    </button>
                                     <button
                                       onClick={(e) => {
                                         e.stopPropagation();
@@ -604,6 +592,31 @@ export default function AlunoCronograma() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Dialog Global para Seletor de Cores (otimização: 1 dialog em vez de 336 Popovers) */}
+      <Dialog open={colorPickerCell !== null} onOpenChange={(open) => !open && setColorPickerCell(null)}>
+        <DialogContent className="w-auto max-w-xs border-2">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-bold">Escolher Cor</DialogTitle>
+          </DialogHeader>
+          <div className="grid grid-cols-3 gap-3 py-2">
+            {COLORS.map((color) => (
+              <button
+                key={color.value}
+                onClick={() => {
+                  if (colorPickerCell) {
+                    updateSlot(colorPickerCell.day, colorPickerCell.hour, colorPickerCell.minute, { color: color.value });
+                    setColorPickerCell(null);
+                  }
+                }}
+                className="w-12 h-12 rounded-lg border-2 border-border hover:scale-110 hover:shadow-lg transition-all"
+                style={{ backgroundColor: color.value }}
+                title={color.name}
+              />
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Dialog Salvar Template */}
       <Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>
