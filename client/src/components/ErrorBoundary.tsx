@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 import { AlertTriangle, RotateCcw } from "lucide-react";
 import { Component, ErrorInfo, ReactNode } from "react";
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 interface Props {
   children: ReactNode;
@@ -28,31 +26,15 @@ class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary capturou erro:', error, errorInfo);
     
-    // Salvar erro no Firestore para monitoramento
-    this.logErrorToFirestore(error, errorInfo);
-  }
-
-  async logErrorToFirestore(error: Error, errorInfo: ErrorInfo) {
-    try {
-      const userId = localStorage.getItem('userId');
-      const userEmail = localStorage.getItem('userEmail');
-      
-      await addDoc(collection(db, 'errorLogs'), {
-        componentName: this.props.componentName || 'Unknown',
-        errorMessage: error.message,
-        errorStack: error.stack || '',
-        errorInfo: errorInfo.componentStack || '',
-        userId: userId || 'anonymous',
-        userEmail: userEmail || 'unknown',
-        timestamp: serverTimestamp(),
-        userAgent: navigator.userAgent,
-        url: window.location.href
-      });
-      
-      console.log('✅ Erro registrado no Firestore para análise');
-    } catch (logError) {
-      console.error('❌ Erro ao salvar log no Firestore:', logError);
-    }
+    // Log detalhado no console para debug
+    console.group('🔴 Erro Capturado pelo ErrorBoundary');
+    console.error('Componente:', this.props.componentName || 'Unknown');
+    console.error('Mensagem:', error.message);
+    console.error('Stack:', error.stack);
+    console.error('Component Stack:', errorInfo.componentStack);
+    console.error('URL:', window.location.href);
+    console.error('User Agent:', navigator.userAgent);
+    console.groupEnd();
   }
 
   handleClearCacheAndReload = () => {
@@ -88,7 +70,7 @@ class ErrorBoundary extends Component<Props, State> {
 
             <p className="text-muted-foreground mb-6 text-center">
               Encontramos um problema ao carregar esta seção. Não se preocupe, seus dados estão seguros.
-              Este erro foi registrado automaticamente e será analisado pela equipe técnica.
+              Tente recarregar a página ou limpar o cache.
             </p>
 
             {process.env.NODE_ENV === 'development' && (

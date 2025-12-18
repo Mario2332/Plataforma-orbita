@@ -1,4 +1,32 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, ComponentType } from "react";
+
+// Função helper para retry de lazy loading com tratamento de erro
+const lazyWithRetry = <T extends ComponentType<any>>(componentImport: () => Promise<{ default: T }>) => {
+  return lazy(() => {
+    return new Promise<{ default: T }>((resolve, reject) => {
+      const hasRefreshed = JSON.parse(
+        window.sessionStorage.getItem('retry-lazy-refreshed') || 'false'
+      );
+
+      // Tentar carregar o componente
+      componentImport()
+        .then((component) => {
+          window.sessionStorage.setItem('retry-lazy-refreshed', 'false');
+          resolve(component);
+        })
+        .catch((error) => {
+          if (!hasRefreshed) {
+            // Se for erro de chunk loading, tentar recarregar a página uma vez
+            window.sessionStorage.setItem('retry-lazy-refreshed', 'true');
+            console.warn('⚠️ Erro ao carregar módulo, recarregando página...', error);
+            return window.location.reload();
+          }
+          // Se já tentou recarregar, rejeitar com o erro
+          reject(error);
+        });
+    });
+  });
+};
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -20,10 +48,10 @@ const AlunoEstudos = lazy(() => import("./pages/aluno/AlunoEstudos"));
 const AlunoSimulados = lazy(() => import("./pages/aluno/AlunoSimulados"));
 const AlunoRedacoes = lazy(() => import("./pages/aluno/AlunoRedacoes"));
 const AlunoMetricas = lazy(() => import("./pages/aluno/AlunoMetricas"));
-const CronogramaWrapper = lazy(() => import("./pages/aluno/CronogramaWrapper"));
-const AlunoConfiguracoes = lazy(() => import("./pages/aluno/AlunoConfiguracoes"));
-const AlunoDiario = lazy(() => import("./pages/aluno/AlunoDiario"));
-const AlunoMetas = lazy(() => import("./pages/aluno/AlunoMetas"));
+const CronogramaWrapper = lazyWithRetry(() => import("./pages/aluno/CronogramaWrapper"));
+const AlunoConfiguracoes = lazyWithRetry(() => import("./pages/aluno/AlunoConfiguracoes"));
+const AlunoDiario = lazyWithRetry(() => import("./pages/aluno/AlunoDiario"));
+const AlunoMetas = lazyWithRetry(() => import("./pages/aluno/AlunoMetas"));
 const PainelGeral = lazy(() => import("./pages/aluno/conteudos/PainelGeral"));
 const Matematica = lazy(() => import("./pages/aluno/conteudos/Matematica"));
 const Biologia = lazy(() => import("./pages/aluno/conteudos/Biologia"));
