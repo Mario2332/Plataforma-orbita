@@ -209,3 +209,112 @@ export async function deleteTemplateDirect(templateId: string): Promise<void> {
   const templateRef = doc(db, "alunos", userId, "templates", templateId);
   await deleteDoc(templateRef);
 }
+
+
+// ============================================
+// ESTUDOS
+// ============================================
+
+export interface Estudo {
+  id?: string;
+  data: Date;
+  materia: string;
+  assunto?: string;
+  tempoMinutos: number;
+  questoesFeitas: number;
+  questoesAcertadas: number;
+  anotacoes?: string;
+  createdAt?: Date;
+}
+
+/**
+ * Buscar todos os estudos do aluno
+ * Limitado aos 200 mais recentes para performance
+ */
+export async function getEstudosDirect(): Promise<Estudo[]> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const estudosRef = collection(db, "alunos", userId, "estudos");
+  const q = query(estudosRef, orderBy("data", "desc"));
+  
+  const snapshot = await getDocs(q);
+  return snapshot.docs.slice(0, 200).map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as Estudo[];
+}
+
+// ============================================
+// SIMULADOS
+// ============================================
+
+export interface Simulado {
+  id?: string;
+  data: Date;
+  tipo: string;
+  linguagensAcertos: number;
+  linguagensTotal: number;
+  humanasAcertos: number;
+  humanasTotal: number;
+  naturezaAcertos: number;
+  naturezaTotal: number;
+  matematicaAcertos: number;
+  matematicaTotal: number;
+  redacaoNota?: number;
+  anotacoes?: string;
+  createdAt?: Date;
+}
+
+/**
+ * Buscar todos os simulados do aluno
+ * Limitado aos 100 mais recentes para performance
+ */
+export async function getSimuladosDirect(): Promise<Simulado[]> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const simuladosRef = collection(db, "alunos", userId, "simulados");
+  const q = query(simuladosRef, orderBy("data", "desc"));
+  
+  const snapshot = await getDocs(q);
+  return snapshot.docs.slice(0, 100).map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as Simulado[];
+}
+
+// ============================================
+// METAS
+// ============================================
+
+export interface Meta {
+  id?: string;
+  titulo: string;
+  descricao?: string;
+  tipo: string;
+  valorAlvo: number;
+  valorAtual: number;
+  unidade: string;
+  dataInicio: Date;
+  dataFim: Date;
+  concluida: boolean;
+  createdAt?: Date;
+}
+
+/**
+ * Buscar todas as metas do aluno
+ */
+export async function getMetasDirect(): Promise<Meta[]> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const metasRef = collection(db, "alunos", userId, "metas");
+  const q = query(metasRef, orderBy("dataFim", "asc"));
+  
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as Meta[];
+}

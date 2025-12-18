@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAlunoApi } from "@/hooks/useAlunoApi";
+// Acesso direto ao Firestore (elimina cold start de ~24s)
+import { getEstudosDirect, getSimuladosDirect, getMetasDirect } from "@/lib/firestore-direct";
 import { 
   Activity, 
   BookOpen, 
@@ -49,7 +50,7 @@ const MATERIAS_ENEM = [
 
 export default function AlunoHome() {
   console.log('[AlunoHome] Componente montado!');
-  const api = useAlunoApi();
+  // Removido useAlunoApi - usando acesso direto ao Firestore para eliminar cold start
   const [, setLocation] = useLocation();
   const { userData } = useAuthContext();
   const [estudos, setEstudos] = useState<any[]>([]);
@@ -60,10 +61,11 @@ export default function AlunoHome() {
   const loadData = async () => {
     try {
       setIsLoading(true);
+      // Acesso direto ao Firestore (elimina cold start)
       const [estudosData, simuladosData, metasData] = await Promise.all([
-        api.getEstudos(),
-        api.getSimulados(),
-        api.getMetas(),
+        getEstudosDirect(),
+        getSimuladosDirect(),
+        getMetasDirect(),
       ]);
       setEstudos(estudosData as any[]);
       setSimulados(simuladosData as any[]);
