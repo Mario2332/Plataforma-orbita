@@ -186,6 +186,30 @@ service cloud.firestore {
         allow read: if hasRole('mentor') && 
                        get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
       }
+      
+      // ============================================
+      // PLANOS DE AÇÃO (subcoleção)
+      // ============================================
+      match /planosAcao/{planoId} {
+        // Aluno pode gerenciar seus próprios planos de ação
+        allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
+        
+        // Mentor pode visualizar planos de ação dos seus alunos
+        allow read: if hasRole('mentor') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+      }
+      
+      // ============================================
+      // AUTODIAGNÓSTICOS (subcoleção)
+      // ============================================
+      match /autodiagnosticos/{autodiagnosticoId} {
+        // Aluno pode gerenciar seus próprios autodiagnósticos
+        allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
+        
+        // Mentor pode visualizar autodiagnósticos dos seus alunos
+        allow read: if hasRole('mentor') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+      }
     }
   }
 }
