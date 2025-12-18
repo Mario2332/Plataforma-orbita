@@ -10,6 +10,7 @@ import { useAlunoApi } from "@/hooks/useAlunoApi";
 import { storage } from "@/lib/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Plus, Trash2, FileText, BarChart3, AlertCircle, Filter, Upload, X, Image as ImageIcon, Zap, Target, TrendingDown } from "lucide-react";
+import { criarPlanosDeAutodiagnostico } from "@/lib/firestore-direct";
 import { toast } from "sonner";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Cell } from "recharts";
 
@@ -169,6 +170,14 @@ export default function AlunoAutodiagnostico() {
           questoes: questoesValidas
         });
         toast.success("Autodiagnóstico salvo com sucesso!");
+        
+        // Criar planos de ação automaticamente para erros por interpretação ou lacuna teórica
+        try {
+          await criarPlanosDeAutodiagnostico(prova.trim(), questoesValidas);
+        } catch (planoError) {
+          console.error("Erro ao criar planos de ação:", planoError);
+          // Não mostrar erro ao usuário, pois o autodiagnóstico foi salvo com sucesso
+        }
       }
       setProva("");
       setDataProva(new Date().toISOString().split('T')[0]);

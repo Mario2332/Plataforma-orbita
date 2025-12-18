@@ -6,12 +6,13 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useAlunoApi } from "@/hooks/useAlunoApi";
-import { FileText, Plus, Trash2, TrendingUp, Edit, Zap, BarChart3, Target, Clock } from "lucide-react";
+import { FileText, Plus, Trash2, TrendingUp, Edit, Zap, BarChart3, Target, Clock, ClipboardList } from "lucide-react";
 import { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AlunoAutodiagnostico from "./AlunoAutodiagnostico";
+import AlunoPlanoAcao from "./AlunoPlanoAcao";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 type AreaFiltro = "total" | "linguagens" | "humanas" | "natureza" | "matematica";
@@ -264,7 +265,7 @@ export default function AlunoSimulados() {
 
       {/* Tabs Premium */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <TabsList className="grid w-full grid-cols-2 p-1.5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-2 border-blue-200/50 dark:border-blue-800/50 rounded-2xl h-auto">
+        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-2 border-blue-200/50 dark:border-blue-800/50 rounded-2xl h-auto">
           <TabsTrigger 
             value="simulados" 
             className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-xl font-bold text-base py-3 rounded-xl transition-all"
@@ -278,6 +279,13 @@ export default function AlunoSimulados() {
           >
             <Target className="w-5 h-5 mr-2" />
             Autodiagnóstico
+          </TabsTrigger>
+          <TabsTrigger 
+            value="planos" 
+            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-xl font-bold text-base py-3 rounded-xl transition-all"
+          >
+            <ClipboardList className="w-5 h-5 mr-2" />
+            Planos de Ação
           </TabsTrigger>
         </TabsList>
 
@@ -596,6 +604,15 @@ export default function AlunoSimulados() {
             fallbackMessage="Erro ao carregar Autodiagnóstico"
           >
             <AlunoAutodiagnostico />
+          </ErrorBoundary>
+        </TabsContent>
+
+        <TabsContent value="planos">
+          <ErrorBoundary 
+            componentName="AlunoPlanoAcao" 
+            fallbackMessage="Erro ao carregar Planos de Ação"
+          >
+            <AlunoPlanoAcao />
           </ErrorBoundary>
         </TabsContent>
       </Tabs>

@@ -381,3 +381,211 @@ export async function getMetasDirect(): Promise<Meta[]> {
     ...doc.data()
   })) as Meta[];
 }
+
+
+// ============================================
+// PLANOS DE AÇÃO (Pendências de Estudo)
+// ============================================
+
+export interface PlanoAcao {
+  id?: string;
+  prova: string;              // Nome da prova (ex: "ENEM 2024")
+  macroassunto: string;
+  microassunto: string;
+  motivoErro: "interpretacao" | "lacuna_teorica";
+  quantidadeErros: number;    // Contagem de erros do mesmo tipo
+  conduta: string;            // Texto da conduta recomendada
+  resolvido: boolean;
+  resolvidoEm?: Date;
+  criadoManualmente: boolean; // true se foi adicionado manualmente pelo aluno
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+/**
+ * Buscar todos os planos de ação do aluno
+ */
+export async function getPlanosAcaoDirect(): Promise<PlanoAcao[]> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const planosRef = collection(db, "alunos", userId, "planosAcao");
+  const q = query(planosRef, orderBy("createdAt", "desc"));
+  
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as PlanoAcao[];
+}
+
+/**
+ * Criar um novo plano de ação
+ */
+export async function createPlanoAcaoDirect(plano: Omit<PlanoAcao, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const planosRef = collection(db, "alunos", userId, "planosAcao");
+  const docRef = await addDoc(planosRef, {
+    ...plano,
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now()
+  });
+  
+  return docRef.id;
+}
+
+/**
+ * Atualizar um plano de ação existente
+ */
+export async function updatePlanoAcaoDirect(planoId: string, updates: Partial<PlanoAcao>): Promise<void> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const planoRef = doc(db, "alunos", userId, "planosAcao", planoId);
+  await updateDoc(planoRef, {
+    ...updates,
+    updatedAt: Timestamp.now()
+  });
+}
+
+/**
+ * Marcar plano de ação como resolvido
+ */
+export async function resolverPlanoAcaoDirect(planoId: string): Promise<void> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const planoRef = doc(db, "alunos", userId, "planosAcao", planoId);
+  await updateDoc(planoRef, {
+    resolvido: true,
+    resolvidoEm: Timestamp.now(),
+    updatedAt: Timestamp.now()
+  });
+}
+
+/**
+ * Reabrir plano de ação (desmarcar como resolvido)
+ */
+export async function reabrirPlanoAcaoDirect(planoId: string): Promise<void> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const planoRef = doc(db, "alunos", userId, "planosAcao", planoId);
+  await updateDoc(planoRef, {
+    resolvido: false,
+    resolvidoEm: null,
+    updatedAt: Timestamp.now()
+  });
+}
+
+/**
+ * Deletar um plano de ação
+ */
+export async function deletePlanoAcaoDirect(planoId: string): Promise<void> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  const planoRef = doc(db, "alunos", userId, "planosAcao", planoId);
+  await deleteDoc(planoRef);
+}
+
+/**
+ * Gerar conduta baseada no motivo do erro e quantidade de erros
+ */
+export function gerarConduta(motivoErro: "interpretacao" | "lacuna_teorica", quantidadeErros: number): string {
+  const dobrar = quantidadeErros >= 3;
+  
+  if (motivoErro === "interpretacao") {
+    const questoes = dobrar ? 10 : 5;
+    return `Fazer ${questoes} questões contextualizadas para praticar o conteúdo.`;
+  } else {
+    const questoes = dobrar ? 20 : 10;
+    return `Revisar a teoria com foco na lacuna identificada e, depois, fazer ${questoes} questões.`;
+  }
+}
+
+/**
+ * Criar ou atualizar planos de ação a partir de um autodiagnóstico
+ * Chamado automaticamente quando um autodiagnóstico é salvo
+ */
+export async function criarPlanosDeAutodiagnostico(
+  prova: string, 
+  questoes: Array<{ macroassunto: string; microassunto: string; motivoErro: string }>
+): Promise<void> {
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error("Usuário não autenticado");
+
+  // Filtrar apenas erros por interpretação ou lacuna teórica
+  const questoesRelevantes = questoes.filter(
+    q => q.motivoErro === "interpretacao" || q.motivoErro === "lacuna_teorica"
+  );
+
+  if (questoesRelevantes.length === 0) return;
+
+  // Buscar planos existentes para esta prova
+  const planosRef = collection(db, "alunos", userId, "planosAcao");
+  const snapshot = await getDocs(planosRef);
+  const planosExistentes = snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as PlanoAcao[];
+
+  // Agrupar questões por microassunto + motivo
+  const agrupados: Record<string, { macroassunto: string; microassunto: string; motivoErro: "interpretacao" | "lacuna_teorica"; count: number }> = {};
+  
+  questoesRelevantes.forEach(q => {
+    const key = `${prova}-${q.microassunto}-${q.motivoErro}`;
+    if (!agrupados[key]) {
+      agrupados[key] = {
+        macroassunto: q.macroassunto,
+        microassunto: q.microassunto,
+        motivoErro: q.motivoErro as "interpretacao" | "lacuna_teorica",
+        count: 0
+      };
+    }
+    agrupados[key].count++;
+  });
+
+  // Criar ou atualizar planos
+  const batch = writeBatch(db);
+  
+  Object.entries(agrupados).forEach(([key, dados]) => {
+    // Verificar se já existe um plano para este microassunto + motivo + prova
+    const planoExistente = planosExistentes.find(
+      p => p.prova === prova && 
+           p.microassunto === dados.microassunto && 
+           p.motivoErro === dados.motivoErro &&
+           !p.resolvido
+    );
+
+    if (planoExistente && planoExistente.id) {
+      // Atualizar quantidade de erros
+      const novaQuantidade = planoExistente.quantidadeErros + dados.count;
+      const planoRef = doc(db, "alunos", userId, "planosAcao", planoExistente.id);
+      batch.update(planoRef, {
+        quantidadeErros: novaQuantidade,
+        conduta: gerarConduta(dados.motivoErro, novaQuantidade),
+        updatedAt: Timestamp.now()
+      });
+    } else {
+      // Criar novo plano
+      const novoPlanoRef = doc(planosRef);
+      batch.set(novoPlanoRef, {
+        prova,
+        macroassunto: dados.macroassunto,
+        microassunto: dados.microassunto,
+        motivoErro: dados.motivoErro,
+        quantidadeErros: dados.count,
+        conduta: gerarConduta(dados.motivoErro, dados.count),
+        resolvido: false,
+        criadoManualmente: false,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now()
+      });
+    }
+  });
+
+  await batch.commit();
+}
