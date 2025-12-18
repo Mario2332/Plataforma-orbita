@@ -210,6 +210,30 @@ service cloud.firestore {
         allow read: if hasRole('mentor') && 
                        get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
       }
+      
+      // ============================================
+      // REDAÇÕES (subcoleção)
+      // ============================================
+      match /redacoes/{redacaoId} {
+        // Aluno pode gerenciar suas próprias redações
+        allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
+        
+        // Mentor pode visualizar redações dos seus alunos
+        allow read: if hasRole('mentor') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+      }
+      
+      // ============================================
+      // CONFIGURAÇÕES (subcoleção)
+      // ============================================
+      match /configuracoes/{configId} {
+        // Aluno pode gerenciar suas próprias configurações
+        allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
+        
+        // Mentor pode visualizar configurações dos seus alunos
+        allow read: if hasRole('mentor') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+      }
     }
   }
 }

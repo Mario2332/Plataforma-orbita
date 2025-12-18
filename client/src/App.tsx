@@ -18,6 +18,7 @@ const LoginGestor = lazy(() => import("./pages/auth/LoginGestor"));
 const AlunoHome = lazy(() => import("./pages/aluno/AlunoHome"));
 const AlunoEstudos = lazy(() => import("./pages/aluno/AlunoEstudos"));
 const AlunoSimulados = lazy(() => import("./pages/aluno/AlunoSimulados"));
+const AlunoRedacoes = lazy(() => import("./pages/aluno/AlunoRedacoes"));
 const AlunoMetricas = lazy(() => import("./pages/aluno/AlunoMetricas"));
 const CronogramaWrapper = lazy(() => import("./pages/aluno/CronogramaWrapper"));
 const AlunoConfiguracoes = lazy(() => import("./pages/aluno/AlunoConfiguracoes"));
@@ -109,6 +110,13 @@ function Router() {
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
             <AlunoSimulados />
+          </Suspense>
+        </DashboardLayout>
+      </Route>
+      <Route path="/aluno/redacoes">
+        <DashboardLayout>
+          <Suspense fallback={<PageLoader />}>
+            <AlunoRedacoes />
           </Suspense>
         </DashboardLayout>
       </Route>
