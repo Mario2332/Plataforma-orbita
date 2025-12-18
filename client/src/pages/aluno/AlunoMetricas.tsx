@@ -115,8 +115,10 @@ export default function AlunoMetricas() {
   const dadosEvolucao = useMemo(() => {
     if (!estudosFiltrados.length) return [];
     
+    // Agrupar por data, guardando timestamp para ordenação
     const porDia = estudosFiltrados.reduce((acc, estudo) => {
       let dataFormatada: string;
+      let timestamp: number = 0;
       try {
         let data: Date;
         if (estudo.data?.seconds || estudo.data?._seconds) {
@@ -127,52 +129,39 @@ export default function AlunoMetricas() {
         } else {
           data = new Date(estudo.data);
         }
-        dataFormatada = !isNaN(data.getTime()) ? data.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }) : 'Inválida';
+        if (!isNaN(data.getTime())) {
+          dataFormatada = data.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+          timestamp = data.getTime();
+        } else {
+          dataFormatada = 'Inválida';
+        }
       } catch {
         dataFormatada = 'Inválida';
       }
-      const data = dataFormatada;
-      if (!acc[data]) {
-        acc[data] = { data, tempo: 0, questoes: 0, acertos: 0 };
+      
+      if (!acc[dataFormatada]) {
+        acc[dataFormatada] = { data: dataFormatada, tempo: 0, questoes: 0, acertos: 0, timestamp };
       }
-      acc[data].tempo += estudo.tempoMinutos;
-      acc[data].questoes += estudo.questoesFeitas;
-      acc[data].acertos += estudo.questoesAcertadas;
+      // Atualizar timestamp para o mais recente do dia (para garantir consistência)
+      if (timestamp > acc[dataFormatada].timestamp) {
+        acc[dataFormatada].timestamp = timestamp;
+      }
+      acc[dataFormatada].tempo += estudo.tempoMinutos;
+      acc[dataFormatada].questoes += estudo.questoesFeitas;
+      acc[dataFormatada].acertos += estudo.questoesAcertadas;
       return acc;
     }, {} as Record<string, any>);
     
-    // Ordenar por data (mais antiga primeiro)
-    const dadosOrdenados = Object.entries(porDia)
-      .sort(([dataA], [dataB]) => {
-        // Converter strings de data de volta para Date para comparação
-        const parseData = (str: string) => {
-          try {
-            // Formato: "DD de MMM" (ex: "18 de dez")
-            const meses: Record<string, number> = {
-              'jan': 0, 'fev': 1, 'mar': 2, 'abr': 3, 'mai': 4, 'jun': 5,
-              'jul': 6, 'ago': 7, 'set': 8, 'out': 9, 'nov': 10, 'dez': 11
-            };
-            const partes = str.split(' de ');
-            if (partes.length === 2) {
-              const dia = parseInt(partes[0]);
-              const mes = meses[partes[1].toLowerCase()];
-              const ano = new Date().getFullYear();
-              return new Date(ano, mes, dia);
-            }
-            return new Date(0);
-          } catch {
-            return new Date(0);
-          }
-        };
-        
-        const dateA = parseData(dataA);
-        const dateB = parseData(dataB);
-        return dateA.getTime() - dateB.getTime();
-      })
-      .map(([_, d]) => d);
+    // Ordenar por timestamp (mais antigo primeiro = à esquerda do gráfico)
+    const dadosOrdenados = Object.values(porDia)
+      .filter((d: any) => d.data !== 'Inválida')
+      .sort((a: any, b: any) => a.timestamp - b.timestamp);
     
     return dadosOrdenados.map((d: any) => ({
-      ...d,
+      data: d.data,
+      tempo: d.tempo,
+      questoes: d.questoes,
+      acertos: d.acertos,
       percentual: d.questoes > 0 ? Math.round((d.acertos / d.questoes) * 100) : 0,
     }));
   }, [estudosFiltrados]);
