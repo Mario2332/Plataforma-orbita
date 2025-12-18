@@ -410,13 +410,26 @@ export async function getPlanosAcaoDirect(): Promise<PlanoAcao[]> {
   if (!userId) throw new Error("Usuário não autenticado");
 
   const planosRef = collection(db, "alunos", userId, "planosAcao");
-  const q = query(planosRef, orderBy("createdAt", "desc"));
+  // Não usar orderBy para evitar necessidade de índice composto
+  const snapshot = await getDocs(planosRef);
   
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  })) as PlanoAcao[];
+  // Ordenar no cliente por data de criação (criadoEm ou createdAt)
+  const planos = snapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      // Normalizar campo de data
+      createdAt: data.createdAt || data.criadoEm || null
+    };
+  }) as PlanoAcao[];
+  
+  // Ordenar por data decrescente (mais recentes primeiro)
+  return planos.sort((a, b) => {
+    const dateA = a.createdAt?.toDate?.() || new Date(0);
+    const dateB = b.createdAt?.toDate?.() || new Date(0);
+    return dateB.getTime() - dateA.getTime();
+  });
 }
 
 /**
