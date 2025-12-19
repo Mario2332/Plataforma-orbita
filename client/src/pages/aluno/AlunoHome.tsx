@@ -391,18 +391,18 @@ export default function AlunoHome() {
                   {/* Base da lâmpada (conector) - diretamente no cabo */}
                   <rect
                     x={x - 2}
-                    y={cableY}
+                    y={cableY - 1}
                     width="4"
-                    height="4"
+                    height="3"
                     fill="#6b7280"
                     rx="1"
                   />
-                  {/* Lâmpada oval com filtro de brilho - logo abaixo do conector */}
+                  {/* Lâmpada oval com filtro de brilho - colada no conector */}
                   <ellipse 
                     cx={x} 
-                    cy={cableY + 12} 
-                    rx="5" 
-                    ry="8"
+                    cy={cableY + 7} 
+                    rx="4" 
+                    ry="6"
                     fill={color}
                     filter={`url(#${filterId})`}
                     className="animate-light-blink"
