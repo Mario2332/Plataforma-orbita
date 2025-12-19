@@ -331,7 +331,7 @@ export default function AlunoHome() {
       <div className="fixed bottom-20 left-10 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
       {/* 🎄 Header Natalino com Luzinhas em Arcos */}
-      <div className="relative overflow-hidden rounded-3xl p-10 border-2 border-red-200 dark:border-red-900/50 backdrop-blur-xl shadow-2xl animate-slide-up bg-gradient-to-br from-red-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="relative overflow-hidden rounded-3xl p-10 border-4 backdrop-blur-xl shadow-2xl animate-slide-up bg-gradient-to-br from-red-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" style={{ borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
         
         {/* 🎄 Luzinhas de Natal em Arcos Pendentes - FIXAS, apenas piscando */}
         <div className="absolute top-0 left-0 right-0 h-16 overflow-visible">
@@ -344,7 +344,7 @@ export default function AlunoHome() {
               strokeWidth="2"
               className="dark:stroke-gray-500"
             />
-            {/* Luzinhas nos arcos - FIXAS, só piscando */}
+            {/* Luzinhas nos arcos - formato oval (lâmpadas) */}
             {[...Array(40)].map((_, i) => {
               const t = i / 39;
               const x = t * 1200;
@@ -354,26 +354,37 @@ export default function AlunoHome() {
               const color = colors[i % 4];
               return (
                 <g key={i}>
-                  {/* Luz principal - fixa, só pisca opacidade */}
-                  <circle 
+                  {/* Base da lâmpada (conector) */}
+                  <rect
+                    x={x - 2}
+                    y={y - 3}
+                    width="4"
+                    height="5"
+                    fill="#6b7280"
+                    rx="1"
+                  />
+                  {/* Lâmpada oval */}
+                  <ellipse 
                     cx={x} 
-                    cy={y} 
-                    r="6" 
+                    cy={y + 10} 
+                    rx="5" 
+                    ry="9"
                     fill={color}
                     className="animate-light-blink"
                     style={{
                       animationDelay: `${i * 0.1}s`
                     }}
                   />
-                  {/* Glow ao redor - fixa, só pisca opacidade */}
-                  <circle 
+                  {/* Glow ao redor - formato oval */}
+                  <ellipse 
                     cx={x} 
-                    cy={y} 
-                    r="12" 
+                    cy={y + 10} 
+                    rx="10" 
+                    ry="14"
                     fill={color}
                     className="animate-light-blink"
                     style={{
-                      opacity: 0.25,
+                      opacity: 0.2,
                       animationDelay: `${i * 0.1}s`
                     }}
                   />
@@ -450,7 +461,7 @@ export default function AlunoHome() {
       {/* Cards de Métricas com Progresso Circular */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {/* Card Sequência Premium */}
-        <Card className="relative overflow-hidden border-2 hover:border-orange-500 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-500/20 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <Card className="relative overflow-hidden border-4 hover:border-orange-500 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-500/20 group animate-slide-up" style={{ animationDelay: '0.1s', borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-orange-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           
@@ -493,7 +504,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Tempo com Progresso */}
-        <Card className="relative overflow-hidden border-2 hover:border-blue-500 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <Card className="relative overflow-hidden border-4 hover:border-blue-500 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 group animate-slide-up" style={{ animationDelay: '0.2s', borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           
@@ -520,7 +531,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Questões com Gráfico Circular */}
-        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <Card className="relative overflow-hidden border-4 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.3s', borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           
@@ -550,7 +561,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Simulado */}
-        <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 group animate-slide-up" style={{ animationDelay: '0.4s' }}>
+        <Card className="relative overflow-hidden border-4 hover:border-purple-500 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 group animate-slide-up" style={{ animationDelay: '0.4s', borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           
@@ -674,7 +685,7 @@ export default function AlunoHome() {
       </div>
 
       {/* Mapa de Calor Premium */}
-      <Card className="border-2 hover:shadow-2xl transition-all duration-500 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+      <Card className="border-4 hover:shadow-2xl transition-all duration-500 animate-slide-up" style={{ animationDelay: '0.6s', borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -721,7 +732,7 @@ export default function AlunoHome() {
       {/* Análise e Atividade */}
       <div className="grid gap-6 md:grid-cols-2 animate-slide-up" style={{ animationDelay: '0.7s' }}>
         {/* Análise Inteligente Premium */}
-        <Card className="border-2 hover:shadow-xl transition-shadow">
+        <Card className="border-4 hover:shadow-xl transition-shadow" style={{ borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-2xl font-black">
               <div className="relative">
@@ -851,7 +862,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Atividade Recente Premium */}
-        <Card className="border-2 hover:shadow-xl transition-shadow">
+        <Card className="border-4 hover:shadow-xl transition-shadow" style={{ borderImage: 'repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) 4' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-2xl font-black">
               <div className="relative">
