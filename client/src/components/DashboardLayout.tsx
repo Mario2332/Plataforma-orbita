@@ -422,8 +422,8 @@ function DashboardLayoutContent({
             {/* 🎄 Card de usuário com tema natalino */}
             <div className="flex items-center gap-3 rounded-xl px-2 py-2 w-full group-data-[collapsible=icon]:justify-center bg-gradient-to-r from-red-50 to-green-50 dark:from-red-950/20 dark:to-green-950/20 border-2 border-red-200 dark:border-red-800 shadow-sm">
               <div className="relative shrink-0">
-                {/* 🎅 Gorro de Papai Noel */}
-                <div className="absolute -top-4 -left-1 z-20 animate-santa-hat" style={{ transform: 'rotate(-15deg)' }}>
+                {/* 🎅 Gorro de Papai Noel - centralizado com a foto */}
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20 animate-santa-hat" style={{ transform: 'translateX(-50%) rotate(-12deg)' }}>
                   <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     {/* Gorro vermelho */}
                     <path d="M4 20C4 20 6 8 14 6C22 8 24 20 24 20" fill="#DC2626" />
