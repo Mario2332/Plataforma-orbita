@@ -1724,6 +1724,7 @@ const SettingsStep = ({
     state, 
     onUpdateHours, 
     onUpdateSimulations, 
+    onUpdateStartDate,
     onUpdateEndDate, 
     onUpdateRevision,
     onUpdateWriting,
@@ -1738,6 +1739,7 @@ const SettingsStep = ({
     state: AppState, 
     onUpdateHours: (idx: number, val: number) => void,
     onUpdateSimulations: (config: SimulationConfig) => void,
+    onUpdateStartDate: (val: string | null) => void,
     onUpdateEndDate: (val: string) => void,
     onUpdateRevision: (config: SimpleActivityConfig) => void,
     onUpdateWriting: (config: SimpleActivityConfig) => void,
@@ -2137,7 +2139,7 @@ const SettingsStep = ({
                                 const today = new Date();
                                 return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
                             })()}
-                            onChange={(e) => setState(prev => ({ ...prev, startDate: e.target.value || null }))}
+                            onChange={(e) => onUpdateStartDate(e.target.value || null)}
                             className="w-full md:w-64 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all text-gray-700 font-medium"
                         />
                     </div>
@@ -2154,7 +2156,7 @@ const SettingsStep = ({
                         </div>
                         {state.startDate && (
                             <button
-                                onClick={() => setState(prev => ({ ...prev, startDate: null }))}
+                                onClick={() => onUpdateStartDate(null)}
                                 className="text-gray-400 hover:text-red-500 transition-colors"
                                 title="Usar data de hoje"
                             >
@@ -3334,6 +3336,7 @@ export default function CronogramaDinamico() {
                 state={state}
                 onUpdateHours={(idx, val) => setState(s => ({...s, weeklyHours: {...s.weeklyHours, [idx]: val}}))}
                 onUpdateSimulations={(config) => setState(s => ({...s, simulations: config}))}
+                onUpdateStartDate={(val) => setState(s => ({...s, startDate: val}))}
                 onUpdateRevision={(config) => setState(s => ({...s, revision: config}))}
                 onUpdateWriting={(config) => setState(s => ({...s, writing: config}))}
                 onUpdateCorrectionComplete={(config) => setState(s => ({...s, correctionComplete: config}))}
