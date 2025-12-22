@@ -910,8 +910,8 @@ type SimulationConfig = {
 type FixedActivityConfig = {
     enabled: boolean;
     startDate: string | null; // Data de início
-    endDate: string | null; // Data de término
-    intensifications: IntensificationPeriod[]; // Períodos de intensificação
+    endDate?: string | null; // DEPRECATED: Não usado mais - mantido para compatibilidade com dados antigos
+    intensifications: IntensificationPeriod[]; // Períodos de intensificação (usados para mudar cenário)
 };
 
 // Configuração legada para revisão e redação (mantém compatibilidade)
@@ -1761,26 +1761,15 @@ const SettingsStep = ({
                 </div>
                 {config.enabled && (
                     <div className="space-y-4 animate-in fade-in slide-in-from-top-2">
-                        {/* Datas de início e término */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm text-gray-600 mb-1">Data de Início:</label>
-                                <input 
-                                    type="date"
-                                    value={config.startDate || ''}
-                                    onChange={(e) => updateFn({...config, startDate: e.target.value || null})}
-                                    className="border border-gray-300 rounded px-3 py-2 w-full text-sm"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm text-gray-600 mb-1">Data de Término:</label>
-                                <input 
-                                    type="date"
-                                    value={config.endDate || ''}
-                                    onChange={(e) => updateFn({...config, endDate: e.target.value || null})}
-                                    className="border border-gray-300 rounded px-3 py-2 w-full text-sm"
-                                />
-                            </div>
+                        {/* Data de início (sem data de término - usa intensificações para mudar cenário) */}
+                        <div>
+                            <label className="block text-sm text-gray-600 mb-1">Data de Início:</label>
+                            <input 
+                                type="date"
+                                value={config.startDate || ''}
+                                onChange={(e) => updateFn({...config, startDate: e.target.value || null})}
+                                className="border border-gray-300 rounded px-3 py-2 w-full sm:w-auto text-sm"
+                            />
                         </div>
 
                         {/* Períodos de intensificação */}
@@ -1951,24 +1940,25 @@ const SettingsStep = ({
                 {renderSimpleActivityConfig("Redação", <Edit3 className="text-blue-500 w-5 h-5" />, "text-blue-500", state.writing, onUpdateWriting)}
             </div>
 
-            {/* Correção de Simulados - configuração avançada */}
-            <div className="grid md:grid-cols-2 gap-6">
-                {renderAdvancedActivityConfig("Correção de Simulado Completo", <CheckCheck className="text-purple-600 w-5 h-5" />, "text-purple-600", state.correctionComplete, onUpdateCorrectionComplete)}
-                {renderAdvancedActivityConfig("Correção de Simulado Fragmentado", <CheckCheck className="text-purple-400 w-5 h-5" />, "text-purple-400", state.correctionFragmented, onUpdateCorrectionFragmented)}
-            </div>
-
-            {/* Preenchimento de Lacunas - configuração avançada */}
-            <div className="grid md:grid-cols-2 gap-6">
-                {renderAdvancedActivityConfig("Preenchimento de Lacunas - Completo", <PenTool className="text-yellow-600 w-5 h-5" />, "text-yellow-600", state.gapsComplete, onUpdateGapsComplete)}
-                {renderAdvancedActivityConfig("Preenchimento de Lacunas - Fragmentado", <PenTool className="text-yellow-400 w-5 h-5" />, "text-yellow-400", state.gapsFragmented, onUpdateGapsFragmented)}
-            </div>
-
+            {/* Configuração de Simulados - movido para cima */}
             <SimulationConfigSection 
                 state={state} 
                 onUpdateSimulations={onUpdateSimulations} 
                 dayNames={dayNames}
                 shortDays={shortDays}
             />
+
+            {/* Correção de Simulado Completo | Preenchimento de Lacunas - Completo */}
+            <div className="grid md:grid-cols-2 gap-6">
+                {renderAdvancedActivityConfig("Correção de Simulado Completo", <CheckCheck className="text-purple-600 w-5 h-5" />, "text-purple-600", state.correctionComplete, onUpdateCorrectionComplete)}
+                {renderAdvancedActivityConfig("Preenchimento de Lacunas - Completo", <PenTool className="text-yellow-600 w-5 h-5" />, "text-yellow-600", state.gapsComplete, onUpdateGapsComplete)}
+            </div>
+
+            {/* Correção de Simulado Fragmentado | Preenchimento de Lacunas - Fragmentado */}
+            <div className="grid md:grid-cols-2 gap-6">
+                {renderAdvancedActivityConfig("Correção de Simulado Fragmentado", <CheckCheck className="text-purple-400 w-5 h-5" />, "text-purple-400", state.correctionFragmented, onUpdateCorrectionFragmented)}
+                {renderAdvancedActivityConfig("Preenchimento de Lacunas - Fragmentado", <PenTool className="text-yellow-400 w-5 h-5" />, "text-yellow-400", state.gapsFragmented, onUpdateGapsFragmented)}
+            </div>
 
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
@@ -2524,10 +2514,10 @@ const generateSchedule = (state: AppState): ScheduleResult => {
 
         // Função auxiliar para obter duração de atividades com intensificação
         // A intensificação SUBSTITUI a frequência anterior (não adiciona)
+        // Não usa endDate - as intensificações controlam as mudanças de cenário
         const getActivityDuration = (config: FixedActivityConfig, dayOfWeek: number): number => {
-            // Verificar data de início e término
+            // Verificar apenas data de início (sem data de término)
             if (config.startDate && studyDate < new Date(config.startDate + 'T00:00:00')) return 0;
-            if (config.endDate && studyDate > new Date(config.endDate + 'T23:59:59')) return 0;
             
             // Encontrar o período de intensificação mais recente que está ativo
             // A intensificação substitui completamente a frequência anterior
