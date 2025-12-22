@@ -2548,56 +2548,61 @@ const generateSchedule = (state: AppState): ScheduleResult => {
         };
 
         // 2. Correção de Simulado Completo
+        // CORREÇÃO: Atividades fixas são adicionadas INDEPENDENTEMENTE da disponibilidade semanal
+        // Elas representam compromissos que o usuário configurou especificamente para esses dias
         if (state.correctionComplete.enabled) {
             const correctionDuration = getActivityDuration(state.correctionComplete, dayOfWeek);
-            if (correctionDuration > 0 && dailyMinutes >= correctionDuration) {
-                dailyMinutes -= correctionDuration;
+            if (correctionDuration > 0) {
+                // Adicionar a atividade mesmo se dailyMinutes for 0 ou insuficiente
+                // O tempo será "extra" nesse dia, dedicado especificamente para esta atividade
                 dayTasks.push({ name: "Correção de Simulado Completo", duration: correctionDuration, subject: "Correção de Simulado", type: "correction_complete" });
+                // Subtrair do dailyMinutes apenas se houver tempo disponível
+                dailyMinutes = Math.max(0, dailyMinutes - correctionDuration);
             }
         }
 
         // 2b. Correção de Simulado Fragmentado
         if (state.correctionFragmented.enabled) {
             const correctionDuration = getActivityDuration(state.correctionFragmented, dayOfWeek);
-            if (correctionDuration > 0 && dailyMinutes >= correctionDuration) {
-                dailyMinutes -= correctionDuration;
+            if (correctionDuration > 0) {
                 dayTasks.push({ name: "Correção de Simulado Fragmentado", duration: correctionDuration, subject: "Correção de Simulado", type: "correction_fragmented" });
+                dailyMinutes = Math.max(0, dailyMinutes - correctionDuration);
             }
         }
 
         // 3. Redação
         if (state.writing.enabled) {
             const writingDuration = state.writing.durations[dayOfWeek] || 0;
-            if (writingDuration > 0 && dailyMinutes >= writingDuration) {
-                dailyMinutes -= writingDuration;
+            if (writingDuration > 0) {
                 dayTasks.push({ name: "Prática de Redação", duration: writingDuration, subject: "Redação", type: "writing" });
+                dailyMinutes = Math.max(0, dailyMinutes - writingDuration);
             }
         }
 
         // 4. Revisão
         if (state.revision.enabled) {
             const revisionDuration = state.revision.durations[dayOfWeek] || 0;
-            if (revisionDuration > 0 && dailyMinutes >= revisionDuration) {
-                dailyMinutes -= revisionDuration;
+            if (revisionDuration > 0) {
                 dayTasks.push({ name: "Sessão de Revisão", duration: revisionDuration, subject: "Revisão", type: "revision" });
+                dailyMinutes = Math.max(0, dailyMinutes - revisionDuration);
             }
         }
 
         // 5. Preenchimento de Lacunas - Completo
         if (state.gapsComplete.enabled) {
             const gapsDuration = getActivityDuration(state.gapsComplete, dayOfWeek);
-            if (gapsDuration > 0 && dailyMinutes >= gapsDuration) {
-                dailyMinutes -= gapsDuration;
+            if (gapsDuration > 0) {
                 dayTasks.push({ name: "Preenchimento de Lacunas - Completo", duration: gapsDuration, subject: "Preenchimento de Lacunas", type: "gaps_complete" });
+                dailyMinutes = Math.max(0, dailyMinutes - gapsDuration);
             }
         }
 
         // 5b. Preenchimento de Lacunas - Fragmentado
         if (state.gapsFragmented.enabled) {
             const gapsDuration = getActivityDuration(state.gapsFragmented, dayOfWeek);
-            if (gapsDuration > 0 && dailyMinutes >= gapsDuration) {
-                dailyMinutes -= gapsDuration;
+            if (gapsDuration > 0) {
                 dayTasks.push({ name: "Preenchimento de Lacunas - Fragmentado", duration: gapsDuration, subject: "Preenchimento de Lacunas", type: "gaps_fragmented" });
+                dailyMinutes = Math.max(0, dailyMinutes - gapsDuration);
             }
         }
 
