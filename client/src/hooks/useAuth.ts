@@ -24,6 +24,8 @@ export interface UserData {
   updatedAt: Date;
   lastSignedIn: Date;
   photoURL?: string;
+  curso?: string;
+  faculdade?: string;
 }
 
 export interface AuthState {
@@ -137,6 +139,8 @@ export function useAuth() {
               updatedAt: data.updatedAt?.toDate() || new Date(),
               lastSignedIn: data.lastSignedIn?.toDate() || new Date(),
               photoURL: data.photoURL,
+              curso: data.curso,
+              faculdade: data.faculdade,
             };
 
             console.log('[useAuth] Definindo authState com userData completo:', {
@@ -249,6 +253,8 @@ export function useAuth() {
           updatedAt: data.updatedAt?.toDate() || new Date(),
           lastSignedIn: data.lastSignedIn?.toDate() || new Date(),
           photoURL: data.photoURL,
+          curso: data.curso,
+          faculdade: data.faculdade,
         };
 
         // Atualizar estado com userData
@@ -348,6 +354,8 @@ export function useAuth() {
           updatedAt: data.updatedAt?.toDate() || new Date(),
           lastSignedIn: data.lastSignedIn?.toDate() || new Date(),
           photoURL: data.photoURL,
+          curso: data.curso,
+          faculdade: data.faculdade,
         };
 
         console.log('[useAuth] refreshUserData: dados atualizados:', {

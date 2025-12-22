@@ -339,6 +339,8 @@ export const alunoApi = {
   updateProfile: (data: {
     nome?: string;
     celular?: string;
+    curso?: string;
+    faculdade?: string;
   }) => callFunction("alunoFunctions-updateProfile", data),
   // Estudos
   getEstudos: () => callFunction("alunoFunctions-getEstudos"),

@@ -437,25 +437,27 @@ function DashboardLayoutContent({
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-green-500 rounded-full blur-md opacity-50"></div>
                 <Avatar className="relative h-11 w-11 border-2 border-white dark:border-gray-800 shadow-lg">
-                  {userData?.photoURL ? (
-                    <>
-                      {console.log('[DashboardLayout] Renderizando Avatar com photoURL:', userData.photoURL)}
-                      <AvatarImage src={userData.photoURL} alt={user?.name || "Foto de perfil"} />
-                    </>
-                  ) : (
-                    console.log('[DashboardLayout] Sem photoURL, mostrando fallback')
+                  {userData?.photoURL && (
+                    <AvatarImage src={userData.photoURL} alt={userData?.name || "Foto de perfil"} />
                   )}
                   <AvatarFallback className="text-sm font-black bg-gradient-to-br from-red-500 to-green-500 text-white">
-                    {user?.name?.charAt(0).toUpperCase()}
+                    {userData?.name?.charAt(0).toUpperCase() || "?"}
                   </AvatarFallback>
                 </Avatar>
               </div>
               <div className="flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
                 <p className="text-sm font-bold truncate leading-none text-red-900 dark:text-red-100">
-                  {user?.name || "-"}
+                  {userData?.name?.split(' ')[0] || "Aluno"}
                 </p>
-                <p className="text-xs font-semibold text-green-600 dark:text-green-400 truncate mt-1.5">
-                  {user?.email || "-"}
+                {(userData?.curso || userData?.faculdade) && (
+                  <p className="text-xs font-semibold text-red-600 dark:text-red-400 truncate mt-0.5">
+                    {userData?.curso && userData?.faculdade 
+                      ? `${userData.curso} - ${userData.faculdade}`
+                      : userData?.curso || userData?.faculdade}
+                  </p>
+                )}
+                <p className="text-xs font-semibold text-green-600 dark:text-green-400 truncate mt-0.5">
+                  {userData?.email || ""}
                 </p>
               </div>
             </div>

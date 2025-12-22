@@ -26,6 +26,8 @@ export default function AlunoConfiguracoes() {
     nome: "",
     email: "",
     celular: "",
+    curso: "",
+    faculdade: "",
   });
 
   const [passwordData, setPasswordData] = useState({
@@ -43,6 +45,8 @@ export default function AlunoConfiguracoes() {
         nome: data.nome || "",
         email: data.email || "",
         celular: data.celular || "",
+        curso: data.curso || userData?.curso || "",
+        faculdade: data.faculdade || userData?.faculdade || "",
       });
       setPhotoPreview(data.photoURL || userData?.photoURL || null);
     } catch (error: any) {
@@ -78,7 +82,12 @@ export default function AlunoConfiguracoes() {
         await updateEmail(auth.currentUser, profileData.email);
       }
 
-      await alunoApi.updateProfile({ nome: profileData.nome, celular: profileData.celular });
+      await alunoApi.updateProfile({ 
+        nome: profileData.nome, 
+        celular: profileData.celular,
+        curso: profileData.curso,
+        faculdade: profileData.faculdade 
+      });
       toast.success("Perfil atualizado com sucesso!");
       await loadAluno();
     } catch (error: any) {
@@ -374,6 +383,41 @@ export default function AlunoConfiguracoes() {
                 placeholder="(00) 00000-0000"
                 className="border-2 font-semibold"
               />
+            </div>
+
+            <Separator className="my-4" />
+            
+            <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl border-2 border-purple-200/50">
+              <h3 className="text-lg font-black text-purple-900 dark:text-purple-300 mb-4 flex items-center gap-2">
+                🎯 Objetivo de Aprovação
+              </h3>
+              <p className="text-sm font-semibold text-purple-700 dark:text-purple-400 mb-4">
+                Informe o curso e a faculdade em que você deseja ser aprovado. Essas informações aparecerão no seu perfil.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="curso" className="font-bold text-base">Curso Desejado</Label>
+                  <Input
+                    id="curso"
+                    value={profileData.curso}
+                    onChange={(e) => setProfileData({ ...profileData, curso: e.target.value })}
+                    placeholder="Ex: Medicina, Direito, Engenharia..."
+                    className="border-2 font-semibold"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="faculdade" className="font-bold text-base">Faculdade/Universidade</Label>
+                  <Input
+                    id="faculdade"
+                    value={profileData.faculdade}
+                    onChange={(e) => setProfileData({ ...profileData, faculdade: e.target.value })}
+                    placeholder="Ex: USP, UNICAMP, UFG..."
+                    className="border-2 font-semibold"
+                  />
+                </div>
+              </div>
             </div>
 
             <Button 

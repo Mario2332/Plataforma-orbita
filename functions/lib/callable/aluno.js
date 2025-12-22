@@ -478,7 +478,7 @@ const updateProfile = functions
     .https.onCall(async (data, context) => {
     const auth = await (0, auth_1.getAuthContext)(context);
     (0, auth_1.requireRole)(auth, "aluno");
-    const { nome, celular } = data;
+    const { nome, celular, curso, faculdade } = data;
     try {
         const updates = {
             updatedAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -487,13 +487,23 @@ const updateProfile = functions
             updates.nome = nome;
         if (celular !== undefined)
             updates.celular = celular;
+        if (curso !== undefined)
+            updates.curso = curso;
+        if (faculdade !== undefined)
+            updates.faculdade = faculdade;
         await db.collection("alunos").doc(auth.uid).update(updates);
-        // Atualizar nome no documento users
-        if (nome !== undefined) {
-            await db.collection("users").doc(auth.uid).update({
-                name: nome,
-                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-            });
+        // Atualizar nome, curso e faculdade no documento users
+        const userUpdates = {
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        };
+        if (nome !== undefined)
+            userUpdates.name = nome;
+        if (curso !== undefined)
+            userUpdates.curso = curso;
+        if (faculdade !== undefined)
+            userUpdates.faculdade = faculdade;
+        if (Object.keys(userUpdates).length > 1) {
+            await db.collection("users").doc(auth.uid).update(userUpdates);
         }
         return { success: true };
     }
