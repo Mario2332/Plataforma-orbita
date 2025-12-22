@@ -930,6 +930,7 @@ type AppState = {
   scheduleType: ScheduleType;
   topics: Topic[];
   topicPrefs: TopicPreferences;
+  startDate: string | null; // Data de início do cronograma (formato YYYY-MM-DD)
   endDate: string | null;
   weeklyHours: WeeklyHours;
   simulations: SimulationConfig;
@@ -2115,6 +2116,55 @@ const SettingsStep = ({
                 </div>
             </div>
 
+            {/* Data de Início do Cronograma */}
+            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                <div className="flex items-start gap-4 mb-6">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <CalendarIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                        <h2 className="text-lg font-bold text-gray-800">Data de Início</h2>
+                        <p className="text-gray-500 text-sm">Quando você deseja começar seu cronograma de estudos?</p>
+                    </div>
+                </div>
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                    <div className="flex-1">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Selecione a data de início</label>
+                        <input
+                            type="date"
+                            value={state.startDate || ''}
+                            min={(() => {
+                                const today = new Date();
+                                return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                            })()}
+                            onChange={(e) => setState(prev => ({ ...prev, startDate: e.target.value || null }))}
+                            className="w-full md:w-64 px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all text-gray-700 font-medium"
+                        />
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <div className={`px-4 py-2 rounded-xl text-sm font-medium ${
+                            state.startDate 
+                                ? 'bg-purple-100 text-purple-700' 
+                                : 'bg-gray-100 text-gray-600'
+                        }`}>
+                            {state.startDate 
+                                ? `Início: ${new Date(state.startDate + 'T12:00:00').toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' })}`
+                                : 'Início: Hoje'
+                            }
+                        </div>
+                        {state.startDate && (
+                            <button
+                                onClick={() => setState(prev => ({ ...prev, startDate: null }))}
+                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                title="Usar data de hoje"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </div>
+
             {/* Disponibilidade Semanal */}
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
                 <div className="flex items-start gap-4 mb-6">
@@ -2667,10 +2717,23 @@ const generateSchedule = (state: AppState): ScheduleResult => {
         return budget;
     };
 
-    const currentDate = new Date(); 
-    currentDate.setHours(0,0,0,0);
-    const endDate = state.endDate ? new Date(state.endDate + 'T23:59:59') : null;
-    const totalDurationDays = endDate ? (endDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24) : 365;
+    // Usar a data de início configurada ou a data atual (corrigindo timezone)
+    let currentDate: Date;
+    if (state.startDate) {
+        // Se o usuário definiu uma data de início, usar ela
+        const [year, month, day] = state.startDate.split('-').map(Number);
+        currentDate = new Date(year, month - 1, day, 12, 0, 0); // Meio-dia para evitar problemas de timezone
+    } else {
+        // Usar a data atual no timezone local
+        const now = new Date();
+        currentDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
+    }
+    
+    const endDate = state.endDate ? (() => {
+        const [year, month, day] = state.endDate.split('-').map(Number);
+        return new Date(year, month - 1, day, 23, 59, 59);
+    })() : null;
+    const totalDurationDays = endDate ? Math.ceil((endDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)) : 365;
 
     // Datas relativas
     const linguagensStartDate = new Date(currentDate.getTime() + totalDurationDays * 0.1 * 86400000);
@@ -2708,7 +2771,8 @@ const generateSchedule = (state: AppState): ScheduleResult => {
 
         // --- Lógica de Dias Livres ---
         // Verifica se a data atual está na lista de dias livres
-        const dateString = studyDate.toISOString().split('T')[0];
+        // Usar formato local para evitar problemas de timezone
+        const dateString = `${studyDate.getFullYear()}-${String(studyDate.getMonth() + 1).padStart(2, '0')}-${String(studyDate.getDate()).padStart(2, '0')}`;
         if (state.freeDays.includes(dateString)) {
             schedule.push({ 
                 date: studyDate, 
@@ -2947,6 +3011,7 @@ export default function CronogramaDinamico() {
     scheduleType: 'extensivo',
     topics: extensiveTopicsSource,
     topicPrefs: {},
+    startDate: null, // Data de início do cronograma (null = hoje)
     endDate: null,
     weeklyHours: { 0: 0, 1: 2, 2: 2, 3: 2, 4: 2, 5: 6, 6: 0 },
     simulations: { 
