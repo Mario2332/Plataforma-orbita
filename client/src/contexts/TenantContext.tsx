@@ -224,41 +224,129 @@ export function TenantProvider({ children }: TenantProviderProps) {
       }
       
       styleEl.textContent = `
-        /* Botões e elementos com bg-emerald */
-        .bg-emerald-500, .bg-emerald-600 { background-color: ${corPrimaria} !important; }
-        .bg-emerald-50, .bg-emerald-100 { background-color: ${corPrimaria}15 !important; }
-        .hover\\:bg-emerald-600:hover, .hover\\:bg-emerald-700:hover { background-color: ${corPrimariaHover} !important; }
-        .hover\\:bg-emerald-50:hover, .hover\\:bg-emerald-100:hover { background-color: ${corPrimaria}20 !important; }
+        /* ===== BACKGROUNDS ===== */
+        .bg-emerald-50 { background-color: ${corPrimaria}10 !important; }
+        .bg-emerald-100 { background-color: ${corPrimaria}18 !important; }
+        .bg-emerald-200 { background-color: ${corPrimaria}25 !important; }
+        .bg-emerald-300 { background-color: ${corPrimaria}40 !important; }
+        .bg-emerald-400 { background-color: ${corPrimaria}cc !important; }
+        .bg-emerald-500 { background-color: ${corPrimaria} !important; }
+        .bg-emerald-600 { background-color: ${corPrimariaHover} !important; }
+        .bg-emerald-700 { background-color: ${corPrimariaHover} !important; }
         
-        /* Texto com text-emerald */
-        .text-emerald-500, .text-emerald-600, .text-emerald-700 { color: ${corPrimaria} !important; }
+        /* Backgrounds com opacidade */
+        .bg-emerald-50\\/50 { background-color: ${corPrimaria}08 !important; }
+        .bg-emerald-100\\/50 { background-color: ${corPrimaria}0c !important; }
+        .bg-emerald-900\\/10 { background-color: ${corPrimaria}1a !important; }
+        .bg-emerald-900\\/20 { background-color: ${corPrimaria}33 !important; }
+        .bg-emerald-900\\/30 { background-color: ${corPrimaria}4d !important; }
+        
+        /* ===== HOVER BACKGROUNDS ===== */
+        .hover\\:bg-emerald-50:hover { background-color: ${corPrimaria}15 !important; }
+        .hover\\:bg-emerald-100:hover { background-color: ${corPrimaria}20 !important; }
+        .hover\\:bg-emerald-200:hover { background-color: ${corPrimaria}30 !important; }
+        .hover\\:bg-emerald-500:hover { background-color: ${corPrimaria} !important; }
+        .hover\\:bg-emerald-600:hover { background-color: ${corPrimariaHover} !important; }
+        .hover\\:bg-emerald-700:hover { background-color: ${corPrimariaHover} !important; }
+        .hover\\:bg-emerald-900\\/20:hover { background-color: ${corPrimaria}33 !important; }
+        .hover\\:bg-emerald-900\\/30:hover { background-color: ${corPrimaria}4d !important; }
+        
+        /* ===== TEXT COLORS ===== */
+        .text-emerald-300 { color: ${corPrimaria}99 !important; }
         .text-emerald-400 { color: ${corSecundaria} !important; }
+        .text-emerald-500 { color: ${corPrimaria} !important; }
+        .text-emerald-600 { color: ${corPrimaria} !important; }
+        .text-emerald-700 { color: ${corPrimariaHover} !important; }
+        .text-emerald-800 { color: ${corPrimariaHover} !important; }
+        .text-emerald-900 { color: ${corPrimariaHover} !important; }
         
-        /* Bordas com border-emerald */
-        .border-emerald-200, .border-emerald-300 { border-color: ${corPrimaria}40 !important; }
-        .border-emerald-500, .border-emerald-600 { border-color: ${corPrimaria} !important; }
+        /* Hover text */
+        .hover\\:text-emerald-500:hover { color: ${corPrimaria} !important; }
+        .hover\\:text-emerald-600:hover { color: ${corPrimaria} !important; }
+        .hover\\:text-emerald-700:hover { color: ${corPrimariaHover} !important; }
         
-        /* Ring com ring-emerald */
-        .ring-emerald-200, .ring-emerald-300 { --tw-ring-color: ${corPrimaria}40 !important; }
-        .ring-emerald-500, .ring-emerald-600 { --tw-ring-color: ${corPrimaria} !important; }
+        /* ===== BORDERS ===== */
+        .border-emerald-100 { border-color: ${corPrimaria}20 !important; }
+        .border-emerald-200 { border-color: ${corPrimaria}30 !important; }
+        .border-emerald-300 { border-color: ${corPrimaria}40 !important; }
+        .border-emerald-400 { border-color: ${corPrimaria}60 !important; }
+        .border-emerald-500 { border-color: ${corPrimaria} !important; }
+        .border-emerald-600 { border-color: ${corPrimaria} !important; }
+        .border-emerald-700 { border-color: ${corPrimariaHover} !important; }
+        .border-emerald-800 { border-color: ${corPrimariaHover} !important; }
+        .border-emerald-800\\/50 { border-color: ${corPrimariaHover}80 !important; }
         
-        /* Gradientes de/para emerald */
-        .from-emerald-500, .from-emerald-600 { --tw-gradient-from: ${corPrimaria} !important; }
-        .to-emerald-500, .to-emerald-600 { --tw-gradient-to: ${corPrimaria} !important; }
-        .via-emerald-500, .via-emerald-600 { --tw-gradient-via: ${corPrimaria} !important; }
+        /* Hover borders */
+        .hover\\:border-emerald-300:hover { border-color: ${corPrimaria}40 !important; }
+        .hover\\:border-emerald-500:hover { border-color: ${corPrimaria} !important; }
         
-        /* Teal como secundário */
-        .bg-teal-500, .bg-teal-600 { background-color: ${corSecundaria} !important; }
-        .text-teal-500, .text-teal-600 { color: ${corSecundaria} !important; }
-        .from-teal-500, .from-teal-600 { --tw-gradient-from: ${corSecundaria} !important; }
-        .to-teal-500, .to-teal-600 { --tw-gradient-to: ${corSecundaria} !important; }
+        /* Focus borders */
+        .focus\\:border-emerald-500:focus { border-color: ${corPrimaria} !important; }
+        .focus\\:border-emerald-600:focus { border-color: ${corPrimaria} !important; }
         
-        /* Dark mode adjustments */
-        .dark .bg-emerald-900\\/30, .dark .bg-emerald-900\\/20 { background-color: ${corPrimaria}20 !important; }
+        /* ===== RING ===== */
+        .ring-emerald-200 { --tw-ring-color: ${corPrimaria}30 !important; }
+        .ring-emerald-300 { --tw-ring-color: ${corPrimaria}40 !important; }
+        .ring-emerald-500 { --tw-ring-color: ${corPrimaria} !important; }
+        .ring-emerald-600 { --tw-ring-color: ${corPrimaria} !important; }
+        .ring-emerald-800 { --tw-ring-color: ${corPrimariaHover}80 !important; }
+        .focus\\:ring-emerald-500:focus { --tw-ring-color: ${corPrimaria} !important; }
+        
+        /* ===== GRADIENTS ===== */
+        .from-emerald-400 { --tw-gradient-from: ${corPrimaria}cc !important; }
+        .from-emerald-500 { --tw-gradient-from: ${corPrimaria} !important; }
+        .from-emerald-600 { --tw-gradient-from: ${corPrimariaHover} !important; }
+        .via-emerald-500 { --tw-gradient-via: ${corPrimaria} !important; }
+        .via-emerald-600 { --tw-gradient-via: ${corPrimariaHover} !important; }
+        .to-emerald-400 { --tw-gradient-to: ${corPrimaria}cc !important; }
+        .to-emerald-500 { --tw-gradient-to: ${corPrimaria} !important; }
+        .to-emerald-600 { --tw-gradient-to: ${corPrimariaHover} !important; }
+        
+        /* ===== TEAL (SECONDARY) ===== */
+        .bg-teal-50 { background-color: ${corSecundaria}15 !important; }
+        .bg-teal-100 { background-color: ${corSecundaria}20 !important; }
+        .bg-teal-500 { background-color: ${corSecundaria} !important; }
+        .bg-teal-600 { background-color: ${corSecundaria} !important; }
+        .text-teal-500 { color: ${corSecundaria} !important; }
+        .text-teal-600 { color: ${corSecundaria} !important; }
+        .border-teal-500 { border-color: ${corSecundaria} !important; }
+        .from-teal-500 { --tw-gradient-from: ${corSecundaria} !important; }
+        .to-teal-500 { --tw-gradient-to: ${corSecundaria} !important; }
+        
+        /* ===== TABS & DATA-STATE ===== */
+        [data-state="active"].bg-emerald-500 { background-color: ${corPrimaria} !important; }
+        [data-state="active"].data-\\[state\\=active\\]\\:bg-emerald-500 { background-color: ${corPrimaria} !important; }
+        .data-\\[state\\=active\\]\\:bg-emerald-500[data-state="active"] { background-color: ${corPrimaria} !important; }
+        
+        /* ===== DARK MODE ===== */
+        .dark .bg-emerald-50 { background-color: ${corPrimaria}15 !important; }
+        .dark .bg-emerald-100 { background-color: ${corPrimaria}20 !important; }
+        .dark .bg-emerald-900\\/10 { background-color: ${corPrimaria}1a !important; }
+        .dark .bg-emerald-900\\/20 { background-color: ${corPrimaria}33 !important; }
+        .dark .bg-emerald-900\\/30 { background-color: ${corPrimaria}4d !important; }
+        .dark .text-emerald-300 { color: ${corPrimaria}99 !important; }
         .dark .text-emerald-400 { color: ${corSecundaria} !important; }
-        .dark .border-emerald-900\\/30 { border-color: ${corPrimaria}30 !important; }
+        .dark .border-emerald-700 { border-color: ${corPrimaria}60 !important; }
+        .dark .border-emerald-800 { border-color: ${corPrimaria}40 !important; }
+        .dark .border-emerald-800\\/50 { border-color: ${corPrimaria}30 !important; }
         .dark .ring-emerald-800 { --tw-ring-color: ${corPrimaria}60 !important; }
-        .dark .hover\\:bg-emerald-900\\/30:hover { background-color: ${corPrimaria}30 !important; }
+        .dark .hover\\:bg-emerald-900\\/20:hover { background-color: ${corPrimaria}33 !important; }
+        .dark .hover\\:bg-emerald-900\\/30:hover { background-color: ${corPrimaria}4d !important; }
+        
+        /* ===== SHADOW ===== */
+        .shadow-emerald-500\\/20 { --tw-shadow-color: ${corPrimaria}33 !important; }
+        .shadow-emerald-500\\/25 { --tw-shadow-color: ${corPrimaria}40 !important; }
+        .hover\\:shadow-emerald-500\\/30:hover { --tw-shadow-color: ${corPrimaria}4d !important; }
+        
+        /* ===== DIVIDE ===== */
+        .divide-emerald-200 > :not([hidden]) ~ :not([hidden]) { border-color: ${corPrimaria}30 !important; }
+        
+        /* ===== PLACEHOLDER ===== */
+        .placeholder-emerald-400::placeholder { color: ${corSecundaria} !important; }
+        
+        /* ===== ACCENT ===== */
+        .accent-emerald-500 { accent-color: ${corPrimaria} !important; }
+        .accent-emerald-600 { accent-color: ${corPrimaria} !important; }
       `;
       
       // Atualizar favicon se disponível
