@@ -361,7 +361,7 @@ export default function AlunoHome() {
       {/* Cards de Métricas com Progresso Circular */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Card Sequência Premium */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-orange-500/20 group animate-slide-up candy-cane-border" style={{ animationDelay: '0.1s' }}>
+        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.1s' }}>
           
           
           
@@ -374,7 +374,7 @@ export default function AlunoHome() {
             </div>
             <div className="relative">
               
-              <div className="relative p-3 bg-orange-500 rounded-xl shadow-sm">
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <Flame className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -389,7 +389,7 @@ export default function AlunoHome() {
             <div className="flex items-center gap-2">
               <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-orange-500 rounded-full transition-all duration-1000 ease-out"
+                  className="h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${Math.min((streak / (metas.find(m => m.tipo === 'sequencia' && m.status === 'ativa')?.valorAlvo || 30)) * 100, 100)}%` }}
                 />
               </div>
@@ -404,7 +404,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Tempo com Progresso */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group animate-slide-up candy-cane-border" style={{ animationDelay: '0.2s' }}>
+        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.2s' }}>
           
           
           
@@ -412,7 +412,7 @@ export default function AlunoHome() {
             <CardTitle className="text-sm font-semibold">Tempo Total</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-500 rounded-xl shadow-sm">
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <Clock className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -431,7 +431,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Questões com Gráfico Circular */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group animate-slide-up candy-cane-border" style={{ animationDelay: '0.3s' }}>
+        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.3s' }}>
           
           
           
@@ -445,7 +445,7 @@ export default function AlunoHome() {
             </div>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-500 rounded-xl shadow-sm">
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <CheckCircle2 className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -461,7 +461,7 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Simulado */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-purple-500/20 group animate-slide-up candy-cane-border" style={{ animationDelay: '0.4s' }}>
+        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.4s' }}>
           
           
           
@@ -469,7 +469,7 @@ export default function AlunoHome() {
             <CardTitle className="text-sm font-semibold">Último Simulado</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-purple-500 rounded-xl shadow-sm">
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <FileText className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -506,7 +506,7 @@ export default function AlunoHome() {
       {/* Ações Rápidas Premium */}
       <div className="grid gap-5 md:grid-cols-3 animate-slide-up" style={{ animationDelay: '0.5s' }}>
         <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-emerald-500/30 hover:-translate-y-0.5 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" 
+          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-sm hover:-translate-y-0.5 bg-white dark:bg-gray-900" 
           onClick={() => setLocation("/aluno/estudos")}
         >
           
@@ -516,8 +516,8 @@ export default function AlunoHome() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                  <div className="relative p-4 bg-emerald-500 rounded-lg shadow-sm group-hover:scale-[1.01] transition-transform duration-300">
+                  
+                  <div className="relative p-4 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
                     <PlayCircle className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -532,7 +532,7 @@ export default function AlunoHome() {
         </Card>
 
         <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-emerald-500/30 hover:-translate-y-0.5 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" 
+          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-sm hover:-translate-y-0.5 bg-white dark:bg-gray-900" 
           onClick={() => setLocation("/aluno/estudos")}
         >
           
@@ -542,8 +542,8 @@ export default function AlunoHome() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                  <div className="relative p-4 bg-emerald-500 rounded-lg shadow-sm group-hover:scale-[1.01] transition-transform duration-300">
+                  
+                  <div className="relative p-4 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
                     <Plus className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -558,7 +558,7 @@ export default function AlunoHome() {
         </Card>
 
         <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-purple-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-purple-500/30 hover:-translate-y-0.5 bg-gradient-to-br from-purple-50/50 to-transparent dark:from-purple-950/20" 
+          className="relative overflow-hidden border-2 border-transparent hover:border-purple-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-sm hover:-translate-y-0.5 bg-white dark:bg-gray-900" 
           onClick={() => setLocation("/aluno/simulados")}
         >
           
@@ -568,8 +568,8 @@ export default function AlunoHome() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-purple-500 rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                  <div className="relative p-4 bg-purple-500 rounded-lg shadow-sm group-hover:scale-[1.01] transition-transform duration-300">
+                  
+                  <div className="relative p-4 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
                     <FileText className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -592,7 +592,7 @@ export default function AlunoHome() {
               <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
                 <div className="relative">
                   
-                  <div className="relative p-3 bg-gradient-to-br from-primary to-purple-500 rounded-xl shadow-sm">
+                  <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                     <Calendar className="h-4 w-4 text-white" />
                   </div>
                 </div>
@@ -621,7 +621,7 @@ export default function AlunoHome() {
                 <div className="w-5 h-5 rounded-md bg-gray-100 dark:bg-gray-800 border-2 shadow-sm" />
                 <div className="w-5 h-5 rounded-md bg-emerald-200 dark:bg-emerald-900 shadow-sm" />
                 <div className="w-5 h-5 rounded-md bg-emerald-400 dark:bg-emerald-700 shadow-sm" />
-                <div className="w-5 h-5 rounded-md bg-emerald-600 dark:bg-emerald-500 shadow-sm" />
+                <div className="w-5 h-5 rounded-md bg-emerald-600 dark:bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400-sm" />
               </div>
               <span>Mais</span>
             </div>
@@ -637,7 +637,7 @@ export default function AlunoHome() {
             <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
               <div className="relative">
                 
-                <div className="relative p-3 bg-gradient-to-br from-primary to-purple-500 rounded-xl shadow-sm">
+                <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                   <TrendingUp className="h-4 w-4 text-white" />
                 </div>
               </div>
@@ -646,7 +646,7 @@ export default function AlunoHome() {
           </CardHeader>
           <CardContent className="space-y-5">
             {analisePorMateria.pontosFortes.length > 0 && (
-              <div className="relative overflow-hidden p-4 bg-gradient-to-br from-emerald-50 via-emerald-100/50 to-green-50/30 dark:from-emerald-950 dark:via-emerald-900/30 dark:to-green-900/20 border-2 border-emerald-300 dark:border-emerald-700 rounded-lg shadow">
+              <div className="relative overflow-hidden p-4 bg-white dark:bg-gray-900">
                 
                 
                 
@@ -672,7 +672,7 @@ export default function AlunoHome() {
             )}
             
             {analisePorMateria.pontosFracos.length > 0 && (
-              <div className="relative overflow-hidden p-4 bg-gradient-to-br from-red-50 via-red-100/50 to-orange-50/30 dark:from-red-950 dark:via-red-900/30 dark:to-orange-900/20 border-2 border-red-300 dark:border-red-700 rounded-lg shadow">
+              <div className="relative overflow-hidden p-4 bg-white dark:bg-gray-900">
                 
                 
                 
@@ -703,7 +703,7 @@ export default function AlunoHome() {
             )}
             
             {streak === 0 && (
-              <div className="p-4 bg-gradient-to-br from-orange-50 to-orange-100/50 dark:from-orange-950 dark:to-orange-900/30 border-2 border-orange-300 dark:border-orange-700 rounded-lg shadow">
+              <div className="p-4 bg-white dark:bg-gray-900">
                 <p className="text-base font-semibold text-orange-900 dark:text-orange-100 flex items-center gap-2">
                   <Zap className="h-5 w-5" />
                   Comece sua sequência hoje!
@@ -715,7 +715,7 @@ export default function AlunoHome() {
             )}
             
             {streak > 0 && streak < 7 && (
-              <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950 dark:to-emerald-900/30 border-2 border-emerald-300 dark:border-emerald-700 rounded-lg shadow">
+              <div className="p-4 bg-white dark:bg-gray-900">
                 <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
                   <Flame className="h-5 w-5" />
                   {streak} dias de sequência!
@@ -727,7 +727,7 @@ export default function AlunoHome() {
             )}
 
             {streak >= 7 && (
-              <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950 dark:to-emerald-900/30 border-2 border-emerald-300 dark:border-emerald-700 rounded-lg shadow">
+              <div className="p-4 bg-white dark:bg-gray-900">
                 <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
                   <Trophy className="h-5 w-5 fill-emerald-600" />
                   {streak} dias consecutivos!
@@ -739,7 +739,7 @@ export default function AlunoHome() {
             )}
             
             {analisePorMateria.pontosFortes.length === 0 && analisePorMateria.pontosFracos.length === 0 && (
-              <div className="p-4 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950 dark:to-emerald-900/30 border-2 border-emerald-300 dark:border-emerald-700 rounded-lg shadow">
+              <div className="p-4 bg-white dark:bg-gray-900">
                 <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
                   <BarChart3 className="h-5 w-5" />
                   Dados insuficientes
@@ -752,7 +752,7 @@ export default function AlunoHome() {
 
             <Button 
               variant="outline" 
-              className="w-full border-2 hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:border-transparent transition-all duration-300 font-bold text-base py-3 shadow hover:shadow-sm"
+              className="w-full border-2 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-bold text-base py-3 shadow hover:shadow-sm"
               onClick={() => setLocation("/aluno/metricas")}
             >
               <BarChart3 className="h-5 w-5 mr-2" />
@@ -767,7 +767,7 @@ export default function AlunoHome() {
             <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
               <div className="relative">
                 
-                <div className="relative p-3 bg-gradient-to-br from-primary to-purple-500 rounded-xl shadow-sm">
+                <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                   <Activity className="h-4 w-4 text-white" />
                 </div>
               </div>
@@ -778,10 +778,10 @@ export default function AlunoHome() {
             <div className="space-y-3">
               {estudos && estudos.length > 0 ? (
                 estudos.slice(0, 5).map((estudo, index) => (
-                  <div key={index} className="group flex items-start gap-4 pb-4 border-b last:border-0 hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent p-3 rounded-xl transition-all duration-300">
+                  <div key={index} className="group flex items-start gap-4 pb-4 border-b last:border-0 hover:bg-gray-50 dark:hover:bg-gray-800 p-3 rounded-xl transition-all duration-300">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary to-purple-500 rounded-xl blur-sm opacity-50 group-hover:opacity-75 transition-opacity" />
-                      <div className="relative p-3 bg-gradient-to-br from-primary to-purple-500 rounded-xl shadow group-hover:scale-[1.01] transition-transform">
+                      
+                      <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-lg shadow group-hover:scale-[1.01] transition-transform">
                         <BookOpen className="h-5 w-5 text-white" />
                       </div>
                     </div>
@@ -817,7 +817,7 @@ export default function AlunoHome() {
                   <Button 
                     size="lg"
                     onClick={() => setLocation("/aluno/estudos")}
-                    className="bg-gradient-to-r from-primary via-purple-500 to-emerald-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-emerald-500/90 shadow-sm hover:shadow-sm transition-all duration-300 font-bold"
+                    className="bg-emerald-600 hover:bg-emerald-700"
                   >
                     <Plus className="h-5 w-5 mr-2" />
                     Registrar Primeiro Estudo

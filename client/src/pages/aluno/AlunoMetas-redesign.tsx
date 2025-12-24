@@ -5,7 +5,7 @@
 
 // 1. Header com gradiente e animação
 const newHeader = `
-<div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-4 mb-6 border-2 border-primary/20 animate-slide-up">
+<div className="relative overflow-hidden rounded-lg bg-gray-50 dark:bg-gray-900 p-4 mb-6 border border-gray-200 dark:border-gray-700 animate-slide-up">
   <div className="relative flex justify-between items-center">
     <div>
       <h1 className="text-2xl font-bold flex items-center gap-3">
@@ -32,7 +32,7 @@ const newHeader = `
 const newSummaryCards = `
 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-slide-up" style={{ animationDelay: '0.1s' }}>
   {/* Card Metas Ativas */}
-  <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group">
+  <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-sm group">
     
     <CardHeader className="pb-3">
       <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -62,7 +62,7 @@ const newSummaryCards = `
   </Card>
 
   {/* Card Taxa de Conclusão */}
-  <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-sm hover:shadow-purple-500/20 group">
+  <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-sm hover:shadow-sm group">
     
     <CardHeader className="pb-3">
       <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -89,7 +89,7 @@ const newMetaCard = `
   <CardHeader>
     <div className="flex items-start justify-between">
       <div className="flex items-start gap-3">
-        <div className={\`p-2 rounded-lg bg-gradient-to-br \${TIPOS_META[meta.tipo].bgGradient}\`}>
+        <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
           <Icon className={\`h-4 w-4 \${TIPOS_META[meta.tipo].color}\`} />
         </div>
         <div>
@@ -121,7 +121,7 @@ const newMetaCard = `
           value={progresso} 
           className={\`h-3 \${getProgressColor(progresso)} transition-all duration-1000\`}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+        <div className="absolute inset-0 bg-transparent" />
       </div>
       <p className="text-xs text-muted-foreground text-right font-semibold">{progresso}%</p>
     </div>
@@ -133,7 +133,7 @@ const newMetaCard = `
         <span>Até {toDate(meta.dataFim).toLocaleDateString('pt-BR')}</span>
       </div>
       {meta.repetirDiariamente && (
-        <Badge className="bg-emerald-500 shadow">
+        <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
           <Flame className="h-3 w-3 mr-1" />
           Meta diária
         </Badge>
@@ -158,7 +158,7 @@ const newMetaCard = `
         variant="outline"
         size="sm"
         onClick={() => handleCancelarMeta(meta.id)}
-        className="flex-1 hover:bg-orange-500/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
+        className="flex-1 hover:bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
       >
         <XCircle className="h-4 w-4 mr-2" />
         Cancelar

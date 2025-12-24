@@ -464,13 +464,13 @@ export default function AlunoRedacoes() {
         <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-none opacity-50" />
-              <div className="relative bg-gradient-to-br from-orange-500 via-red-500 to-amber-500 p-4 rounded-lg shadow-sm">
+              
+              <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                 <PenTool className="h-10 w-10 text-white" />
               </div>
             </div>
             <div>
-              <h1 className="text-2xl md:text-2xl font-semibold tracking-tight bg-gradient-to-r from-orange-600 via-red-600 to-amber-600 ">
+              <h1 className="text-2xl md:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white ">
                 Redações
               </h1>
               <p className="text-lg text-muted-foreground font-medium mt-1">
@@ -500,14 +500,14 @@ export default function AlunoRedacoes() {
               }
             }}>
               <DialogTrigger asChild>
-                <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow shadow-orange-500/25 transition-all duration-300 hover:shadow-sm hover:shadow-orange-500/30 hover:scale-[1.01]">
+                <Button className="bg-emerald-600 hover:bg-emerald-700">
                   <Plus className="h-4 w-4 mr-2" />
                   Nova Redação
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="text-xl font-bold bg-gradient-to-r from-orange-600 to-red-600 ">
+                  <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white ">
                     {editandoId ? "Editar Redação" : "Registrar Nova Redação"}
                   </DialogTitle>
                   <DialogDescription>
@@ -523,7 +523,7 @@ export default function AlunoRedacoes() {
                       placeholder="Ex: A persistência da violência contra a mulher na sociedade brasileira"
                       value={form.titulo}
                       onChange={(e) => setForm({ ...form, titulo: e.target.value })}
-                      className="border-2 focus:border-orange-500 transition-colors"
+                      className="border-2 focus:border-emerald-500 transition-colors"
                     />
                   </div>
 
@@ -535,7 +535,7 @@ export default function AlunoRedacoes() {
                         type="date"
                         value={form.data}
                         onChange={(e) => setForm({ ...form, data: e.target.value })}
-                        className="border-2 focus:border-orange-500 transition-colors"
+                        className="border-2 focus:border-emerald-500 transition-colors"
                       />
                     </div>
                     <div className="space-y-2">
@@ -575,10 +575,10 @@ export default function AlunoRedacoes() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {/* C1 */}
-                      <div className="space-y-2 p-4 rounded-xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20 dark:border-emerald-800">
+                      <div className="space-y-2 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
                         <Label className="font-semibold text-emerald-700 dark:text-emerald-400">C1 - Norma Culta</Label>
                         <Select value={form.c1} onValueChange={(v) => setForm({ ...form, c1: v })}>
-                          <SelectTrigger className="border-2 border-emerald-300 bg-white dark:bg-black/20">
+                          <SelectTrigger className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-black/20">
                             <SelectValue placeholder="Selecione a nota" />
                           </SelectTrigger>
                           <SelectContent>
@@ -590,10 +590,10 @@ export default function AlunoRedacoes() {
                       </div>
 
                       {/* C2 */}
-                      <div className="space-y-2 p-4 rounded-xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-green-100/50 dark:from-green-950/30 dark:to-green-900/20 dark:border-green-800">
+                      <div className="space-y-2 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
                         <Label className="font-semibold text-green-700 dark:text-green-400">C2 - Tema/Estrutura</Label>
                         <Select value={form.c2} onValueChange={(v) => setForm({ ...form, c2: v })}>
-                          <SelectTrigger className="border-2 border-green-300 bg-white dark:bg-black/20">
+                          <SelectTrigger className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-black/20">
                             <SelectValue placeholder="Selecione a nota" />
                           </SelectTrigger>
                           <SelectContent>
@@ -605,10 +605,10 @@ export default function AlunoRedacoes() {
                       </div>
 
                       {/* C3 */}
-                      <div className="space-y-2 p-4 rounded-xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-950/30 dark:to-amber-900/20 dark:border-amber-800">
+                      <div className="space-y-2 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
                         <Label className="font-semibold text-amber-700 dark:text-amber-400">C3 - Argumentação</Label>
                         <Select value={form.c3} onValueChange={(v) => setForm({ ...form, c3: v })}>
-                          <SelectTrigger className="border-2 border-amber-300 bg-white dark:bg-black/20">
+                          <SelectTrigger className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-black/20">
                             <SelectValue placeholder="Selecione a nota" />
                           </SelectTrigger>
                           <SelectContent>
@@ -620,10 +620,10 @@ export default function AlunoRedacoes() {
                       </div>
 
                       {/* C4 */}
-                      <div className="space-y-2 p-4 rounded-xl border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-purple-100/50 dark:from-purple-950/30 dark:to-purple-900/20 dark:border-purple-800">
+                      <div className="space-y-2 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
                         <Label className="font-semibold text-purple-700 dark:text-purple-400">C4 - Coesão</Label>
                         <Select value={form.c4} onValueChange={(v) => setForm({ ...form, c4: v })}>
-                          <SelectTrigger className="border-2 border-purple-300 bg-white dark:bg-black/20">
+                          <SelectTrigger className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-black/20">
                             <SelectValue placeholder="Selecione a nota" />
                           </SelectTrigger>
                           <SelectContent>
@@ -635,10 +635,10 @@ export default function AlunoRedacoes() {
                       </div>
 
                       {/* C5 */}
-                      <div className="space-y-2 p-4 rounded-xl border-2 border-red-200 bg-gradient-to-br from-red-50 to-red-100/50 dark:from-red-950/30 dark:to-red-900/20 dark:border-red-800 md:col-span-2">
+                      <div className="space-y-2 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
                         <Label className="font-semibold text-red-700 dark:text-red-400">C5 - Proposta de Intervenção</Label>
                         <Select value={form.c5} onValueChange={(v) => setForm({ ...form, c5: v })}>
-                          <SelectTrigger className="border-2 border-red-300 bg-white dark:bg-black/20">
+                          <SelectTrigger className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-black/20">
                             <SelectValue placeholder="Selecione a nota" />
                           </SelectTrigger>
                           <SelectContent>
@@ -651,10 +651,10 @@ export default function AlunoRedacoes() {
                     </div>
 
                     {/* Nota Total Calculada */}
-                    <div className="p-5 rounded-lg bg-gradient-to-r from-orange-100 via-red-100 to-amber-100 dark:from-orange-950/50 dark:via-red-950/50 dark:to-amber-950/50 border-2 border-orange-300 dark:border-orange-800">
+                    <div className="p-5 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-orange-800 dark:text-orange-300">Nota Total (calculada automaticamente)</span>
-                        <span className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 ">{notaTotalForm}</span>
+                        <span className="text-2xl font-semibold text-gray-900 dark:text-white ">{notaTotalForm}</span>
                       </div>
                     </div>
                   </div>
@@ -710,7 +710,7 @@ export default function AlunoRedacoes() {
                   <Button 
                     onClick={handleSubmit} 
                     disabled={isSaving}
-                    className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
+                    className="bg-emerald-600 hover:bg-emerald-700"
                   >
                     {isSaving ? "Salvando..." : editandoId ? "Atualizar" : "Registrar"}
                   </Button>
@@ -724,22 +724,22 @@ export default function AlunoRedacoes() {
       {/* Dashboard - Cards de Métricas Premium */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Card Média Geral */}
-        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up" style={{ animationDelay: '0.1s' }}>
           
           
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold">Média Geral (últimas 5)</CardTitle>
             <div className="relative">
-              <div className="absolute inset-0 bg-emerald-500 rounded-xl blur-md opacity-50" />
-              <div className="relative p-3 bg-emerald-500 rounded-xl shadow-sm">
+              
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 ">
+              <div className="text-2xl font-semibold text-emerald-600 dark:text-emerald-400 ">
                 {estatisticas.mediaGeral}
               </div>
               <span className="text-lg font-bold text-muted-foreground">pts</span>
@@ -763,15 +763,15 @@ export default function AlunoRedacoes() {
               </CardTitle>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl blur-md opacity-50" />
-              <div className="relative p-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl shadow-sm">
+              
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                 <Award className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold bg-gradient-to-r from-yellow-600 via-yellow-500 to-orange-500 ">
+              <div className="text-2xl font-semibold text-gray-900 dark:text-white ">
                 {estatisticas.melhorNota}
               </div>
               <span className="text-lg font-bold text-muted-foreground">pts</span>
@@ -783,22 +783,22 @@ export default function AlunoRedacoes() {
         </Card>
 
         {/* Card Total de Redações */}
-        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up" style={{ animationDelay: '0.3s' }}>
           
           
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold">Redações Produzidas</CardTitle>
             <div className="relative">
-              <div className="absolute inset-0 bg-emerald-500 rounded-xl blur-md opacity-50" />
-              <div className="relative p-3 bg-emerald-500 rounded-xl shadow-sm">
+              
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <FileText className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-500 ">
+              <div className="text-2xl font-semibold text-emerald-600 dark:text-emerald-400 ">
                 {estatisticas.totalRedacoes}
               </div>
               <span className="text-lg font-bold text-muted-foreground">textos</span>
@@ -815,18 +815,18 @@ export default function AlunoRedacoes() {
             ? "hover:border-red-500 hover:shadow-red-500/20 border-red-300" 
             : estatisticas.tempoAlerta 
               ? "hover:border-yellow-500 hover:shadow-yellow-500/20 border-yellow-300" 
-              : "hover:border-purple-500 hover:shadow-purple-500/20"
+              : "hover:border-purple-500 hover:shadow-sm"
         }`} style={{ animationDelay: '0.4s' }}>
-          <div className={`absolute inset-0 bg-gradient-to-br ${
+          <div className={`absolute inset-0 bg-gray-100 dark:bg-gray-800 ${
             estatisticas.tempoExcessivo 
-              ? "from-red-500/10" 
+              ? "from-gray-500/10" 
               : estatisticas.tempoAlerta 
                 ? "from-yellow-500/10" 
                 : "from-purple-500/10"
           } via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
-          <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${
+          <div className={`absolute top-0 right-0 w-40 h-40 bg-gray-100 dark:bg-gray-800 ${
             estatisticas.tempoExcessivo 
-              ? "from-red-500/20" 
+              ? "from-gray-500/20" 
               : estatisticas.tempoAlerta 
                 ? "from-yellow-500/20" 
                 : "from-purple-500/20"
@@ -842,16 +842,16 @@ export default function AlunoRedacoes() {
               )}
             </CardTitle>
             <div className="relative">
-              <div className={`absolute inset-0 bg-gradient-to-br ${
+              <div className={`absolute inset-0 bg-gray-100 dark:bg-gray-800 ${
                 estatisticas.tempoExcessivo 
-                  ? "from-red-500 to-rose-500" 
+                  ? "from-gray-500 to-gray-600" 
                   : estatisticas.tempoAlerta 
                     ? "from-yellow-500 to-amber-500" 
                     : "from-purple-500 to-pink-500"
               } rounded-xl blur-md opacity-50`} />
-              <div className={`relative p-3 bg-gradient-to-br ${
+              <div className={`relative p-3 bg-gray-100 dark:bg-gray-800 ${
                 estatisticas.tempoExcessivo 
-                  ? "from-red-500 to-rose-500" 
+                  ? "from-gray-500 to-gray-600" 
                   : estatisticas.tempoAlerta 
                     ? "from-yellow-500 to-amber-500" 
                     : "from-purple-500 to-pink-500"
@@ -867,7 +867,7 @@ export default function AlunoRedacoes() {
                   ? "text-red-600" 
                   : estatisticas.tempoAlerta 
                     ? "text-yellow-600" 
-                    : "bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 "
+                    : "text-gray-900 dark:text-white "
               }`}>
                 {estatisticas.tempoMedio.horas}h{estatisticas.tempoMedio.minutos}
               </div>
@@ -889,12 +889,12 @@ export default function AlunoRedacoes() {
         <CardHeader className="pb-3">
           <CardTitle className="text-lg font-bold flex items-center gap-2">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg blur-md opacity-50" />
-              <div className="relative p-2 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg">
+              
+              <div className="relative p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                 <Target className="h-5 w-5 text-white" />
               </div>
             </div>
-            <span className="bg-gradient-to-r from-orange-600 to-red-600 ">Minha Meta</span>
+            <span className="text-gray-900 dark:text-white ">Minha Meta</span>
           </CardTitle>
           <CardDescription>
             Defina sua meta de nota para acompanhar no gráfico de evolução
@@ -909,7 +909,7 @@ export default function AlunoRedacoes() {
               step={20}
               value={metaNotaInput}
               onChange={(e) => setMetaNotaInput(e.target.value)}
-              className="w-32 border-2 focus:border-orange-500 transition-colors"
+              className="w-32 border-2 focus:border-emerald-500 transition-colors"
             />
             <Button 
               variant="outline" 
@@ -921,7 +921,7 @@ export default function AlunoRedacoes() {
                   toast.error("A meta deve estar entre 0 e 1000");
                 }
               }}
-              className="border-2 hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/30 transition-all"
+              className="border-2 hover:border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
             >
               Salvar Meta
             </Button>
@@ -940,7 +940,7 @@ export default function AlunoRedacoes() {
           <CardHeader>
             <CardTitle className="text-lg font-bold flex items-center gap-2">
               <div className="relative">
-                <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-md opacity-50" />
+                
                 <div className="relative p-2 bg-emerald-500 rounded-lg">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
@@ -1005,8 +1005,8 @@ export default function AlunoRedacoes() {
             <CardHeader>
               <CardTitle className="text-lg font-bold flex items-center gap-2">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-purple-500 rounded-lg blur-md opacity-50" />
-                  <div className="relative p-2 bg-purple-500 rounded-lg">
+                  
+                  <div className="relative p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                     <Zap className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -1058,7 +1058,7 @@ export default function AlunoRedacoes() {
             <CardHeader>
               <CardTitle className="text-lg font-bold flex items-center gap-2">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-md opacity-50" />
+                  
                   <div className="relative p-2 bg-emerald-500 rounded-lg">
                     <Award className="h-5 w-5 text-white" />
                   </div>
@@ -1108,7 +1108,7 @@ export default function AlunoRedacoes() {
                       key={item.nome}
                       className={`flex items-center justify-between p-3 rounded-xl transition-all duration-300 ${
                         isPontoFraco 
-                          ? "bg-gradient-to-r from-red-50 to-red-100 dark:from-red-950/30 dark:to-red-900/20 border-2 border-red-200 dark:border-red-800" 
+                          ? "bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700" 
                           : "bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-800/50"
                       }`}
                     >
@@ -1121,7 +1121,7 @@ export default function AlunoRedacoes() {
                           {item.nome} - {item.descricao}
                         </span>
                         {isPontoFraco && (
-                          <span className="text-xs bg-gradient-to-r from-red-500 to-rose-500 text-white px-2 py-1 rounded-full font-bold shadow">
+                          <span className="text-xs bg-gray-600 text-white px-2 py-1 rounded-full font-bold shadow">
                             ⚠️ Ponto Fraco
                           </span>
                         )}
@@ -1147,8 +1147,8 @@ export default function AlunoRedacoes() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg blur-md opacity-50" />
-                <div className="relative p-2 bg-gradient-to-br from-gray-500 to-gray-600 rounded-lg">
+                
+                <div className="relative p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                   <FileText className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -1180,7 +1180,7 @@ export default function AlunoRedacoes() {
                 {redacoesFiltradas.map((redacao, index) => (
                   <div 
                     key={redacao.id}
-                    className="p-5 rounded-lg border-2 hover:border-orange-300 hover:shadow transition-all duration-300 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 animate-slide-up"
+                    className="p-5 rounded-lg border-2 hover:border-gray-300 hover:shadow transition-all duration-300 bg-white dark:bg-gray-900 animate-slide-up"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -1195,19 +1195,19 @@ export default function AlunoRedacoes() {
                           </span>
                         </div>
                         <div className="flex flex-wrap gap-2 mt-3">
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-emerald-100 to-emerald-200 dark:from-emerald-900/50 dark:to-emerald-800/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             C1: {redacao.c1}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-green-100 to-green-200 dark:from-green-900/50 dark:to-green-800/50 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                             C2: {redacao.c2}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-100 to-amber-200 dark:from-amber-900/50 dark:to-amber-800/50 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                             C3: {redacao.c3}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-purple-100 to-purple-200 dark:from-purple-900/50 dark:to-purple-800/50 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                             C4: {redacao.c4}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-red-100 to-red-200 dark:from-red-900/50 dark:to-red-800/50 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                             C5: {redacao.c5}
                           </span>
                         </div>
@@ -1239,7 +1239,7 @@ export default function AlunoRedacoes() {
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-center">
-                          <div className="text-2xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 ">
+                          <div className="text-2xl font-semibold text-gray-900 dark:text-white ">
                             {redacao.notaTotal}
                           </div>
                           <div className="text-xs text-muted-foreground font-medium">pontos</div>
@@ -1257,7 +1257,7 @@ export default function AlunoRedacoes() {
                             variant="outline"
                             size="sm"
                             onClick={() => handleDelete(redacao.id)}
-                            className="border-2 text-red-500 hover:text-red-700 hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all"
+                            className="border-2 text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -1281,11 +1281,11 @@ export default function AlunoRedacoes() {
             <div className="text-center">
               <div className="relative inline-block mb-6">
                 
-                <div className="relative bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 p-4 rounded-full">
+                <div className="relative bg-gray-100 dark:bg-gray-800 p-4 rounded-full">
                   <PenTool className="h-16 w-16 text-orange-500" />
                 </div>
               </div>
-              <h3 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-orange-600 to-red-600 ">
+              <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white ">
                 Comece a registrar suas redações!
               </h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
@@ -1293,7 +1293,7 @@ export default function AlunoRedacoes() {
               </p>
               <Button 
                 onClick={() => setIsDialogOpen(true)}
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow shadow-orange-500/25 transition-all duration-300 hover:shadow-sm hover:shadow-orange-500/30 hover:scale-[1.01]"
+                className="bg-emerald-600 hover:bg-emerald-700"
                 size="lg"
               >
                 <Plus className="h-5 w-5 mr-2" />

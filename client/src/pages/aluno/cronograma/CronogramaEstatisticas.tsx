@@ -50,7 +50,7 @@ const SUBJECT_GROUPS: Record<string, string[]> = {
 // Paleta azul padronizada
 const AREA_COLORS: Record<string, string> = {
   'Matemática': 'bg-emerald-500',
-  'Física': 'bg-indigo-500',
+  'Física': 'bg-emerald-500',
   'Química': 'bg-teal-500',
   'Biologia': 'bg-emerald-500',
   'História': 'bg-emerald-600',
@@ -175,7 +175,7 @@ export default function CronogramaEstatisticas() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 animate-slide-up">
+      <div className="bg-red-50 border border-gray-200 dark:border-gray-700 rounded-xl p-6 animate-slide-up">
         <p className="text-red-800 font-semibold">{error}</p>
         <button
           onClick={loadCronograma}
@@ -197,13 +197,13 @@ export default function CronogramaEstatisticas() {
         <div className="relative">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-none opacity-50" />
-              <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
+              
+              <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                 <BarChart3 className="h-10 w-10 text-white" />
               </div>
             </div>
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 Estatísticas
               </h1>
             </div>
@@ -220,7 +220,7 @@ export default function CronogramaEstatisticas() {
           onClick={() => setTipo("extensive")}
           className={`relative overflow-hidden p-6 rounded-lg border-2 font-bold text-lg transition-all hover:shadow-sm hover:-translate-y-1 ${
             tipo === "extensive"
-              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-emerald-500/30"
+              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-sm"
               : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
@@ -233,7 +233,7 @@ export default function CronogramaEstatisticas() {
           onClick={() => setTipo("intensive")}
           className={`relative overflow-hidden p-6 rounded-lg border-2 font-bold text-lg transition-all hover:shadow-sm hover:-translate-y-1 ${
             tipo === "intensive"
-              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-emerald-500/30"
+              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-sm"
               : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
@@ -245,7 +245,7 @@ export default function CronogramaEstatisticas() {
       </div>
 
       {/* Card de Progresso Total Premium */}
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-10 shadow-sm shadow-emerald-500/30 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      <div className="relative overflow-hidden rounded-lg bg-emerald-600 p-10 shadow-sm shadow-sm animate-slide-up" style={{ animationDelay: '0.2s' }}>
         
         <div className="relative">
           <div className="flex items-center justify-between mb-6">
@@ -270,7 +270,7 @@ export default function CronogramaEstatisticas() {
       {/* Estatísticas por Área Premium */}
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-          <div className="p-2 bg-emerald-500 rounded-xl shadow">
+          <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
             <PieChart className="w-6 h-6 text-white" />
           </div>
           Progresso por Área de Conhecimento
@@ -311,7 +311,7 @@ export default function CronogramaEstatisticas() {
       {/* Estatísticas por Ciclo Premium */}
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.4s' }}>
         <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-          <div className="p-2 bg-emerald-500 rounded-xl shadow">
+          <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
             <TrendingUp className="w-6 h-6 text-white" />
           </div>
           Progresso por Ciclo

@@ -22,9 +22,9 @@ interface MentorMateriaPageProps {
 }
 
 const INCIDENCE_OPTIONS = [
-  { value: "Muito alta!", label: "Muito alta!", color: "bg-red-500" },
-  { value: "Alta!", label: "Alta!", color: "bg-orange-500" },
-  { value: "Média", label: "Média", color: "bg-yellow-500" },
+  { value: "Muito alta!", label: "Muito alta!", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" },
+  { value: "Alta!", label: "Alta!", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" },
+  { value: "Média", label: "Média", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" },
   { value: "Baixa", label: "Baixa", color: "bg-emerald-500" },
   { value: "Muito baixa", label: "Muito baixa", color: "bg-gray-400" },
 ];
@@ -108,9 +108,9 @@ export default function MentorMateriaPage({ materiaKey }: MentorMateriaPageProps
 
   const getIncidenceBadgeColor = (level: string) => {
     switch (level) {
-      case "Muito alta!": return "bg-red-500 text-white hover:bg-red-600";
-      case "Alta!": return "bg-orange-500 text-white hover:bg-orange-600";
-      case "Média": return "bg-yellow-500 text-black hover:bg-yellow-600";
+      case "Muito alta!": return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 text-white hover:bg-red-600";
+      case "Alta!": return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 text-white hover:bg-orange-600";
+      case "Média": return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 text-black hover:bg-yellow-600";
       case "Baixa": return "bg-emerald-500 text-white hover:bg-emerald-600";
       case "Muito baixa": return "bg-gray-400 text-white hover:bg-gray-500";
       default: return "bg-gray-300 text-black hover:bg-gray-400";

@@ -40,7 +40,7 @@ import { calcularPontuacaoSemanal, atualizarPontuacaoRanking, getRankingAluno } 
 export const NIVEIS_RANKING = [
   { id: 1, nome: "Vestibulando Bronze", cor: "from-amber-600 to-amber-800", badge: "bg-amber-600", icon: "🥉" },
   { id: 2, nome: "Vestibulando Prata", cor: "from-gray-400 to-gray-600", badge: "bg-gray-500", icon: "🥈" },
-  { id: 3, nome: "Vestibulando Ouro", cor: "from-yellow-400 to-yellow-600", badge: "bg-yellow-500", icon: "🥇" },
+  { id: 3, nome: "Vestibulando Ouro", cor: "from-yellow-400 to-yellow-600", badge: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300", icon: "🥇" },
   { id: 4, nome: "Vestibulando Diamante", cor: "from-teal-400 to-emerald-600", badge: "bg-teal-500", icon: "💎" },
   { id: 5, nome: "Vestibulando Elite", cor: "from-purple-500 to-purple-700", badge: "bg-purple-600", icon: "👑" },
   { id: 6, nome: "Futuro Calouro", cor: "from-emerald-400 to-emerald-600", badge: "bg-emerald-500", icon: "🎓" },
@@ -155,7 +155,7 @@ export function RankingModal({ open, onOpenChange, alunoAtual }: RankingModalPro
     const zona = getZona(posicao);
     if (zona === "promocao") {
       return (
-        <Badge className="bg-green-500 text-white flex items-center gap-1 text-xs px-2 py-0.5 whitespace-nowrap flex-shrink-0">
+        <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-white flex items-center gap-1 text-xs px-2 py-0.5 whitespace-nowrap flex-shrink-0">
           <TrendingUp className="h-3 w-3" />
           <span className="hidden sm:inline">Promoção</span>
         </Badge>
@@ -163,7 +163,7 @@ export function RankingModal({ open, onOpenChange, alunoAtual }: RankingModalPro
     }
     if (zona === "rebaixamento" && nivelSelecionado > 1) {
       return (
-        <Badge className="bg-red-500 text-white flex items-center gap-1 text-xs px-2 py-0.5 whitespace-nowrap flex-shrink-0">
+        <Badge className="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 text-white flex items-center gap-1 text-xs px-2 py-0.5 whitespace-nowrap flex-shrink-0">
           <TrendingDown className="h-3 w-3" />
           <span className="hidden sm:inline">Rebaixamento</span>
         </Badge>
@@ -365,7 +365,7 @@ export function RankingModal({ open, onOpenChange, alunoAtual }: RankingModalPro
         {/* Legenda */}
         <div className="flex flex-wrap gap-3 sm:gap-4 pt-3 border-t text-xs sm:text-sm flex-shrink-0">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-500" />
+            <div className="w-3 h-3 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" />
             <span>Zona de Promoção (Top 5)</span>
           </div>
           <div className="flex items-center gap-2">
@@ -373,7 +373,7 @@ export function RankingModal({ open, onOpenChange, alunoAtual }: RankingModalPro
             <span>Zona de Manutenção</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
+            <div className="w-3 h-3 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" />
             <span>Zona de Rebaixamento (Últimos 5)</span>
           </div>
         </div>

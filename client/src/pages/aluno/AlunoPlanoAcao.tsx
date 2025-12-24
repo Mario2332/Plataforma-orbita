@@ -164,7 +164,7 @@ export default function AlunoPlanoAcao() {
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 shadow">
+            <Button className="bg-emerald-600 hover:bg-emerald-700 shadow">
               <Plus className="mr-2 h-4 w-4" />
               Nova Pendência
             </Button>
@@ -254,21 +254,21 @@ export default function AlunoPlanoAcao() {
 
       {/* Estatísticas */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20">
+        <Card className="border border-gray-200 dark:border-gray-700 dark:border-orange-800 bg-white dark:bg-gray-900">
           <CardContent className="p-4 text-center">
             <AlertTriangle className="h-5 w-5 mx-auto text-orange-500 mb-2" />
             <p className="text-2xl font-bold text-orange-600">{planosPendentes.length}</p>
             <p className="text-sm text-orange-700 dark:text-orange-300">Pendentes</p>
           </CardContent>
         </Card>
-        <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
+        <Card className="border border-gray-200 dark:border-gray-700 dark:border-green-800 bg-white dark:bg-gray-900">
           <CardContent className="p-4 text-center">
             <CheckCircle2 className="h-5 w-5 mx-auto text-green-500 mb-2" />
             <p className="text-2xl font-bold text-green-600">{planosResolvidos.length}</p>
             <p className="text-sm text-green-700 dark:text-green-300">Resolvidas</p>
           </CardContent>
         </Card>
-        <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
+        <Card className="border border-gray-200 dark:border-gray-700 dark:border-emerald-800 bg-white dark:bg-gray-900">
           <CardContent className="p-4 text-center">
             <BookOpen className="h-5 w-5 mx-auto text-emerald-500 mb-2" />
             <p className="text-2xl font-bold text-emerald-600">
@@ -277,7 +277,7 @@ export default function AlunoPlanoAcao() {
             <p className="text-sm text-emerald-700 dark:text-emerald-300">Interpretação</p>
           </CardContent>
         </Card>
-        <Card className="border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20">
+        <Card className="border border-gray-200 dark:border-gray-700 dark:border-purple-800 bg-white dark:bg-gray-900">
           <CardContent className="p-4 text-center">
             <Target className="h-5 w-5 mx-auto text-purple-500 mb-2" />
             <p className="text-2xl font-bold text-purple-600">
@@ -386,7 +386,7 @@ export default function AlunoPlanoAcao() {
         <Card className="border-2 mt-8">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg">
+              <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                 <CheckCircle2 className="h-5 w-5 text-white" />
               </div>
               <div>

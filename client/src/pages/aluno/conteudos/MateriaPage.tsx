@@ -110,7 +110,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
   const getIncidenceBadgeColor = (level: string) => {
     switch (level) {
-      case "Muito alta!": return "bg-gradient-to-r from-emerald-600 to-indigo-600 text-white hover:from-emerald-700 hover:to-indigo-700 shadow";
+      case "Muito alta!": return "bg-emerald-600 text-white hover:bg-emerald-700 shadow";
       case "Alta!": return "bg-emerald-500 text-white hover:from-emerald-600 hover:to-teal-600 shadow";
       case "Média": return "bg-teal-500 text-white hover:bg-teal-600 shadow-md";
       case "Baixa": return "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md";
@@ -177,19 +177,19 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
+            <div className="p-4 bg-white dark:bg-gray-900">
               <div className="text-sm font-bold text-emerald-900 dark:text-emerald-300 mb-1">Total de Tópicos</div>
               <div className="text-3xl font-semibold text-gray-900 dark:text-white bg-clip-text text-transparent">
                 {topics.length}
               </div>
             </div>
-            <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
+            <div className="p-4 bg-white dark:bg-gray-900">
               <div className="text-sm font-bold text-emerald-900 dark:text-emerald-300 mb-1">Estudados</div>
               <div className="text-3xl font-semibold text-gray-900 dark:text-white bg-clip-text text-transparent">
                 {topicosEstudados}
               </div>
             </div>
-            <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
+            <div className="p-4 bg-white dark:bg-gray-900">
               <div className="text-sm font-bold text-emerald-900 dark:text-emerald-300 mb-1">Progresso</div>
               <div className="text-3xl font-semibold text-gray-900 dark:text-white bg-clip-text text-transparent">
                 {percentualEstudado}%
@@ -205,7 +205,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <div className="flex flex-col sm:flex-row gap-4 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
+          <div className="flex flex-col sm:flex-row gap-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700/50">
             <div className="flex items-center gap-2">
               <div className="p-2 bg-emerald-500 rounded-lg shadow-md">
                 <Filter className="w-4 h-4 text-white" />
@@ -259,10 +259,10 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border-2 border-emerald-200/50">
+          <div className="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700/50">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
+                <tr className="border-b-2 border-emerald-200 bg-gray-50 dark:bg-gray-900">
                   <th className="text-left p-4">
                     <Button
                       variant="ghost"
@@ -307,7 +307,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                     const hasNotes = progresso?.anotacoes && progresso.anotacoes.trim().length > 0;
 
                     return (
-                      <tr key={topic.id} className="border-b hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-teal-50/50 transition-all">
+                      <tr key={topic.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
                         <td className="p-4 font-semibold">{topic.name}</td>
                         <td className="p-4 text-center">
                           <Badge className={`${getIncidenceBadgeColor(topic.incidenceLevel)} font-bold px-3 py-1`}>
@@ -332,7 +332,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                                 variant={hasNotes ? "default" : "outline"}
                                 size="sm"
                                 onClick={() => handleOpenDialog(topic.id)}
-                                className={hasNotes ? "bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow" : "border-2 font-bold hover:bg-emerald-100"}
+                                className={hasNotes ? "bg-emerald-600 hover:bg-emerald-700 font-bold shadow" : "border-2 font-bold hover:bg-emerald-100"}
                               >
                                 <FileText className="w-4 h-4 mr-1" />
                                 {hasNotes ? "Ver" : "Adicionar"}
@@ -355,7 +355,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                                   <Button variant="outline" onClick={() => setOpenDialog(null)} className="border-2 font-bold">
                                     Cancelar
                                   </Button>
-                                  <Button onClick={() => handleSaveNotes(topic.id)} className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold">
+                                  <Button onClick={() => handleSaveNotes(topic.id)} className="bg-emerald-600 hover:bg-emerald-700 font-bold">
                                     Salvar
                                   </Button>
                                 </div>

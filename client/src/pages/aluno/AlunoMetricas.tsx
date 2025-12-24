@@ -302,7 +302,7 @@ export default function AlunoMetricas() {
             <div className="flex items-center gap-4">
               <div className="relative">
                 
-                <div className="relative bg-emerald-500 p-4 rounded-lg shadow-sm">
+                <div className="relative bg-gray-100 dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                   <BarChart3 className="h-10 w-10 text-white" />
                 </div>
               </div>
@@ -338,11 +338,11 @@ export default function AlunoMetricas() {
 
       {/* Cards de métricas premium */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-sm transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Tempo Total</CardTitle>
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Clock className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -354,11 +354,11 @@ export default function AlunoMetricas() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.15s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-sm transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.15s' }}>
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Questões</CardTitle>
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <BarChart3 className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -370,11 +370,11 @@ export default function AlunoMetricas() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-purple-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-sm transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Acertos</CardTitle>
-            <div className="p-2 bg-purple-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <TrendingUp className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -390,7 +390,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Taxa de Acerto</CardTitle>
-            <div className="p-2 bg-amber-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Target className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -406,7 +406,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Dias de Estudo</CardTitle>
-            <div className="p-2 bg-rose-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Award className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -437,7 +437,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-emerald-500 rounded-xl shadow">
+                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
                 Evolução do Desempenho
@@ -510,7 +510,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-emerald-500 rounded-xl shadow">
+                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                   <BarChart3 className="h-5 w-5 text-white" />
                 </div>
                 Desempenho por Matéria
@@ -552,7 +552,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-purple-500 rounded-xl shadow">
+                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 Taxa de Acerto por Matéria
@@ -563,7 +563,7 @@ export default function AlunoMetricas() {
               {dadosPorMateria.length > 0 ? (
                 <div className="space-y-6">
                   {dadosPorMateria.map((item, index) => (
-                    <div key={index} className="space-y-3 p-4 rounded-lg bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/10 hover:border-purple-500/30 transition-all">
+                    <div key={index} className="space-y-3 p-4 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-purple-500/30 transition-all">
                       <div className="flex items-center justify-between">
                         <span className="font-semibold text-base">{item.materia}</span>
                         <div className="flex items-center gap-3">
@@ -572,12 +572,12 @@ export default function AlunoMetricas() {
                           </span>
                           <span className={`px-4 py-1.5 rounded-full font-semibold text-sm ${
                             item.percentual >= 80
-                              ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
+                              ? "bg-emerald-600 text-white"
                               : item.percentual >= 60
                               ? "bg-emerald-500 text-white"
                               : item.percentual >= 40
-                              ? "bg-amber-500 text-white"
-                              : "bg-gradient-to-r from-red-500 to-rose-500 text-white"
+                              ? "bg-gray-500 text-white"
+                              : "bg-gray-600 text-white"
                           }`}>
                             {item.percentual}%
                           </span>
@@ -587,12 +587,12 @@ export default function AlunoMetricas() {
                         <div
                           className={`h-3 rounded-full transition-all duration-1000 ${
                             item.percentual >= 80
-                              ? "bg-gradient-to-r from-emerald-500 to-green-500"
+                              ? "bg-emerald-500"
                               : item.percentual >= 60
                               ? "bg-emerald-500"
                               : item.percentual >= 40
-                              ? "bg-amber-500"
-                              : "bg-gradient-to-r from-red-500 to-rose-500"
+                              ? "bg-gray-400"
+                              : "bg-gray-500"
                           }`}
                           style={{ width: `${item.percentual}%` }}
                         />
@@ -617,7 +617,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow">
+                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
                   <PieChart className="h-5 w-5 text-white" />
                 </div>
                 Distribuição de Tempo por Matéria/Atividade

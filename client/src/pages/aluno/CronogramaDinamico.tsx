@@ -979,7 +979,7 @@ const getSubjectStyle = (subject: string) => {
                 bg: 'bg-yellow-50',
                 border: 'border-yellow-500',
                 badge: 'bg-yellow-100 text-yellow-800',
-                dot: 'bg-yellow-500'
+                dot: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
             };
         case 'Biologia':
         case 'Física':
@@ -988,7 +988,7 @@ const getSubjectStyle = (subject: string) => {
                 bg: 'bg-green-50',
                 border: 'border-green-500',
                 badge: 'bg-green-100 text-green-800',
-                dot: 'bg-green-500'
+                dot: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
             };
         case 'História':
         case 'Geografia':
@@ -1005,7 +1005,7 @@ const getSubjectStyle = (subject: string) => {
                 bg: 'bg-orange-50',
                 border: 'border-orange-500',
                 badge: 'bg-orange-100 text-orange-800',
-                dot: 'bg-orange-500'
+                dot: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
             };
         case 'Simulado':
             return {
@@ -1202,7 +1202,7 @@ const TopicsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 rounded-lg p-4 shadow-sm">
+            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow-sm">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-5">
                         <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow">
@@ -1230,8 +1230,8 @@ const TopicsStep = ({
                 {Object.entries(statsPerArea).map(([area, data]) => {
                     const percentage = data.total > 0 ? Math.round((data.selected / data.total) * 100) : 0;
                     const colorClasses: {[key: string]: {bg: string, text: string, border: string, progress: string}} = {
-                        'green': { bg: 'bg-green-50', text: 'text-green-600', border: 'border-green-100', progress: 'bg-green-500' },
-                        'amber': { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-100', progress: 'bg-amber-500' },
+                        'green': { bg: 'bg-green-50', text: 'text-green-600', border: 'border-green-100', progress: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' },
+                        'amber': { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-100', progress: 'bg-gray-400' },
                         'purple': { bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-100', progress: 'bg-purple-500' },
                         'blue': { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-100', progress: 'bg-emerald-500' }
                     };
@@ -1264,7 +1264,7 @@ const TopicsStep = ({
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100 hover:shadow-sm transition-shadow">
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow">
+                        <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow">
                             <FileText className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1279,7 +1279,7 @@ const TopicsStep = ({
                             onClick={() => onScheduleTypeChange('extensivo')}
                             className={`px-4 py-3 rounded-lg text-sm font-bold transition-all ${
                                 scheduleType === 'extensivo' 
-                                ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow shadow-emerald-200' 
+                                ? 'bg-emerald-600 text-white shadow' 
                                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                             }`}
                         >
@@ -1289,7 +1289,7 @@ const TopicsStep = ({
                             onClick={() => onScheduleTypeChange('intensivo')}
                             className={`px-4 py-3 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
                                 scheduleType === 'intensivo' 
-                                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow shadow-purple-200' 
+                                ? 'bg-emerald-600 text-white shadow' 
                                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                             }`}
                         >
@@ -1303,7 +1303,7 @@ const TopicsStep = ({
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-gray-100 pb-4">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center shadow">
+                        <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center shadow">
                             <Layers className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1415,7 +1415,7 @@ const TopicsStep = ({
             <div className="flex justify-end">
                 <button 
                     onClick={onNext}
-                    className="group text-gray-900 dark:text-white hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-3 transition-all shadow-sm shadow-emerald-300/50 hover:shadow-sm hover:shadow-emerald-400/50 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group text-gray-900 dark:text-white hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-3 transition-all shadow-sm shadow-sm hover:shadow-sm hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]"
                 >
                     Próximo: Ajustes 
                     <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -1766,7 +1766,7 @@ const SettingsStep = ({
             }`}>
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 bg-gradient-to-br ${gradientColors[colorName] || 'from-gray-500 to-gray-600'} rounded-xl flex items-center justify-center shadow-md`}>
+                        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-md">
                             {React.cloneElement(icon, { className: 'w-5 h-5 text-white' })}
                         </div>
                         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
@@ -1899,7 +1899,7 @@ const SettingsStep = ({
             }`}>
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 bg-gradient-to-br ${gradientColors[colorName] || 'from-gray-500 to-gray-600'} rounded-xl flex items-center justify-center shadow-md`}>
+                        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-md">
                             {React.cloneElement(icon, { className: 'w-5 h-5 text-white' })}
                         </div>
                         <h2 className="text-base font-bold text-gray-800">{title}</h2>
@@ -2091,7 +2091,7 @@ const SettingsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gradient-to-br from-emerald-500 via-green-600 to-teal-600 rounded-lg p-4 shadow-sm">
+            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow-sm">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-5">
                         <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow">
@@ -2118,7 +2118,7 @@ const SettingsStep = ({
             {/* Disponibilidade Semanal */}
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow">
+                    <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center shadow">
                         <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -2190,7 +2190,7 @@ const SettingsStep = ({
             {/* Data Limite */}
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl flex items-center justify-center shadow">
+                    <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow">
                         <CalendarIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -2224,7 +2224,7 @@ const SettingsStep = ({
                 </button>
                 <button 
                     onClick={onGenerate} 
-                    className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-3 transition-all shadow-sm shadow-green-300/50 hover:shadow-sm hover:shadow-green-400/50 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group bg-emerald-600 hover:bg-emerald-700"
                 >
                     <RefreshCw className="w-6 h-6" /> 
                     Gerar Cronograma
@@ -2547,7 +2547,7 @@ const ScheduleView = ({
             )}
 
             {/* Header com gradiente - padrão da plataforma */}
-            <div className="bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 rounded-lg p-4 shadow-sm border border-purple-100/50">
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center shadow shadow-purple-200">

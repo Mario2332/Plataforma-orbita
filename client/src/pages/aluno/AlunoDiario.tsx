@@ -23,7 +23,7 @@ const NIVEIS_CANSACO = [
   { value: "normal", label: "Normal", icon: Battery, color: "bg-emerald-500", level: 75 },
   { value: "cansado", label: "Cansado", icon: Battery, color: "bg-teal-500", level: 50 },
   { value: "muito_cansado", label: "Muito Cansado", icon: Battery, color: "bg-emerald-500", level: 25 },
-  { value: "exausto", label: "Exausto", icon: Battery, color: "bg-indigo-500", level: 10 },
+  { value: "exausto", label: "Exausto", icon: Battery, color: "bg-gray-500", level: 10 },
 ];
 
 export default function AlunoDiario() {
@@ -248,7 +248,7 @@ export default function AlunoDiario() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
 
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 text-white animate-slide-up">
+      <div className="relative overflow-hidden rounded-lg bg-emerald-600 p-4 text-white animate-slide-up">
         <div className="relative flex items-center gap-4">
           <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
             <BookHeart className="w-10 h-10" />
@@ -263,7 +263,7 @@ export default function AlunoDiario() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Heart className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -332,7 +332,7 @@ export default function AlunoDiario() {
                 Fez atividade física hoje? (opcional)
               </Label>
               <div className="grid grid-cols-2 gap-3">
-                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: true })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.atividadeFisica === true ? "bg-emerald-500 text-white border-transparent shadow" : "border-gray-200 hover:border-emerald-300"}`}>
+                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: true })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.atividadeFisica === true ? "bg-emerald-600 text-white border-emerald-600" : "border-gray-200 hover:border-emerald-300"}`}>
                   <div className="text-3xl mb-2">✅</div>
                   <div className="text-sm font-bold">Sim</div>
                 </button>
@@ -346,7 +346,7 @@ export default function AlunoDiario() {
               <Label htmlFor="observacoes" className="font-bold">Observações (opcional)</Label>
               <Textarea id="observacoes" placeholder="Alguma observação sobre o dia? O que te deixou assim?" value={formData.observacoes} onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })} rows={3} className="border-2" />
             </div>
-            <Button type="submit" disabled={isSaving} className="w-full bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-3">
+            <Button type="submit" disabled={isSaving} className="w-full bg-emerald-600 hover:bg-emerald-700 font-bold text-lg py-3">
               {isSaving ? "Salvando..." : "Salvar Registro"}
             </Button>
           </form>
@@ -356,10 +356,10 @@ export default function AlunoDiario() {
       {registros.length > 0 && (
         <>
           {analise?.alertaBurnout && (
-            <Card className="border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900" style={{ animationDelay: '0.1s' }}>
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-orange-500 rounded-xl shadow">
+                  <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <AlertTriangle className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -371,7 +371,7 @@ export default function AlunoDiario() {
               <CardContent>
                 <div className="space-y-3">
                   <p className="text-sm font-semibold">Você registrou <strong>{analise.diasComBaixaEnergia}</strong> dia(s) com baixa energia e <strong>{analise.diasComEstadoNegativo}</strong> dia(s) com estado emocional negativo.</p>
-                  <div className="p-4 bg-white dark:bg-gray-900 rounded-xl border-2 border-orange-200">
+                  <div className="p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
                     <p className="text-sm font-semibold mb-3">💡 Recomendações:</p>
                     <ul className="text-sm space-y-2 list-disc list-inside font-semibold">
                       <li>Considere fazer uma pausa nos estudos</li>
@@ -390,7 +390,7 @@ export default function AlunoDiario() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-emerald-500 rounded-xl shadow">
+                  <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <BarChart3 className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -497,7 +497,7 @@ export default function AlunoDiario() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -553,7 +553,7 @@ export default function AlunoDiario() {
                           )}
                           {registro.atividadeFisica !== undefined && registro.atividadeFisica !== null && (
                             <div className="flex items-center gap-3">
-                              <div className={`w-12 h-12 rounded-xl ${registro.atividadeFisica ? 'bg-emerald-500' : 'bg-gray-500'} flex items-center justify-center text-2xl shadow`}>
+                              <div className={`w-12 h-12 rounded-xl ${registro.atividadeFisica ? 'bg-emerald-600' : 'bg-gray-400'} flex items-center justify-center text-2xl shadow`}>
                                 {registro.atividadeFisica ? '✅' : '❌'}
                               </div>
                               <div>
@@ -564,7 +564,7 @@ export default function AlunoDiario() {
                           )}
                         </div>
                         {registro.observacoes && (
-                          <div className="mt-3 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-lg border border-emerald-200/50">
+                          <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
                             <div className="text-xs text-muted-foreground mb-1 font-bold">Observações:</div>
                             <div className="text-sm font-semibold">{registro.observacoes}</div>
                           </div>

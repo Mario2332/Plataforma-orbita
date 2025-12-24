@@ -190,7 +190,7 @@ export default function CronogramaAnual() {
 
   if (error) {
     return (
-      <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 animate-slide-up">
+      <div className="bg-red-50 border border-gray-200 dark:border-gray-700 rounded-xl p-6 animate-slide-up">
         <p className="text-red-800 font-semibold">{error}</p>
         <button
           onClick={loadCronograma}
@@ -217,13 +217,13 @@ export default function CronogramaAnual() {
             <div className="space-y-3">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-none opacity-50" />
-                  <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
+                  
+                  <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                     <Calendar className="h-10 w-10 text-white" />
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     Cronograma Anual
                   </h1>
                 </div>
@@ -232,7 +232,7 @@ export default function CronogramaAnual() {
             
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-6 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <Printer className="w-5 h-5" />
               Imprimir
@@ -250,7 +250,7 @@ export default function CronogramaAnual() {
           onClick={() => setTipo("extensive")}
           className={`relative overflow-hidden p-6 rounded-lg border-2 font-bold text-lg transition-all hover:shadow-sm hover:-translate-y-1 ${
             tipo === "extensive"
-              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-emerald-500/30"
+              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-sm"
               : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
@@ -263,7 +263,7 @@ export default function CronogramaAnual() {
           onClick={() => setTipo("intensive")}
           className={`relative overflow-hidden p-6 rounded-lg border-2 font-bold text-lg transition-all hover:shadow-sm hover:-translate-y-1 ${
             tipo === "intensive"
-              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-emerald-500/30"
+              ? "bg-emerald-500 text-white border-emerald-400 shadow-sm shadow-sm"
               : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
@@ -275,7 +275,7 @@ export default function CronogramaAnual() {
       </div>
 
       {/* Seletor de cronograma ativo Premium */}
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 p-6 border-2 border-emerald-200/50 dark:border-emerald-800/50 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      <div className="relative overflow-hidden rounded-lg bg-white dark:bg-gray-900" style={{ animationDelay: '0.2s' }}>
         <div className="relative">
           <p className="font-semibold text-lg mb-4 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-emerald-600" />
@@ -309,7 +309,7 @@ export default function CronogramaAnual() {
       </div>
 
       {/* Barra de progresso Premium */}
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 shadow-sm shadow-emerald-500/30 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+      <div className="relative overflow-hidden rounded-lg bg-emerald-600 p-8 shadow-sm shadow-sm animate-slide-up" style={{ animationDelay: '0.3s' }}>
         
         <div className="relative">
           <div className="flex items-center justify-between mb-4">
@@ -347,14 +347,14 @@ export default function CronogramaAnual() {
           <div className="flex gap-3">
             <button
               onClick={expandAll}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <ChevronsDown className="w-4 h-4" />
               Expandir
             </button>
             <button
               onClick={collapseAll}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <ChevronsUp className="w-4 h-4" />
               Retrair
@@ -363,7 +363,7 @@ export default function CronogramaAnual() {
         </div>
         
         {searchTerm.trim() && (
-          <div className="mt-4 p-3 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border-2 border-emerald-200/50 dark:border-emerald-800/50">
+          <div className="mt-4 p-3 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border border-gray-200 dark:border-gray-700/50 dark:border-emerald-800/50">
             {cyclesToDisplay.length > 0 ? (
               <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
                 ✨ Encontrados {cyclesToDisplay.length} ciclo(s) com tópicos correspondentes
@@ -390,7 +390,7 @@ export default function CronogramaAnual() {
             >
               <button
                 onClick={() => toggleCycle(cycle.cycle)}
-                className="w-full bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 px-6 py-5 border-b-2 border-emerald-100 dark:border-emerald-900 flex items-center justify-between hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 transition-all group"
+                className="w-full bg-gray-50 dark:bg-gray-900 px-6 py-5 border-b-2 border-emerald-100 dark:border-emerald-900 flex items-center justify-between hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 transition-all group"
               >
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white bg-clip-text text-transparent">
                   Ciclo {cycle.cycle}
@@ -409,7 +409,7 @@ export default function CronogramaAnual() {
                   {cycle.subjects.map((subject, subjectIdx) => (
                     <div key={subjectIdx}>
                       <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                        <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
+                        <div className="w-1.5 h-6 bg-emerald-500 rounded-full" />
                         {subject.name}
                       </h4>
                       <ul className="space-y-3">

@@ -18,11 +18,11 @@ export default function CronogramaWrapper() {
         
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="p-4 rounded-lg bg-emerald-500 shadow shadow-indigo-500/25">
+            <div className="p-4 rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 shadow-indigo-500/25">
               <Calendar className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-teal-600 to-emerald-600 ">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white ">
                 Cronograma de Estudos
               </h1>
               <p className="text-gray-600 dark:text-gray-400 mt-1">
@@ -42,7 +42,7 @@ export default function CronogramaWrapper() {
               flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all
               ${
                 activeTab === "semanal"
-                  ? "bg-gradient-to-r from-indigo-500 to-teal-500 text-white shadow-md"
+                  ? "bg-emerald-600 text-white shadow-md"
                   : "text-gray-600 hover:bg-gray-100"
               }
             `}
@@ -56,7 +56,7 @@ export default function CronogramaWrapper() {
               flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all
               ${
                 activeTab === "anual-ciclos"
-                  ? "bg-gradient-to-r from-indigo-500 to-teal-500 text-white shadow-md"
+                  ? "bg-emerald-600 text-white shadow-md"
                   : "text-gray-600 hover:bg-gray-100"
               }
             `}

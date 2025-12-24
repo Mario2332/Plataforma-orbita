@@ -409,13 +409,13 @@ export default function AlunoEstudos() {
           <div className="space-y-3">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-none opacity-50" />
-                <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
+                
+                <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                   <BookOpen className="h-10 w-10 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 ">
+                <h1 className="text-2xl font-semibold tracking-tight text-emerald-600 dark:text-emerald-400 ">
                   Estudos
                 </h1>
               </div>
@@ -429,7 +429,7 @@ export default function AlunoEstudos() {
             <DialogTrigger asChild>
               <Button 
                 size="lg"
-                className="relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 hover:from-emerald-600 hover:via-teal-600 hover:to-emerald-600 shadow-sm hover:shadow-sm transition-all duration-300 font-bold border-0"
+                className="relative overflow-hidden bg-emerald-600 hover:bg-emerald-700"
                 onClick={() => {
                   setEditandoId(null);
                   setFormData({
@@ -557,7 +557,7 @@ export default function AlunoEstudos() {
                   <Button 
                     type="submit" 
                     disabled={isSaving}
-                    className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold"
+                    className="bg-emerald-600 hover:bg-emerald-700 font-bold"
                   >
                     {isSaving ? "Salvando..." : "Salvar"}
                   </Button>
@@ -575,8 +575,8 @@ export default function AlunoEstudos() {
             <div>
               <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-emerald-500 rounded-xl blur-md opacity-50" />
-                  <div className="relative p-3 bg-emerald-500 rounded-xl shadow-sm">
+                  
+                  <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <Timer className="h-4 w-4 text-white" />
                   </div>
                 </div>
@@ -592,9 +592,9 @@ export default function AlunoEstudos() {
           <div className="flex flex-col items-center gap-4">
             {/* Display do tempo com design moderno */}
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 rounded-lg blur-none" />
-              <div className="relative px-12 py-8 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-lg border-2 border-emerald-200 dark:border-emerald-800">
-                <div className="text-7xl font-mono font-semibold tabular-nums bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 ">
+              
+              <div className="relative px-12 py-8 bg-white dark:bg-gray-900">
+                <div className="text-7xl font-mono font-semibold tabular-nums text-emerald-600 dark:text-emerald-400 ">
                   {formatarTempo(tempoDecorrido)}
                 </div>
               </div>
@@ -606,7 +606,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={iniciarCronometro} 
                   size="lg"
-                  className="relative overflow-hidden bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 shadow-sm hover:shadow-sm hover:shadow-teal-500/30 transition-all duration-300 font-bold px-8 py-3 text-lg"
+                  className="relative overflow-hidden bg-emerald-600 hover:bg-emerald-700 shadow-sm hover:shadow-sm hover:shadow-sm transition-all duration-300 font-bold px-8 py-3 text-lg"
                 >
                   <Play className="h-4 w-4 mr-2" />
                   Iniciar
@@ -615,7 +615,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={pausarCronometro} 
                   size="lg"
-                  className="relative overflow-hidden bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-700 hover:to-indigo-700 shadow-sm hover:shadow-sm hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-3 text-lg"
+                  className="relative overflow-hidden bg-emerald-600 hover:bg-emerald-700 shadow-sm hover:shadow-sm hover:shadow-sm transition-all duration-300 font-bold px-8 py-3 text-lg"
                 >
                   <Pause className="h-4 w-4 mr-2" />
                   Pausar
@@ -626,7 +626,7 @@ export default function AlunoEstudos() {
                 onClick={resetarCronometro} 
                 size="lg"
                 variant="outline"
-                className="border-2 hover:bg-gradient-to-r hover:from-gray-500 hover:to-gray-600 hover:text-white hover:border-transparent transition-all duration-300 font-bold px-8 py-3 text-lg"
+                className="border-2 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-bold px-8 py-3 text-lg"
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Resetar
@@ -636,7 +636,7 @@ export default function AlunoEstudos() {
                 onClick={salvarCronometro} 
                 size="lg"
                 disabled={tempoDecorrido === 0}
-                className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-indigo-500 hover:from-emerald-600 hover:to-indigo-600 shadow-sm hover:shadow-sm hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-3 text-lg disabled:opacity-50"
+                className="relative overflow-hidden bg-emerald-600 hover:bg-emerald-700"
               >
                 <Save className="h-4 w-4 mr-2" />
                 Salvar Sessão
@@ -646,7 +646,7 @@ export default function AlunoEstudos() {
                 onClick={() => setDialogTempoOpen(true)} 
                 size="lg"
                 variant="outline"
-                className="border-2 border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 font-bold px-8 py-3 text-lg"
+                className="border border-gray-200 dark:border-gray-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-600 transition-all duration-300 font-bold px-8 py-3 text-lg"
               >
                 <Target className="h-4 w-4 mr-2" />
                 Definir Tempo
@@ -656,7 +656,7 @@ export default function AlunoEstudos() {
                 onClick={ativarModoFoco} 
                 size="lg"
                 variant="outline"
-                className="border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white transition-all duration-300 font-bold px-8 py-3 text-lg"
+                className="border border-gray-200 dark:border-gray-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-600 transition-all duration-300 font-bold px-8 py-3 text-lg"
               >
                 <Maximize2 className="h-4 w-4 mr-2" />
                 Modo Foco
@@ -689,8 +689,8 @@ export default function AlunoEstudos() {
             )}
             
             {cronometroAtivo && (
-              <div className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-500/20 to-emerald-500/20 rounded-full border-2 border-teal-500/30 backdrop-blur-sm">
-                <div className="w-3 h-3 bg-teal-500 rounded-full animate-ping" />
+              <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+                <div className="w-3 h-3 bg-emerald-500 rounded-full" />
                 <p className="text-sm font-bold text-teal-700 dark:text-teal-300">
                   Cronômetro ativo - Continue estudando!
                 </p>
@@ -705,8 +705,8 @@ export default function AlunoEstudos() {
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl blur-md opacity-50" />
-              <div className="relative p-3 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl shadow-sm">
+              
+              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <BookOpen className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -719,7 +719,7 @@ export default function AlunoEstudos() {
             <div className="text-center py-16">
               <div className="relative mx-auto w-24 h-24 mb-6">
                 
-                <div className="relative p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center justify-center border-2 border-emerald-200 dark:border-emerald-800">
+                <div className="relative p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center justify-center border border-gray-200 dark:border-gray-700 dark:border-emerald-800">
                   <BookOpen className="h-12 w-12 text-emerald-500" />
                 </div>
               </div>
@@ -793,10 +793,10 @@ export default function AlunoEstudos() {
                     }
                     
                     return (
-                    <TableRow key={estudo.id} className="hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent transition-all">
+                    <TableRow key={estudo.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
                       <TableCell className="font-medium">{dataFormatada}</TableCell>
                       <TableCell>
-                        <span className="px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-indigo-500/20 rounded-full text-sm font-semibold border border-emerald-500/30">
+                        <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm font-semibold border border-gray-200 dark:border-gray-700">
                           {estudo.materia}
                         </span>
                       </TableCell>
@@ -822,7 +822,7 @@ export default function AlunoEstudos() {
                             size="icon"
                             onClick={() => handleEdit(estudo)}
                             title="Editar"
-                            className="hover:bg-emerald-500/20 hover:text-emerald-600 transition-colors"
+                            className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
@@ -831,7 +831,7 @@ export default function AlunoEstudos() {
                             size="icon"
                             onClick={() => handleDelete(estudo.id)}
                             title="Excluir"
-                            className="hover:bg-emerald-500/20 hover:text-emerald-600 transition-colors"
+                            className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -895,7 +895,7 @@ export default function AlunoEstudos() {
             <Button variant="outline" onClick={() => setDialogTempoOpen(false)}>
               Cancelar
             </Button>
-            <Button onClick={definirTempoMeta} className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold">
+            <Button onClick={definirTempoMeta} className="bg-emerald-600 hover:bg-emerald-700 font-bold">
               Definir Meta
             </Button>
           </DialogFooter>
@@ -904,7 +904,7 @@ export default function AlunoEstudos() {
       
       {/* Modo Foco - Tela Cheia */}
       {modoFoco && (
-        <div className="fixed inset-0 z-50 bg-gradient-to-br from-emerald-950 via-indigo-950 to-teal-950 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-gray-950 flex items-center justify-center">
           {/* Elementos decorativos */}
           
           <div className="relative z-10 flex flex-col items-center gap-12 p-4">
@@ -926,8 +926,8 @@ export default function AlunoEstudos() {
             
             {/* Cronômetro gigante */}
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-teal-500/30 to-emerald-500/30 rounded-[4rem] blur-none" />
-              <div className="relative px-20 py-16 bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-[4rem] border-4 border-emerald-400/30 backdrop-blur-none">
+              
+              <div className="relative px-20 py-16 bg-gray-900 rounded-[4rem] border-4 border-emerald-400/30 backdrop-blur-none">
                 <div className="text-[10rem] font-mono font-semibold tabular-nums text-white drop-shadow-sm">
                   {formatarTempo(tempoDecorrido)}
                 </div>
@@ -956,7 +956,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={iniciarCronometro} 
                   size="lg"
-                  className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-sm shadow-teal-500/50 font-bold px-12 py-8 text-2xl rounded-lg"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm font-bold px-12 py-8 text-2xl rounded-lg"
                 >
                   <Play className="h-10 w-10 mr-3" />
                   Iniciar
@@ -965,7 +965,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={pausarCronometro} 
                   size="lg"
-                  className="bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white shadow-sm shadow-emerald-500/50 font-bold px-12 py-8 text-2xl rounded-lg"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-sm font-bold px-12 py-8 text-2xl rounded-lg"
                 >
                   <Pause className="h-10 w-10 mr-3" />
                   Pausar
@@ -985,7 +985,7 @@ export default function AlunoEstudos() {
             
             {/* Indicador de cronômetro ativo */}
             {cronometroAtivo && (
-              <div className="flex items-center gap-3 px-8 py-4 bg-teal-500/20 rounded-full border-2 border-teal-400/30 backdrop-blur-sm">
+              <div className="flex items-center gap-3 px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
                 <div className="w-4 h-4 bg-teal-400 rounded-full animate-ping" />
                 <p className="text-lg font-bold text-teal-100">
                   Cronômetro ativo - Continue estudando!

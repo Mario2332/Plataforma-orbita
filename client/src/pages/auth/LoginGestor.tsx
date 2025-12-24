@@ -61,7 +61,7 @@ export default function LoginGestor() {
                 <Shield className="w-10 h-10 text-white" />
               </div>
             </div>
-            <h1 className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
               Plataforma Órbita
             </h1>
           </div>
@@ -76,7 +76,7 @@ export default function LoginGestor() {
           </p>
 
           <div className="space-y-4 pt-4">
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border-2 border-emerald-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-sm transition-all hover:scale-[1.01]">
               <div className="p-2 bg-emerald-500 rounded-lg shadow">
                 <Settings className="w-6 h-6 text-white" />
               </div>
@@ -86,7 +86,7 @@ export default function LoginGestor() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-teal-50 p-5 rounded-xl border-2 border-teal-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-teal-50 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-sm transition-all hover:scale-[1.01]">
               <div className="p-2 bg-emerald-500 rounded-lg shadow">
                 <Database className="w-6 h-6 text-white" />
               </div>
@@ -96,7 +96,7 @@ export default function LoginGestor() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border-2 border-emerald-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-sm transition-all hover:scale-[1.01]">
               <div className="p-2 bg-emerald-500 rounded-lg shadow">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
@@ -109,8 +109,8 @@ export default function LoginGestor() {
         </div>
 
         {/* Lado Direito - Formulário Premium */}
-        <Card className="w-full shadow-sm border-2 border-emerald-200 bg-white/95 backdrop-blur-sm animate-slide-up">
-          <CardHeader className="bg-gradient-to-r from-emerald-50 to-teal-50 border-b-2 border-emerald-200">
+        <Card className="w-full shadow-sm border border-gray-200 dark:border-gray-700 bg-white/95 backdrop-blur-sm animate-slide-up">
+          <CardHeader className="bg-gray-50 dark:bg-gray-900 border-b-2 border-emerald-200">
             <CardTitle className="text-3xl font-semibold text-gray-900 dark:text-white bg-clip-text text-transparent flex items-center gap-2">
               <Zap className="w-8 h-8 text-emerald-500" />
               Login Gestor
@@ -151,7 +151,7 @@ export default function LoginGestor() {
 
               <Button 
                 type="submit" 
-                className="w-full h-12 bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg shadow hover:shadow-sm transition-all" 
+                className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 font-bold text-lg shadow hover:shadow-sm transition-all" 
                 disabled={loading}
               >
                 {loading ? (

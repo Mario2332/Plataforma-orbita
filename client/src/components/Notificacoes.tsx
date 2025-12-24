@@ -189,7 +189,7 @@ const Notificacoes: React.FC = () => {
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
           {countNaoLidas > 0 && (
-            <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold">
+            <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 text-white text-xs flex items-center justify-center font-bold">
               {countNaoLidas > 9 ? '9+' : countNaoLidas}
             </span>
           )}

@@ -246,12 +246,12 @@ export default function AlunoSimulados() {
         <div className="relative">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-emerald-500 rounded-lg blur-none opacity-50" />
-              <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
+              
+              <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
                 <FileText className="h-10 w-10 text-white" />
               </div>
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 ">
+            <h1 className="text-2xl font-semibold tracking-tight text-emerald-600 dark:text-emerald-400 ">
               Simulados
             </h1>
           </div>
@@ -263,7 +263,7 @@ export default function AlunoSimulados() {
 
       {/* Tabs Premium */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border-2 border-emerald-200/50 dark:border-emerald-800/50 rounded-lg h-auto">
+        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700/50 dark:border-emerald-800/50 rounded-lg h-auto">
           <TabsTrigger 
             value="simulados" 
             className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-sm font-bold text-base py-3 rounded-xl transition-all"
@@ -293,7 +293,7 @@ export default function AlunoSimulados() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-emerald-500 rounded-xl shadow">
+                  <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -303,7 +303,7 @@ export default function AlunoSimulados() {
                 </div>
                 <Dialog open={dialogOpen} onOpenChange={handleDialogClose}>
                   <DialogTrigger asChild>
-                    <Button className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 shadow-sm hover:shadow-sm font-bold hover:-translate-y-0.5 transition-all">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700 shadow-sm hover:shadow-sm font-bold hover:-translate-y-0.5 transition-all">
                       <Plus className="mr-2 h-5 w-5" />
                       Novo Simulado
                     </Button>
@@ -327,10 +327,10 @@ export default function AlunoSimulados() {
 
                       <div className="space-y-4">
                         <h3 className="font-semibold text-lg flex items-center gap-2">
-                          <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
+                          <div className="w-1.5 h-6 bg-emerald-500 rounded-full" />
                           Linguagens e Códigos (45 questões)
                         </h3>
-                        <div className="grid grid-cols-2 gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border-2 border-emerald-200/50">
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border border-gray-200 dark:border-gray-700/50">
                           <div>
                             <Label htmlFor="linguagensAcertos" className="font-semibold">Acertos</Label>
                             <Input id="linguagensAcertos" type="number" min="0" max="45" value={formData.linguagensAcertos} onChange={(e) => setFormData({...formData, linguagensAcertos: Number(e.target.value)})} className="border-2 mt-2" />
@@ -344,10 +344,10 @@ export default function AlunoSimulados() {
 
                       <div className="space-y-4">
                         <h3 className="font-semibold text-lg flex items-center gap-2">
-                          <div className="w-1.5 h-6 bg-gradient-to-b from-teal-500 to-emerald-500 rounded-full" />
+                          <div className="w-1.5 h-6 bg-emerald-500 rounded-full" />
                           Ciências Humanas (45 questões)
                         </h3>
-                        <div className="grid grid-cols-2 gap-4 p-4 bg-teal-50 dark:bg-teal-950/20 rounded-xl border-2 border-teal-200/50">
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-teal-50 dark:bg-teal-950/20 rounded-xl border border-gray-200 dark:border-gray-700/50">
                           <div>
                             <Label htmlFor="humanasAcertos" className="font-semibold">Acertos</Label>
                             <Input id="humanasAcertos" type="number" min="0" max="45" value={formData.humanasAcertos} onChange={(e) => setFormData({...formData, humanasAcertos: Number(e.target.value)})} className="border-2 mt-2" />
@@ -361,10 +361,10 @@ export default function AlunoSimulados() {
 
                       <div className="space-y-4">
                         <h3 className="font-semibold text-lg flex items-center gap-2">
-                          <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-emerald-500 rounded-full" />
+                          <div className="w-1.5 h-6 bg-emerald-500 rounded-full" />
                           Ciências da Natureza (45 questões)
                         </h3>
-                        <div className="grid grid-cols-2 gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border-2 border-emerald-200/50">
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border border-gray-200 dark:border-gray-700/50">
                           <div>
                             <Label htmlFor="naturezaAcertos" className="font-semibold">Acertos</Label>
                             <Input id="naturezaAcertos" type="number" min="0" max="45" value={formData.naturezaAcertos} onChange={(e) => setFormData({...formData, naturezaAcertos: Number(e.target.value)})} className="border-2 mt-2" />
@@ -378,7 +378,7 @@ export default function AlunoSimulados() {
 
                       <div className="space-y-4">
                         <h3 className="font-semibold text-lg flex items-center gap-2">
-                          <div className="w-1.5 h-6 bg-gradient-to-b from-indigo-500 to-emerald-500 rounded-full" />
+                          <div className="w-1.5 h-6 bg-emerald-500 rounded-full" />
                           Matemática (45 questões)
                         </h3>
                         <div className="grid grid-cols-2 gap-4 p-4 bg-indigo-50 dark:bg-indigo-950/20 rounded-xl border-2 border-indigo-200/50">
@@ -395,10 +395,10 @@ export default function AlunoSimulados() {
 
                       <div className="space-y-4">
                         <h3 className="font-semibold text-lg flex items-center gap-2">
-                          <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
+                          <div className="w-1.5 h-6 bg-emerald-500 rounded-full" />
                           Redação
                         </h3>
-                        <div className="grid grid-cols-2 gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border-2 border-emerald-200/50">
+                        <div className="grid grid-cols-2 gap-4 p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl border border-gray-200 dark:border-gray-700/50">
                           <div>
                             <Label htmlFor="redacaoNota" className="font-semibold">Nota (0-1000)</Label>
                             <Input id="redacaoNota" type="number" min="0" max="1000" value={formData.redacaoNota} onChange={(e) => setFormData({...formData, redacaoNota: Number(e.target.value)})} className="border-2 mt-2" />
@@ -437,7 +437,7 @@ export default function AlunoSimulados() {
 
                       <DialogFooter className="gap-2">
                         <Button type="button" variant="outline" onClick={() => handleDialogClose(false)} className="border-2">Cancelar</Button>
-                        <Button type="submit" disabled={isSaving} className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold">
+                        <Button type="submit" disabled={isSaving} className="bg-emerald-600 hover:bg-emerald-700 font-bold">
                           {isSaving ? "Salvando..." : editandoId ? "Atualizar" : "Salvar"}
                         </Button>
                       </DialogFooter>
@@ -499,7 +499,7 @@ export default function AlunoSimulados() {
           <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-500 rounded-xl shadow">
+                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -517,7 +517,7 @@ export default function AlunoSimulados() {
                 <div className="overflow-x-auto rounded-xl border-2">
                   <Table>
                     <TableHeader>
-                      <TableRow className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
+                      <TableRow className="bg-gray-50 dark:bg-gray-900">
                         <TableHead className="font-semibold">Nome</TableHead>
                         <TableHead className="font-semibold">Data</TableHead>
                         <TableHead className="font-semibold">Ling.</TableHead>

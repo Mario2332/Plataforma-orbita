@@ -171,7 +171,7 @@ export default function DashboardLayout({
               window.location.href = getLoginUrl();
             }}
             size="lg"
-            className="w-full bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 shadow hover:shadow-sm transition-all font-bold border-0"
+            className="w-full bg-emerald-600 hover:bg-emerald-700 shadow hover:shadow-sm transition-all font-bold border-0"
           >
             Entrar
           </Button>
@@ -420,7 +420,7 @@ function DashboardLayoutContent({
             </Button>
             
             {/* 🎄 Card de usuário com tema natalino */}
-            <div className="flex items-center gap-3 rounded-xl px-2 py-2 w-full group-data-[collapsible=icon]:justify-center bg-gradient-to-r from-red-50 to-green-50 dark:from-red-950/20 dark:to-green-950/20 border-2 border-red-200 dark:border-red-800 shadow-sm">
+            <div className="flex items-center gap-3 rounded-xl px-2 py-2 w-full group-data-[collapsible=icon]:justify-center bg-gradient-to-r from-red-50 to-green-50 dark:from-red-950/20 dark:to-green-950/20 border border-gray-200 dark:border-gray-700 dark:border-red-800 shadow-sm">
               <div className="relative shrink-0">
                 {/* 🎅 Gorro de Papai Noel - centralizado com a foto */}
                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20 animate-santa-hat" style={{ transform: 'translateX(-50%) rotate(-12deg)' }}>

@@ -281,7 +281,7 @@ export default function AlunoCronograma() {
         <Button
           onClick={handleSave}
           disabled={isSaving}
-          className="bg-gradient-to-r from-indigo-500 via-teal-500 to-emerald-500 hover:from-indigo-600 hover:via-teal-600 hover:to-emerald-600 shadow-sm hover:shadow-sm font-bold"
+          className="bg-emerald-600 hover:bg-emerald-700 shadow-sm hover:shadow-sm font-bold"
         >
           <Save className="mr-2 h-4 w-4" />
           {isSaving ? "Salvando..." : "Salvar"}
@@ -292,15 +292,15 @@ export default function AlunoCronograma() {
       <Card className="border-2 hover:shadow-sm transition-shadow animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-            <div className="p-2 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             Instruções
           </CardTitle>
         </CardHeader>
         <CardContent className="grid md:grid-cols-2 gap-4">
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-r from-indigo-500/5 to-purple-500/5 border-2 border-indigo-500/10">
-            <div className="p-2 bg-indigo-500 rounded-lg">
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <span className="text-white font-bold text-sm">1</span>
             </div>
             <div>
@@ -308,8 +308,8 @@ export default function AlunoCronograma() {
               <p className="text-sm text-muted-foreground">Clique em uma célula para digitar a atividade</p>
             </div>
           </div>
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/10">
-            <div className="p-2 bg-purple-500 rounded-lg">
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <span className="text-white font-bold text-sm">2</span>
             </div>
             <div>
@@ -317,8 +317,8 @@ export default function AlunoCronograma() {
               <p className="text-sm text-muted-foreground">Clique no ícone de paleta para escolher a cor</p>
             </div>
           </div>
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-r from-pink-500/5 to-rose-500/5 border-2 border-pink-500/10">
-            <div className="p-2 bg-pink-500 rounded-lg">
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <span className="text-white font-bold text-sm">3</span>
             </div>
             <div>
@@ -326,8 +326,8 @@ export default function AlunoCronograma() {
               <p className="text-sm text-muted-foreground">Clique com botão direito para copiar e colar</p>
             </div>
           </div>
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-r from-rose-500/5 to-orange-500/5 border-2 border-rose-500/10">
-            <div className="p-2 bg-rose-500 rounded-lg">
+          <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
               <span className="text-white font-bold text-sm">4</span>
             </div>
             <div>
@@ -342,7 +342,7 @@ export default function AlunoCronograma() {
       <Card className="border-2 hover:shadow-sm transition-shadow animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Clock className="h-5 w-5 text-white" />
             </div>
             Grade Semanal
@@ -372,7 +372,7 @@ export default function AlunoCronograma() {
                     const timeKey = `${hour}-${minute}`;
                     return (
                       <tr key={timeKey}>
-                        <td className="border-2 border-border bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-3 text-xs font-mono font-bold sticky left-0 z-10">
+                        <td className="border-2 border-border bg-gray-50 dark:bg-gray-900 p-3 text-xs font-mono font-bold sticky left-0 z-10">
                           {formatTime(hour, minute)}
                         </td>
                         {DAYS.map((_, dayIndex) => {

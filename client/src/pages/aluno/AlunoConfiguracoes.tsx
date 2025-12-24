@@ -234,7 +234,7 @@ export default function AlunoConfiguracoes() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
 
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 text-white animate-slide-up">
+      <div className="relative overflow-hidden rounded-lg bg-emerald-600 p-4 text-white animate-slide-up">
         <div className="relative flex items-center gap-4">
           <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
             <Settings className="w-10 h-10" />
@@ -249,7 +249,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Camera className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -261,7 +261,7 @@ export default function AlunoConfiguracoes() {
         <CardContent>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="relative group">
-              <div className="w-40 h-40 rounded-full overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border-4 border-emerald-200 shadow-sm group-hover:scale-[1.01] transition-transform">
+              <div className="w-40 h-40 rounded-full overflow-hidden bg-gray-50 dark:bg-gray-900 border-4 border-emerald-200 shadow-sm group-hover:scale-[1.01] transition-transform">
                 {photoPreview ? (
                   <img
                     src={photoPreview}
@@ -269,7 +269,7 @@ export default function AlunoConfiguracoes() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-teal-100">
+                  <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">
                     <User className="w-20 h-20 text-emerald-400" />
                   </div>
                 )}
@@ -298,7 +298,7 @@ export default function AlunoConfiguracoes() {
               <Button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={loadingPhoto}
-                className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow border-0"
+                className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700"
               >
                 <Upload className="mr-2 h-4 w-4" />
                 {photoPreview ? "Alterar Foto" : "Adicionar Foto"}
@@ -316,7 +316,7 @@ export default function AlunoConfiguracoes() {
                 </Button>
               )}
 
-              <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
+              <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700/50">
                 <p className="text-sm font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
                   Formatos aceitos: JPG, PNG, WebP (máx. 5MB)
@@ -332,7 +332,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <User className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -383,7 +383,7 @@ export default function AlunoConfiguracoes() {
 
             <Separator className="my-4" />
             
-            <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl border-2 border-purple-200/50">
+            <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700/50">
               <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-300 mb-4 flex items-center gap-2">
                 🎯 Objetivo de Aprovação
               </h3>
@@ -419,7 +419,7 @@ export default function AlunoConfiguracoes() {
             <Button 
               type="submit" 
               disabled={loadingProfile}
-              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow border-0"
+              className="bg-emerald-600 hover:bg-emerald-700"
             >
               {loadingProfile && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loadingProfile ? "Salvando..." : "Salvar Alterações"}
@@ -433,7 +433,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Lock className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -487,7 +487,7 @@ export default function AlunoConfiguracoes() {
             <Button 
               type="submit" 
               disabled={loadingPassword}
-              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow border-0"
+              className="bg-emerald-600 hover:bg-emerald-700"
             >
               {loadingPassword && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loadingPassword ? "Alterando..." : "Alterar Senha"}

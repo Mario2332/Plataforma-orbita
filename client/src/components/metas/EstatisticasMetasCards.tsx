@@ -80,7 +80,7 @@ export function EstatisticasMetasCards({ metas }: EstatisticasMetasCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up">
       {/* Metas Ativas */}
-      <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group">
+      <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-sm group">
         
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -110,7 +110,7 @@ export function EstatisticasMetasCards({ metas }: EstatisticasMetasCardsProps) {
       </Card>
 
       {/* Taxa de Conclusão */}
-      <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-sm hover:shadow-purple-500/20 group">
+      <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-sm hover:shadow-sm group">
         
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">

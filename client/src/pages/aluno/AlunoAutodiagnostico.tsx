@@ -332,11 +332,11 @@ export default function AlunoAutodiagnostico() {
       {/* Elementos decorativos */}
 
       {/* Box Motivacional */}
-      <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-lg animate-slide-up shadow">
+      <Card className="border border-gray-200 dark:border-gray-700 dark:border-emerald-800 bg-white dark:bg-gray-900">
         <CardContent className="pt-4">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
-              <div className="p-3 bg-emerald-500 rounded-xl shadow">
+              <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
             </div>
@@ -353,7 +353,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -377,7 +377,7 @@ export default function AlunoAutodiagnostico() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <Label className="font-bold">Questões Erradas</Label>
-                <Button type="button" onClick={addQuestao} size="sm" className="bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold">
+                <Button type="button" onClick={addQuestao} size="sm" className="bg-emerald-600 hover:bg-emerald-700 font-bold">
                   <Plus className="h-4 w-4 mr-1" />
                   Adicionar Questão
                 </Button>
@@ -473,7 +473,7 @@ export default function AlunoAutodiagnostico() {
                   Cancelar
                 </Button>
               )}
-              <Button type="submit" disabled={isSaving} className="flex-1 bg-emerald-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-3">
+              <Button type="submit" disabled={isSaving} className="flex-1 bg-emerald-600 hover:bg-emerald-700 font-bold text-lg py-3">
                 {isSaving ? "Salvando..." : editandoId ? "Atualizar Autodiagnóstico" : "Salvar Autodiagnóstico"}
               </Button>
             </div>
@@ -486,7 +486,7 @@ export default function AlunoAutodiagnostico() {
         <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-500 rounded-xl shadow">
+              <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
                 <TrendingDown className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -554,7 +554,7 @@ export default function AlunoAutodiagnostico() {
                     {dadosDistribuicao.filter(d => d.quantidade > 0).sort((a, b) => b.quantidade - a.quantidade).map(d => {
                       const percentual = ((d.quantidade / totalErros) * 100).toFixed(1);
                       return (
-                        <div key={d.nome} className="flex items-center gap-2 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-200/50">
+                        <div key={d.nome} className="flex items-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
                           <div className="w-3 h-3 rounded-full" style={{ backgroundColor: d.cor }}></div>
                           <span className="font-semibold"><strong>{d.nome}:</strong> {d.quantidade} ({percentual}%)</span>
                         </div>
@@ -577,7 +577,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-500 rounded-xl shadow">
+            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -637,7 +637,7 @@ export default function AlunoAutodiagnostico() {
                               <div className="overflow-x-auto rounded-xl border-2">
                                 <table className="w-full text-sm">
                                   <thead>
-                                    <tr className="border-b bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
+                                    <tr className="border-b bg-gray-50 dark:bg-gray-900">
                                       <th className="text-left py-2 px-3 font-semibold">Questão</th>
                                       <th className="text-left py-2 px-3 font-semibold">Macroassunto</th>
                                       <th className="text-left py-2 px-3 font-semibold">Microassunto</th>

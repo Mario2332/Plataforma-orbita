@@ -294,7 +294,7 @@ export default function AlunoMetas() {
     const diasRestantes = Math.ceil((dataFim.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
 
     if (meta.status === 'concluida') {
-      return <Badge className="bg-green-500">Concluída</Badge>;
+      return <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Concluída</Badge>;
     }
 
     if (meta.status === 'expirada') {
@@ -310,21 +310,21 @@ export default function AlunoMetas() {
     }
 
     if (diasRestantes <= 3) {
-      return <Badge className="bg-orange-500">3 dias restantes</Badge>;
+      return <Badge className="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300">3 dias restantes</Badge>;
     }
 
     if (diasRestantes <= 7) {
-      return <Badge className="bg-yellow-500">7 dias restantes</Badge>;
+      return <Badge className="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300">7 dias restantes</Badge>;
     }
 
     return <Badge variant="outline">Ativa</Badge>;
   };
 
   const getProgressColor = (progresso: number) => {
-    if (progresso >= 90) return "bg-green-500";
+    if (progresso >= 90) return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400";
     if (progresso >= 75) return "bg-emerald-500";
-    if (progresso >= 50) return "bg-yellow-500";
-    if (progresso >= 25) return "bg-orange-500";
+    if (progresso >= 50) return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
+    if (progresso >= 25) return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
     return "bg-gray-500";
   };
 
@@ -393,7 +393,7 @@ export default function AlunoMetas() {
   return (
     <div className="container mx-auto p-4 space-y-6">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-4 mb-6 border-2 border-primary/20 animate-slide-up">
+      <div className="relative overflow-hidden rounded-lg bg-gray-50 dark:bg-gray-900 p-4 mb-6 border border-gray-200 dark:border-gray-700 animate-slide-up">
         <div className="relative flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-3">
@@ -406,7 +406,7 @@ export default function AlunoMetas() {
           </div>
           <Button 
             onClick={() => handleOpenDialog()} 
-            className="gap-2 bg-gradient-to-r from-primary via-primary to-emerald-600 hover:from-primary/90 hover:via-primary/90 hover:to-emerald-600/90 shadow hover:shadow-sm hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.01] text-white font-semibold"
+            className="gap-2 bg-emerald-600 hover:bg-emerald-700"
             size="lg"
           >
             <Plus className="h-5 w-5" />
@@ -480,7 +480,7 @@ export default function AlunoMetas() {
                   <CardHeader className="relative z-10">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${TIPOS_META[meta.tipo].bgGradient}`}>
+                        <div className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800`}>
                           <Icon className={`h-4 w-4 ${TIPOS_META[meta.tipo].color}`} />
                         </div>
                         <div>
@@ -523,7 +523,7 @@ export default function AlunoMetas() {
                         <span>Até {formatDateBR(meta.dataFim)}</span>
                       </div>
                       {meta.repetirDiariamente && (
-                        <Badge className="bg-emerald-500 shadow">
+                        <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
                           <Flame className="h-3 w-3 mr-1" />
                           Meta diária
                         </Badge>
@@ -548,7 +548,7 @@ export default function AlunoMetas() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleCancelMeta(meta.id)}
-                        className="flex-1 hover:bg-orange-500/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
+                        className="flex-1 hover:bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
                       >
                         <XCircle className="h-4 w-4 mr-2" />
                         Cancelar
@@ -652,13 +652,13 @@ export default function AlunoMetas() {
               return (
                 <Card 
                   key={meta.id}
-                  className="relative overflow-hidden border-2 border-red-200 bg-red-50/30 dark:bg-red-900/10 animate-slide-up"
+                  className="relative overflow-hidden border border-gray-200 dark:border-gray-700 bg-red-50/30 dark:bg-red-900/10 animate-slide-up"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <CardHeader className="relative z-10">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${TIPOS_META[meta.tipo].bgGradient} opacity-50`}>
+                        <div className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800 opacity-50`}>
                           <Icon className={`h-4 w-4 ${TIPOS_META[meta.tipo].color}`} />
                         </div>
                         <div>
@@ -719,7 +719,7 @@ export default function AlunoMetas() {
           <div className="relative">
             <DialogHeader className="relative">
               <DialogTitle className="text-2xl font-bold flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
+                <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
                   <Target className="h-4 w-4 text-primary" />
                 </div>
                 {isEditMode ? 'Editar Meta' : 'Nova Meta'}
@@ -874,7 +874,7 @@ export default function AlunoMetas() {
             </Button>
             <Button 
               onClick={handleSubmit}
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow hover:shadow-sm transition-all duration-300 hover:scale-[1.01]"
+              className="bg-emerald-600 hover:bg-emerald-700"
             >
               {isEditMode ? (
                 <>

@@ -73,10 +73,10 @@ export function CardsProgressoMetasAtivas({ metas }: CardsProgressoMetasAtivasPr
             
             // Cor da barra de progresso
             let progressColor = "bg-gray-500";
-            if (progresso >= 90) progressColor = "bg-green-500";
+            if (progresso >= 90) progressColor = "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400";
             else if (progresso >= 75) progressColor = "bg-emerald-500";
-            else if (progresso >= 50) progressColor = "bg-yellow-500";
-            else if (progresso >= 25) progressColor = "bg-orange-500";
+            else if (progresso >= 50) progressColor = "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
+            else if (progresso >= 25) progressColor = "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
             
             // Cor do badge de dias restantes
             let badgeVariant: "default" | "destructive" | "secondary" = "default";
@@ -84,9 +84,9 @@ export function CardsProgressoMetasAtivas({ metas }: CardsProgressoMetasAtivasPr
             if (diasRestantes <= 1) {
               badgeVariant = "destructive";
             } else if (diasRestantes <= 3) {
-              badgeClass = "bg-orange-500 hover:bg-orange-600";
+              badgeClass = "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-orange-600";
             } else if (diasRestantes <= 7) {
-              badgeClass = "bg-yellow-500 hover:bg-yellow-600";
+              badgeClass = "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-yellow-600";
             }
 
             return (
