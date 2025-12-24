@@ -247,7 +247,7 @@ export default function AlunoSimulados() {
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
               
-              <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
+              <div className="relative bg-emerald-500 rounded-lg shadow-sm">
                 <FileText className="h-10 w-10 text-white" />
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function AlunoSimulados() {
 
       {/* Tabs Premium */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700/50 dark:border-emerald-800/50 rounded-lg h-auto">
+        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50/50 dark:border-emerald-800/50 rounded-lg h-auto">
           <TabsTrigger 
             value="simulados" 
             className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-sm font-bold text-base py-3 rounded-xl transition-all"
@@ -293,7 +293,7 @@ export default function AlunoSimulados() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                  <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -499,7 +499,7 @@ export default function AlunoSimulados() {
           <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div>

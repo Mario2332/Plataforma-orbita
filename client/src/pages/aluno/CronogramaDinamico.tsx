@@ -1203,7 +1203,7 @@ const TopicsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+            <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-4 shadow-sm border border-emerald-100 dark:border-emerald-800">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-5">
                         <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow">
@@ -1265,7 +1265,7 @@ const TopicsStep = ({
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100 hover:shadow-sm transition-shadow">
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow">
+                        <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center shadow">
                             <FileText className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1304,7 +1304,7 @@ const TopicsStep = ({
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-gray-100 pb-4">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center shadow">
+                        <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center shadow">
                             <Layers className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1769,7 +1769,7 @@ const SettingsStep = ({
             }`}>
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-md">
+                        <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center shadow-md">
                             {React.cloneElement(icon, { className: 'w-5 h-5 text-white' })}
                         </div>
                         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
@@ -1902,7 +1902,7 @@ const SettingsStep = ({
             }`}>
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow-md">
+                        <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center shadow-md">
                             {React.cloneElement(icon, { className: 'w-5 h-5 text-white' })}
                         </div>
                         <h2 className="text-base font-bold text-gray-800">{title}</h2>
@@ -2094,7 +2094,7 @@ const SettingsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+            <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-4 shadow-sm border border-emerald-100 dark:border-emerald-800">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-5">
                         <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow">
@@ -2170,7 +2170,7 @@ const SettingsStep = ({
             {/* Disponibilidade Semanal */}
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center shadow">
+                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center shadow">
                         <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -2242,7 +2242,7 @@ const SettingsStep = ({
             {/* Data Limite */}
             <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center shadow">
+                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center shadow">
                         <CalendarIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>

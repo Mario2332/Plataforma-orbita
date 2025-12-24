@@ -297,7 +297,7 @@ export default function AlunoPlanoAcao() {
               value={prova}
               className="border-2 rounded-xl overflow-hidden bg-white dark:bg-gray-900"
             >
-              <AccordionTrigger className="px-4 py-4 hover:no-underline hover:bg-gray-50 dark:hover:bg-gray-800">
+              <AccordionTrigger className="px-4 py-4 hover:no-underline hover:bg-emerald-50 dark:hover:bg-emerald-900/20">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-emerald-500 rounded-lg">
                     <Target className="h-5 w-5 text-white" />
@@ -386,7 +386,7 @@ export default function AlunoPlanoAcao() {
         <Card className="border-2 mt-8">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
                 <CheckCircle2 className="h-5 w-5 text-white" />
               </div>
               <div>

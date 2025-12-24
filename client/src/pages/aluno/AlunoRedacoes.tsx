@@ -465,7 +465,7 @@ export default function AlunoRedacoes() {
           <div className="flex items-center gap-4">
             <div className="relative">
               
-              <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
+              <div className="relative bg-emerald-500 rounded-lg shadow-sm">
                 <PenTool className="h-10 w-10 text-white" />
               </div>
             </div>
@@ -651,7 +651,7 @@ export default function AlunoRedacoes() {
                     </div>
 
                     {/* Nota Total Calculada */}
-                    <div className="p-5 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+                    <div className="p-5 rounded-lg bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-orange-800 dark:text-orange-300">Nota Total (calculada automaticamente)</span>
                         <span className="text-2xl font-semibold text-gray-900 dark:text-white ">{notaTotalForm}</span>
@@ -732,7 +732,7 @@ export default function AlunoRedacoes() {
             <CardTitle className="text-sm font-semibold">Média Geral (últimas 5)</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -764,7 +764,7 @@ export default function AlunoRedacoes() {
             </div>
             <div className="relative">
               
-              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
+              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow-sm">
                 <Award className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -791,7 +791,7 @@ export default function AlunoRedacoes() {
             <CardTitle className="text-sm font-semibold">Redações Produzidas</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                 <FileText className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -890,7 +890,7 @@ export default function AlunoRedacoes() {
           <CardTitle className="text-lg font-bold flex items-center gap-2">
             <div className="relative">
               
-              <div className="relative p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <div className="relative p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
                 <Target className="h-5 w-5 text-white" />
               </div>
             </div>
@@ -921,7 +921,7 @@ export default function AlunoRedacoes() {
                   toast.error("A meta deve estar entre 0 e 1000");
                 }
               }}
-              className="border-2 hover:border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+              className="border-2 hover:border-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all"
             >
               Salvar Meta
             </Button>
@@ -1006,7 +1006,7 @@ export default function AlunoRedacoes() {
               <CardTitle className="text-lg font-bold flex items-center gap-2">
                 <div className="relative">
                   
-                  <div className="relative p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                  <div className="relative p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
                     <Zap className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -1108,8 +1108,8 @@ export default function AlunoRedacoes() {
                       key={item.nome}
                       className={`flex items-center justify-between p-3 rounded-xl transition-all duration-300 ${
                         isPontoFraco 
-                          ? "bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700" 
-                          : "bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                          ? "bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50" 
+                          : "bg-gray-50 dark:bg-gray-900/50 hover:bg-emerald-50 dark:hover:bg-emerald-900/20/50"
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -1148,7 +1148,7 @@ export default function AlunoRedacoes() {
             <div className="flex items-center gap-3">
               <div className="relative">
                 
-                <div className="relative p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                <div className="relative p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
                   <FileText className="h-5 w-5 text-white" />
                 </div>
               </div>
@@ -1159,7 +1159,7 @@ export default function AlunoRedacoes() {
                 </CardDescription>
               </div>
             </div>
-            <div className={`p-2 rounded-full bg-gray-100 dark:bg-gray-800 transition-transform duration-300 ${showHistorico ? 'rotate-180' : ''}`}>
+            <div className={`p-2 rounded-full bg-emerald-100 dark:bg-emerald-900/30 transition-transform duration-300 ${showHistorico ? 'rotate-180' : ''}`}>
               <ChevronDown className="h-5 w-5 text-gray-500" />
             </div>
           </div>
@@ -1198,16 +1198,16 @@ export default function AlunoRedacoes() {
                           <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             C1: {redacao.c1}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             C2: {redacao.c2}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             C3: {redacao.c3}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             C4: {redacao.c4}
                           </span>
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             C5: {redacao.c5}
                           </span>
                         </div>
@@ -1257,7 +1257,7 @@ export default function AlunoRedacoes() {
                             variant="outline"
                             size="sm"
                             onClick={() => handleDelete(redacao.id)}
-                            className="border-2 text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+                            className="border-2 text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -1281,7 +1281,7 @@ export default function AlunoRedacoes() {
             <div className="text-center">
               <div className="relative inline-block mb-6">
                 
-                <div className="relative bg-gray-100 dark:bg-gray-800 p-4 rounded-full">
+                <div className="relative bg-emerald-100 dark:bg-emerald-900/30 p-4 rounded-full">
                   <PenTool className="h-16 w-16 text-orange-500" />
                 </div>
               </div>

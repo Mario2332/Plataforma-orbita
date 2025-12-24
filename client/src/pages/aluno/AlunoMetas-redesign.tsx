@@ -89,7 +89,7 @@ const newMetaCard = `
   <CardHeader>
     <div className="flex items-start justify-between">
       <div className="flex items-start gap-3">
-        <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+        <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
           <Icon className={\`h-4 w-4 \${TIPOS_META[meta.tipo].color}\`} />
         </div>
         <div>

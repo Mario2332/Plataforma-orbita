@@ -410,7 +410,7 @@ export default function AlunoEstudos() {
             <div className="flex items-center gap-4">
               <div className="relative">
                 
-                <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
+                <div className="relative bg-emerald-500 rounded-lg shadow-sm">
                   <BookOpen className="h-10 w-10 text-white" />
                 </div>
               </div>
@@ -576,7 +576,7 @@ export default function AlunoEstudos() {
               <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
                 <div className="relative">
                   
-                  <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                  <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                     <Timer className="h-4 w-4 text-white" />
                   </div>
                 </div>
@@ -689,7 +689,7 @@ export default function AlunoEstudos() {
             )}
             
             {cronometroAtivo && (
-              <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+              <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-200 dark:border-emerald-800">
                 <div className="w-3 h-3 bg-emerald-500 rounded-full" />
                 <p className="text-sm font-bold text-teal-700 dark:text-teal-300">
                   Cronômetro ativo - Continue estudando!
@@ -706,7 +706,7 @@ export default function AlunoEstudos() {
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
             <div className="relative">
               
-              <div className="relative p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                 <BookOpen className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -793,10 +793,10 @@ export default function AlunoEstudos() {
                     }
                     
                     return (
-                    <TableRow key={estudo.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <TableRow key={estudo.id} className="hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all">
                       <TableCell className="font-medium">{dataFormatada}</TableCell>
                       <TableCell>
-                        <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm font-semibold border border-gray-200 dark:border-gray-700">
+                        <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 rounded-full text-sm font-semibold text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                           {estudo.materia}
                         </span>
                       </TableCell>
@@ -822,7 +822,7 @@ export default function AlunoEstudos() {
                             size="icon"
                             onClick={() => handleEdit(estudo)}
                             title="Editar"
-                            className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
@@ -831,7 +831,7 @@ export default function AlunoEstudos() {
                             size="icon"
                             onClick={() => handleDelete(estudo.id)}
                             title="Excluir"
-                            className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -985,7 +985,7 @@ export default function AlunoEstudos() {
             
             {/* Indicador de cronômetro ativo */}
             {cronometroAtivo && (
-              <div className="flex items-center gap-3 px-8 py-4 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+              <div className="flex items-center gap-3 px-8 py-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-200 dark:border-emerald-800">
                 <div className="w-4 h-4 bg-teal-400 rounded-full animate-ping" />
                 <p className="text-lg font-bold text-teal-100">
                   Cronômetro ativo - Continue estudando!

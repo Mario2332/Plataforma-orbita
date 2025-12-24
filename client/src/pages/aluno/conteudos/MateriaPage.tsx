@@ -307,7 +307,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                     const hasNotes = progresso?.anotacoes && progresso.anotacoes.trim().length > 0;
 
                     return (
-                      <tr key={topic.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                      <tr key={topic.id} className="border-b hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all">
                         <td className="p-4 font-semibold">{topic.name}</td>
                         <td className="p-4 text-center">
                           <Badge className={`${getIncidenceBadgeColor(topic.incidenceLevel)} font-bold px-3 py-1`}>

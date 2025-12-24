@@ -336,7 +336,7 @@ export default function AlunoAutodiagnostico() {
         <CardContent className="pt-4">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
-              <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
             </div>
@@ -353,7 +353,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
+            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -486,7 +486,7 @@ export default function AlunoAutodiagnostico() {
         <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
+              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
                 <TrendingDown className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -554,7 +554,7 @@ export default function AlunoAutodiagnostico() {
                     {dadosDistribuicao.filter(d => d.quantidade > 0).sort((a, b) => b.quantidade - a.quantidade).map(d => {
                       const percentual = ((d.quantidade / totalErros) * 100).toFixed(1);
                       return (
-                        <div key={d.nome} className="flex items-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+                        <div key={d.nome} className="flex items-center gap-2 p-3 rounded-lg bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50">
                           <div className="w-3 h-3 rounded-full" style={{ backgroundColor: d.cor }}></div>
                           <span className="font-semibold"><strong>{d.nome}:</strong> {d.quantidade} ({percentual}%)</span>
                         </div>
@@ -577,7 +577,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-xl">
+            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>

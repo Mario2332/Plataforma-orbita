@@ -310,11 +310,11 @@ export default function AlunoMetas() {
     }
 
     if (diasRestantes <= 3) {
-      return <Badge className="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300">3 dias restantes</Badge>;
+      return <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">3 dias restantes</Badge>;
     }
 
     if (diasRestantes <= 7) {
-      return <Badge className="bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300">7 dias restantes</Badge>;
+      return <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">7 dias restantes</Badge>;
     }
 
     return <Badge variant="outline">Ativa</Badge>;
@@ -323,8 +323,8 @@ export default function AlunoMetas() {
   const getProgressColor = (progresso: number) => {
     if (progresso >= 90) return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400";
     if (progresso >= 75) return "bg-emerald-500";
-    if (progresso >= 50) return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
-    if (progresso >= 25) return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300";
+    if (progresso >= 50) return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
+    if (progresso >= 25) return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
     return "bg-gray-500";
   };
 
@@ -480,7 +480,7 @@ export default function AlunoMetas() {
                   <CardHeader className="relative z-10">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800`}>
+                        <div className={`p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30`}>
                           <Icon className={`h-4 w-4 ${TIPOS_META[meta.tipo].color}`} />
                         </div>
                         <div>
@@ -548,7 +548,7 @@ export default function AlunoMetas() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleCancelMeta(meta.id)}
-                        className="flex-1 hover:bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
+                        className="flex-1 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
                       >
                         <XCircle className="h-4 w-4 mr-2" />
                         Cancelar
@@ -658,7 +658,7 @@ export default function AlunoMetas() {
                   <CardHeader className="relative z-10">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800 opacity-50`}>
+                        <div className={`p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 opacity-50`}>
                           <Icon className={`h-4 w-4 ${TIPOS_META[meta.tipo].color}`} />
                         </div>
                         <div>
@@ -719,7 +719,7 @@ export default function AlunoMetas() {
           <div className="relative">
             <DialogHeader className="relative">
               <DialogTitle className="text-2xl font-bold flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+                <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
                   <Target className="h-4 w-4 text-primary" />
                 </div>
                 {isEditMode ? 'Editar Meta' : 'Nova Meta'}

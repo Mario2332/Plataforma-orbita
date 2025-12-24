@@ -218,7 +218,7 @@ export default function CronogramaAnual() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   
-                  <div className="relative bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm">
+                  <div className="relative bg-emerald-500 rounded-lg shadow-sm">
                     <Calendar className="h-10 w-10 text-white" />
                   </div>
                 </div>
@@ -232,7 +232,7 @@ export default function CronogramaAnual() {
             
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-6 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <Printer className="w-5 h-5" />
               Imprimir
@@ -347,14 +347,14 @@ export default function CronogramaAnual() {
           <div className="flex gap-3">
             <button
               onClick={expandAll}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <ChevronsDown className="w-4 h-4" />
               Expandir
             </button>
             <button
               onClick={collapseAll}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <ChevronsUp className="w-4 h-4" />
               Retrair
