@@ -305,7 +305,7 @@ function DashboardLayoutContent({
                         alt="Logo"
                       />
                     </div>
-                    <span className="font-semibold text-lg tracking-tight truncate text-gray-900 dark:text-white bg-clip-text text-transparent">
+                    <span className="font-semibold text-lg tracking-tight truncate text-emerald-600 dark:text-emerald-400">
                       {APP_TITLE}
                     </span>
                   </div>

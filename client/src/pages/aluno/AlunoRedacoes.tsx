@@ -810,54 +810,16 @@ export default function AlunoRedacoes() {
         </Card>
 
         {/* Card Tempo Médio */}
-        <Card className={`relative overflow-hidden border-2 transition-all duration-500 hover:shadow-sm group animate-slide-up ${
-          estatisticas.tempoExcessivo 
-            ? "hover:border-red-500 hover:shadow-red-500/20 border-red-300" 
-            : estatisticas.tempoAlerta 
-              ? "hover:border-yellow-500 hover:shadow-yellow-500/20 border-yellow-300" 
-              : "hover:border-purple-500 hover:shadow-sm"
-        }`} style={{ animationDelay: '0.4s' }}>
-          <div className={`absolute inset-0 bg-gray-100 dark:bg-gray-800 ${
-            estatisticas.tempoExcessivo 
-              ? "from-gray-500/10" 
-              : estatisticas.tempoAlerta 
-                ? "from-yellow-500/10" 
-                : "from-purple-500/10"
-          } via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
-          <div className={`absolute top-0 right-0 w-40 h-40 bg-gray-100 dark:bg-gray-800 ${
-            estatisticas.tempoExcessivo 
-              ? "from-gray-500/20" 
-              : estatisticas.tempoAlerta 
-                ? "from-yellow-500/20" 
-                : "from-purple-500/20"
-          } to-transparent rounded-full blur-none group-hover:scale-150 transition-transform duration-700 pointer-events-none`} />
-          
+        <Card className="relative overflow-hidden border transition-all duration-500 hover:shadow-sm group animate-slide-up hover:border-emerald-500" style={{ animationDelay: '0.4s' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className={`text-sm font-semibold flex items-center gap-2 ${
-              estatisticas.tempoExcessivo ? "text-red-600" : estatisticas.tempoAlerta ? "text-yellow-600" : ""
-            }`}>
+            <CardTitle className="text-sm font-semibold flex items-center gap-2">
               Tempo Médio
               {(estatisticas.tempoExcessivo || estatisticas.tempoAlerta) && (
-                <AlertTriangle className="h-4 w-4" />
+                <AlertTriangle className="h-4 w-4 text-yellow-500" />
               )}
             </CardTitle>
-            <div className="relative">
-              <div className={`absolute inset-0 bg-gray-100 dark:bg-gray-800 ${
-                estatisticas.tempoExcessivo 
-                  ? "from-gray-500 to-gray-600" 
-                  : estatisticas.tempoAlerta 
-                    ? "from-yellow-500 to-amber-500" 
-                    : "from-purple-500 to-pink-500"
-              } rounded-xl blur-md opacity-50`} />
-              <div className={`relative p-3 bg-gray-100 dark:bg-gray-800 ${
-                estatisticas.tempoExcessivo 
-                  ? "from-gray-500 to-gray-600" 
-                  : estatisticas.tempoAlerta 
-                    ? "from-yellow-500 to-amber-500" 
-                    : "from-purple-500 to-pink-500"
-              } rounded-xl shadow-sm`}>
-                <Clock className="h-4 w-4 text-white" />
-              </div>
+            <div className="p-3 bg-emerald-500 rounded-xl shadow-sm">
+              <Clock className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
