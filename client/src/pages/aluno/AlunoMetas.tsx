@@ -94,8 +94,8 @@ const TIPOS_META = {
     icon: Clock,
     unidade: "horas",
     descricao: "Estudar X horas em um período",
-    color: "text-blue-500",
-    bgGradient: "from-blue-500/20 to-blue-600/10",
+    color: "text-emerald-500",
+    bgGradient: "from-emerald-500/20 to-emerald-600/10",
   },
   questoes: {
     nome: "Questões",
@@ -322,7 +322,7 @@ export default function AlunoMetas() {
 
   const getProgressColor = (progresso: number) => {
     if (progresso >= 90) return "bg-green-500";
-    if (progresso >= 75) return "bg-blue-500";
+    if (progresso >= 75) return "bg-emerald-500";
     if (progresso >= 50) return "bg-yellow-500";
     if (progresso >= 25) return "bg-orange-500";
     return "bg-gray-500";
@@ -407,7 +407,7 @@ export default function AlunoMetas() {
           </div>
           <Button 
             onClick={() => handleOpenDialog()} 
-            className="gap-2 bg-gradient-to-r from-primary via-primary to-blue-600 hover:from-primary/90 hover:via-primary/90 hover:to-blue-600/90 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 text-white font-semibold"
+            className="gap-2 bg-gradient-to-r from-primary via-primary to-emerald-600 hover:from-primary/90 hover:via-primary/90 hover:to-emerald-600/90 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 text-white font-semibold"
             size="lg"
           >
             <Plus className="h-5 w-5" />
@@ -526,7 +526,7 @@ export default function AlunoMetas() {
                         <span>Até {formatDateBR(meta.dataFim)}</span>
                       </div>
                       {meta.repetirDiariamente && (
-                        <Badge className="bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg">
+                        <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg">
                           <Flame className="h-3 w-3 mr-1" />
                           Meta diária
                         </Badge>

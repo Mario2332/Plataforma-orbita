@@ -12,12 +12,13 @@ import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyChFCUxaTiXIcNh0PCFORe_FTK8NWV0xLA",
-  authDomain: "plataforma-mentoria-mario.firebaseapp.com",
-  projectId: "plataforma-mentoria-mario",
-  storageBucket: "plataforma-mentoria-mario.firebasestorage.app",
-  messagingSenderId: "1072418970493",
-  appId: "1:1072418970493:web:f5184d12a0e67ba0d70a14"
+  apiKey: "AIzaSyAQkK8xj-WXb0IVBh3rDJbUrJgb0wC75-U",
+  authDomain: "plataforma-orbita.firebaseapp.com",
+  projectId: "plataforma-orbita",
+  storageBucket: "plataforma-orbita.firebasestorage.app",
+  messagingSenderId: "896953885758",
+  appId: "1:896953885758:web:06d5dc91e80cfa13bd9d6f",
+  measurementId: "G-FQL285W4M6"
 };
 
 // Inicializar Firebase

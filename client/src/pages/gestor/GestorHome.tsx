@@ -132,7 +132,7 @@ export default function GestorHome() {
       <div>
         <h1 className="text-3xl font-bold">Dashboard do Gestor</h1>
         <p className="text-muted-foreground mt-1">
-          Bem-vindo à Mentoria Mário Machado, {user?.name}!
+          Bem-vindo à Plataforma Órbita, {user?.name}!
         </p>
       </div>
 
@@ -188,7 +188,7 @@ export default function GestorHome() {
       <Card>
         <CardHeader>
           <CardTitle>Visão Geral</CardTitle>
-          <CardDescription>Resumo da Mentoria Mário Machado</CardDescription>
+          <CardDescription>Resumo da Plataforma Órbita</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">

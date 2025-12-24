@@ -146,11 +146,11 @@ export default function DashboardLayout({
 
   if (!user || !userData) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="flex flex-col items-center gap-8 p-8 max-w-md w-full">
           <div className="flex flex-col items-center gap-6">
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
               <div className="relative">
                 <img
                   src={APP_LOGO}
@@ -160,7 +160,7 @@ export default function DashboardLayout({
               </div>
             </div>
             <div className="text-center space-y-2">
-              <h1 className="text-3xl font-black tracking-tight bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">{APP_TITLE}</h1>
+              <h1 className="text-3xl font-black tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">{APP_TITLE}</h1>
               <p className="text-sm font-semibold text-muted-foreground">
                 Faça login para continuar
               </p>
@@ -171,7 +171,7 @@ export default function DashboardLayout({
               window.location.href = getLoginUrl();
             }}
             size="lg"
-            className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 shadow-lg hover:shadow-2xl transition-all font-bold border-0"
+            className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-lg hover:shadow-2xl transition-all font-bold border-0"
           >
             Entrar
           </Button>
@@ -274,22 +274,22 @@ function DashboardLayoutContent({
       <div className="relative" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
-          className="border-r-2 border-blue-100 dark:border-blue-900/30 bg-gradient-to-b from-white via-blue-50/30 to-cyan-50/30 dark:from-gray-950 dark:via-blue-950/10 dark:to-cyan-950/10"
+          className="border-r-2 border-emerald-100 dark:border-emerald-900/30 bg-gradient-to-b from-white via-emerald-50/30 to-teal-50/30 dark:from-gray-950 dark:via-emerald-950/10 dark:to-teal-950/10"
           disableTransition={isResizing}
         >
-          <SidebarHeader className="h-16 justify-center border-b-2 border-blue-100 dark:border-blue-900/30 bg-gradient-to-r from-blue-500/5 to-cyan-500/5">
+          <SidebarHeader className="h-16 justify-center border-b-2 border-emerald-100 dark:border-emerald-900/30 bg-gradient-to-r from-emerald-500/5 to-teal-500/5">
             <div className="flex items-center gap-3 pl-2 group-data-[collapsible=icon]:px-0 transition-all w-full">
               {isCollapsed ? (
                 <div className="relative h-10 w-10 shrink-0 group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
                   <img
                     src={APP_LOGO}
-                    className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-blue-200 dark:ring-blue-800 shadow-lg"
+                    className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-emerald-200 dark:ring-emerald-800 shadow-lg"
                     alt="Logo"
                   />
                   <button
                     onClick={toggleSidebar}
-                    className="absolute inset-0 flex items-center justify-center bg-blue-500/90 backdrop-blur-sm rounded-xl ring-2 ring-blue-200 dark:ring-blue-800 opacity-0 group-hover:opacity-100 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="absolute inset-0 flex items-center justify-center bg-emerald-500/90 backdrop-blur-sm rounded-xl ring-2 ring-emerald-200 dark:ring-emerald-800 opacity-0 group-hover:opacity-100 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <PanelLeft className="h-5 w-5 text-white" />
                   </button>
@@ -298,22 +298,22 @@ function DashboardLayoutContent({
                 <>
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl blur-md opacity-50"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50"></div>
                       <img
                         src={APP_LOGO}
-                        className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-blue-200 dark:ring-blue-800 shrink-0 shadow-lg"
+                        className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-emerald-200 dark:ring-emerald-800 shrink-0 shadow-lg"
                         alt="Logo"
                       />
                     </div>
-                    <span className="font-black text-lg tracking-tight truncate bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                    <span className="font-black text-lg tracking-tight truncate bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                       {APP_TITLE}
                     </span>
                   </div>
                   <button
                     onClick={toggleSidebar}
-                    className="ml-auto h-9 w-9 flex items-center justify-center hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0 shadow-sm"
+                    className="ml-auto h-9 w-9 flex items-center justify-center hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0 shadow-sm"
                   >
-                    <PanelLeft className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    <PanelLeft className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                   </button>
                 </>
               )}
@@ -343,12 +343,12 @@ function DashboardLayoutContent({
                         tooltip={item.label}
                         className={`h-11 transition-all font-semibold rounded-xl mb-1 ${
                           isActive 
-                            ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg hover:from-blue-600 hover:to-cyan-600" 
-                            : "hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:shadow-md"
+                            ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg hover:from-emerald-600 hover:to-teal-600" 
+                            : "hover:bg-emerald-100 dark:hover:bg-emerald-900/30 hover:shadow-md"
                         }`}
                       >
                         <item.icon
-                          className={`h-5 w-5 ${isActive ? "text-white" : "text-blue-600 dark:text-blue-400"}`}
+                          className={`h-5 w-5 ${isActive ? "text-white" : "text-emerald-600 dark:text-emerald-400"}`}
                         />
                         <span>{item.label}</span>
                         {hasSubmenu && (
@@ -370,8 +370,8 @@ function DashboardLayoutContent({
                                 tooltip={subItem.label}
                                 className={`h-10 text-sm font-semibold rounded-lg ${
                                   isSubActive 
-                                    ? "bg-gradient-to-r from-blue-400 to-cyan-400 text-white shadow-md" 
-                                    : "hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                                    ? "bg-gradient-to-r from-emerald-400 to-teal-400 text-white shadow-md" 
+                                    : "hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
                                 }`}
                               >
                                 <span>{subItem.label}</span>
@@ -387,7 +387,7 @@ function DashboardLayoutContent({
             </SidebarMenu>
           </SidebarContent>
 
-          <SidebarFooter className="p-3 space-y-2 border-t-2 border-blue-100 dark:border-blue-900/30 bg-gradient-to-r from-blue-500/5 to-cyan-500/5">
+          <SidebarFooter className="p-3 space-y-2 border-t-2 border-emerald-100 dark:border-emerald-900/30 bg-gradient-to-r from-emerald-500/5 to-teal-500/5">
             {userData?.role === 'aluno' && !isMobile && (
               <div className="flex justify-center group-data-[collapsible=icon]:justify-center">
                 <Notificacoes />
@@ -397,12 +397,12 @@ function DashboardLayoutContent({
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="w-full justify-start gap-3 h-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-xl font-semibold transition-all hover:shadow-md"
+              className="w-full justify-start gap-3 h-10 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 rounded-xl font-semibold transition-all hover:shadow-md"
             >
               {theme === "dark" ? (
-                <Sun className="h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" />
+                <Sun className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
               ) : (
-                <Moon className="h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" />
+                <Moon className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
               )}
               <span className="group-data-[collapsible=icon]:hidden">
                 {theme === "dark" ? "Modo Claro" : "Modo Escuro"}
@@ -464,7 +464,7 @@ function DashboardLayoutContent({
           </SidebarFooter>
         </Sidebar>
         <div
-          className={`absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-blue-500/50 transition-colors ${isCollapsed ? "hidden" : ""}`}
+          className={`absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-emerald-500/50 transition-colors ${isCollapsed ? "hidden" : ""}`}
           onMouseDown={() => {
             if (isCollapsed) return;
             setIsResizing(true);
@@ -475,12 +475,12 @@ function DashboardLayoutContent({
 
       <SidebarInset>
         {isMobile && (
-          <div className="flex border-b-2 border-blue-100 dark:border-blue-900/30 h-16 items-center justify-between bg-gradient-to-r from-white via-blue-50/30 to-cyan-50/30 dark:from-gray-950 dark:via-blue-950/10 dark:to-cyan-950/10 backdrop-blur supports-[backdrop-filter]:backdrop-blur px-3 sticky top-0 z-40 shadow-sm">
+          <div className="flex border-b-2 border-emerald-100 dark:border-emerald-900/30 h-16 items-center justify-between bg-gradient-to-r from-white via-emerald-50/30 to-teal-50/30 dark:from-gray-950 dark:via-emerald-950/10 dark:to-teal-950/10 backdrop-blur supports-[backdrop-filter]:backdrop-blur px-3 sticky top-0 z-40 shadow-sm">
             <div className="flex items-center gap-3">
-              <SidebarTrigger className="h-10 w-10 rounded-xl bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-900/50 shadow-sm" />
+              <SidebarTrigger className="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 hover:bg-emerald-200 dark:hover:bg-emerald-900/50 shadow-sm" />
               <div className="flex items-center gap-3">
                 <div className="flex flex-col gap-1">
-                  <span className="tracking-tight font-bold text-blue-900 dark:text-blue-100">
+                  <span className="tracking-tight font-bold text-emerald-900 dark:text-emerald-100">
                     {activeMenuItem?.label ?? APP_TITLE}
                   </span>
                 </div>

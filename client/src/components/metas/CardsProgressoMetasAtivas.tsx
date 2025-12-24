@@ -74,7 +74,7 @@ export function CardsProgressoMetasAtivas({ metas }: CardsProgressoMetasAtivasPr
             // Cor da barra de progresso
             let progressColor = "bg-gray-500";
             if (progresso >= 90) progressColor = "bg-green-500";
-            else if (progresso >= 75) progressColor = "bg-blue-500";
+            else if (progresso >= 75) progressColor = "bg-emerald-500";
             else if (progresso >= 50) progressColor = "bg-yellow-500";
             else if (progresso >= 25) progressColor = "bg-orange-500";
             

@@ -41,7 +41,7 @@ export const NIVEIS_RANKING = [
   { id: 1, nome: "Vestibulando Bronze", cor: "from-amber-600 to-amber-800", badge: "bg-amber-600", icon: "🥉" },
   { id: 2, nome: "Vestibulando Prata", cor: "from-gray-400 to-gray-600", badge: "bg-gray-500", icon: "🥈" },
   { id: 3, nome: "Vestibulando Ouro", cor: "from-yellow-400 to-yellow-600", badge: "bg-yellow-500", icon: "🥇" },
-  { id: 4, nome: "Vestibulando Diamante", cor: "from-cyan-400 to-blue-600", badge: "bg-cyan-500", icon: "💎" },
+  { id: 4, nome: "Vestibulando Diamante", cor: "from-teal-400 to-emerald-600", badge: "bg-teal-500", icon: "💎" },
   { id: 5, nome: "Vestibulando Elite", cor: "from-purple-500 to-purple-700", badge: "bg-purple-600", icon: "👑" },
   { id: 6, nome: "Futuro Calouro", cor: "from-emerald-400 to-emerald-600", badge: "bg-emerald-500", icon: "🎓" },
 ];
@@ -207,7 +207,7 @@ export function RankingModal({ open, onOpenChange, alunoAtual }: RankingModalPro
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <Clock className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                      <Clock className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
                       <div>
                         <span className="font-medium">Tempo de estudo:</span>
                         <span className="text-muted-foreground"> 10 pts/hora (máx. 100 pts/dia)</span>

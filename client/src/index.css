@@ -43,15 +43,15 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --primary: var(--color-emerald-700);
+  --primary-foreground: var(--color-emerald-50);
+  --sidebar-primary: var(--color-emerald-600);
+  --sidebar-primary-foreground: var(--color-emerald-50);
+  --chart-1: var(--color-emerald-300);
+  --chart-2: var(--color-emerald-500);
+  --chart-3: var(--color-emerald-600);
+  --chart-4: var(--color-emerald-700);
+  --chart-5: var(--color-emerald-800);
   --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.235 0.015 65);
@@ -79,10 +79,10 @@
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
+  --primary: var(--color-emerald-700);
+  --primary-foreground: var(--color-emerald-50);
+  --sidebar-primary: var(--color-emerald-500);
+  --sidebar-primary-foreground: var(--color-emerald-50);
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.85 0.005 65);
   --card: oklch(0.21 0.006 285.885);
@@ -100,11 +100,11 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --chart-1: var(--color-emerald-300);
+  --chart-2: var(--color-emerald-500);
+  --chart-3: var(--color-emerald-600);
+  --chart-4: var(--color-emerald-700);
+  --chart-5: var(--color-emerald-800);
   --sidebar: oklch(0.21 0.006 285.885);
   --sidebar-foreground: oklch(0.85 0.005 65);
   --sidebar-accent: oklch(0.274 0.006 286.033);
@@ -217,110 +217,4 @@
   animation: spin-slow 3s linear infinite;
 }
 
-/* 🎄 Animações de Natal 🎄 */
-@keyframes snowfall {
-  0% {
-    transform: translateY(-20px) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
 
-@keyframes christmas-glow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(0.8);
-    box-shadow: 0 0 5px currentColor;
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-    box-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
-  }
-}
-
-@keyframes christmas-lights {
-  0%, 100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.3);
-  }
-}
-
-@keyframes santa-hat-wiggle {
-  0%, 100% {
-    transform: rotate(-5deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-}
-
-.animate-snowfall {
-  animation: snowfall linear infinite;
-}
-
-.animate-christmas-glow {
-  animation: christmas-glow 1s ease-in-out infinite;
-}
-
-.animate-christmas-lights {
-  animation: christmas-lights 2s ease-in-out infinite;
-}
-
-.animate-santa-hat {
-  animation: santa-hat-wiggle 2s ease-in-out infinite;
-}
-
-/* Animação de piscar para luzinhas de Natal - SEM MOVIMENTO */
-@keyframes light-blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-
-.animate-light-blink {
-  animation: light-blink 1.5s ease-in-out infinite;
-}
-
-/* Borda Candy Cane com suporte a Dark Mode */
-.candy-cane-border {
-  border: 4px solid transparent !important;
-  border-radius: 12px !important;
-  background: 
-    linear-gradient(#ffffff, #ffffff) padding-box,
-    repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) border-box !important;
-}
-
-.dark .candy-cane-border {
-  background: 
-    linear-gradient(#1f2937, #1f2937) padding-box,
-    repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) border-box !important;
-}
-
-.candy-cane-border-header {
-  border: 4px solid transparent !important;
-  border-radius: 16px !important;
-  background: 
-    linear-gradient(to bottom right, #fef2f2, #ffffff, #f0fdf4) padding-box,
-    repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) border-box !important;
-}
-
-.dark .candy-cane-border-header {
-  background: 
-    linear-gradient(to bottom right, #1f2937, #1f2937, #1f2937) padding-box,
-    repeating-linear-gradient(45deg, #dc2626, #dc2626 10px, #ffffff 10px, #ffffff 20px) border-box !important;
-}

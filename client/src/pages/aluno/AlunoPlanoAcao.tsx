@@ -141,9 +141,9 @@ export default function AlunoPlanoAcao() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="relative">
-          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ export default function AlunoPlanoAcao() {
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 shadow-lg">
+            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-lg">
               <Plus className="mr-2 h-4 w-4" />
               Nova Pendência
             </Button>
@@ -268,13 +268,13 @@ export default function AlunoPlanoAcao() {
             <p className="text-sm text-green-700 dark:text-green-300">Resolvidas</p>
           </CardContent>
         </Card>
-        <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20">
+        <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
           <CardContent className="p-4 text-center">
-            <BookOpen className="h-8 w-8 mx-auto text-blue-500 mb-2" />
-            <p className="text-2xl font-bold text-blue-600">
+            <BookOpen className="h-8 w-8 mx-auto text-emerald-500 mb-2" />
+            <p className="text-2xl font-bold text-emerald-600">
               {planosPendentes.filter(p => p.motivoErro === "interpretacao").length}
             </p>
-            <p className="text-sm text-blue-700 dark:text-blue-300">Interpretação</p>
+            <p className="text-sm text-emerald-700 dark:text-emerald-300">Interpretação</p>
           </CardContent>
         </Card>
         <Card className="border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20">
@@ -299,7 +299,7 @@ export default function AlunoPlanoAcao() {
             >
               <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-gray-50 dark:hover:bg-gray-800">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg">
+                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg">
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div className="text-left">
@@ -331,7 +331,7 @@ export default function AlunoPlanoAcao() {
                           <Badge 
                             variant="outline" 
                             className={plano.motivoErro === "interpretacao" 
-                              ? "bg-blue-100 text-blue-700 border-blue-300" 
+                              ? "bg-emerald-100 text-emerald-700 border-emerald-300" 
                               : "bg-purple-100 text-purple-700 border-purple-300"
                             }
                           >

@@ -73,9 +73,9 @@ export default function PainelGeral() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="relative">
-          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -96,10 +96,10 @@ export default function PainelGeral() {
 
   return (
     <div className="container mx-auto py-6 space-y-8 pb-8 animate-fade-in">
-      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-8 text-white animate-slide-up">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 text-white animate-slide-up">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
         <div className="relative flex items-center gap-4">
@@ -108,7 +108,7 @@ export default function PainelGeral() {
           </div>
           <div>
             <h1 className="text-4xl font-black mb-2">Painel Geral - Controle de Conteúdos</h1>
-            <p className="text-blue-50 text-lg">Visão completa do seu progresso em todas as matérias do ENEM</p>
+            <p className="text-emerald-50 text-lg">Visão completa do seu progresso em todas as matérias do ENEM</p>
           </div>
         </div>
       </div>
@@ -117,12 +117,12 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-2xl transition-all rounded-2xl group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg font-black">Total de Tópicos</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            <div className="text-4xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
               {stats.totalTopicos}
             </div>
             <p className="text-sm text-muted-foreground font-semibold mt-2">
@@ -134,12 +134,12 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-2xl transition-all rounded-2xl group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg font-black">Tópicos Estudados</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
               <CheckCircle2 className="h-5 w-5 text-white" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            <div className="text-4xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
               {stats.topicosEstudados}
             </div>
             <p className="text-sm text-muted-foreground font-semibold mt-2">
@@ -147,7 +147,7 @@ export default function PainelGeral() {
             </p>
             <div className="mt-3 w-full bg-gray-200 rounded-full h-3 overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-1000"
+                className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-1000"
                 style={{ width: `${percentualGeral}%` }}
               />
             </div>
@@ -159,7 +159,7 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
                 <BarChart3 className="w-6 h-6 text-white" />
               </div>
               <CardTitle className="text-2xl font-black">Progresso por Matéria</CardTitle>
@@ -182,7 +182,7 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
                 <PieChartIcon className="w-6 h-6 text-white" />
               </div>
               <CardTitle className="text-2xl font-black">Distribuição de Tópicos Estudados</CardTitle>
@@ -215,7 +215,7 @@ export default function PainelGeral() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <CardTitle className="text-2xl font-black">Resumo por Matéria</CardTitle>
@@ -225,27 +225,27 @@ export default function PainelGeral() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50">
-                  <th className="text-left p-4 font-black text-blue-900">Matéria</th>
-                  <th className="text-center p-4 font-black text-blue-900">Total Tópicos</th>
-                  <th className="text-center p-4 font-black text-blue-900">Estudados</th>
-                  <th className="text-center p-4 font-black text-blue-900">% Estudado</th>
+                <tr className="border-b-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50">
+                  <th className="text-left p-4 font-black text-emerald-900">Matéria</th>
+                  <th className="text-center p-4 font-black text-emerald-900">Total Tópicos</th>
+                  <th className="text-center p-4 font-black text-emerald-900">Estudados</th>
+                  <th className="text-center p-4 font-black text-emerald-900">% Estudado</th>
                 </tr>
               </thead>
               <tbody>
                 {stats.resumoPorMateria.map((m, idx) => (
-                  <tr key={idx} className="border-b hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-cyan-50/50 transition-all">
+                  <tr key={idx} className="border-b hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-teal-50/50 transition-all">
                     <td className="p-4 font-bold">{m.materia}</td>
                     <td className="p-4 text-center font-semibold">{m.topicos}</td>
                     <td className="p-4 text-center font-semibold">{m.estudados}</td>
                     <td className="p-4 text-center">
                       <div className="inline-flex items-center gap-2">
-                        <span className="font-black text-lg bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                        <span className="font-black text-lg bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                           {m.percentualEstudado}%
                         </span>
                         <div className="w-20 bg-gray-200 rounded-full h-2 overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
+                            className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full"
                             style={{ width: `${m.percentualEstudado}%` }}
                           />
                         </div>

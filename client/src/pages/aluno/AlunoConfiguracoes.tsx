@@ -222,9 +222,9 @@ export default function AlunoConfiguracoes() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="relative">
-          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -233,10 +233,10 @@ export default function AlunoConfiguracoes() {
 
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
-      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-8 text-white animate-slide-up">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 text-white animate-slide-up">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
         <div className="relative flex items-center gap-4">
@@ -245,7 +245,7 @@ export default function AlunoConfiguracoes() {
           </div>
           <div>
             <h1 className="text-4xl font-black mb-2">Configurações</h1>
-            <p className="text-blue-50 text-lg">Gerencie suas informações pessoais e preferências de conta</p>
+            <p className="text-emerald-50 text-lg">Gerencie suas informações pessoais e preferências de conta</p>
           </div>
         </div>
       </div>
@@ -253,7 +253,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Camera className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -265,7 +265,7 @@ export default function AlunoConfiguracoes() {
         <CardContent>
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="relative group">
-              <div className="w-40 h-40 rounded-full overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 border-4 border-blue-200 shadow-2xl group-hover:scale-105 transition-transform">
+              <div className="w-40 h-40 rounded-full overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border-4 border-emerald-200 shadow-2xl group-hover:scale-105 transition-transform">
                 {photoPreview ? (
                   <img
                     src={photoPreview}
@@ -273,8 +273,8 @@ export default function AlunoConfiguracoes() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-cyan-100">
-                    <User className="w-20 h-20 text-blue-400" />
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-teal-100">
+                    <User className="w-20 h-20 text-emerald-400" />
                   </div>
                 )}
               </div>
@@ -302,7 +302,7 @@ export default function AlunoConfiguracoes() {
               <Button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={loadingPhoto}
-                className="w-full md:w-auto bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold shadow-lg border-0"
+                className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg border-0"
               >
                 <Upload className="mr-2 h-4 w-4" />
                 {photoPreview ? "Alterar Foto" : "Adicionar Foto"}
@@ -320,8 +320,8 @@ export default function AlunoConfiguracoes() {
                 </Button>
               )}
 
-              <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-xl border-2 border-blue-200/50">
-                <p className="text-sm font-bold text-blue-900 dark:text-blue-300 flex items-center gap-2">
+              <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
+                <p className="text-sm font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
                   Formatos aceitos: JPG, PNG, WebP (máx. 5MB)
                 </p>
@@ -336,7 +336,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <User className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -423,7 +423,7 @@ export default function AlunoConfiguracoes() {
             <Button 
               type="submit" 
               disabled={loadingProfile}
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold shadow-lg border-0"
+              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg border-0"
             >
               {loadingProfile && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loadingProfile ? "Salvando..." : "Salvar Alterações"}
@@ -437,7 +437,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Lock className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -491,7 +491,7 @@ export default function AlunoConfiguracoes() {
             <Button 
               type="submit" 
               disabled={loadingPassword}
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold shadow-lg border-0"
+              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg border-0"
             >
               {loadingPassword && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loadingPassword ? "Alterando..." : "Alterar Senha"}

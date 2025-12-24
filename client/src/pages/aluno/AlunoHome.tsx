@@ -317,7 +317,7 @@ export default function AlunoHome() {
         {[...Array(20)].map((_, i) => (
           <Snowflake 
             key={i}
-            className="absolute text-blue-300/40 dark:text-white/30 animate-snowfall"
+            className="absolute text-emerald-300/40 dark:text-white/30 animate-snowfall"
             style={{
               left: `${(i * 5) + 2}%`,
               top: `-30px`,
@@ -551,22 +551,22 @@ export default function AlunoHome() {
         </Card>
 
         {/* Card Tempo com Progresso */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 group animate-slide-up candy-cane-border" style={{ animationDelay: '0.2s' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group animate-slide-up candy-cane-border" style={{ animationDelay: '0.2s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold">Tempo Total</CardTitle>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
-              <div className="relative p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
+              <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-xl">
                 <Clock className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-baseline gap-2">
-              <div className="text-4xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
+              <div className="text-4xl font-black bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
                 {Math.floor(tempoTotal / 60)}h
               </div>
               <span className="text-2xl font-bold text-muted-foreground">{tempoTotal % 60}min</span>
@@ -653,18 +653,18 @@ export default function AlunoHome() {
       {/* Ações Rápidas Premium */}
       <div className="grid gap-5 md:grid-cols-3 animate-slide-up" style={{ animationDelay: '0.5s' }}>
         <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all duration-500 cursor-pointer group hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-2 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/20" 
+          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-2xl hover:shadow-emerald-500/30 hover:-translate-y-2 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" 
           onClick={() => setLocation("/aluno/estudos")}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/5 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 via-emerald-500/5 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
           
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
-                  <div className="relative p-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl shadow-xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
+                  <div className="relative p-4 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl shadow-xl group-hover:scale-110 transition-transform duration-300">
                     <PlayCircle className="h-8 w-8 text-white" />
                   </div>
                 </div>
@@ -673,7 +673,7 @@ export default function AlunoHome() {
                   <CardDescription className="text-sm mt-1">Registre seu tempo de estudo</CardDescription>
                 </div>
               </div>
-              <ArrowRight className="h-6 w-6 text-muted-foreground group-hover:text-blue-500 group-hover:translate-x-2 transition-all duration-300" />
+              <ArrowRight className="h-6 w-6 text-muted-foreground group-hover:text-emerald-500 group-hover:translate-x-2 transition-all duration-300" />
             </div>
           </CardHeader>
         </Card>
@@ -862,12 +862,12 @@ export default function AlunoHome() {
             )}
             
             {streak > 0 && streak < 7 && (
-              <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950 dark:to-blue-900/30 border-2 border-blue-300 dark:border-blue-700 rounded-2xl shadow-lg">
-                <p className="text-base font-black text-blue-900 dark:text-blue-100 flex items-center gap-2">
+              <div className="p-6 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950 dark:to-emerald-900/30 border-2 border-emerald-300 dark:border-emerald-700 rounded-2xl shadow-lg">
+                <p className="text-base font-black text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
                   <Flame className="h-5 w-5" />
                   {streak} dias de sequência!
                 </p>
-                <p className="text-sm text-blue-700 dark:text-blue-300 mt-2 font-medium">
+                <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-2 font-medium">
                   Continue para formar o hábito de estudar todos os dias
                 </p>
               </div>
@@ -886,12 +886,12 @@ export default function AlunoHome() {
             )}
             
             {analisePorMateria.pontosFortes.length === 0 && analisePorMateria.pontosFracos.length === 0 && (
-              <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950 dark:to-blue-900/30 border-2 border-blue-300 dark:border-blue-700 rounded-2xl shadow-lg">
-                <p className="text-base font-black text-blue-900 dark:text-blue-100 flex items-center gap-2">
+              <div className="p-6 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950 dark:to-emerald-900/30 border-2 border-emerald-300 dark:border-emerald-700 rounded-2xl shadow-lg">
+                <p className="text-base font-black text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
                   <BarChart3 className="h-5 w-5" />
                   Dados insuficientes
                 </p>
-                <p className="text-sm text-blue-700 dark:text-blue-300 mt-2 font-medium">
+                <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-2 font-medium">
                   Faça pelo menos 5 questões de cada matéria para ver sua análise detalhada
                 </p>
               </div>
@@ -936,7 +936,7 @@ export default function AlunoHome() {
                       <p className="text-base font-bold truncate">{estudo.materia}</p>
                       <p className="text-sm text-muted-foreground truncate">{estudo.conteudo}</p>
                       <div className="flex items-center gap-4 mt-2 text-xs font-medium text-muted-foreground">
-                        <span className="flex items-center gap-1.5 px-2 py-1 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                        <span className="flex items-center gap-1.5 px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
                           <Clock className="h-3.5 w-3.5" />
                           {estudo.tempoMinutos}min
                         </span>
@@ -964,7 +964,7 @@ export default function AlunoHome() {
                   <Button 
                     size="lg"
                     onClick={() => setLocation("/aluno/estudos")}
-                    className="bg-gradient-to-r from-primary via-purple-500 to-blue-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-blue-500/90 shadow-xl hover:shadow-2xl transition-all duration-300 font-bold"
+                    className="bg-gradient-to-r from-primary via-purple-500 to-emerald-500 hover:from-primary/90 hover:via-purple-500/90 hover:to-emerald-500/90 shadow-xl hover:shadow-2xl transition-all duration-300 font-bold"
                   >
                     <Plus className="h-5 w-5 mr-2" />
                     Registrar Primeiro Estudo

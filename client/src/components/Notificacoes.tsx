@@ -222,7 +222,7 @@ const Notificacoes: React.FC = () => {
                 <div
                   key={notif.id}
                   className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${
-                    !notif.lida ? 'bg-blue-50 dark:bg-blue-950/20' : ''
+                    !notif.lida ? 'bg-emerald-50 dark:bg-emerald-950/20' : ''
                   }`}
                 >
                   <div className="flex items-start gap-3">

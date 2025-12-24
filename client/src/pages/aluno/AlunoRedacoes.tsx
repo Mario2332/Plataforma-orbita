@@ -580,10 +580,10 @@ export default function AlunoRedacoes() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {/* C1 */}
-                      <div className="space-y-2 p-4 rounded-xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-950/30 dark:to-blue-900/20 dark:border-blue-800">
-                        <Label className="font-semibold text-blue-700 dark:text-blue-400">C1 - Norma Culta</Label>
+                      <div className="space-y-2 p-4 rounded-xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-950/30 dark:to-emerald-900/20 dark:border-emerald-800">
+                        <Label className="font-semibold text-emerald-700 dark:text-emerald-400">C1 - Norma Culta</Label>
                         <Select value={form.c1} onValueChange={(v) => setForm({ ...form, c1: v })}>
-                          <SelectTrigger className="border-2 border-blue-300 bg-white dark:bg-black/20">
+                          <SelectTrigger className="border-2 border-emerald-300 bg-white dark:bg-black/20">
                             <SelectValue placeholder="Selecione a nota" />
                           </SelectTrigger>
                           <SelectContent>
@@ -674,12 +674,12 @@ export default function AlunoRedacoes() {
                     <div className="space-y-3">
                       {/* Repertório da Introdução */}
                       <div className="space-y-2">
-                        <Label className="font-medium text-blue-700 dark:text-blue-400">Repertório da Introdução</Label>
+                        <Label className="font-medium text-emerald-700 dark:text-emerald-400">Repertório da Introdução</Label>
                         <Input
                           placeholder="Ex: Citação de Zygmunt Bauman sobre modernidade líquida"
                           value={form.repertorioIntro}
                           onChange={(e) => setForm({ ...form, repertorioIntro: e.target.value })}
-                          className="border-2 focus:border-blue-500 transition-colors"
+                          className="border-2 focus:border-emerald-500 transition-colors"
                         />
                       </div>
 
@@ -729,22 +729,22 @@ export default function AlunoRedacoes() {
       {/* Dashboard - Cards de Métricas Premium */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {/* Card Média Geral */}
-        <Card className="relative overflow-hidden border-2 hover:border-blue-500 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold">Média Geral (últimas 5)</CardTitle>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
-              <div className="relative p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
+              <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-xl">
                 <TrendingUp className="h-6 w-6 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-4xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">
+              <div className="text-4xl font-black bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
                 {estatisticas.mediaGeral}
               </div>
               <span className="text-lg font-bold text-muted-foreground">pts</span>
@@ -939,18 +939,18 @@ export default function AlunoRedacoes() {
 
       {/* Gráfico de Evolução */}
       {redacoesFiltradas.length > 0 && (
-        <Card className="relative overflow-hidden border-2 hover:border-blue-500 transition-all duration-500 hover:shadow-xl animate-slide-up" style={{ animationDelay: '0.6s' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-transparent pointer-events-none" />
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-xl animate-slide-up" style={{ animationDelay: '0.6s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent pointer-events-none" />
           
           <CardHeader>
             <CardTitle className="text-lg font-bold flex items-center gap-2">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg blur-md opacity-50" />
-                <div className="relative p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg blur-md opacity-50" />
+                <div className="relative p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
               </div>
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Evolução das Notas</span>
+              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Evolução das Notas</span>
             </CardTitle>
             <CardDescription>
               Acompanhe sua trajetória ao longo do tempo
@@ -1200,7 +1200,7 @@ export default function AlunoRedacoes() {
                           </span>
                         </div>
                         <div className="flex flex-wrap gap-2 mt-3">
-                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-900/50 dark:to-blue-800/50 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700">
+                          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-emerald-100 to-emerald-200 dark:from-emerald-900/50 dark:to-emerald-800/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">
                             C1: {redacao.c1}
                           </span>
                           <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-green-100 to-green-200 dark:from-green-900/50 dark:to-green-800/50 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700">
@@ -1222,9 +1222,9 @@ export default function AlunoRedacoes() {
                           <div className="mt-4 space-y-2">
                             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Repertórios Utilizados</p>
                             {redacao.repertorioIntro && (
-                              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
-                                <p className="text-xs font-semibold text-blue-700 dark:text-blue-400 mb-1">📘 Introdução</p>
-                                <p className="text-sm text-blue-900 dark:text-blue-200">{redacao.repertorioIntro}</p>
+                              <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
+                                <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mb-1">📘 Introdução</p>
+                                <p className="text-sm text-emerald-900 dark:text-emerald-200">{redacao.repertorioIntro}</p>
                               </div>
                             )}
                             {redacao.repertorioD1 && (
@@ -1254,7 +1254,7 @@ export default function AlunoRedacoes() {
                             variant="outline"
                             size="sm"
                             onClick={() => handleEdit(redacao)}
-                            className="border-2 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all"
+                            className="border-2 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all"
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>

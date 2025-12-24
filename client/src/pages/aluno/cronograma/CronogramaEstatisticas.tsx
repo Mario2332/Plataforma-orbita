@@ -49,15 +49,15 @@ const SUBJECT_GROUPS: Record<string, string[]> = {
 
 // Paleta azul padronizada
 const AREA_COLORS: Record<string, string> = {
-  'Matemática': 'bg-blue-500',
+  'Matemática': 'bg-emerald-500',
   'Física': 'bg-indigo-500',
-  'Química': 'bg-cyan-500',
-  'Biologia': 'bg-sky-500',
-  'História': 'bg-blue-600',
-  'Geografia': 'bg-cyan-600',
+  'Química': 'bg-teal-500',
+  'Biologia': 'bg-emerald-500',
+  'História': 'bg-emerald-600',
+  'Geografia': 'bg-teal-600',
   'Filosofia': 'bg-indigo-600',
-  'Sociologia': 'bg-sky-600',
-  'Linguagens': 'bg-blue-400'
+  'Sociologia': 'bg-emerald-600',
+  'Linguagens': 'bg-emerald-400'
 };
 
 export default function CronogramaEstatisticas() {
@@ -164,9 +164,9 @@ export default function CronogramaEstatisticas() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="relative">
-          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -190,24 +190,24 @@ export default function CronogramaEstatisticas() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500/20 via-cyan-500/10 to-sky-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
         <div className="relative">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-              <div className="relative bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-4 rounded-2xl shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
+              <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-2xl shadow-2xl">
                 <BarChart3 className="h-10 w-10 text-white" />
               </div>
             </div>
             <div>
-              <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-cyan-600 to-sky-600 bg-clip-text text-transparent animate-gradient">
+              <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient">
                 Estatísticas
               </h1>
             </div>
@@ -224,8 +224,8 @@ export default function CronogramaEstatisticas() {
           onClick={() => setTipo("extensive")}
           className={`relative overflow-hidden p-6 rounded-2xl border-2 font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1 ${
             tipo === "extensive"
-              ? "bg-gradient-to-br from-blue-500 to-cyan-500 text-white border-blue-400 shadow-xl shadow-blue-500/30"
-              : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-blue-300"
+              ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-emerald-400 shadow-xl shadow-emerald-500/30"
+              : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
@@ -238,8 +238,8 @@ export default function CronogramaEstatisticas() {
           onClick={() => setTipo("intensive")}
           className={`relative overflow-hidden p-6 rounded-2xl border-2 font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1 ${
             tipo === "intensive"
-              ? "bg-gradient-to-br from-blue-500 to-cyan-500 text-white border-blue-400 shadow-xl shadow-blue-500/30"
-              : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-blue-300"
+              ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-emerald-400 shadow-xl shadow-emerald-500/30"
+              : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
@@ -251,7 +251,7 @@ export default function CronogramaEstatisticas() {
       </div>
 
       {/* Card de Progresso Total Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-10 shadow-2xl shadow-blue-500/30 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-10 shadow-2xl shadow-emerald-500/30 animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
         
@@ -263,7 +263,7 @@ export default function CronogramaEstatisticas() {
             </div>
           </div>
           <div className="text-7xl font-black mb-4 text-white drop-shadow-2xl">{stats.total.percentage}%</div>
-          <p className="text-blue-100 text-xl font-semibold mb-8">
+          <p className="text-emerald-100 text-xl font-semibold mb-8">
             {stats.total.completed} de {stats.total.total} tópicos concluídos
           </p>
           <div className="w-full bg-white/20 rounded-full h-5 backdrop-blur-sm">
@@ -278,7 +278,7 @@ export default function CronogramaEstatisticas() {
       {/* Estatísticas por Área Premium */}
       <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl p-8 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <h3 className="text-2xl font-black mb-6 flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+          <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
             <PieChart className="w-6 h-6 text-white" />
           </div>
           Progresso por Área de Conhecimento
@@ -293,12 +293,12 @@ export default function CronogramaEstatisticas() {
                 className="relative overflow-hidden border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:shadow-2xl hover:-translate-y-1 transition-all group"
                 style={{ animationDelay: `${0.4 + index * 0.05}s` }}
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-full blur-2xl group-hover:scale-150 transition-transform" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-full blur-2xl group-hover:scale-150 transition-transform" />
                 
                 <div className="relative">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="font-black text-lg">{area}</h4>
-                    <span className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                    <span className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                       {data.percentage}%
                     </span>
                   </div>
@@ -320,7 +320,7 @@ export default function CronogramaEstatisticas() {
       {/* Estatísticas por Ciclo Premium */}
       <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl p-8 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.4s' }}>
         <h3 className="text-2xl font-black mb-6 flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+          <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
             <TrendingUp className="w-6 h-6 text-white" />
           </div>
           Progresso por Ciclo
@@ -332,18 +332,18 @@ export default function CronogramaEstatisticas() {
               className="relative overflow-hidden border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-0.5 transition-all group"
               style={{ animationDelay: `${0.5 + index * 0.05}s` }}
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-full blur-2xl group-hover:scale-150 transition-transform" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-full blur-2xl group-hover:scale-150 transition-transform" />
               
               <div className="relative">
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-black text-lg">Ciclo {cycle.cycle}</span>
-                  <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                  <span className="text-2xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                     {cycle.percentage}%
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3.5 mb-3 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-blue-500 to-cyan-500 h-3.5 rounded-full transition-all duration-500 shadow-lg"
+                    className="bg-gradient-to-r from-emerald-500 to-teal-500 h-3.5 rounded-full transition-all duration-500 shadow-lg"
                     style={{ width: `${cycle.percentage}%` }}
                   />
                 </div>

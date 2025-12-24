@@ -318,9 +318,9 @@ export default function AlunoAutodiagnostico() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="relative">
-          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -330,21 +330,21 @@ export default function AlunoAutodiagnostico() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
       {/* Box Motivacional */}
-      <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 rounded-2xl animate-slide-up shadow-lg">
+      <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-2xl animate-slide-up shadow-lg">
         <CardContent className="pt-6">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
-              <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="flex-1">
               <p className="text-base leading-relaxed text-gray-700 dark:text-gray-200">
-                <strong className="font-black text-blue-700 dark:text-blue-400">Não encare seus erros como fracasso, mas sim como o GPS da sua aprovação.</strong> Cada questão errada mostra uma lacuna específica no seu conhecimento, funcionando como um mapa que ajuda a direcionar corretamente sua energia. Ao registrar seus erros aqui e corrigi-los, você transforma uma falha momentânea em retenção de longo prazo e garante que o seu esforço seja cirúrgico. <strong className="font-black text-cyan-700 dark:text-cyan-400">Quem mapeia o erro hoje, maximiza as chances de acerto no ENEM.</strong>
+                <strong className="font-black text-emerald-700 dark:text-emerald-400">Não encare seus erros como fracasso, mas sim como o GPS da sua aprovação.</strong> Cada questão errada mostra uma lacuna específica no seu conhecimento, funcionando como um mapa que ajuda a direcionar corretamente sua energia. Ao registrar seus erros aqui e corrigi-los, você transforma uma falha momentânea em retenção de longo prazo e garante que o seu esforço seja cirúrgico. <strong className="font-black text-teal-700 dark:text-teal-400">Quem mapeia o erro hoje, maximiza as chances de acerto no ENEM.</strong>
               </p>
             </div>
           </div>
@@ -355,7 +355,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -379,7 +379,7 @@ export default function AlunoAutodiagnostico() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <Label className="font-bold">Questões Erradas</Label>
-                <Button type="button" onClick={addQuestao} size="sm" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold">
+                <Button type="button" onClick={addQuestao} size="sm" className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold">
                   <Plus className="h-4 w-4 mr-1" />
                   Adicionar Questão
                 </Button>
@@ -391,7 +391,7 @@ export default function AlunoAutodiagnostico() {
                   <Card key={questao.id} className="p-4 border-2 hover:shadow-lg transition-shadow">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Questão {originalIndex + 1}</span>
+                        <span className="text-sm font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Questão {originalIndex + 1}</span>
                         {questoes.length > 1 && (
                           <Button type="button" onClick={() => removeQuestao(originalIndex)} size="sm" variant="ghost" className="text-red-500 hover:text-red-700 hover:bg-red-100">
                             <Trash2 className="h-4 w-4" />
@@ -454,7 +454,7 @@ export default function AlunoAutodiagnostico() {
                               <Input type="file" accept="image/jpeg,image/png,image/webp" onChange={(e) => { const file = e.target.files?.[0]; if (file) handleImageUpload(originalIndex, file); }} disabled={uploadingImages[originalIndex]} className="cursor-pointer border-2" />
                               {uploadingImages[originalIndex] && (
                                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-emerald-500"></div>
                                   Enviando...
                                 </div>
                               )}
@@ -475,7 +475,7 @@ export default function AlunoAutodiagnostico() {
                   Cancelar
                 </Button>
               )}
-              <Button type="submit" disabled={isSaving} className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold text-lg py-6">
+              <Button type="submit" disabled={isSaving} className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-6">
                 {isSaving ? "Salvando..." : editandoId ? "Atualizar Autodiagnóstico" : "Salvar Autodiagnóstico"}
               </Button>
             </div>
@@ -488,7 +488,7 @@ export default function AlunoAutodiagnostico() {
         <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
                 <TrendingDown className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -556,7 +556,7 @@ export default function AlunoAutodiagnostico() {
                     {dadosDistribuicao.filter(d => d.quantidade > 0).sort((a, b) => b.quantidade - a.quantidade).map(d => {
                       const percentual = ((d.quantidade / totalErros) * 100).toFixed(1);
                       return (
-                        <div key={d.nome} className="flex items-center gap-2 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border border-blue-200/50">
+                        <div key={d.nome} className="flex items-center gap-2 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border border-emerald-200/50">
                           <div className="w-3 h-3 rounded-full" style={{ backgroundColor: d.cor }}></div>
                           <span className="font-semibold"><strong>{d.nome}:</strong> {d.quantidade} ({percentual}%)</span>
                         </div>
@@ -579,7 +579,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -603,7 +603,7 @@ export default function AlunoAutodiagnostico() {
                     <AccordionTrigger className="hover:no-underline">
                       <div className="flex items-center justify-between w-full pr-4">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg">
+                          <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg">
                             <FileText className="h-5 w-5 text-white" />
                           </div>
                           <div className="text-left">
@@ -639,7 +639,7 @@ export default function AlunoAutodiagnostico() {
                               <div className="overflow-x-auto rounded-xl border-2">
                                 <table className="w-full text-sm">
                                   <thead>
-                                    <tr className="border-b bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20">
+                                    <tr className="border-b bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
                                       <th className="text-left py-2 px-3 font-black">Questão</th>
                                       <th className="text-left py-2 px-3 font-black">Macroassunto</th>
                                       <th className="text-left py-2 px-3 font-black">Microassunto</th>
@@ -651,7 +651,7 @@ export default function AlunoAutodiagnostico() {
                                       const motivo = getMotivoErro(q.motivoErro);
                                       return (
                                         <>
-                                          <tr key={idx} className="border-b last:border-0 hover:bg-blue-50 dark:hover:bg-blue-950/20 transition-colors">
+                                          <tr key={idx} className="border-b last:border-0 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 transition-colors">
                                             <td className="py-2 px-3 font-semibold">{q.numeroQuestao}</td>
                                             <td className="py-2 px-3">{q.macroassunto}</td>
                                             <td className="py-2 px-3">{q.microassunto}</td>
@@ -662,7 +662,7 @@ export default function AlunoAutodiagnostico() {
                                             </td>
                                           </tr>
                                           {q.anotacoes && (
-                                            <tr key={`${idx}-anotacoes`} className="border-b last:border-0 bg-blue-50/50 dark:bg-blue-950/10">
+                                            <tr key={`${idx}-anotacoes`} className="border-b last:border-0 bg-emerald-50/50 dark:bg-emerald-950/10">
                                               <td colSpan={4} className="py-2 px-3">
                                                 <div className="text-xs">
                                                   <span className="font-bold text-muted-foreground">Anotações:</span>
@@ -672,10 +672,10 @@ export default function AlunoAutodiagnostico() {
                                             </tr>
                                           )}
                                           {q.imagemUrl && (
-                                            <tr key={`${idx}-imagem`} className="border-b last:border-0 bg-blue-50/50 dark:bg-blue-950/10">
+                                            <tr key={`${idx}-imagem`} className="border-b last:border-0 bg-emerald-50/50 dark:bg-emerald-950/10">
                                               <td colSpan={4} className="py-2 px-3">
                                                 <div className="text-xs space-y-2">
-                                                  <button onClick={() => { const key = `${auto.id}-${idx}`; setExpandedImages(prev => ({ ...prev, [key]: !prev[key] })); }} className="flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">
+                                                  <button onClick={() => { const key = `${auto.id}-${idx}`; setExpandedImages(prev => ({ ...prev, [key]: !prev[key] })); }} className="flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
                                                     <ImageIcon className="h-4 w-4" />
                                                     {expandedImages[`${auto.id}-${idx}`] ? 'Ocultar' : 'Ver'} Imagem da Questão
                                                     <span className="text-xs">{expandedImages[`${auto.id}-${idx}`] ? '▲' : '▼'}</span>
@@ -719,8 +719,8 @@ export default function AlunoAutodiagnostico() {
             </Accordion>
           ) : (
             <div className="text-center py-12">
-              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full flex items-center justify-center">
-                <FileText className="w-12 h-12 text-blue-500" />
+              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full flex items-center justify-center">
+                <FileText className="w-12 h-12 text-emerald-500" />
               </div>
               <p className="text-lg font-semibold text-gray-600 dark:text-gray-400">Nenhum autodiagnóstico registrado</p>
               <p className="text-sm text-muted-foreground mt-2">Comece criando seu primeiro autodiagnóstico acima!</p>

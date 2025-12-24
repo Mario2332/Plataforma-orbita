@@ -1023,10 +1023,10 @@ const getSubjectStyle = (subject: string) => {
             };
         case 'Redação':
             return {
-                bg: 'bg-blue-50', 
-                border: 'border-blue-500',
-                badge: 'bg-blue-100 text-blue-800',
-                dot: 'bg-blue-500'
+                bg: 'bg-emerald-50', 
+                border: 'border-emerald-500',
+                badge: 'bg-emerald-100 text-emerald-800',
+                dot: 'bg-emerald-500'
             };
         case 'Correção de Simulado':
             return {
@@ -1087,7 +1087,7 @@ const StepIndicator = ({ step }: { step: number }) => {
         {/* Linha de conexão */}
         <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 z-0" style={{ left: '10%', right: '10%' }} />
         <div 
-          className="absolute top-5 h-0.5 bg-blue-600 z-0 transition-all duration-500" 
+          className="absolute top-5 h-0.5 bg-emerald-600 z-0 transition-all duration-500" 
           style={{ left: '10%', width: `${Math.max(0, (step - 1) * 26.67)}%` }} 
         />
         
@@ -1100,15 +1100,15 @@ const StepIndicator = ({ step }: { step: number }) => {
             <div key={s.num} className="flex flex-col items-center z-10">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold mb-2 transition-all duration-300 ${
                 isActive 
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-110' 
+                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-110' 
                   : isCompleted 
-                    ? 'bg-blue-600 text-white' 
+                    ? 'bg-emerald-600 text-white' 
                     : 'bg-gray-100 text-gray-400 border border-gray-200'
               }`}>
                 {isCompleted ? <Check className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
               </div>
               <span className={`text-xs font-semibold uppercase tracking-wide hidden sm:block transition-colors ${
-                isActive ? 'text-blue-600' : isCompleted ? 'text-blue-600' : 'text-gray-400'
+                isActive ? 'text-emerald-600' : isCompleted ? 'text-emerald-600' : 'text-gray-400'
               }`}>
                 {s.label}
               </span>
@@ -1202,7 +1202,7 @@ const TopicsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-2xl p-8 shadow-xl">
+            <div className="bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 rounded-2xl p-8 shadow-xl">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div className="flex items-center gap-5">
                         <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
@@ -1210,15 +1210,15 @@ const TopicsStep = ({
                         </div>
                         <div>
                             <h1 className="text-3xl font-bold text-white">Seleção de Matérias</h1>
-                            <p className="text-blue-100 text-sm mt-1">Personalize seu cronograma escolhendo os conteúdos e dificuldades 📚</p>
+                            <p className="text-emerald-100 text-sm mt-1">Personalize seu cronograma escolhendo os conteúdos e dificuldades 📚</p>
                         </div>
                     </div>
                     <div className="bg-white/10 backdrop-blur-sm px-6 py-4 rounded-2xl border border-white/20">
                         <div className="text-center">
-                            <span className="text-xs font-medium text-blue-100 uppercase tracking-wider block">Tópicos Selecionados</span>
+                            <span className="text-xs font-medium text-emerald-100 uppercase tracking-wider block">Tópicos Selecionados</span>
                             <div className="flex items-baseline justify-center gap-1 mt-1">
                                 <span className="text-4xl font-bold text-white">{selectedTopicsCount}</span>
-                                <span className="text-blue-200 text-lg font-medium">/ {totalTopics}</span>
+                                <span className="text-emerald-200 text-lg font-medium">/ {totalTopics}</span>
                             </div>
                         </div>
                     </div>
@@ -1233,7 +1233,7 @@ const TopicsStep = ({
                         'green': { bg: 'bg-green-50', text: 'text-green-600', border: 'border-green-100', progress: 'bg-green-500' },
                         'amber': { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-100', progress: 'bg-amber-500' },
                         'purple': { bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-100', progress: 'bg-purple-500' },
-                        'blue': { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-100', progress: 'bg-blue-500' }
+                        'blue': { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-100', progress: 'bg-emerald-500' }
                     };
                     const colors = colorClasses[data.color];
                     
@@ -1279,7 +1279,7 @@ const TopicsStep = ({
                             onClick={() => onScheduleTypeChange('extensivo')}
                             className={`px-6 py-3 rounded-lg text-sm font-bold transition-all ${
                                 scheduleType === 'extensivo' 
-                                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-200' 
+                                ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-200' 
                                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                             }`}
                         >
@@ -1303,7 +1303,7 @@ const TopicsStep = ({
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-gray-100 pb-4">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
                             <Layers className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1332,7 +1332,7 @@ const TopicsStep = ({
                                             const allIndices = Object.values(grouped[subject]).flat().map((t: any) => t.idx);
                                             onToggleAll(subject, allIndices);
                                         }}
-                                        className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 rounded transition-colors"
+                                        className="text-xs font-medium text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 px-2 py-1 rounded transition-colors"
                                     >
                                         Selecionar/Remover Tudo
                                     </button>
@@ -1340,8 +1340,8 @@ const TopicsStep = ({
                                 </div>
                             </summary>
                             
-                            <div className="bg-blue-50 px-4 py-3 border-t border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                                <div className="flex items-center gap-2 text-sm text-blue-800">
+                            <div className="bg-emerald-50 px-4 py-3 border-t border-emerald-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <div className="flex items-center gap-2 text-sm text-emerald-800">
                                     <Layers className="w-4 h-4" />
                                     <span className="font-semibold">Definir dificuldade geral para {subject}:</span>
                                 </div>
@@ -1351,9 +1351,9 @@ const TopicsStep = ({
                                         min="0" max="4" 
                                         value={bulkDiffs[subject] ?? 2} 
                                         onChange={(e) => handleBulkChange(subject, parseInt(e.target.value))}
-                                        className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                        className="w-full h-2 bg-emerald-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
                                     />
-                                    <span className="text-xs font-bold text-blue-700 w-24 text-right">
+                                    <span className="text-xs font-bold text-emerald-700 w-24 text-right">
                                         {diffLabels[bulkDiffs[subject] ?? 2]}
                                     </span>
                                 </div>
@@ -1361,8 +1361,8 @@ const TopicsStep = ({
 
                             <div className="p-4 bg-white border-t border-gray-200 space-y-4">
                                 {Object.keys(grouped[subject]).map(front => (
-                                    <div key={front} className="ml-2 pl-4 border-l-2 border-blue-100">
-                                        <h4 className="font-medium text-sm text-blue-600 mb-3 uppercase tracking-wide">{front}</h4>
+                                    <div key={front} className="ml-2 pl-4 border-l-2 border-emerald-100">
+                                        <h4 className="font-medium text-sm text-emerald-600 mb-3 uppercase tracking-wide">{front}</h4>
                                         <div className="space-y-3">
                                             {grouped[subject][front].map((topic: any) => {
                                                 const pref = topicPrefs[`topic-${topic.idx}`];
@@ -1377,7 +1377,7 @@ const TopicsStep = ({
                                                                 type="checkbox" 
                                                                 checked={pref.included}
                                                                 onChange={() => onToggle(topic.idx)}
-                                                                className="mt-1 w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                                                                className="mt-1 w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500"
                                                             />
                                                             <div className="flex flex-col">
                                                                 <span className={`text-sm ${!pref.included ? 'text-gray-400 line-through' : 'text-gray-700'}`}>
@@ -1395,7 +1395,7 @@ const TopicsStep = ({
                                                                     min="0" max="4" 
                                                                     value={pref.difficulty}
                                                                     onChange={(e) => onDifficultyChange(topic.idx, parseInt(e.target.value))}
-                                                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                                                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
                                                                 />
                                                                 <span className="text-xs text-gray-500 w-20 text-right">{diffLabels[pref.difficulty]}</span>
                                                             </div>
@@ -1415,7 +1415,7 @@ const TopicsStep = ({
             <div className="flex justify-end">
                 <button 
                     onClick={onNext}
-                    className="group bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-blue-300/50 hover:shadow-2xl hover:shadow-blue-400/50 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-emerald-300/50 hover:shadow-2xl hover:shadow-emerald-400/50 hover:scale-[1.02] active:scale-[0.98]"
                 >
                     Próximo: Ajustes 
                     <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -1757,7 +1757,7 @@ const SettingsStep = ({
         const colorName = colorClass.split('-')[1];
         const gradientColors: {[key: string]: string} = {
             'pink': 'from-pink-500 to-rose-600',
-            'blue': 'from-blue-500 to-indigo-600'
+            'blue': 'from-emerald-500 to-indigo-600'
         };
         
         return (
@@ -1988,7 +1988,7 @@ const SettingsStep = ({
                                                 <button
                                                     key={i}
                                                     onClick={() => toggleDay(intensIdx, i)}
-                                                    className={`w-7 h-7 rounded-full text-xs font-bold transition-colors ${intens.days.includes(i) ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-400 hover:bg-gray-300'}`}
+                                                    className={`w-7 h-7 rounded-full text-xs font-bold transition-colors ${intens.days.includes(i) ? 'bg-emerald-500 text-white' : 'bg-gray-200 text-gray-400 hover:bg-gray-300'}`}
                                                 >
                                                     {d}
                                                 </button>
@@ -2118,7 +2118,7 @@ const SettingsStep = ({
             {/* Disponibilidade Semanal */}
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
                 <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
                         <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -2133,25 +2133,25 @@ const SettingsStep = ({
                         return (
                             <div key={day} className={`p-4 rounded-xl border-2 transition-all ${
                                 isActive 
-                                    ? 'bg-blue-50 border-blue-200' 
+                                    ? 'bg-emerald-50 border-emerald-200' 
                                     : 'bg-gray-50 border-gray-100'
                             }`}>
                                 <label className={`block text-xs font-bold uppercase tracking-wide mb-2 ${
-                                    isActive ? 'text-blue-600' : 'text-gray-400'
+                                    isActive ? 'text-emerald-600' : 'text-gray-400'
                                 }`}>{day.slice(0, 3)}</label>
                                 <div className="text-center mb-2">
                                     <span className={`text-2xl font-bold ${
-                                        isActive ? 'text-blue-600' : 'text-gray-300'
+                                        isActive ? 'text-emerald-600' : 'text-gray-300'
                                     }`}>{hours}</span>
                                     <span className={`text-sm ${
-                                        isActive ? 'text-blue-400' : 'text-gray-300'
+                                        isActive ? 'text-emerald-400' : 'text-gray-300'
                                     }`}>h</span>
                                 </div>
                                 <input 
                                     type="range" min="0" max="15" step="0.5"
                                     value={hours}
                                     onChange={(e) => onUpdateHours(idx, parseFloat(e.target.value))}
-                                    className="w-full h-2 accent-blue-600 cursor-pointer"
+                                    className="w-full h-2 accent-emerald-600 cursor-pointer"
                                 />
                             </div>
                         );
@@ -2164,7 +2164,7 @@ const SettingsStep = ({
             {/* Revisão e Redação - configuração simples */}
             <div className="grid md:grid-cols-2 gap-6">
                 {renderSimpleActivityConfig("Revisão", <Repeat className="text-pink-500 w-5 h-5" />, "text-pink-500", state.revision, onUpdateRevision)}
-                {renderSimpleActivityConfig("Redação", <Edit3 className="text-blue-500 w-5 h-5" />, "text-blue-500", state.writing, onUpdateWriting)}
+                {renderSimpleActivityConfig("Redação", <Edit3 className="text-emerald-500 w-5 h-5" />, "text-emerald-500", state.writing, onUpdateWriting)}
             </div>
 
             {/* Configuração de Simulados - movido para cima */}
@@ -2201,7 +2201,7 @@ const SettingsStep = ({
                 <div className="flex flex-col sm:flex-row gap-4 items-center bg-gray-50 p-4 rounded-xl">
                     <input 
                         type="date"
-                        className="border-2 border-gray-200 rounded-xl px-4 py-3 w-full sm:w-auto focus:border-blue-500 focus:outline-none transition-colors"
+                        className="border-2 border-gray-200 rounded-xl px-4 py-3 w-full sm:w-auto focus:border-emerald-500 focus:outline-none transition-colors"
                         onChange={(e) => onUpdateEndDate(e.target.value)}
                         value={state.endDate || ''}
                     />
@@ -2290,9 +2290,9 @@ const CalendarView = ({ schedule, onToggleCheck, checkedItems }: { schedule: any
             const isSelected = selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === currentDate.getMonth();
 
             days.push(
-                <div key={day} onClick={() => setSelectedDate(date)} className={`h-24 border rounded-lg p-2 cursor-pointer transition-all hover:shadow-md flex flex-col justify-between ${isSelected ? 'ring-2 ring-blue-500 border-blue-500 bg-blue-50' : 'bg-white border-gray-200'}`}>
+                <div key={day} onClick={() => setSelectedDate(date)} className={`h-24 border rounded-lg p-2 cursor-pointer transition-all hover:shadow-md flex flex-col justify-between ${isSelected ? 'ring-2 ring-emerald-500 border-emerald-500 bg-emerald-50' : 'bg-white border-gray-200'}`}>
                     <div className="flex justify-between items-start">
-                        <span className={`text-sm font-semibold ${isSelected ? 'text-blue-700' : 'text-gray-700'}`}>{day}</span>
+                        <span className={`text-sm font-semibold ${isSelected ? 'text-emerald-700' : 'text-gray-700'}`}>{day}</span>
                         {dayData && <span className="text-[10px] text-gray-400">{dayData.tasks.reduce((acc:number,t:any)=>acc+t.duration,0)}m</span>}
                     </div>
                     <div className="flex gap-1 flex-wrap content-end">
@@ -2362,8 +2362,8 @@ const CalendarView = ({ schedule, onToggleCheck, checkedItems }: { schedule: any
                     <button onClick={handleNext} className="p-2 hover:bg-gray-100 rounded-full"><ChevronRight className="w-5 h-5 text-gray-600" /></button>
                 </div>
                 <div className="flex bg-gray-100 p-1 rounded-lg w-full md:w-auto">
-                    <button onClick={() => { setCalendarType('month'); setSelectedDate(null); }} className={`flex-1 md:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-all ${calendarType === 'month' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>Mensal</button>
-                    <button onClick={() => { setCalendarType('week'); setSelectedDate(null); }} className={`flex-1 md:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-all ${calendarType === 'week' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>Semanal</button>
+                    <button onClick={() => { setCalendarType('month'); setSelectedDate(null); }} className={`flex-1 md:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-all ${calendarType === 'month' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>Mensal</button>
+                    <button onClick={() => { setCalendarType('week'); setSelectedDate(null); }} className={`flex-1 md:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-all ${calendarType === 'week' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>Semanal</button>
                 </div>
             </div>
             {calendarType === 'month' ? (
@@ -2374,7 +2374,7 @@ const CalendarView = ({ schedule, onToggleCheck, checkedItems }: { schedule: any
                     </div>
                     {selectedDate && (
                         <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-in slide-in-from-top-4 fade-in duration-300">
-                            <h4 className="font-bold text-lg mb-4 flex items-center gap-2"><CalendarIcon className="w-5 h-5 text-blue-600" /> Detalhes do dia {selectedDate.toLocaleDateString('pt-BR')}</h4>
+                            <h4 className="font-bold text-lg mb-4 flex items-center gap-2"><CalendarIcon className="w-5 h-5 text-emerald-600" /> Detalhes do dia {selectedDate.toLocaleDateString('pt-BR')}</h4>
                             {!selectedDayData ? <p className="text-gray-500 text-sm">Nenhuma atividade planejada para este dia.</p> : (
                                 <div className="space-y-3">
                                     <div className="text-sm text-gray-500 mb-2">Tempo total: {selectedDayData.tasks.reduce((acc: number, t: any) => acc + t.duration, 0)} minutos</div>
@@ -2594,7 +2594,7 @@ const ScheduleView = ({
                             <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden break-inside-avoid">
                                 <div className="bg-gray-50 p-4 border-b border-gray-200 flex justify-between items-center">
                                     <div className="flex items-center gap-3">
-                                        <div className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded text-sm uppercase">{day.date.toLocaleDateString('pt-BR', { weekday: 'short' })}</div>
+                                        <div className="bg-emerald-100 text-emerald-700 font-bold px-3 py-1 rounded text-sm uppercase">{day.date.toLocaleDateString('pt-BR', { weekday: 'short' })}</div>
                                         <span className="font-semibold text-gray-900">{day.date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
                                     </div>
                                     <span className="text-xs font-medium text-gray-500 bg-white px-2 py-1 rounded border border-gray-200">{day.tasks.reduce((acc: number, t: any) => acc + t.duration, 0)} min totais</span>
@@ -3238,7 +3238,7 @@ export default function CronogramaDinamico() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 animate-spin text-emerald-600 mx-auto mb-4" />
           <p className="text-gray-600">Carregando cronograma...</p>
         </div>
       </div>

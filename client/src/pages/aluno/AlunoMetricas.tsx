@@ -292,24 +292,24 @@ export default function AlunoMetricas() {
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
       <div className="fixed top-20 right-10 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-pink-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/20 via-emerald-500/10 to-pink-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
         <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
           <div className="space-y-3">
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-                <div className="relative bg-gradient-to-br from-purple-500 via-blue-500 to-pink-500 p-4 rounded-2xl shadow-2xl">
+                <div className="relative bg-gradient-to-br from-purple-500 via-emerald-500 to-pink-500 p-4 rounded-2xl shadow-2xl">
                   <BarChart3 className="h-10 w-10 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-purple-600 via-emerald-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
                   Análise de Desempenho
                 </h1>
               </div>
@@ -340,17 +340,17 @@ export default function AlunoMetricas() {
 
       {/* Cards de métricas premium */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
-        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl" />
+        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl" />
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Tempo Total</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Clock className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-3xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
               {Math.floor(metricas.tempoTotal / 60)}h {metricas.tempoTotal % 60}m
             </div>
             <p className="text-xs text-muted-foreground mt-1 font-medium">de estudo dedicado</p>
@@ -428,14 +428,14 @@ export default function AlunoMetricas() {
 
       {/* Gráficos Premium */}
       <Tabs defaultValue="evolucao" className="space-y-6 animate-slide-up" style={{ animationDelay: '0.35s' }}>
-        <TabsList className="grid w-full grid-cols-3 p-1 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-2">
-          <TabsTrigger value="evolucao" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
+        <TabsList className="grid w-full grid-cols-3 p-1 bg-gradient-to-r from-purple-500/10 to-emerald-500/10 border-2">
+          <TabsTrigger value="evolucao" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white">
             Evolução Temporal
           </TabsTrigger>
-          <TabsTrigger value="materias" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
+          <TabsTrigger value="materias" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white">
             Por Matéria
           </TabsTrigger>
-          <TabsTrigger value="distribuicao" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white">
+          <TabsTrigger value="distribuicao" className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white">
             Distribuição
           </TabsTrigger>
         </TabsList>
@@ -444,7 +444,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-xl transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-black flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+                <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
                 Evolução do Desempenho
@@ -502,8 +502,8 @@ export default function AlunoMetricas() {
                 </ResponsiveContainer>
               ) : (
                 <div className="flex flex-col items-center justify-center h-[400px]">
-                  <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full mb-4">
-                    <BarChart3 className="h-12 w-12 text-blue-500" />
+                  <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-purple-500/10 rounded-full mb-4">
+                    <BarChart3 className="h-12 w-12 text-emerald-500" />
                   </div>
                   <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
                   <p className="text-sm text-muted-foreground">para o período selecionado</p>
@@ -581,7 +581,7 @@ export default function AlunoMetricas() {
                             item.percentual >= 80
                               ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
                               : item.percentual >= 60
-                              ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
+                              ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white"
                               : item.percentual >= 40
                               ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white"
                               : "bg-gradient-to-r from-red-500 to-rose-500 text-white"
@@ -596,7 +596,7 @@ export default function AlunoMetricas() {
                             item.percentual >= 80
                               ? "bg-gradient-to-r from-emerald-500 to-green-500"
                               : item.percentual >= 60
-                              ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                              ? "bg-gradient-to-r from-emerald-500 to-teal-500"
                               : item.percentual >= 40
                               ? "bg-gradient-to-r from-amber-500 to-orange-500"
                               : "bg-gradient-to-r from-red-500 to-rose-500"

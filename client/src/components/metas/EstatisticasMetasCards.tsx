@@ -80,18 +80,18 @@ export function EstatisticasMetasCards({ metas }: EstatisticasMetasCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up">
       {/* Metas Ativas */}
-      <Card className="relative overflow-hidden border-2 hover:border-blue-500 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 group">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+      <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group">
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
         
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
-            <Target className="h-5 w-5 text-blue-500" />
+            <Target className="h-5 w-5 text-emerald-500" />
             Metas Ativas
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{metasAtivas}</div>
+          <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{metasAtivas}</div>
           <p className="text-xs text-muted-foreground mt-1">em andamento</p>
         </CardContent>
       </Card>

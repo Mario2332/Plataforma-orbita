@@ -11,18 +11,18 @@ import { toast } from "sonner";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, Cell } from "recharts";
 
 const ESTADOS_EMOCIONAIS = [
-  { value: "otimo", label: "Ótimo", emoji: "😄", color: "bg-gradient-to-br from-blue-500 to-cyan-500" },
-  { value: "bom", label: "Bom", emoji: "🙂", color: "bg-blue-500" },
+  { value: "otimo", label: "Ótimo", emoji: "😄", color: "bg-gradient-to-br from-emerald-500 to-teal-500" },
+  { value: "bom", label: "Bom", emoji: "🙂", color: "bg-emerald-500" },
   { value: "neutro", label: "Neutro", emoji: "😐", color: "bg-gray-500" },
-  { value: "ruim", label: "Ruim", emoji: "😟", color: "bg-blue-400" },
-  { value: "pessimo", label: "Péssimo", emoji: "😢", color: "bg-blue-300" },
+  { value: "ruim", label: "Ruim", emoji: "😟", color: "bg-emerald-400" },
+  { value: "pessimo", label: "Péssimo", emoji: "😢", color: "bg-emerald-300" },
 ];
 
 const NIVEIS_CANSACO = [
-  { value: "descansado", label: "Descansado", icon: Battery, color: "bg-gradient-to-br from-blue-500 to-cyan-500", level: 100 },
-  { value: "normal", label: "Normal", icon: Battery, color: "bg-blue-500", level: 75 },
-  { value: "cansado", label: "Cansado", icon: Battery, color: "bg-cyan-500", level: 50 },
-  { value: "muito_cansado", label: "Muito Cansado", icon: Battery, color: "bg-sky-500", level: 25 },
+  { value: "descansado", label: "Descansado", icon: Battery, color: "bg-gradient-to-br from-emerald-500 to-teal-500", level: 100 },
+  { value: "normal", label: "Normal", icon: Battery, color: "bg-emerald-500", level: 75 },
+  { value: "cansado", label: "Cansado", icon: Battery, color: "bg-teal-500", level: 50 },
+  { value: "muito_cansado", label: "Muito Cansado", icon: Battery, color: "bg-emerald-500", level: 25 },
   { value: "exausto", label: "Exausto", icon: Battery, color: "bg-indigo-500", level: 10 },
 ];
 
@@ -186,11 +186,11 @@ export default function AlunoDiario() {
       if (registro.atividadeFisica === true) diasComAtividade++;
       else if (registro.atividadeFisica === false) diasSemAtividade++;
     });
-    const dadosEstados = ESTADOS_EMOCIONAIS.map(e => ({ nome: e.label, quantidade: contagemEstados[e.value] || 0, cor: e.color.replace('bg-', '').replace('gradient-to-br from-', '').replace(' to-cyan-500', '') }));
-    const dadosCansaco = NIVEIS_CANSACO.map(n => ({ nome: n.label, quantidade: contagemCansaco[n.value] || 0, cor: n.color.replace('bg-', '').replace('gradient-to-br from-', '').replace(' to-cyan-500', '') }));
-    const dadosSono = ESTADOS_EMOCIONAIS.map(e => ({ nome: e.label, quantidade: contagemSono[e.value] || 0, cor: e.color.replace('bg-', '').replace('gradient-to-br from-', '').replace(' to-cyan-500', '') }));
+    const dadosEstados = ESTADOS_EMOCIONAIS.map(e => ({ nome: e.label, quantidade: contagemEstados[e.value] || 0, cor: e.color.replace('bg-', '').replace('gradient-to-br from-', '').replace(' to-teal-500', '') }));
+    const dadosCansaco = NIVEIS_CANSACO.map(n => ({ nome: n.label, quantidade: contagemCansaco[n.value] || 0, cor: n.color.replace('bg-', '').replace('gradient-to-br from-', '').replace(' to-teal-500', '') }));
+    const dadosSono = ESTADOS_EMOCIONAIS.map(e => ({ nome: e.label, quantidade: contagemSono[e.value] || 0, cor: e.color.replace('bg-', '').replace('gradient-to-br from-', '').replace(' to-teal-500', '') }));
     const dadosAtividade = [
-      { nome: 'Sim', quantidade: diasComAtividade, cor: 'blue-500' },
+      { nome: 'Sim', quantidade: diasComAtividade, cor: 'emerald-500' },
       { nome: 'Não', quantidade: diasSemAtividade, cor: 'gray-400' },
     ];
     return { dadosEstados, dadosCansaco, dadosSono, dadosAtividade };
@@ -236,9 +236,9 @@ export default function AlunoDiario() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="relative">
-          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-blue-500 animate-pulse" />
+            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -247,10 +247,10 @@ export default function AlunoDiario() {
 
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
-      <div className="fixed top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
 
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 via-cyan-500 to-sky-500 p-8 text-white animate-slide-up">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 text-white animate-slide-up">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
         <div className="relative flex items-center gap-4">
@@ -259,7 +259,7 @@ export default function AlunoDiario() {
           </div>
           <div>
             <h1 className="text-4xl font-black mb-2">Diário de Bordo Emocional</h1>
-            <p className="text-blue-50 text-lg">Registre como você se sentiu em relação aos estudos</p>
+            <p className="text-emerald-50 text-lg">Registre como você se sentiu em relação aos estudos</p>
           </div>
         </div>
       </div>
@@ -267,7 +267,7 @@ export default function AlunoDiario() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Heart className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -292,7 +292,7 @@ export default function AlunoDiario() {
               </Label>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {ESTADOS_EMOCIONAIS.map((estado) => (
-                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, estadoEmocional: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.estadoEmocional === estado.value ? `${estado.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-blue-300"}`}>
+                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, estadoEmocional: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.estadoEmocional === estado.value ? `${estado.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-emerald-300"}`}>
                     <div className="text-3xl mb-2">{estado.emoji}</div>
                     <div className="text-sm font-bold">{estado.label}</div>
                   </button>
@@ -308,7 +308,7 @@ export default function AlunoDiario() {
                 {NIVEIS_CANSACO.map((nivel) => {
                   const Icon = nivel.icon;
                   return (
-                    <button key={nivel.value} type="button" onClick={() => setFormData({ ...formData, nivelCansaco: nivel.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.nivelCansaco === nivel.value ? `${nivel.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-blue-300"}`}>
+                    <button key={nivel.value} type="button" onClick={() => setFormData({ ...formData, nivelCansaco: nivel.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.nivelCansaco === nivel.value ? `${nivel.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-emerald-300"}`}>
                       <Icon className="h-8 w-8 mx-auto mb-2" />
                       <div className="text-sm font-bold">{nivel.label}</div>
                     </button>
@@ -323,7 +323,7 @@ export default function AlunoDiario() {
               </Label>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {ESTADOS_EMOCIONAIS.map((estado) => (
-                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, qualidadeSono: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.qualidadeSono === estado.value ? `${estado.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-blue-300"}`}>
+                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, qualidadeSono: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.qualidadeSono === estado.value ? `${estado.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-emerald-300"}`}>
                     <div className="text-3xl mb-2">{estado.emoji}</div>
                     <div className="text-sm font-bold">{estado.label}</div>
                   </button>
@@ -336,11 +336,11 @@ export default function AlunoDiario() {
                 Fez atividade física hoje? (opcional)
               </Label>
               <div className="grid grid-cols-2 gap-3">
-                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: true })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.atividadeFisica === true ? "bg-gradient-to-br from-blue-500 to-cyan-500 text-white border-transparent shadow-lg" : "border-gray-200 hover:border-blue-300"}`}>
+                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: true })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.atividadeFisica === true ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-transparent shadow-lg" : "border-gray-200 hover:border-emerald-300"}`}>
                   <div className="text-3xl mb-2">✅</div>
                   <div className="text-sm font-bold">Sim</div>
                 </button>
-                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: false })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.atividadeFisica === false ? "bg-gray-500 text-white border-transparent shadow-lg" : "border-gray-200 hover:border-blue-300"}`}>
+                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: false })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.atividadeFisica === false ? "bg-gray-500 text-white border-transparent shadow-lg" : "border-gray-200 hover:border-emerald-300"}`}>
                   <div className="text-3xl mb-2">❌</div>
                   <div className="text-sm font-bold">Não</div>
                 </button>
@@ -350,7 +350,7 @@ export default function AlunoDiario() {
               <Label htmlFor="observacoes" className="font-bold">Observações (opcional)</Label>
               <Textarea id="observacoes" placeholder="Alguma observação sobre o dia? O que te deixou assim?" value={formData.observacoes} onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })} rows={3} className="border-2" />
             </div>
-            <Button type="submit" disabled={isSaving} className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 font-bold text-lg py-6">
+            <Button type="submit" disabled={isSaving} className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-6">
               {isSaving ? "Salvando..." : "Salvar Registro"}
             </Button>
           </form>
@@ -394,7 +394,7 @@ export default function AlunoDiario() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
                     <BarChart3 className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -501,7 +501,7 @@ export default function AlunoDiario() {
       <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -557,7 +557,7 @@ export default function AlunoDiario() {
                           )}
                           {registro.atividadeFisica !== undefined && registro.atividadeFisica !== null && (
                             <div className="flex items-center gap-3">
-                              <div className={`w-12 h-12 rounded-xl ${registro.atividadeFisica ? 'bg-gradient-to-br from-blue-500 to-cyan-500' : 'bg-gray-500'} flex items-center justify-center text-2xl shadow-lg`}>
+                              <div className={`w-12 h-12 rounded-xl ${registro.atividadeFisica ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gray-500'} flex items-center justify-center text-2xl shadow-lg`}>
                                 {registro.atividadeFisica ? '✅' : '❌'}
                               </div>
                               <div>
@@ -568,7 +568,7 @@ export default function AlunoDiario() {
                           )}
                         </div>
                         {registro.observacoes && (
-                          <div className="mt-3 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-lg border border-blue-200/50">
+                          <div className="mt-3 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-lg border border-emerald-200/50">
                             <div className="text-xs text-muted-foreground mb-1 font-bold">Observações:</div>
                             <div className="text-sm font-semibold">{registro.observacoes}</div>
                           </div>
@@ -584,8 +584,8 @@ export default function AlunoDiario() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full flex items-center justify-center">
-                <Heart className="w-12 h-12 text-blue-500" />
+              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full flex items-center justify-center">
+                <Heart className="w-12 h-12 text-emerald-500" />
               </div>
               <p className="text-lg font-semibold text-gray-600 dark:text-gray-400">Nenhum registro ainda.</p>
               <p className="text-sm text-muted-foreground mt-2">Comece registrando como você se sente hoje!</p>

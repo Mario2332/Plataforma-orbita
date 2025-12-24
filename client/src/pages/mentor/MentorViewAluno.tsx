@@ -102,9 +102,9 @@ export default function MentorViewAluno() {
         </div>
 
         {/* Alerta informativo */}
-        <Card className="border-blue-200 bg-blue-50 dark:bg-blue-950 dark:border-blue-800">
+        <Card className="border-emerald-200 bg-emerald-50 dark:bg-emerald-950 dark:border-emerald-800">
           <CardContent className="pt-6">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
+            <p className="text-sm text-emerald-800 dark:text-emerald-200">
               ℹ️ Você está visualizando e pode editar a área do aluno. 
               Todas as alterações serão salvas na conta do aluno.
             </p>
