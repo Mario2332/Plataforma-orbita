@@ -170,10 +170,31 @@ export function TenantProvider({ children }: TenantProviderProps) {
       
       const { corPrimaria, corPrimariaHover, corSecundaria } = tenant.branding;
       
+      // Função para converter hex para oklch (aproximação)
+      const hexToOklch = (hex: string): string => {
+        // Remove # se presente
+        const cleanHex = hex.replace('#', '');
+        const r = parseInt(cleanHex.substr(0, 2), 16) / 255;
+        const g = parseInt(cleanHex.substr(2, 2), 16) / 255;
+        const b = parseInt(cleanHex.substr(4, 2), 16) / 255;
+        
+        // Conversão simplificada para oklch
+        const l = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        const c = Math.sqrt(Math.pow(r - l, 2) + Math.pow(g - l, 2) + Math.pow(b - l, 2)) * 0.4;
+        const h = Math.atan2(b - l, r - l) * (180 / Math.PI);
+        
+        return `oklch(${(l * 0.8 + 0.2).toFixed(2)} ${c.toFixed(2)} ${((h + 360) % 360).toFixed(0)})`;
+      };
+      
       // Aplicar como variáveis CSS customizadas
       root.style.setProperty('--tenant-primary', corPrimaria);
       root.style.setProperty('--tenant-primary-hover', corPrimariaHover);
       root.style.setProperty('--tenant-secondary', corSecundaria);
+      
+      // Aplicar cor primária na sidebar-accent (para aba selecionada)
+      const oklchColor = hexToOklch(corPrimaria);
+      root.style.setProperty('--sidebar-accent', oklchColor);
+      root.style.setProperty('--sidebar-accent-foreground', 'oklch(0.98 0 0)');
       
       // Atualizar favicon se disponível
       if (tenant.branding.favicon) {
