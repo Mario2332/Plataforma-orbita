@@ -238,7 +238,7 @@ export default function AlunoDiario() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
+            <Zap className="h-5 w-5 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -247,31 +247,31 @@ export default function AlunoDiario() {
 
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 text-white animate-slide-up">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 text-white animate-slide-up">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-none"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-none"></div>
         <div className="relative flex items-center gap-4">
-          <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
+          <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
             <BookHeart className="w-10 h-10" />
           </div>
           <div>
-            <h1 className="text-4xl font-black mb-2">Diário de Bordo Emocional</h1>
+            <h1 className="text-2xl font-semibold mb-2">Diário de Bordo Emocional</h1>
             <p className="text-emerald-50 text-lg">Registre como você se sentiu em relação aos estudos</p>
           </div>
         </div>
       </div>
 
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up">
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <Heart className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">Novo Registro</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Novo Registro</CardTitle>
               <CardDescription className="text-base">Registre seu estado emocional e nível de energia do dia</CardDescription>
             </div>
           </div>
@@ -292,7 +292,7 @@ export default function AlunoDiario() {
               </Label>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {ESTADOS_EMOCIONAIS.map((estado) => (
-                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, estadoEmocional: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.estadoEmocional === estado.value ? `${estado.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-emerald-300"}`}>
+                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, estadoEmocional: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.estadoEmocional === estado.value ? `${estado.color} text-white border-transparent shadow` : "border-gray-200 hover:border-emerald-300"}`}>
                     <div className="text-3xl mb-2">{estado.emoji}</div>
                     <div className="text-sm font-bold">{estado.label}</div>
                   </button>
@@ -308,8 +308,8 @@ export default function AlunoDiario() {
                 {NIVEIS_CANSACO.map((nivel) => {
                   const Icon = nivel.icon;
                   return (
-                    <button key={nivel.value} type="button" onClick={() => setFormData({ ...formData, nivelCansaco: nivel.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.nivelCansaco === nivel.value ? `${nivel.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-emerald-300"}`}>
-                      <Icon className="h-8 w-8 mx-auto mb-2" />
+                    <button key={nivel.value} type="button" onClick={() => setFormData({ ...formData, nivelCansaco: nivel.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.nivelCansaco === nivel.value ? `${nivel.color} text-white border-transparent shadow` : "border-gray-200 hover:border-emerald-300"}`}>
+                      <Icon className="h-5 w-5 mx-auto mb-2" />
                       <div className="text-sm font-bold">{nivel.label}</div>
                     </button>
                   );
@@ -323,7 +323,7 @@ export default function AlunoDiario() {
               </Label>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {ESTADOS_EMOCIONAIS.map((estado) => (
-                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, qualidadeSono: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.qualidadeSono === estado.value ? `${estado.color} text-white border-transparent shadow-lg` : "border-gray-200 hover:border-emerald-300"}`}>
+                  <button key={estado.value} type="button" onClick={() => setFormData({ ...formData, qualidadeSono: estado.value })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.qualidadeSono === estado.value ? `${estado.color} text-white border-transparent shadow` : "border-gray-200 hover:border-emerald-300"}`}>
                     <div className="text-3xl mb-2">{estado.emoji}</div>
                     <div className="text-sm font-bold">{estado.label}</div>
                   </button>
@@ -336,11 +336,11 @@ export default function AlunoDiario() {
                 Fez atividade física hoje? (opcional)
               </Label>
               <div className="grid grid-cols-2 gap-3">
-                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: true })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.atividadeFisica === true ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-transparent shadow-lg" : "border-gray-200 hover:border-emerald-300"}`}>
+                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: true })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.atividadeFisica === true ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-transparent shadow" : "border-gray-200 hover:border-emerald-300"}`}>
                   <div className="text-3xl mb-2">✅</div>
                   <div className="text-sm font-bold">Sim</div>
                 </button>
-                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: false })} className={`p-4 rounded-xl border-2 transition-all hover:scale-105 ${formData.atividadeFisica === false ? "bg-gray-500 text-white border-transparent shadow-lg" : "border-gray-200 hover:border-emerald-300"}`}>
+                <button type="button" onClick={() => setFormData({ ...formData, atividadeFisica: false })} className={`p-4 rounded-xl border-2 transition-all hover:scale-[1.01] ${formData.atividadeFisica === false ? "bg-gray-500 text-white border-transparent shadow" : "border-gray-200 hover:border-emerald-300"}`}>
                   <div className="text-3xl mb-2">❌</div>
                   <div className="text-sm font-bold">Não</div>
                 </button>
@@ -350,7 +350,7 @@ export default function AlunoDiario() {
               <Label htmlFor="observacoes" className="font-bold">Observações (opcional)</Label>
               <Textarea id="observacoes" placeholder="Alguma observação sobre o dia? O que te deixou assim?" value={formData.observacoes} onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })} rows={3} className="border-2" />
             </div>
-            <Button type="submit" disabled={isSaving} className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-6">
+            <Button type="submit" disabled={isSaving} className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-3">
               {isSaving ? "Salvando..." : "Salvar Registro"}
             </Button>
           </form>
@@ -363,11 +363,11 @@ export default function AlunoDiario() {
             <Card className="border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 animate-slide-up" style={{ animationDelay: '0.1s' }}>
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-orange-500 rounded-xl shadow-lg">
+                  <div className="p-2 bg-orange-500 rounded-xl shadow">
                     <AlertTriangle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl font-black text-orange-700 dark:text-orange-400">Alerta: Sinais de Esgotamento</CardTitle>
+                    <CardTitle className="text-2xl font-semibold text-orange-700 dark:text-orange-400">Alerta: Sinais de Esgotamento</CardTitle>
                     <CardDescription className="text-base text-orange-600 dark:text-orange-500">Identificamos sinais de esgotamento nos seus registros recentes</CardDescription>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ export default function AlunoDiario() {
                 <div className="space-y-3">
                   <p className="text-sm font-semibold">Você registrou <strong>{analise.diasComBaixaEnergia}</strong> dia(s) com baixa energia e <strong>{analise.diasComEstadoNegativo}</strong> dia(s) com estado emocional negativo.</p>
                   <div className="p-4 bg-white dark:bg-gray-900 rounded-xl border-2 border-orange-200">
-                    <p className="text-sm font-black mb-3">💡 Recomendações:</p>
+                    <p className="text-sm font-semibold mb-3">💡 Recomendações:</p>
                     <ul className="text-sm space-y-2 list-disc list-inside font-semibold">
                       <li>Considere fazer uma pausa nos estudos</li>
                       <li>Converse com seu mentor sobre sua rotina</li>
@@ -390,15 +390,15 @@ export default function AlunoDiario() {
             </Card>
           )}
 
-          <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
                     <BarChart3 className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl font-black">Evolução Emocional</CardTitle>
+                    <CardTitle className="text-2xl font-semibold">Evolução Emocional</CardTitle>
                     <CardDescription className="text-base">Acompanhe suas emoções e energia ao longo do tempo</CardDescription>
                   </div>
                 </div>
@@ -419,7 +419,7 @@ export default function AlunoDiario() {
             <CardContent>
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-sm font-black mb-4">Linha do Tempo</h3>
+                  <h3 className="text-sm font-semibold mb-4">Linha do Tempo</h3>
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={dadosGrafico}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -432,9 +432,9 @@ export default function AlunoDiario() {
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <h3 className="text-sm font-black mb-4">Estado Emocional</h3>
+                    <h3 className="text-sm font-semibold mb-4">Estado Emocional</h3>
                     <ResponsiveContainer width="100%" height={250}>
                       <BarChart data={dadosDistribuicao.dadosEstados}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -446,7 +446,7 @@ export default function AlunoDiario() {
                     </ResponsiveContainer>
                   </div>
                   <div>
-                    <h3 className="text-sm font-black mb-4">Nível de Energia</h3>
+                    <h3 className="text-sm font-semibold mb-4">Nível de Energia</h3>
                     <ResponsiveContainer width="100%" height={250}>
                       <BarChart data={dadosDistribuicao.dadosCansaco}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -458,7 +458,7 @@ export default function AlunoDiario() {
                     </ResponsiveContainer>
                   </div>
                   <div>
-                    <h3 className="text-sm font-black mb-4 flex items-center gap-2">
+                    <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
                       <span className="text-xl">😴</span>
                       Qualidade do Sono
                     </h3>
@@ -473,7 +473,7 @@ export default function AlunoDiario() {
                     </ResponsiveContainer>
                   </div>
                   <div>
-                    <h3 className="text-sm font-black mb-4 flex items-center gap-2">
+                    <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
                       <span className="text-xl">🏋️</span>
                       Atividade Física
                     </h3>
@@ -498,14 +498,14 @@ export default function AlunoDiario() {
         </>
       )}
 
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">Histórico de Registros</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Histórico de Registros</CardTitle>
               <CardDescription className="text-base">
                 {registros.length > 0 ? `${registros.length} registro${registros.length > 1 ? 's' : ''} encontrado${registros.length > 1 ? 's' : ''}` : "Nenhum registro ainda"}
               </CardDescription>
@@ -519,50 +519,50 @@ export default function AlunoDiario() {
                 const estado = getEstadoEmocional(registro.estadoEmocional);
                 const cansaco = getNivelCansaco(registro.nivelCansaco);
                 return (
-                  <div key={registro.id} className="p-4 rounded-xl border-2 bg-card hover:shadow-lg transition-all">
+                  <div key={registro.id} className="p-4 rounded-xl border-2 bg-card hover:shadow transition-all">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="text-sm font-black text-muted-foreground">{formatData(registro.data)}</span>
+                          <span className="text-sm font-semibold text-muted-foreground">{formatData(registro.data)}</span>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {estado && (
                             <div className="flex items-center gap-3">
-                              <div className={`w-12 h-12 rounded-xl ${estado.color} flex items-center justify-center text-2xl shadow-lg`}>{estado.emoji}</div>
+                              <div className={`w-12 h-12 rounded-xl ${estado.color} flex items-center justify-center text-2xl shadow`}>{estado.emoji}</div>
                               <div>
                                 <div className="text-xs text-muted-foreground font-semibold">Estado Emocional</div>
-                                <div className="font-black">{estado.label}</div>
+                                <div className="font-semibold">{estado.label}</div>
                               </div>
                             </div>
                           )}
                           {cansaco && (
                             <div className="flex items-center gap-3">
-                              <div className={`w-12 h-12 rounded-xl ${cansaco.color} flex items-center justify-center shadow-lg`}>
-                                <Battery className="h-6 w-6 text-white" />
+                              <div className={`w-12 h-12 rounded-xl ${cansaco.color} flex items-center justify-center shadow`}>
+                                <Battery className="h-4 w-4 text-white" />
                               </div>
                               <div>
                                 <div className="text-xs text-muted-foreground font-semibold">Nível de Energia</div>
-                                <div className="font-black">{cansaco.label}</div>
+                                <div className="font-semibold">{cansaco.label}</div>
                               </div>
                             </div>
                           )}
                           {registro.qualidadeSono && (
                             <div className="flex items-center gap-3">
-                              <div className={`w-12 h-12 rounded-xl ${getEstadoEmocional(registro.qualidadeSono)?.color} flex items-center justify-center text-2xl shadow-lg`}>😴</div>
+                              <div className={`w-12 h-12 rounded-xl ${getEstadoEmocional(registro.qualidadeSono)?.color} flex items-center justify-center text-2xl shadow`}>😴</div>
                               <div>
                                 <div className="text-xs text-muted-foreground font-semibold">Qualidade do Sono</div>
-                                <div className="font-black">{getEstadoEmocional(registro.qualidadeSono)?.label}</div>
+                                <div className="font-semibold">{getEstadoEmocional(registro.qualidadeSono)?.label}</div>
                               </div>
                             </div>
                           )}
                           {registro.atividadeFisica !== undefined && registro.atividadeFisica !== null && (
                             <div className="flex items-center gap-3">
-                              <div className={`w-12 h-12 rounded-xl ${registro.atividadeFisica ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gray-500'} flex items-center justify-center text-2xl shadow-lg`}>
+                              <div className={`w-12 h-12 rounded-xl ${registro.atividadeFisica ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gray-500'} flex items-center justify-center text-2xl shadow`}>
                                 {registro.atividadeFisica ? '✅' : '❌'}
                               </div>
                               <div>
                                 <div className="text-xs text-muted-foreground font-semibold">Atividade Física</div>
-                                <div className="font-black">{registro.atividadeFisica ? 'Sim' : 'Não'}</div>
+                                <div className="font-semibold">{registro.atividadeFisica ? 'Sim' : 'Não'}</div>
                               </div>
                             </div>
                           )}

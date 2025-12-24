@@ -1082,7 +1082,7 @@ const StepIndicator = ({ step }: { step: number }) => {
   ];
   
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-8">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 mb-8">
       <div className="flex justify-between items-center relative">
         {/* Linha de conexão */}
         <div className="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 z-0" style={{ left: '10%', right: '10%' }} />
@@ -1100,7 +1100,7 @@ const StepIndicator = ({ step }: { step: number }) => {
             <div key={s.num} className="flex flex-col items-center z-10">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold mb-2 transition-all duration-300 ${
                 isActive 
-                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-110' 
+                  ? 'bg-emerald-600 text-white shadow shadow-emerald-200 scale-110' 
                   : isCompleted 
                     ? 'bg-emerald-600 text-white' 
                     : 'bg-gray-100 text-gray-400 border border-gray-200'
@@ -1202,10 +1202,10 @@ const TopicsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 rounded-2xl p-8 shadow-xl">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-600 rounded-lg p-4 shadow-sm">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow">
                             <BookOpen className="w-8 h-8 text-white" />
                         </div>
                         <div>
@@ -1213,11 +1213,11 @@ const TopicsStep = ({
                             <p className="text-emerald-100 text-sm mt-1">Personalize seu cronograma escolhendo os conteúdos e dificuldades 📚</p>
                         </div>
                     </div>
-                    <div className="bg-white/10 backdrop-blur-sm px-6 py-4 rounded-2xl border border-white/20">
+                    <div className="bg-white/10 backdrop-blur-sm px-4 py-4 rounded-lg border border-white/20">
                         <div className="text-center">
                             <span className="text-xs font-medium text-emerald-100 uppercase tracking-wider block">Tópicos Selecionados</span>
                             <div className="flex items-baseline justify-center gap-1 mt-1">
-                                <span className="text-4xl font-bold text-white">{selectedTopicsCount}</span>
+                                <span className="text-2xl font-bold text-white">{selectedTopicsCount}</span>
                                 <span className="text-emerald-200 text-lg font-medium">/ {totalTopics}</span>
                             </div>
                         </div>
@@ -1261,10 +1261,10 @@ const TopicsStep = ({
             </div>
 
             {/* Modalidade do Cronograma */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+            <div className="bg-white p-4 rounded-lg shadow border border-gray-100 hover:shadow-sm transition-shadow">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow">
                             <FileText className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1277,9 +1277,9 @@ const TopicsStep = ({
                     <div className="flex bg-gray-100 p-1.5 rounded-xl">
                         <button
                             onClick={() => onScheduleTypeChange('extensivo')}
-                            className={`px-6 py-3 rounded-lg text-sm font-bold transition-all ${
+                            className={`px-4 py-3 rounded-lg text-sm font-bold transition-all ${
                                 scheduleType === 'extensivo' 
-                                ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-200' 
+                                ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow shadow-emerald-200' 
                                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                             }`}
                         >
@@ -1287,9 +1287,9 @@ const TopicsStep = ({
                         </button>
                         <button
                             onClick={() => onScheduleTypeChange('intensivo')}
-                            className={`px-6 py-3 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+                            className={`px-4 py-3 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
                                 scheduleType === 'intensivo' 
-                                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-200' 
+                                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow shadow-purple-200' 
                                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                             }`}
                         >
@@ -1300,10 +1300,10 @@ const TopicsStep = ({
             </div>
 
             {/* Conteúdos e Dificuldades */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+            <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 border-b border-gray-100 pb-4">
                     <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center shadow">
                             <Layers className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -1415,7 +1415,7 @@ const TopicsStep = ({
             <div className="flex justify-end">
                 <button 
                     onClick={onNext}
-                    className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-emerald-300/50 hover:shadow-2xl hover:shadow-emerald-400/50 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-3 transition-all shadow-sm shadow-emerald-300/50 hover:shadow-sm hover:shadow-emerald-400/50 hover:scale-[1.02] active:scale-[0.98]"
                 >
                     Próximo: Ajustes 
                     <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -1512,7 +1512,7 @@ const SimulationConfigSection = ({
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold flex items-center gap-2">
                     <Settings className="text-gray-700" />
@@ -1761,7 +1761,7 @@ const SettingsStep = ({
         };
         
         return (
-            <div className={`bg-white p-6 rounded-2xl shadow-lg border-2 transition-all ${
+            <div className={`bg-white p-4 rounded-lg shadow border-2 transition-all ${
                 config.enabled ? `border-${colorName}-200` : 'border-gray-100'
             }`}>
                 <div className="flex items-center justify-between mb-4">
@@ -1894,7 +1894,7 @@ const SettingsStep = ({
         };
 
         return (
-            <div className={`bg-white p-6 rounded-2xl shadow-lg border-2 transition-all ${
+            <div className={`bg-white p-4 rounded-lg shadow border-2 transition-all ${
                 config.enabled ? `border-${colorName}-200` : 'border-gray-100'
             }`}>
                 <div className="flex items-center justify-between mb-4">
@@ -2036,7 +2036,7 @@ const SettingsStep = ({
         };
 
         return (
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-bold flex items-center gap-2 text-gray-800">
                         <CalendarOff className="text-gray-600 w-5 h-5" />
@@ -2091,10 +2091,10 @@ const SettingsStep = ({
     return (
         <div className="space-y-6">
             {/* Header Principal - Estilo Estudos/Metas */}
-            <div className="bg-gradient-to-br from-emerald-500 via-green-600 to-teal-600 rounded-2xl p-8 shadow-xl">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div className="bg-gradient-to-br from-emerald-500 via-green-600 to-teal-600 rounded-lg p-4 shadow-sm">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow">
                             <Settings className="w-8 h-8 text-white" />
                         </div>
                         <div>
@@ -2116,9 +2116,9 @@ const SettingsStep = ({
             </div>
 
             {/* Disponibilidade Semanal */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+            <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow">
                         <Clock className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -2162,7 +2162,7 @@ const SettingsStep = ({
             <FreeDaysSelector />
 
             {/* Revisão e Redação - configuração simples */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4">
                 {renderSimpleActivityConfig("Revisão", <Repeat className="text-pink-500 w-5 h-5" />, "text-pink-500", state.revision, onUpdateRevision)}
                 {renderSimpleActivityConfig("Redação", <Edit3 className="text-emerald-500 w-5 h-5" />, "text-emerald-500", state.writing, onUpdateWriting)}
             </div>
@@ -2176,21 +2176,21 @@ const SettingsStep = ({
             />
 
             {/* Correção de Simulado Completo | Preenchimento de Lacunas - Completo */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4">
                 {renderAdvancedActivityConfig("Correção de Simulado Completo", <CheckCheck className="text-purple-600 w-5 h-5" />, "text-purple-600", state.correctionComplete, onUpdateCorrectionComplete)}
                 {renderAdvancedActivityConfig("Preenchimento de Lacunas - Completo", <PenTool className="text-yellow-600 w-5 h-5" />, "text-yellow-600", state.gapsComplete, onUpdateGapsComplete)}
             </div>
 
             {/* Correção de Simulado Fragmentado | Preenchimento de Lacunas - Fragmentado */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4">
                 {renderAdvancedActivityConfig("Correção de Simulado Fragmentado", <CheckCheck className="text-purple-400 w-5 h-5" />, "text-purple-400", state.correctionFragmented, onUpdateCorrectionFragmented, true)}
                 {renderAdvancedActivityConfig("Preenchimento de Lacunas - Fragmentado", <PenTool className="text-yellow-400 w-5 h-5" />, "text-yellow-400", state.gapsFragmented, onUpdateGapsFragmented, true)}
             </div>
 
             {/* Data Limite */}
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+            <div className="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl flex items-center justify-center shadow">
                         <CalendarIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -2212,10 +2212,10 @@ const SettingsStep = ({
             </div>
 
             {/* Botões de Ação */}
-            <div className="flex justify-between pt-6">
+            <div className="flex justify-between pt-4">
                 <button 
                     onClick={onBack} 
-                    className="group text-gray-600 hover:text-gray-800 px-6 py-3 font-semibold flex items-center gap-2 rounded-xl hover:bg-gray-100 transition-all border border-gray-200"
+                    className="group text-gray-600 hover:text-gray-800 px-4 py-3 font-semibold flex items-center gap-2 rounded-xl hover:bg-gray-100 transition-all border border-gray-200"
                 >
                     <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center group-hover:-translate-x-1 transition-transform">
                         <ChevronLeft className="w-5 h-5" />
@@ -2224,7 +2224,7 @@ const SettingsStep = ({
                 </button>
                 <button 
                     onClick={onGenerate} 
-                    className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-green-300/50 hover:shadow-2xl hover:shadow-green-400/50 hover:scale-[1.02] active:scale-[0.98]"
+                    className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-10 py-4 rounded-lg font-bold text-lg flex items-center gap-3 transition-all shadow-sm shadow-green-300/50 hover:shadow-sm hover:shadow-green-400/50 hover:scale-[1.02] active:scale-[0.98]"
                 >
                     <RefreshCw className="w-6 h-6" /> 
                     Gerar Cronograma
@@ -2373,7 +2373,7 @@ const CalendarView = ({ schedule, onToggleCheck, checkedItems }: { schedule: any
                         {renderMonthGrid()}
                     </div>
                     {selectedDate && (
-                        <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 animate-in slide-in-from-top-4 fade-in duration-300">
+                        <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200 animate-in slide-in-from-top-4 fade-in duration-300">
                             <h4 className="font-bold text-lg mb-4 flex items-center gap-2"><CalendarIcon className="w-5 h-5 text-emerald-600" /> Detalhes do dia {selectedDate.toLocaleDateString('pt-BR')}</h4>
                             {!selectedDayData ? <p className="text-gray-500 text-sm">Nenhuma atividade planejada para este dia.</p> : (
                                 <div className="space-y-3">
@@ -2501,7 +2501,7 @@ const ScheduleView = ({
             {/* Modal de Tópicos Faltantes */}
             {showMissingModal && (
                 <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-                    <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+                    <div className="bg-white rounded-lg shadow-sm w-full max-w-2xl max-h-[80vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
                         <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-lg">
                             <h3 className="font-bold text-lg text-gray-800 flex items-center gap-2">
                                 <AlertCircle className="w-5 h-5 text-red-500" />
@@ -2511,7 +2511,7 @@ const ScheduleView = ({
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
-                        <div className="p-6 overflow-y-auto">
+                        <div className="p-4 overflow-y-auto">
                             <p className="text-sm text-gray-600 mb-4">
                                 Os seguintes conteúdos não couberam no cronograma até a data limite de {new Date(userEndDate!).toLocaleDateString('pt-BR')}:
                             </p>
@@ -2547,10 +2547,10 @@ const ScheduleView = ({
             )}
 
             {/* Header com gradiente - padrão da plataforma */}
-            <div className="bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 rounded-2xl p-6 shadow-sm border border-purple-100/50">
+            <div className="bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 rounded-lg p-4 shadow-sm border border-purple-100/50">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-200">
+                        <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center shadow shadow-purple-200">
                             <CalendarIcon className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -2579,7 +2579,7 @@ const ScheduleView = ({
                     <button 
                         onClick={onSave} 
                         disabled={isSaving}
-                        className="bg-purple-600 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-purple-700 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-200"
+                        className="bg-purple-600 text-white px-4 py-2.5 rounded-xl font-semibold hover:bg-purple-700 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow shadow-purple-200"
                     >
                         {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                         <span>{isSaving ? 'Salvando...' : 'Salvar'}</span>
@@ -2588,7 +2588,7 @@ const ScheduleView = ({
             </div>
 
             {viewMode === 'list' ? (
-                <div className="grid gap-6">
+                <div className="grid gap-4">
                     {schedule.length === 0 ? <div className="text-center p-12 bg-white rounded-lg border border-gray-200"><AlertCircle className="w-12 h-12 text-yellow-500 mx-auto mb-4" /><h3 className="text-lg font-semibold">Nenhum dia gerado</h3></div> : (
                         schedule.map((day, i) => (
                             <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden break-inside-avoid">

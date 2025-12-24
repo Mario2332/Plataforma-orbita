@@ -110,8 +110,8 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
   const getIncidenceBadgeColor = (level: string) => {
     switch (level) {
-      case "Muito alta!": return "bg-gradient-to-r from-emerald-600 to-indigo-600 text-white hover:from-emerald-700 hover:to-indigo-700 shadow-lg";
-      case "Alta!": return "bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600 shadow-lg";
+      case "Muito alta!": return "bg-gradient-to-r from-emerald-600 to-indigo-600 text-white hover:from-emerald-700 hover:to-indigo-700 shadow";
+      case "Alta!": return "bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600 shadow";
       case "Média": return "bg-teal-500 text-white hover:bg-teal-600 shadow-md";
       case "Baixa": return "bg-emerald-500 text-white hover:bg-emerald-600 shadow-md";
       case "Muito baixa": return "bg-gray-400 text-white hover:bg-gray-500";
@@ -159,17 +159,17 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
   return (
     <div className="container mx-auto py-6 space-y-6 pb-8 animate-fade-in">
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up">
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl shadow-lg">
+            <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow">
               <BookOpen className="w-8 h-8 text-white" />
             </div>
             <div className="flex-1">
-              <CardTitle className="text-4xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              <CardTitle className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 {materia?.displayName}
               </CardTitle>
               <p className="text-muted-foreground font-semibold mt-2">
@@ -181,19 +181,19 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
             <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
               <div className="text-sm font-bold text-emerald-900 dark:text-emerald-300 mb-1">Total de Tópicos</div>
-              <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              <div className="text-3xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 {topics.length}
               </div>
             </div>
             <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
               <div className="text-sm font-bold text-emerald-900 dark:text-emerald-300 mb-1">Estudados</div>
-              <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              <div className="text-3xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 {topicosEstudados}
               </div>
             </div>
             <div className="p-4 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border-2 border-emerald-200/50">
               <div className="text-sm font-bold text-emerald-900 dark:text-emerald-300 mb-1">Progresso</div>
-              <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              <div className="text-3xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 {percentualEstudado}%
               </div>
               <div className="mt-2 w-full bg-gray-200 rounded-full h-2 overflow-hidden">
@@ -212,7 +212,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
               <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow-md">
                 <Filter className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm font-black">Filtros:</span>
+              <span className="text-sm font-semibold">Filtros:</span>
             </div>
             
             <div className="flex-1 flex flex-col sm:flex-row gap-3">
@@ -270,7 +270,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSort("name")}
-                      className="flex items-center gap-1 hover:bg-emerald-100 font-black"
+                      className="flex items-center gap-1 hover:bg-emerald-100 font-semibold"
                     >
                       Conteúdo
                       {getSortIcon("name")}
@@ -281,14 +281,14 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleSort("incidence")}
-                      className="flex items-center gap-1 mx-auto hover:bg-emerald-100 font-black"
+                      className="flex items-center gap-1 mx-auto hover:bg-emerald-100 font-semibold"
                     >
                       Incidência
                       {getSortIcon("incidence")}
                     </Button>
                   </th>
-                  <th className="text-center p-4 font-black w-24">Estudado</th>
-                  <th className="text-center p-4 font-black w-32">Anotações</th>
+                  <th className="text-center p-4 font-semibold w-24">Estudado</th>
+                  <th className="text-center p-4 font-semibold w-32">Anotações</th>
                 </tr>
               </thead>
               <tbody>
@@ -334,15 +334,15 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
                                 variant={hasNotes ? "default" : "outline"}
                                 size="sm"
                                 onClick={() => handleOpenDialog(topic.id)}
-                                className={hasNotes ? "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg" : "border-2 font-bold hover:bg-emerald-100"}
+                                className={hasNotes ? "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow" : "border-2 font-bold hover:bg-emerald-100"}
                               >
                                 <FileText className="w-4 h-4 mr-1" />
                                 {hasNotes ? "Ver" : "Adicionar"}
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-2xl border-2 rounded-2xl">
+                            <DialogContent className="max-w-2xl border-2 rounded-lg">
                               <DialogHeader>
-                                <DialogTitle className="text-2xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                                <DialogTitle className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                                   Anotações - {topic.name}
                                 </DialogTitle>
                               </DialogHeader>

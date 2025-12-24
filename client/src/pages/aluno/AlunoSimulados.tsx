@@ -228,7 +228,7 @@ export default function AlunoSimulados() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
+            <Zap className="h-5 w-5 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -238,22 +238,22 @@ export default function AlunoSimulados() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-4 border-2 border-white/20 dark:border-white/10 backdrop-blur-none shadow-sm animate-slide-up">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-none animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-none animate-pulse-slow" style={{ animationDelay: '1s' }} />
         <div className="relative">
           <div className="flex items-center gap-4 mb-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-              <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-2xl shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur-none opacity-50 animate-pulse-slow" />
+              <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
                 <FileText className="h-10 w-10 text-white" />
               </div>
             </div>
-            <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient">
+            <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600  animate-gradient">
               Simulados
             </h1>
           </div>
@@ -265,24 +265,24 @@ export default function AlunoSimulados() {
 
       {/* Tabs Premium */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border-2 border-emerald-200/50 dark:border-emerald-800/50 rounded-2xl h-auto">
+        <TabsList className="grid w-full grid-cols-3 p-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border-2 border-emerald-200/50 dark:border-emerald-800/50 rounded-lg h-auto">
           <TabsTrigger 
             value="simulados" 
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-xl font-bold text-base py-3 rounded-xl transition-all"
+            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm font-bold text-base py-3 rounded-xl transition-all"
           >
             <FileText className="w-5 h-5 mr-2" />
             Meus Simulados
           </TabsTrigger>
           <TabsTrigger 
             value="autodiagnostico" 
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-xl font-bold text-base py-3 rounded-xl transition-all"
+            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm font-bold text-base py-3 rounded-xl transition-all"
           >
             <Target className="w-5 h-5 mr-2" />
             Autodiagnóstico
           </TabsTrigger>
           <TabsTrigger 
             value="planos" 
-            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-xl font-bold text-base py-3 rounded-xl transition-all"
+            className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm font-bold text-base py-3 rounded-xl transition-all"
           >
             <ClipboardList className="w-5 h-5 mr-2" />
             Planos de Ação
@@ -291,28 +291,28 @@ export default function AlunoSimulados() {
 
         <TabsContent value="simulados" className="space-y-6 mt-6">
           {/* Gráfico de Evolução Premium */}
-          <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl">
+          <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl font-black">Evolução</CardTitle>
+                    <CardTitle className="text-2xl font-semibold">Evolução</CardTitle>
                     <CardDescription className="text-base">Acompanhe seu progresso ao longo do tempo</CardDescription>
                   </div>
                 </div>
                 <Dialog open={dialogOpen} onOpenChange={handleDialogClose}>
                   <DialogTrigger asChild>
-                    <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-xl hover:shadow-2xl font-bold hover:-translate-y-0.5 transition-all">
+                    <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-sm hover:shadow-sm font-bold hover:-translate-y-0.5 transition-all">
                       <Plus className="mr-2 h-5 w-5" />
                       Novo Simulado
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto border-2">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl font-black">{editandoId ? "Editar Simulado" : "Novo Simulado"}</DialogTitle>
+                      <DialogTitle className="text-2xl font-semibold">{editandoId ? "Editar Simulado" : "Novo Simulado"}</DialogTitle>
                       <DialogDescription className="text-base">Preencha os dados do simulado realizado</DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -328,7 +328,7 @@ export default function AlunoSimulados() {
                       </div>
 
                       <div className="space-y-4">
-                        <h3 className="font-black text-lg flex items-center gap-2">
+                        <h3 className="font-semibold text-lg flex items-center gap-2">
                           <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
                           Linguagens e Códigos (45 questões)
                         </h3>
@@ -345,7 +345,7 @@ export default function AlunoSimulados() {
                       </div>
 
                       <div className="space-y-4">
-                        <h3 className="font-black text-lg flex items-center gap-2">
+                        <h3 className="font-semibold text-lg flex items-center gap-2">
                           <div className="w-1.5 h-6 bg-gradient-to-b from-teal-500 to-emerald-500 rounded-full" />
                           Ciências Humanas (45 questões)
                         </h3>
@@ -362,7 +362,7 @@ export default function AlunoSimulados() {
                       </div>
 
                       <div className="space-y-4">
-                        <h3 className="font-black text-lg flex items-center gap-2">
+                        <h3 className="font-semibold text-lg flex items-center gap-2">
                           <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-emerald-500 rounded-full" />
                           Ciências da Natureza (45 questões)
                         </h3>
@@ -379,7 +379,7 @@ export default function AlunoSimulados() {
                       </div>
 
                       <div className="space-y-4">
-                        <h3 className="font-black text-lg flex items-center gap-2">
+                        <h3 className="font-semibold text-lg flex items-center gap-2">
                           <div className="w-1.5 h-6 bg-gradient-to-b from-indigo-500 to-emerald-500 rounded-full" />
                           Matemática (45 questões)
                         </h3>
@@ -396,7 +396,7 @@ export default function AlunoSimulados() {
                       </div>
 
                       <div className="space-y-4">
-                        <h3 className="font-black text-lg flex items-center gap-2">
+                        <h3 className="font-semibold text-lg flex items-center gap-2">
                           <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
                           Redação
                         </h3>
@@ -498,14 +498,14 @@ export default function AlunoSimulados() {
           </Card>
 
           {/* Tabela de Simulados Premium */}
-          <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl">
+          <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+                <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl font-black">Histórico</CardTitle>
+                  <CardTitle className="text-2xl font-semibold">Histórico</CardTitle>
                   <CardDescription className="text-base">Todos os simulados registrados</CardDescription>
                 </div>
               </div>
@@ -520,21 +520,21 @@ export default function AlunoSimulados() {
                   <Table>
                     <TableHeader>
                       <TableRow className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
-                        <TableHead className="font-black">Nome</TableHead>
-                        <TableHead className="font-black">Data</TableHead>
-                        <TableHead className="font-black">Ling.</TableHead>
-                        <TableHead className="font-black">Hum.</TableHead>
-                        <TableHead className="font-black">Nat.</TableHead>
-                        <TableHead className="font-black">Mat.</TableHead>
-                        <TableHead className="font-black">1º Dia</TableHead>
-                        <TableHead className="font-black">Tempo 1º</TableHead>
-                        <TableHead className="font-black">Dif. 1º</TableHead>
-                        <TableHead className="font-black">2º Dia</TableHead>
-                        <TableHead className="font-black">Tempo 2º</TableHead>
-                        <TableHead className="font-black">Dif. 2º</TableHead>
-                        <TableHead className="font-black">Total</TableHead>
-                        <TableHead className="font-black">Redação</TableHead>
-                        <TableHead className="text-right font-black">Ações</TableHead>
+                        <TableHead className="font-semibold">Nome</TableHead>
+                        <TableHead className="font-semibold">Data</TableHead>
+                        <TableHead className="font-semibold">Ling.</TableHead>
+                        <TableHead className="font-semibold">Hum.</TableHead>
+                        <TableHead className="font-semibold">Nat.</TableHead>
+                        <TableHead className="font-semibold">Mat.</TableHead>
+                        <TableHead className="font-semibold">1º Dia</TableHead>
+                        <TableHead className="font-semibold">Tempo 1º</TableHead>
+                        <TableHead className="font-semibold">Dif. 1º</TableHead>
+                        <TableHead className="font-semibold">2º Dia</TableHead>
+                        <TableHead className="font-semibold">Tempo 2º</TableHead>
+                        <TableHead className="font-semibold">Dif. 2º</TableHead>
+                        <TableHead className="font-semibold">Total</TableHead>
+                        <TableHead className="font-semibold">Redação</TableHead>
+                        <TableHead className="text-right font-semibold">Ações</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -575,7 +575,7 @@ export default function AlunoSimulados() {
                             <TableCell className="font-bold">{dia2Acertos}/90</TableCell>
                             <TableCell>{formatarTempo(tempoDia2)}</TableCell>
                             <TableCell className="text-sm">{getDificuldadeLabel(simulado.dificuldadeDia2)}</TableCell>
-                            <TableCell className="font-black text-lg">{total}/180</TableCell>
+                            <TableCell className="font-semibold text-lg">{total}/180</TableCell>
                             <TableCell className="font-bold">{simulado.redacaoNota > 0 ? simulado.redacaoNota : "-"}</TableCell>
                             <TableCell className="text-right">
                               <div className="flex items-center justify-end gap-2">

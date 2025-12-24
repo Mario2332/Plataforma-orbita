@@ -98,7 +98,7 @@ export default function AlunoSimuladosReadOnly({ data }: Props) {
                       content={({ active, payload }) => {
                         if (active && payload && payload.length) {
                           return (
-                            <div className="bg-background border rounded-lg p-2 shadow-lg">
+                            <div className="bg-background border rounded-lg p-2 shadow">
                               <p className="text-sm font-medium">{payload[0].payload.nome}</p>
                               <p className="text-sm text-muted-foreground">{payload[0].payload.data}</p>
                               <p className="text-sm font-bold text-primary">

@@ -150,17 +150,17 @@ export default function DashboardLayout({
         <div className="flex flex-col items-center gap-8 p-8 max-w-md w-full">
           <div className="flex flex-col items-center gap-6">
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur-none opacity-50 group-hover:opacity-75 transition-opacity"></div>
               <div className="relative">
                 <img
                   src={APP_LOGO}
                   alt={APP_TITLE}
-                  className="h-24 w-24 rounded-2xl object-cover shadow-2xl border-4 border-white dark:border-gray-800"
+                  className="h-24 w-24 rounded-lg object-cover shadow-sm border-4 border-white dark:border-gray-800"
                 />
               </div>
             </div>
             <div className="text-center space-y-2">
-              <h1 className="text-3xl font-black tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">{APP_TITLE}</h1>
+              <h1 className="text-3xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">{APP_TITLE}</h1>
               <p className="text-sm font-semibold text-muted-foreground">
                 Faça login para continuar
               </p>
@@ -171,7 +171,7 @@ export default function DashboardLayout({
               window.location.href = getLoginUrl();
             }}
             size="lg"
-            className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-lg hover:shadow-2xl transition-all font-bold border-0"
+            className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow hover:shadow-sm transition-all font-bold border-0"
           >
             Entrar
           </Button>
@@ -284,7 +284,7 @@ function DashboardLayoutContent({
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
                   <img
                     src={APP_LOGO}
-                    className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-emerald-200 dark:ring-emerald-800 shadow-lg"
+                    className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-emerald-200 dark:ring-emerald-800 shadow"
                     alt="Logo"
                   />
                   <button
@@ -301,11 +301,11 @@ function DashboardLayoutContent({
                       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50"></div>
                       <img
                         src={APP_LOGO}
-                        className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-emerald-200 dark:ring-emerald-800 shrink-0 shadow-lg"
+                        className="relative h-10 w-10 rounded-xl object-contain ring-2 ring-emerald-200 dark:ring-emerald-800 shrink-0 shadow"
                         alt="Logo"
                       />
                     </div>
-                    <span className="font-black text-lg tracking-tight truncate bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    <span className="font-semibold text-lg tracking-tight truncate bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                       {APP_TITLE}
                     </span>
                   </div>
@@ -343,7 +343,7 @@ function DashboardLayoutContent({
                         tooltip={item.label}
                         className={`h-11 transition-all font-semibold rounded-xl mb-1 ${
                           isActive 
-                            ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg hover:from-emerald-600 hover:to-teal-600" 
+                            ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow hover:from-emerald-600 hover:to-teal-600" 
                             : "hover:bg-emerald-100 dark:hover:bg-emerald-900/30 hover:shadow-md"
                         }`}
                       >
@@ -436,11 +436,11 @@ function DashboardLayoutContent({
                   </svg>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-green-500 rounded-full blur-md opacity-50"></div>
-                <Avatar className="relative h-11 w-11 border-2 border-white dark:border-gray-800 shadow-lg">
+                <Avatar className="relative h-11 w-11 border-2 border-white dark:border-gray-800 shadow">
                   {userData?.photoURL && (
                     <AvatarImage src={userData.photoURL} alt={userData?.name || "Foto de perfil"} />
                   )}
-                  <AvatarFallback className="text-sm font-black bg-gradient-to-br from-red-500 to-green-500 text-white">
+                  <AvatarFallback className="text-sm font-semibold bg-gradient-to-br from-red-500 to-green-500 text-white">
                     {userData?.name?.charAt(0).toUpperCase() || "?"}
                   </AvatarFallback>
                 </Avatar>

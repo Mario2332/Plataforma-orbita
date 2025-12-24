@@ -80,9 +80,9 @@ export function EstatisticasMetasCards({ metas }: EstatisticasMetasCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up">
       {/* Metas Ativas */}
-      <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group">
+      <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-none group-hover:scale-150 transition-transform duration-700" />
         
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -97,9 +97,9 @@ export function EstatisticasMetasCards({ metas }: EstatisticasMetasCardsProps) {
       </Card>
 
       {/* Metas Concluídas */}
-      <Card className="relative overflow-hidden border-2 hover:border-green-500 transition-all duration-500 hover:shadow-2xl hover:shadow-green-500/20 group">
+      <Card className="relative overflow-hidden border-2 hover:border-green-500 transition-all duration-500 hover:shadow-sm hover:shadow-green-500/20 group">
         <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 rounded-full blur-none group-hover:scale-150 transition-transform duration-700" />
         
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -114,9 +114,9 @@ export function EstatisticasMetasCards({ metas }: EstatisticasMetasCardsProps) {
       </Card>
 
       {/* Taxa de Conclusão */}
-      <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 group">
+      <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-sm hover:shadow-purple-500/20 group">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-none group-hover:scale-150 transition-transform duration-700" />
         
         <CardHeader className="pb-3">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">

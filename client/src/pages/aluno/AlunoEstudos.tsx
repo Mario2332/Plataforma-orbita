@@ -389,7 +389,7 @@ export default function AlunoEstudos() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-primary"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-primary animate-pulse" />
+            <Zap className="h-5 w-5 text-primary animate-pulse" />
           </div>
         </div>
       </div>
@@ -399,25 +399,25 @@ export default function AlunoEstudos() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-4 border-2 border-white/20 dark:border-white/10 backdrop-blur-none shadow-sm animate-slide-up">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-none animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-none animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
         <div className="relative flex items-center justify-between">
           <div className="space-y-3">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-                <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-2xl shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur-none opacity-50 animate-pulse-slow" />
+                <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
                   <BookOpen className="h-10 w-10 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient">
+                <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600  animate-gradient">
                   Estudos
                 </h1>
               </div>
@@ -431,7 +431,7 @@ export default function AlunoEstudos() {
             <DialogTrigger asChild>
               <Button 
                 size="lg"
-                className="relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 hover:from-emerald-600 hover:via-teal-600 hover:to-emerald-600 shadow-xl hover:shadow-2xl transition-all duration-300 font-bold border-0"
+                className="relative overflow-hidden bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 hover:from-emerald-600 hover:via-teal-600 hover:to-emerald-600 shadow-sm hover:shadow-sm transition-all duration-300 font-bold border-0"
                 onClick={() => {
                   setEditandoId(null);
                   setFormData({
@@ -451,13 +451,13 @@ export default function AlunoEstudos() {
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto border-2">
               <DialogHeader>
-                <DialogTitle className="text-2xl font-black">{editandoId ? "Editar Sessão de Estudo" : "Registrar Sessão de Estudo"}</DialogTitle>
+                <DialogTitle className="text-2xl font-semibold">{editandoId ? "Editar Sessão de Estudo" : "Registrar Sessão de Estudo"}</DialogTitle>
                 <DialogDescription className="text-base">
                   {editandoId ? "Atualize os detalhes da sua sessão de estudo" : "Preencha os detalhes da sua sessão de estudo"}
                 </DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmit}>
-                <div className="grid gap-6 py-6">
+                <div className="grid gap-4 py-3">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="data" className="text-sm font-semibold">Data</Label>
@@ -571,15 +571,15 @@ export default function AlunoEstudos() {
       </div>
 
       {/* Cronômetro Premium */}
-      <Card className="border-2 hover:shadow-2xl transition-all duration-500 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+      <Card className="border-2 hover:shadow-sm transition-all duration-500 animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="flex items-center gap-3 text-2xl font-black">
+              <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50" />
-                  <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-xl">
-                    <Timer className="h-6 w-6 text-white" />
+                  <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-sm">
+                    <Timer className="h-4 w-4 text-white" />
                   </div>
                 </div>
                 Cronômetro de Estudo
@@ -591,12 +591,12 @@ export default function AlunoEstudos() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-4">
             {/* Display do tempo com design moderno */}
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 rounded-3xl blur-2xl animate-pulse-slow" />
-              <div className="relative px-12 py-8 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-3xl border-2 border-emerald-200 dark:border-emerald-800">
-                <div className="text-7xl font-mono font-black tabular-nums bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 rounded-lg blur-none animate-pulse-slow" />
+              <div className="relative px-12 py-8 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-lg border-2 border-emerald-200 dark:border-emerald-800">
+                <div className="text-7xl font-mono font-semibold tabular-nums bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 ">
                   {formatarTempo(tempoDecorrido)}
                 </div>
               </div>
@@ -608,18 +608,18 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={iniciarCronometro} 
                   size="lg"
-                  className="relative overflow-hidden bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 shadow-xl hover:shadow-2xl hover:shadow-teal-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 shadow-sm hover:shadow-sm hover:shadow-teal-500/30 transition-all duration-300 font-bold px-8 py-3 text-lg"
                 >
-                  <Play className="h-6 w-6 mr-2" />
+                  <Play className="h-4 w-4 mr-2" />
                   Iniciar
                 </Button>
               ) : (
                 <Button 
                   onClick={pausarCronometro} 
                   size="lg"
-                  className="relative overflow-hidden bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-700 hover:to-indigo-700 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-700 hover:to-indigo-700 shadow-sm hover:shadow-sm hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-3 text-lg"
                 >
-                  <Pause className="h-6 w-6 mr-2" />
+                  <Pause className="h-4 w-4 mr-2" />
                   Pausar
                 </Button>
               )}
@@ -628,9 +628,9 @@ export default function AlunoEstudos() {
                 onClick={resetarCronometro} 
                 size="lg"
                 variant="outline"
-                className="border-2 hover:bg-gradient-to-r hover:from-gray-500 hover:to-gray-600 hover:text-white hover:border-transparent transition-all duration-300 font-bold px-8 py-6 text-lg"
+                className="border-2 hover:bg-gradient-to-r hover:from-gray-500 hover:to-gray-600 hover:text-white hover:border-transparent transition-all duration-300 font-bold px-8 py-3 text-lg"
               >
-                <RotateCcw className="h-6 w-6 mr-2" />
+                <RotateCcw className="h-4 w-4 mr-2" />
                 Resetar
               </Button>
               
@@ -638,9 +638,9 @@ export default function AlunoEstudos() {
                 onClick={salvarCronometro} 
                 size="lg"
                 disabled={tempoDecorrido === 0}
-                className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-indigo-500 hover:from-emerald-600 hover:to-indigo-600 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-6 text-lg disabled:opacity-50"
+                className="relative overflow-hidden bg-gradient-to-r from-emerald-500 to-indigo-500 hover:from-emerald-600 hover:to-indigo-600 shadow-sm hover:shadow-sm hover:shadow-emerald-500/30 transition-all duration-300 font-bold px-8 py-3 text-lg disabled:opacity-50"
               >
-                <Save className="h-6 w-6 mr-2" />
+                <Save className="h-4 w-4 mr-2" />
                 Salvar Sessão
               </Button>
               
@@ -648,9 +648,9 @@ export default function AlunoEstudos() {
                 onClick={() => setDialogTempoOpen(true)} 
                 size="lg"
                 variant="outline"
-                className="border-2 border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 font-bold px-8 py-6 text-lg"
+                className="border-2 border-emerald-500 hover:bg-emerald-500 hover:text-white transition-all duration-300 font-bold px-8 py-3 text-lg"
               >
-                <Target className="h-6 w-6 mr-2" />
+                <Target className="h-4 w-4 mr-2" />
                 Definir Tempo
               </Button>
               
@@ -658,9 +658,9 @@ export default function AlunoEstudos() {
                 onClick={ativarModoFoco} 
                 size="lg"
                 variant="outline"
-                className="border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white transition-all duration-300 font-bold px-8 py-6 text-lg"
+                className="border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white transition-all duration-300 font-bold px-8 py-3 text-lg"
               >
-                <Maximize2 className="h-6 w-6 mr-2" />
+                <Maximize2 className="h-4 w-4 mr-2" />
                 Modo Foco
               </Button>
             </div>
@@ -691,7 +691,7 @@ export default function AlunoEstudos() {
             )}
             
             {cronometroAtivo && (
-              <div className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500/20 to-emerald-500/20 rounded-full border-2 border-teal-500/30 backdrop-blur-sm animate-pulse-slow">
+              <div className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-teal-500/20 to-emerald-500/20 rounded-full border-2 border-teal-500/30 backdrop-blur-sm animate-pulse-slow">
                 <div className="w-3 h-3 bg-teal-500 rounded-full animate-ping" />
                 <p className="text-sm font-bold text-teal-700 dark:text-teal-300">
                   Cronômetro ativo - Continue estudando!
@@ -703,13 +703,13 @@ export default function AlunoEstudos() {
       </Card>
 
       {/* Lista de Estudos Premium */}
-      <Card className="border-2 hover:shadow-xl transition-shadow animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      <Card className="border-2 hover:shadow-sm transition-shadow animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-2xl font-black">
+          <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl blur-md opacity-50" />
-              <div className="relative p-3 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl shadow-xl">
-                <BookOpen className="h-6 w-6 text-white" />
+              <div className="relative p-3 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-xl shadow-sm">
+                <BookOpen className="h-4 w-4 text-white" />
               </div>
             </div>
             Histórico de Estudos
@@ -720,8 +720,8 @@ export default function AlunoEstudos() {
           {estudos.length === 0 ? (
             <div className="text-center py-16">
               <div className="relative mx-auto w-24 h-24 mb-6">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-indigo-500 rounded-full blur-xl opacity-30" />
-                <div className="relative p-6 bg-gradient-to-br from-emerald-500/10 to-indigo-500/10 rounded-full flex items-center justify-center border-2 border-emerald-200 dark:border-emerald-800">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-indigo-500 rounded-full blur-none opacity-30" />
+                <div className="relative p-4 bg-gradient-to-br from-emerald-500/10 to-indigo-500/10 rounded-full flex items-center justify-center border-2 border-emerald-200 dark:border-emerald-800">
                   <BookOpen className="h-12 w-12 text-emerald-500" />
                 </div>
               </div>
@@ -853,8 +853,8 @@ export default function AlunoEstudos() {
       <Dialog open={dialogTempoOpen} onOpenChange={setDialogTempoOpen}>
         <DialogContent className="border-2">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-black flex items-center gap-2">
-              <Target className="h-6 w-6 text-emerald-500" />
+            <DialogTitle className="text-2xl font-semibold flex items-center gap-2">
+              <Target className="h-4 w-4 text-emerald-500" />
               Definir Tempo de Estudos
             </DialogTitle>
             <DialogDescription className="text-base">
@@ -908,31 +908,31 @@ export default function AlunoEstudos() {
       {modoFoco && (
         <div className="fixed inset-0 z-50 bg-gradient-to-br from-emerald-950 via-indigo-950 to-teal-950 flex items-center justify-center">
           {/* Elementos decorativos */}
-          <div className="absolute top-20 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 left-20 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-float-delayed" />
+          <div className="absolute top-20 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-none animate-float" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-teal-500/10 rounded-full blur-none animate-float-delayed" />
           
-          <div className="relative z-10 flex flex-col items-center gap-12 p-8">
+          <div className="relative z-10 flex flex-col items-center gap-12 p-4">
             {/* Botão fechar */}
             <Button
               onClick={desativarModoFoco}
               size="lg"
               variant="ghost"
-              className="absolute top-8 right-8 text-white hover:bg-white/10 rounded-full h-14 w-14 p-0"
+              className="absolute top-4 right-8 text-white hover:bg-white/10 rounded-full h-14 w-14 p-0"
             >
-              <X className="h-8 w-8" />
+              <X className="h-5 w-5" />
             </Button>
             
             {/* Título */}
             <div className="text-center space-y-2">
-              <h2 className="text-4xl font-black text-white">Modo Foco</h2>
+              <h2 className="text-2xl font-semibold text-white">Modo Foco</h2>
               <p className="text-xl text-emerald-200 font-medium">Concentre-se nos seus estudos</p>
             </div>
             
             {/* Cronômetro gigante */}
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-teal-500/30 to-emerald-500/30 rounded-[4rem] blur-3xl animate-pulse-slow" />
-              <div className="relative px-20 py-16 bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-[4rem] border-4 border-emerald-400/30 backdrop-blur-xl">
-                <div className="text-[10rem] font-mono font-black tabular-nums text-white drop-shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-teal-500/30 to-emerald-500/30 rounded-[4rem] blur-none animate-pulse-slow" />
+              <div className="relative px-20 py-16 bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-[4rem] border-4 border-emerald-400/30 backdrop-blur-none">
+                <div className="text-[10rem] font-mono font-semibold tabular-nums text-white drop-shadow-sm">
                   {formatarTempo(tempoDecorrido)}
                 </div>
               </div>
@@ -947,7 +947,7 @@ export default function AlunoEstudos() {
                 </div>
                 <div className="relative h-6 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
                   <div 
-                    className="absolute h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 rounded-full shadow-lg shadow-teal-500/50"
+                    className="absolute h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 rounded-full shadow shadow-teal-500/50"
                     style={{ width: `${progressoPercentual}%` }}
                   />
                 </div>
@@ -955,12 +955,12 @@ export default function AlunoEstudos() {
             )}
             
             {/* Botões de controle */}
-            <div className="flex gap-6">
+            <div className="flex gap-4">
               {!cronometroAtivo ? (
                 <Button 
                   onClick={iniciarCronometro} 
                   size="lg"
-                  className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-2xl shadow-teal-500/50 font-bold px-12 py-8 text-2xl rounded-2xl"
+                  className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-sm shadow-teal-500/50 font-bold px-12 py-8 text-2xl rounded-lg"
                 >
                   <Play className="h-10 w-10 mr-3" />
                   Iniciar
@@ -969,7 +969,7 @@ export default function AlunoEstudos() {
                 <Button 
                   onClick={pausarCronometro} 
                   size="lg"
-                  className="bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white shadow-2xl shadow-emerald-500/50 font-bold px-12 py-8 text-2xl rounded-2xl"
+                  className="bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 text-white shadow-sm shadow-emerald-500/50 font-bold px-12 py-8 text-2xl rounded-lg"
                 >
                   <Pause className="h-10 w-10 mr-3" />
                   Pausar
@@ -980,7 +980,7 @@ export default function AlunoEstudos() {
                 onClick={resetarCronometro} 
                 size="lg"
                 variant="outline"
-                className="border-4 border-white/30 hover:bg-white/10 text-white font-bold px-12 py-8 text-2xl rounded-2xl backdrop-blur-sm"
+                className="border-4 border-white/30 hover:bg-white/10 text-white font-bold px-12 py-8 text-2xl rounded-lg backdrop-blur-sm"
               >
                 <RotateCcw className="h-10 w-10 mr-3" />
                 Resetar

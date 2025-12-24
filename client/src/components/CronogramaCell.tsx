@@ -68,7 +68,7 @@ const CronogramaCell = memo(function CronogramaCell({
 
   return (
     <td
-      className="border-2 border-border p-0 h-12 relative group transition-all hover:shadow-lg"
+      className="border-2 border-border p-0 h-12 relative group transition-all hover:shadow"
       style={{ backgroundColor: slot.color }}
       draggable={!isEditing && slot.activity !== ""}
       onDragStart={onDragStart}

@@ -359,7 +359,7 @@ export default function MentorAlunos() {
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
                       return (
-                        <div className="bg-background border rounded-lg p-2 shadow-lg">
+                        <div className="bg-background border rounded-lg p-2 shadow">
                           <p className="text-sm font-medium">{payload[0].payload.data}</p>
                           <p className="text-sm text-muted-foreground">
                             Total: {payload[0].value} alunos

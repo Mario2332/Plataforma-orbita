@@ -442,7 +442,7 @@ export default function AlunoRedacoes() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-orange-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <PenTool className="h-8 w-8 text-orange-500 animate-pulse" />
+            <PenTool className="h-5 w-5 text-orange-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -452,30 +452,30 @@ export default function AlunoRedacoes() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos flutuantes */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-orange-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-red-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-orange-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-red-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
       {/* Header Premium com Glassmorphism */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500/20 via-red-500/10 to-amber-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-orange-500/20 via-red-500/10 to-amber-500/10 p-4 border-2 border-white/20 dark:border-white/10 backdrop-blur-none shadow-sm animate-slide-up">
         {/* Efeitos de luz */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-red-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-500/20 to-transparent rounded-full blur-none animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-red-500/20 to-transparent rounded-full blur-none animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
         {/* Partículas decorativas */}
         <div className="absolute top-10 right-20 w-2 h-2 bg-orange-500 rounded-full animate-ping" />
         <div className="absolute top-20 right-40 w-1.5 h-1.5 bg-red-500 rounded-full animate-ping" style={{ animationDelay: '0.5s' }} />
         <div className="absolute bottom-10 left-20 w-2 h-2 bg-amber-500 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
         
-        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-              <div className="relative bg-gradient-to-br from-orange-500 via-red-500 to-amber-500 p-4 rounded-2xl shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg blur-none opacity-50 animate-pulse-slow" />
+              <div className="relative bg-gradient-to-br from-orange-500 via-red-500 to-amber-500 p-4 rounded-lg shadow-sm">
                 <PenTool className="h-10 w-10 text-white" />
               </div>
             </div>
             <div>
-              <h1 className="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-orange-600 via-red-600 to-amber-600 bg-clip-text text-transparent animate-gradient">
+              <h1 className="text-2xl md:text-2xl font-semibold tracking-tight bg-gradient-to-r from-orange-600 via-red-600 to-amber-600  animate-gradient">
                 Redações
               </h1>
               <p className="text-lg text-muted-foreground font-medium mt-1">
@@ -505,14 +505,14 @@ export default function AlunoRedacoes() {
               }
             }}>
               <DialogTrigger asChild>
-                <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-lg shadow-orange-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105">
+                <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow shadow-orange-500/25 transition-all duration-300 hover:shadow-sm hover:shadow-orange-500/30 hover:scale-[1.01]">
                   <Plus className="h-4 w-4 mr-2" />
                   Nova Redação
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="text-xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                  <DialogTitle className="text-xl font-bold bg-gradient-to-r from-orange-600 to-red-600 ">
                     {editandoId ? "Editar Redação" : "Registrar Nova Redação"}
                   </DialogTitle>
                   <DialogDescription>
@@ -656,10 +656,10 @@ export default function AlunoRedacoes() {
                     </div>
 
                     {/* Nota Total Calculada */}
-                    <div className="p-5 rounded-2xl bg-gradient-to-r from-orange-100 via-red-100 to-amber-100 dark:from-orange-950/50 dark:via-red-950/50 dark:to-amber-950/50 border-2 border-orange-300 dark:border-orange-800">
+                    <div className="p-5 rounded-lg bg-gradient-to-r from-orange-100 via-red-100 to-amber-100 dark:from-orange-950/50 dark:via-red-950/50 dark:to-amber-950/50 border-2 border-orange-300 dark:border-orange-800">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-orange-800 dark:text-orange-300">Nota Total (calculada automaticamente)</span>
-                        <span className="text-4xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">{notaTotalForm}</span>
+                        <span className="text-2xl font-semibold bg-gradient-to-r from-orange-600 to-red-600 ">{notaTotalForm}</span>
                       </div>
                     </div>
                   </div>
@@ -727,24 +727,24 @@ export default function AlunoRedacoes() {
       </div>
 
       {/* Dashboard - Cards de Métricas Premium */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Card Média Geral */}
-        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-none group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold">Média Geral (últimas 5)</CardTitle>
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
-              <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-xl">
-                <TrendingUp className="h-6 w-6 text-white" />
+              <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-sm">
+                <TrendingUp className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-4xl font-black bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
+              <div className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 ">
                 {estatisticas.mediaGeral}
               </div>
               <span className="text-lg font-bold text-muted-foreground">pts</span>
@@ -756,9 +756,9 @@ export default function AlunoRedacoes() {
         </Card>
 
         {/* Card Melhor Nota */}
-        <Card className="relative overflow-hidden border-2 hover:border-yellow-500 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-500/20 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <Card className="relative overflow-hidden border-2 hover:border-yellow-500 transition-all duration-500 hover:shadow-sm hover:shadow-yellow-500/20 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-full blur-none group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <div className="space-y-1">
@@ -769,14 +769,14 @@ export default function AlunoRedacoes() {
             </div>
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
-              <div className="relative p-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl shadow-xl">
-                <Award className="h-6 w-6 text-white" />
+              <div className="relative p-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl shadow-sm">
+                <Award className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-4xl font-black bg-gradient-to-r from-yellow-600 via-yellow-500 to-orange-500 bg-clip-text text-transparent">
+              <div className="text-2xl font-semibold bg-gradient-to-r from-yellow-600 via-yellow-500 to-orange-500 ">
                 {estatisticas.melhorNota}
               </div>
               <span className="text-lg font-bold text-muted-foreground">pts</span>
@@ -788,22 +788,22 @@ export default function AlunoRedacoes() {
         </Card>
 
         {/* Card Total de Redações */}
-        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm hover:shadow-emerald-500/20 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-none group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-sm font-semibold">Redações Produzidas</CardTitle>
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl blur-md opacity-50 animate-pulse-slow" />
-              <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-xl">
-                <FileText className="h-6 w-6 text-white" />
+              <div className="relative p-3 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-sm">
+                <FileText className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className="text-4xl font-black bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-500 bg-clip-text text-transparent">
+              <div className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-500 ">
                 {estatisticas.totalRedacoes}
               </div>
               <span className="text-lg font-bold text-muted-foreground">textos</span>
@@ -815,7 +815,7 @@ export default function AlunoRedacoes() {
         </Card>
 
         {/* Card Tempo Médio */}
-        <Card className={`relative overflow-hidden border-2 transition-all duration-500 hover:shadow-2xl group animate-slide-up ${
+        <Card className={`relative overflow-hidden border-2 transition-all duration-500 hover:shadow-sm group animate-slide-up ${
           estatisticas.tempoExcessivo 
             ? "hover:border-red-500 hover:shadow-red-500/20 border-red-300" 
             : estatisticas.tempoAlerta 
@@ -835,7 +835,7 @@ export default function AlunoRedacoes() {
               : estatisticas.tempoAlerta 
                 ? "from-yellow-500/20" 
                 : "from-purple-500/20"
-          } to-transparent rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none`} />
+          } to-transparent rounded-full blur-none group-hover:scale-150 transition-transform duration-700 pointer-events-none`} />
           
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className={`text-sm font-semibold flex items-center gap-2 ${
@@ -860,19 +860,19 @@ export default function AlunoRedacoes() {
                   : estatisticas.tempoAlerta 
                     ? "from-yellow-500 to-amber-500" 
                     : "from-purple-500 to-pink-500"
-              } rounded-xl shadow-xl`}>
-                <Clock className="h-6 w-6 text-white" />
+              } rounded-xl shadow-sm`}>
+                <Clock className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-baseline gap-2">
-              <div className={`text-4xl font-black ${
+              <div className={`text-2xl font-semibold ${
                 estatisticas.tempoExcessivo 
                   ? "text-red-600" 
                   : estatisticas.tempoAlerta 
                     ? "text-yellow-600" 
-                    : "bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 "
               }`}>
                 {estatisticas.tempoMedio.horas}h{estatisticas.tempoMedio.minutos}
               </div>
@@ -888,7 +888,7 @@ export default function AlunoRedacoes() {
       </div>
 
       {/* Meta de Nota */}
-      <Card className="relative overflow-hidden border-2 hover:border-orange-500 transition-all duration-500 hover:shadow-xl group animate-slide-up z-10" style={{ animationDelay: '0.5s' }}>
+      <Card className="relative overflow-hidden border-2 hover:border-orange-500 transition-all duration-500 hover:shadow-sm group animate-slide-up z-10" style={{ animationDelay: '0.5s' }}>
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         
         <CardHeader className="pb-3">
@@ -899,7 +899,7 @@ export default function AlunoRedacoes() {
                 <Target className="h-5 w-5 text-white" />
               </div>
             </div>
-            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">Minha Meta</span>
+            <span className="bg-gradient-to-r from-orange-600 to-red-600 ">Minha Meta</span>
           </CardTitle>
           <CardDescription>
             Defina sua meta de nota para acompanhar no gráfico de evolução
@@ -939,7 +939,7 @@ export default function AlunoRedacoes() {
 
       {/* Gráfico de Evolução */}
       {redacoesFiltradas.length > 0 && (
-        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-xl animate-slide-up" style={{ animationDelay: '0.6s' }}>
+        <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm animate-slide-up" style={{ animationDelay: '0.6s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent pointer-events-none" />
           
           <CardHeader>
@@ -950,7 +950,7 @@ export default function AlunoRedacoes() {
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
               </div>
-              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Evolução das Notas</span>
+              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 ">Evolução das Notas</span>
             </CardTitle>
             <CardDescription>
               Acompanhe sua trajetória ao longo do tempo
@@ -1002,9 +1002,9 @@ export default function AlunoRedacoes() {
 
       {/* Diagnóstico por Competência */}
       {redacoesFiltradas.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Gráfico de Radar */}
-          <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-xl animate-slide-up" style={{ animationDelay: '0.7s' }}>
+          <Card className="relative overflow-hidden border-2 hover:border-purple-500 transition-all duration-500 hover:shadow-sm animate-slide-up" style={{ animationDelay: '0.7s' }}>
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent pointer-events-none" />
             
             <CardHeader>
@@ -1015,7 +1015,7 @@ export default function AlunoRedacoes() {
                     <Zap className="h-5 w-5 text-white" />
                   </div>
                 </div>
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Equilíbrio entre Competências</span>
+                <span className="bg-gradient-to-r from-purple-600 to-pink-600 ">Equilíbrio entre Competências</span>
               </CardTitle>
               <CardDescription>
                 Visualize o equilíbrio das suas notas nas 5 competências
@@ -1057,7 +1057,7 @@ export default function AlunoRedacoes() {
           </Card>
 
           {/* Gráfico de Barras */}
-          <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-xl animate-slide-up" style={{ animationDelay: '0.8s' }}>
+          <Card className="relative overflow-hidden border-2 hover:border-emerald-500 transition-all duration-500 hover:shadow-sm animate-slide-up" style={{ animationDelay: '0.8s' }}>
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent pointer-events-none" />
             
             <CardHeader>
@@ -1068,7 +1068,7 @@ export default function AlunoRedacoes() {
                     <Award className="h-5 w-5 text-white" />
                   </div>
                 </div>
-                <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">Média por Competência</span>
+                <span className="bg-gradient-to-r from-emerald-600 to-green-600 ">Média por Competência</span>
               </CardTitle>
               <CardDescription>
                 Compare suas médias históricas em cada competência
@@ -1119,19 +1119,19 @@ export default function AlunoRedacoes() {
                     >
                       <div className="flex items-center gap-3">
                         <div 
-                          className="w-4 h-4 rounded-full shadow-lg" 
+                          className="w-4 h-4 rounded-full shadow" 
                           style={{ backgroundColor: item.cor }}
                         />
                         <span className={`text-sm font-medium ${isPontoFraco ? "font-bold text-red-600 dark:text-red-400" : ""}`}>
                           {item.nome} - {item.descricao}
                         </span>
                         {isPontoFraco && (
-                          <span className="text-xs bg-gradient-to-r from-red-500 to-rose-500 text-white px-2 py-1 rounded-full font-bold shadow-lg">
+                          <span className="text-xs bg-gradient-to-r from-red-500 to-rose-500 text-white px-2 py-1 rounded-full font-bold shadow">
                             ⚠️ Ponto Fraco
                           </span>
                         )}
                       </div>
-                      <span className={`font-black text-lg ${isPontoFraco ? "text-red-600 dark:text-red-400" : ""}`}>
+                      <span className={`font-semibold text-lg ${isPontoFraco ? "text-red-600 dark:text-red-400" : ""}`}>
                         {item.media}
                       </span>
                     </div>
@@ -1144,7 +1144,7 @@ export default function AlunoRedacoes() {
       )}
 
       {/* Histórico Detalhado */}
-      <Card className="relative overflow-hidden border-2 hover:border-gray-400 transition-all duration-500 hover:shadow-xl animate-slide-up" style={{ animationDelay: '0.9s' }}>
+      <Card className="relative overflow-hidden border-2 hover:border-gray-400 transition-all duration-500 hover:shadow-sm animate-slide-up" style={{ animationDelay: '0.9s' }}>
         <CardHeader 
           className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors rounded-t-xl"
           onClick={() => setShowHistorico(!showHistorico)}
@@ -1174,7 +1174,7 @@ export default function AlunoRedacoes() {
             {redacoesFiltradas.length === 0 ? (
               <div className="text-center py-12">
                 <div className="relative inline-block">
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-full blur-xl opacity-20" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-full blur-none opacity-20" />
                   <FileText className="h-16 w-16 mx-auto text-orange-300 relative" />
                 </div>
                 <p className="mt-4 text-lg font-medium text-muted-foreground">Nenhuma redação registrada ainda.</p>
@@ -1185,7 +1185,7 @@ export default function AlunoRedacoes() {
                 {redacoesFiltradas.map((redacao, index) => (
                   <div 
                     key={redacao.id}
-                    className="p-5 rounded-2xl border-2 hover:border-orange-300 hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 animate-slide-up"
+                    className="p-5 rounded-lg border-2 hover:border-orange-300 hover:shadow transition-all duration-300 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 animate-slide-up"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -1244,7 +1244,7 @@ export default function AlunoRedacoes() {
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-center">
-                          <div className="text-4xl font-black bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                          <div className="text-2xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 ">
                             {redacao.notaTotal}
                           </div>
                           <div className="text-xs text-muted-foreground font-medium">pontos</div>
@@ -1285,12 +1285,12 @@ export default function AlunoRedacoes() {
           <CardContent className="py-16">
             <div className="text-center">
               <div className="relative inline-block mb-6">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-full blur-2xl opacity-30 animate-pulse-slow" />
-                <div className="relative bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 p-6 rounded-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-500 rounded-full blur-none opacity-30 animate-pulse-slow" />
+                <div className="relative bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 p-4 rounded-full">
                   <PenTool className="h-16 w-16 text-orange-500" />
                 </div>
               </div>
-              <h3 className="text-2xl font-black mb-3 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-orange-600 to-red-600 ">
                 Comece a registrar suas redações!
               </h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
@@ -1298,7 +1298,7 @@ export default function AlunoRedacoes() {
               </p>
               <Button 
                 onClick={() => setIsDialogOpen(true)}
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-lg shadow-orange-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105"
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow shadow-orange-500/25 transition-all duration-300 hover:shadow-sm hover:shadow-orange-500/30 hover:scale-[1.01]"
                 size="lg"
               >
                 <Plus className="h-5 w-5 mr-2" />

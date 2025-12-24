@@ -208,26 +208,26 @@ export default function CronogramaAnual() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-emerald-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-none shadow-sm animate-slide-up">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-full blur-none animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-none animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
         <div className="relative">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
             <div className="space-y-3">
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-                  <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-2xl shadow-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur-none opacity-50 animate-pulse-slow" />
+                  <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 rounded-lg shadow-sm">
                     <Calendar className="h-10 w-10 text-white" />
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient">
+                  <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent animate-gradient">
                     Cronograma Anual
                   </h1>
                 </div>
@@ -236,7 +236,7 @@ export default function CronogramaAnual() {
             
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow-lg transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-6 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <Printer className="w-5 h-5" />
               Imprimir
@@ -252,13 +252,13 @@ export default function CronogramaAnual() {
       <div className="grid md:grid-cols-2 gap-4 animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <button
           onClick={() => setTipo("extensive")}
-          className={`relative overflow-hidden p-6 rounded-2xl border-2 font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1 ${
+          className={`relative overflow-hidden p-6 rounded-lg border-2 font-bold text-lg transition-all hover:shadow-sm hover:-translate-y-1 ${
             tipo === "extensive"
-              ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-emerald-400 shadow-xl shadow-emerald-500/30"
+              ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-emerald-400 shadow-sm shadow-emerald-500/30"
               : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-none" />
           <div className="relative flex items-center justify-center gap-3">
             <Target className="w-6 h-6" />
             <span>Cronograma Extensivo</span>
@@ -266,13 +266,13 @@ export default function CronogramaAnual() {
         </button>
         <button
           onClick={() => setTipo("intensive")}
-          className={`relative overflow-hidden p-6 rounded-2xl border-2 font-bold text-lg transition-all hover:shadow-xl hover:-translate-y-1 ${
+          className={`relative overflow-hidden p-6 rounded-lg border-2 font-bold text-lg transition-all hover:shadow-sm hover:-translate-y-1 ${
             tipo === "intensive"
-              ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-emerald-400 shadow-xl shadow-emerald-500/30"
+              ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-emerald-400 shadow-sm shadow-emerald-500/30"
               : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-emerald-300"
           }`}
         >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-none" />
           <div className="relative flex items-center justify-center gap-3">
             <Zap className="w-6 h-6" />
             <span>Cronograma Intensivo</span>
@@ -281,10 +281,10 @@ export default function CronogramaAnual() {
       </div>
 
       {/* Seletor de cronograma ativo Premium */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 p-6 border-2 border-emerald-200/50 dark:border-emerald-800/50 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-500/10 to-transparent rounded-full blur-3xl" />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 p-6 border-2 border-emerald-200/50 dark:border-emerald-800/50 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-500/10 to-transparent rounded-full blur-none" />
         <div className="relative">
-          <p className="font-black text-lg mb-4 flex items-center gap-2">
+          <p className="font-semibold text-lg mb-4 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-emerald-600" />
             Qual cronograma você está seguindo ativamente?
           </p>
@@ -316,14 +316,14 @@ export default function CronogramaAnual() {
       </div>
 
       {/* Barra de progresso Premium */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 shadow-2xl shadow-emerald-500/30 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 shadow-sm shadow-emerald-500/30 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-none" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-none" />
         
         <div className="relative">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xl font-black text-white">Progresso Geral</span>
-            <span className="text-3xl font-black text-white">
+            <span className="text-xl font-semibold text-white">Progresso Geral</span>
+            <span className="text-3xl font-semibold text-white">
               {progress.percentage}%
             </span>
           </div>
@@ -332,7 +332,7 @@ export default function CronogramaAnual() {
           </p>
           <div className="w-full bg-white/20 rounded-full h-4 backdrop-blur-sm">
             <div
-              className="bg-white h-4 rounded-full transition-all duration-500 shadow-lg"
+              className="bg-white h-4 rounded-full transition-all duration-500 shadow"
               style={{ width: `${progress.percentage}%` }}
             />
           </div>
@@ -340,7 +340,7 @@ export default function CronogramaAnual() {
       </div>
 
       {/* Barra de busca e controles Premium */}
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-6 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.4s' }}>
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-emerald-500" />
@@ -356,14 +356,14 @@ export default function CronogramaAnual() {
           <div className="flex gap-3">
             <button
               onClick={expandAll}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow-lg transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <ChevronsDown className="w-4 h-4" />
               Expandir
             </button>
             <button
               onClick={collapseAll}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow-lg transition-all hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-3 text-sm font-bold border-2 border-emerald-500/30 rounded-xl hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-teal-500/10 hover:shadow transition-all hover:-translate-y-0.5"
             >
               <ChevronsUp className="w-4 h-4" />
               Retrair
@@ -394,17 +394,17 @@ export default function CronogramaAnual() {
           return (
             <div 
               key={cycle.cycle} 
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-2 border-gray-100 dark:border-gray-800 hover:shadow-2xl transition-all animate-slide-up"
+              className="bg-white dark:bg-gray-900 rounded-lg shadow-sm overflow-hidden border-2 border-gray-100 dark:border-gray-800 hover:shadow-sm transition-all animate-slide-up"
               style={{ animationDelay: `${0.5 + index * 0.05}s` }}
             >
               <button
                 onClick={() => toggleCycle(cycle.cycle)}
                 className="w-full bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 px-6 py-5 border-b-2 border-emerald-100 dark:border-emerald-900 flex items-center justify-between hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 transition-all group"
               >
-                <h3 className="text-xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                   Ciclo {cycle.cycle}
                 </h3>
-                <div className="p-2 bg-emerald-500 rounded-xl group-hover:scale-110 transition-transform">
+                <div className="p-2 bg-emerald-500 rounded-xl group-hover:scale-[1.01] transition-transform">
                   {isExpanded ? (
                     <ChevronDown className="w-5 h-5 text-white" />
                   ) : (
@@ -417,7 +417,7 @@ export default function CronogramaAnual() {
                 <div className="p-6 space-y-6">
                   {cycle.subjects.map((subject, subjectIdx) => (
                     <div key={subjectIdx}>
-                      <h4 className="text-lg font-black mb-4 flex items-center gap-2">
+                      <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
                         <div className="w-1.5 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full" />
                         {subject.name}
                       </h4>
@@ -440,10 +440,10 @@ export default function CronogramaAnual() {
                             >
                               <button
                                 onClick={() => handleToggleTopico(topicId)}
-                                className="flex-shrink-0 mt-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-full transition-transform hover:scale-110"
+                                className="flex-shrink-0 mt-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-full transition-transform hover:scale-[1.01]"
                               >
                                 {isCompleted ? (
-                                  <CheckCircle2 className="w-6 h-6 text-green-600 drop-shadow-lg" />
+                                  <CheckCircle2 className="w-6 h-6 text-green-600 drop-shadow" />
                                 ) : (
                                   <Circle className="w-6 h-6 text-gray-400 group-hover:text-emerald-500 transition-colors" />
                                 )}
@@ -470,7 +470,7 @@ export default function CronogramaAnual() {
       </div>
 
       {cyclesToDisplay.length === 0 && !searchTerm.trim() && (
-        <div className="bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-12 text-center">
+        <div className="bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-lg p-12 text-center">
           <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-full flex items-center justify-center">
             <Calendar className="w-12 h-12 text-emerald-500" />
           </div>

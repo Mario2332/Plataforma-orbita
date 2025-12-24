@@ -111,23 +111,23 @@ export default function LoginAluno() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Elementos decorativos flutuantes */}
-      <div className="absolute top-20 left-20 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl animate-float-delayed" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-400/10 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-20 w-64 h-64 bg-emerald-400/20 rounded-full blur-none animate-float" />
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-400/20 rounded-full blur-none animate-float-delayed" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-400/10 rounded-full blur-none" />
 
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center relative z-10">
         {/* Lado Esquerdo - Informações Premium */}
         <div className="text-center md:text-left space-y-6 animate-fade-in">
           <div className="flex items-center justify-center md:justify-start gap-3">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full blur-xl opacity-50" />
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full blur-none opacity-50" />
               <img 
                 src="https://firebasestorage.googleapis.com/v0/b/plataforma-mentoria-mario.firebasestorage.app/o/Logo%2FLogo%20mentoria%20sem%20texto.png?alt=media&token=452fed10-1481-41ad-a4c1-ddd61b039409" 
                 alt="Logo Plataforma Órbita" 
-                className="w-16 h-16 object-contain relative z-10 drop-shadow-2xl"
+                className="w-16 h-16 object-contain relative z-10 drop-shadow-sm"
               />
             </div>
-            <h1 className="text-4xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
               Plataforma Órbita
             </h1>
           </div>
@@ -142,8 +142,8 @@ export default function LoginAluno() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border-2 border-emerald-200 hover:shadow-xl transition-all hover:scale-105">
-              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow-lg">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border-2 border-emerald-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg shadow">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -152,8 +152,8 @@ export default function LoginAluno() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-teal-50 p-5 rounded-xl border-2 border-teal-200 hover:shadow-xl transition-all hover:scale-105">
-              <div className="p-2 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-lg shadow-lg">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-teal-50 p-5 rounded-xl border-2 border-teal-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+              <div className="p-2 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-lg shadow">
                 <Target className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -162,8 +162,8 @@ export default function LoginAluno() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border-2 border-emerald-200 hover:shadow-xl transition-all hover:scale-105">
-              <div className="p-2 bg-gradient-to-br from-emerald-500 to-indigo-500 rounded-lg shadow-lg">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-emerald-50 p-5 rounded-xl border-2 border-emerald-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-indigo-500 rounded-lg shadow">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -172,8 +172,8 @@ export default function LoginAluno() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-indigo-50 p-5 rounded-xl border-2 border-indigo-200 hover:shadow-xl transition-all hover:scale-105">
-              <div className="p-2 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-lg shadow-lg">
+            <div className="flex items-start gap-3 bg-gradient-to-br from-white to-indigo-50 p-5 rounded-xl border-2 border-indigo-200 hover:shadow-sm transition-all hover:scale-[1.01]">
+              <div className="p-2 bg-gradient-to-br from-indigo-500 to-emerald-500 rounded-lg shadow">
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -185,9 +185,9 @@ export default function LoginAluno() {
         </div>
 
         {/* Lado Direito - Formulário Premium */}
-        <Card className="w-full shadow-2xl border-2 border-emerald-200 bg-white/95 backdrop-blur-sm animate-slide-up">
+        <Card className="w-full shadow-sm border-2 border-emerald-200 bg-white/95 backdrop-blur-sm animate-slide-up">
           <CardHeader className="bg-gradient-to-r from-emerald-50 to-teal-50 border-b-2 border-emerald-200">
-            <CardTitle className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent flex items-center gap-2">
+            <CardTitle className="text-3xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent flex items-center gap-2">
               <Zap className="w-8 h-8 text-emerald-500" />
               Área do Aluno
             </CardTitle>
@@ -200,13 +200,13 @@ export default function LoginAluno() {
               <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-emerald-100 to-teal-100 p-1 h-12">
                 <TabsTrigger 
                   value="login" 
-                  className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                  className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow"
                 >
                   Entrar
                 </TabsTrigger>
                 <TabsTrigger 
                   value="cadastro"
-                  className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                  className="font-bold data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow"
                 >
                   Criar Conta
                 </TabsTrigger>
@@ -245,7 +245,7 @@ export default function LoginAluno() {
 
                   <Button 
                     type="submit" 
-                    className="w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg shadow-lg hover:shadow-xl transition-all" 
+                    className="w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg shadow hover:shadow-sm transition-all" 
                     disabled={loading}
                   >
                     {loading ? (
@@ -334,7 +334,7 @@ export default function LoginAluno() {
 
                   <Button 
                     type="submit" 
-                    className="w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg shadow-lg hover:shadow-xl transition-all" 
+                    className="w-full h-12 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg shadow hover:shadow-sm transition-all" 
                     disabled={loading}
                   >
                     {loading ? (

@@ -143,7 +143,7 @@ export default function AlunoPlanoAcao() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
+            <Zap className="h-5 w-5 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ export default function AlunoPlanoAcao() {
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-lg">
+            <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow">
               <Plus className="mr-2 h-4 w-4" />
               Nova Pendência
             </Button>
@@ -256,21 +256,21 @@ export default function AlunoPlanoAcao() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20">
           <CardContent className="p-4 text-center">
-            <AlertTriangle className="h-8 w-8 mx-auto text-orange-500 mb-2" />
+            <AlertTriangle className="h-5 w-5 mx-auto text-orange-500 mb-2" />
             <p className="text-2xl font-bold text-orange-600">{planosPendentes.length}</p>
             <p className="text-sm text-orange-700 dark:text-orange-300">Pendentes</p>
           </CardContent>
         </Card>
         <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
           <CardContent className="p-4 text-center">
-            <CheckCircle2 className="h-8 w-8 mx-auto text-green-500 mb-2" />
+            <CheckCircle2 className="h-5 w-5 mx-auto text-green-500 mb-2" />
             <p className="text-2xl font-bold text-green-600">{planosResolvidos.length}</p>
             <p className="text-sm text-green-700 dark:text-green-300">Resolvidas</p>
           </CardContent>
         </Card>
         <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
           <CardContent className="p-4 text-center">
-            <BookOpen className="h-8 w-8 mx-auto text-emerald-500 mb-2" />
+            <BookOpen className="h-5 w-5 mx-auto text-emerald-500 mb-2" />
             <p className="text-2xl font-bold text-emerald-600">
               {planosPendentes.filter(p => p.motivoErro === "interpretacao").length}
             </p>
@@ -279,7 +279,7 @@ export default function AlunoPlanoAcao() {
         </Card>
         <Card className="border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20">
           <CardContent className="p-4 text-center">
-            <Target className="h-8 w-8 mx-auto text-purple-500 mb-2" />
+            <Target className="h-5 w-5 mx-auto text-purple-500 mb-2" />
             <p className="text-2xl font-bold text-purple-600">
               {planosPendentes.filter(p => p.motivoErro === "lacuna_teorica").length}
             </p>
@@ -297,7 +297,7 @@ export default function AlunoPlanoAcao() {
               value={prova}
               className="border-2 rounded-xl overflow-hidden bg-white dark:bg-gray-900"
             >
-              <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-gray-50 dark:hover:bg-gray-800">
+              <AccordionTrigger className="px-4 py-4 hover:no-underline hover:bg-gray-50 dark:hover:bg-gray-800">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg">
                     <Target className="h-5 w-5 text-white" />
@@ -310,7 +310,7 @@ export default function AlunoPlanoAcao() {
                   </div>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4">
+              <AccordionContent className="px-4 pb-4">
                 <div className="space-y-3 mt-2">
                   {planosProva.map((plano) => (
                     <div
@@ -321,7 +321,7 @@ export default function AlunoPlanoAcao() {
                         onClick={() => plano.id && handleResolver(plano.id)}
                         className="mt-1 flex-shrink-0"
                       >
-                        <Circle className="h-6 w-6 text-gray-400 hover:text-green-500 transition-colors" />
+                        <Circle className="h-4 w-4 text-gray-400 hover:text-green-500 transition-colors" />
                       </button>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">

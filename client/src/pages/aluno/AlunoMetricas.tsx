@@ -281,7 +281,7 @@ export default function AlunoMetricas() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-primary"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-primary animate-pulse" />
+            <Zap className="h-5 w-5 text-primary animate-pulse" />
           </div>
         </div>
       </div>
@@ -291,25 +291,25 @@ export default function AlunoMetricas() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-purple-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
       {/* Header Premium */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-500/20 via-emerald-500/10 to-pink-500/10 p-8 border-2 border-white/20 dark:border-white/10 backdrop-blur-xl shadow-2xl animate-slide-up">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-emerald-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-500/20 via-emerald-500/10 to-pink-500/10 p-4 border-2 border-white/20 dark:border-white/10 backdrop-blur-none shadow-sm animate-slide-up">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-none animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-emerald-500/20 to-transparent rounded-full blur-none animate-pulse-slow" style={{ animationDelay: '1s' }} />
         
-        <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+        <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="space-y-3">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-xl opacity-50 animate-pulse-slow" />
-                <div className="relative bg-gradient-to-br from-purple-500 via-emerald-500 to-pink-500 p-4 rounded-2xl shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur-none opacity-50 animate-pulse-slow" />
+                <div className="relative bg-gradient-to-br from-purple-500 via-emerald-500 to-pink-500 p-4 rounded-lg shadow-sm">
                   <BarChart3 className="h-10 w-10 text-white" />
                 </div>
               </div>
               <div>
-                <h1 className="text-5xl font-black tracking-tight bg-gradient-to-r from-purple-600 via-emerald-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
+                <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-purple-600 via-emerald-600 to-pink-600  animate-gradient">
                   Análise de Desempenho
                 </h1>
               </div>
@@ -319,7 +319,7 @@ export default function AlunoMetricas() {
             </p>
           </div>
           
-          <div className="flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-black/30 rounded-2xl border-2 border-white/30 backdrop-blur-sm">
+          <div className="flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-black/30 rounded-lg border-2 border-white/30 backdrop-blur-sm">
             <Calendar className="h-5 w-5 text-purple-500" />
             <Select value={periodo} onValueChange={(v) => setPeriodo(v as PeriodoFiltro)}>
               <SelectTrigger className="w-[180px] border-2 font-semibold">
@@ -339,86 +339,86 @@ export default function AlunoMetricas() {
       </div>
 
       {/* Cards de métricas premium */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
-        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-none" />
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Tempo Total</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <Clock className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <div className="text-3xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 ">
               {Math.floor(metricas.tempoTotal / 60)}h {metricas.tempoTotal % 60}m
             </div>
             <p className="text-xs text-muted-foreground mt-1 font-medium">de estudo dedicado</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.15s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-emerald-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.15s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-none" />
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Questões</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow">
               <BarChart3 className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-3xl font-black bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+            <div className="text-3xl font-semibold bg-gradient-to-r from-emerald-600 to-green-600 ">
               {metricas.questoesTotal}
             </div>
             <p className="text-xs text-muted-foreground mt-1 font-medium">questões resolvidas</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-purple-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.2s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-none" />
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Acertos</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow">
               <TrendingUp className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <div className="text-3xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 ">
               {metricas.acertosTotal}
             </div>
             <p className="text-xs text-muted-foreground mt-1 font-medium">questões corretas</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.25s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-amber-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.25s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-none" />
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Taxa de Acerto</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow">
               <Target className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+            <div className="text-3xl font-semibold bg-gradient-to-r from-amber-600 to-orange-600 ">
               {metricas.percentualAcerto}%
             </div>
             <p className="text-xs text-muted-foreground mt-1 font-medium">de aproveitamento</p>
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-2 hover:shadow-2xl hover:shadow-rose-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <Card className="relative overflow-hidden border-2 hover:shadow-sm hover:shadow-rose-500/20 transition-all duration-500 group animate-slide-up" style={{ animationDelay: '0.3s' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-none" />
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Dias de Estudo</CardTitle>
-            <div className="p-2 bg-gradient-to-br from-rose-500 to-red-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-rose-500 to-red-500 rounded-xl shadow">
               <Award className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-3xl font-black bg-gradient-to-r from-rose-600 to-red-600 bg-clip-text text-transparent">
+            <div className="text-3xl font-semibold bg-gradient-to-r from-rose-600 to-red-600 ">
               {metricas.diasEstudo}
             </div>
             <p className="text-xs text-muted-foreground mt-1 font-medium">dias praticados</p>
@@ -441,10 +441,10 @@ export default function AlunoMetricas() {
         </TabsList>
 
         <TabsContent value="evolucao" className="space-y-4">
-          <Card className="border-2 hover:shadow-xl transition-shadow">
+          <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
-              <CardTitle className="text-2xl font-black flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+              <CardTitle className="text-2xl font-semibold flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
                 Evolução do Desempenho
@@ -502,7 +502,7 @@ export default function AlunoMetricas() {
                 </ResponsiveContainer>
               ) : (
                 <div className="flex flex-col items-center justify-center h-[400px]">
-                  <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-purple-500/10 rounded-full mb-4">
+                  <div className="p-4 bg-gradient-to-br from-emerald-500/10 to-purple-500/10 rounded-full mb-4">
                     <BarChart3 className="h-12 w-12 text-emerald-500" />
                   </div>
                   <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
@@ -514,10 +514,10 @@ export default function AlunoMetricas() {
         </TabsContent>
 
         <TabsContent value="materias" className="space-y-6">
-          <Card className="border-2 hover:shadow-xl transition-shadow">
+          <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
-              <CardTitle className="text-2xl font-black flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow-lg">
+              <CardTitle className="text-2xl font-semibold flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl shadow">
                   <BarChart3 className="h-5 w-5 text-white" />
                 </div>
                 Desempenho por Matéria
@@ -546,7 +546,7 @@ export default function AlunoMetricas() {
                 </ResponsiveContainer>
               ) : (
                 <div className="flex flex-col items-center justify-center h-[400px]">
-                  <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-full mb-4">
+                  <div className="p-4 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-full mb-4">
                     <BarChart3 className="h-12 w-12 text-emerald-500" />
                   </div>
                   <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
@@ -556,10 +556,10 @@ export default function AlunoMetricas() {
             </CardContent>
           </Card>
 
-          <Card className="border-2 hover:shadow-xl transition-shadow">
+          <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
-              <CardTitle className="text-2xl font-black flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg">
+              <CardTitle className="text-2xl font-semibold flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 Taxa de Acerto por Matéria
@@ -570,14 +570,14 @@ export default function AlunoMetricas() {
               {dadosPorMateria.length > 0 ? (
                 <div className="space-y-6">
                   {dadosPorMateria.map((item, index) => (
-                    <div key={index} className="space-y-3 p-4 rounded-2xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/10 hover:border-purple-500/30 transition-all">
+                    <div key={index} className="space-y-3 p-4 rounded-lg bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/10 hover:border-purple-500/30 transition-all">
                       <div className="flex items-center justify-between">
-                        <span className="font-black text-base">{item.materia}</span>
+                        <span className="font-semibold text-base">{item.materia}</span>
                         <div className="flex items-center gap-3">
                           <span className="text-sm text-muted-foreground font-semibold">
                             {item.acertos}/{item.questoes} questões
                           </span>
-                          <span className={`px-4 py-1.5 rounded-full font-black text-sm ${
+                          <span className={`px-4 py-1.5 rounded-full font-semibold text-sm ${
                             item.percentual >= 80
                               ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white"
                               : item.percentual >= 60
@@ -609,7 +609,7 @@ export default function AlunoMetricas() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-[300px]">
-                  <div className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full mb-4">
+                  <div className="p-4 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full mb-4">
                     <Target className="h-12 w-12 text-purple-500" />
                   </div>
                   <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>
@@ -621,10 +621,10 @@ export default function AlunoMetricas() {
         </TabsContent>
 
         <TabsContent value="distribuicao" className="space-y-4">
-          <Card className="border-2 hover:shadow-xl transition-shadow">
+          <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
-              <CardTitle className="text-2xl font-black flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-lg">
+              <CardTitle className="text-2xl font-semibold flex items-center gap-3">
+                <div className="p-2 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow">
                   <PieChart className="h-5 w-5 text-white" />
                 </div>
                 Distribuição de Tempo por Matéria/Atividade
@@ -633,7 +633,7 @@ export default function AlunoMetricas() {
             </CardHeader>
             <CardContent>
               {dadosDistribuicaoTempo.length > 0 ? (
-                <div className="flex flex-col lg:flex-row gap-6">
+                <div className="flex flex-col lg:flex-row gap-4">
                   {/* Gráfico de Pizza */}
                   <div className="flex-1">
                     <ResponsiveContainer width="100%" height={450}>
@@ -712,7 +712,7 @@ export default function AlunoMetricas() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-[450px]">
-                  <div className="p-6 bg-gradient-to-br from-pink-500/10 to-rose-500/10 rounded-full mb-4">
+                  <div className="p-4 bg-gradient-to-br from-pink-500/10 to-rose-500/10 rounded-full mb-4">
                     <PieChart className="h-12 w-12 text-pink-500" />
                   </div>
                   <p className="text-lg font-semibold text-muted-foreground">Nenhum dado disponível</p>

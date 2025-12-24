@@ -383,7 +383,7 @@ export default function AlunoMetas() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-primary"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Target className="h-8 w-8 text-primary animate-pulse" />
+            <Target className="h-5 w-5 text-primary animate-pulse" />
           </div>
         </div>
       </div>
@@ -391,13 +391,13 @@ export default function AlunoMetas() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container mx-auto p-4 space-y-6">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-8 mb-6 border-2 border-primary/20 animate-slide-up">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-4 mb-6 border-2 border-primary/20 animate-slide-up">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-none" />
         <div className="relative flex justify-between items-center">
           <div>
-            <h1 className="text-4xl font-bold flex items-center gap-3">
+            <h1 className="text-2xl font-bold flex items-center gap-3">
               <Target className="h-10 w-10 text-primary" />
               Minhas Metas
             </h1>
@@ -407,7 +407,7 @@ export default function AlunoMetas() {
           </div>
           <Button 
             onClick={() => handleOpenDialog()} 
-            className="gap-2 bg-gradient-to-r from-primary via-primary to-emerald-600 hover:from-primary/90 hover:via-primary/90 hover:to-emerald-600/90 shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 text-white font-semibold"
+            className="gap-2 bg-gradient-to-r from-primary via-primary to-emerald-600 hover:from-primary/90 hover:via-primary/90 hover:to-emerald-600/90 shadow hover:shadow-sm hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.01] text-white font-semibold"
             size="lg"
           >
             <Plus className="h-5 w-5" />
@@ -444,14 +444,14 @@ export default function AlunoMetas() {
             className="w-full flex items-center justify-between text-left hover:bg-accent/50 p-4 rounded-lg transition-colors"
           >
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Flame className="h-6 w-6 text-orange-500" />
+              <Flame className="h-4 w-4 text-orange-500" />
               Metas Ativas
               <Badge variant="secondary" className="ml-2">{metasAtivas.length}</Badge>
             </h2>
-            <ChevronDown className={`h-6 w-6 transition-transform duration-300 ${metasAtivasExpanded ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${metasAtivasExpanded ? 'rotate-180' : ''}`} />
           </button>
           {metasAtivasExpanded && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {metasAtivas.map((meta, index) => {
               const Icon = TIPOS_META[meta.tipo].icon;
               
@@ -474,17 +474,17 @@ export default function AlunoMetas() {
               return (
                 <Card 
                   key={meta.id}
-                  className="relative overflow-hidden border-2 hover:border-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 group animate-slide-up bg-yellow-50/30 dark:bg-yellow-900/10"
+                  className="relative overflow-hidden border-2 hover:border-primary transition-all duration-500 hover:shadow-sm hover:shadow-primary/20 group animate-slide-up bg-yellow-50/30 dark:bg-yellow-900/10"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-none group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
                   
                   <CardHeader className="relative z-10">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
                         <div className={`p-2 rounded-lg bg-gradient-to-br ${TIPOS_META[meta.tipo].bgGradient}`}>
-                          <Icon className={`h-6 w-6 ${TIPOS_META[meta.tipo].color}`} />
+                          <Icon className={`h-4 w-4 ${TIPOS_META[meta.tipo].color}`} />
                         </div>
                         <div>
                           <CardTitle className="text-lg">{meta.nome}</CardTitle>
@@ -526,7 +526,7 @@ export default function AlunoMetas() {
                         <span>Até {formatDateBR(meta.dataFim)}</span>
                       </div>
                       {meta.repetirDiariamente && (
-                        <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg">
+                        <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 shadow">
                           <Flame className="h-3 w-3 mr-1" />
                           Meta diária
                         </Badge>
@@ -648,7 +648,7 @@ export default function AlunoMetas() {
             <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${metasNaoAlcancadasExpanded ? 'rotate-180' : ''}`} />
           </button>
           {metasNaoAlcancadasExpanded && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {metasNaoAlcancadas.map((meta, index) => {
               const Icon = TIPOS_META[meta.tipo].icon;
               
@@ -662,7 +662,7 @@ export default function AlunoMetas() {
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
                         <div className={`p-2 rounded-lg bg-gradient-to-br ${TIPOS_META[meta.tipo].bgGradient} opacity-50`}>
-                          <Icon className={`h-6 w-6 ${TIPOS_META[meta.tipo].color}`} />
+                          <Icon className={`h-4 w-4 ${TIPOS_META[meta.tipo].color}`} />
                         </div>
                         <div>
                           <CardTitle className="text-lg">{meta.nome}</CardTitle>
@@ -720,11 +720,11 @@ export default function AlunoMetas() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <div className="relative">
-            <div className="absolute -top-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+            <div className="absolute -top-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-none" />
             <DialogHeader className="relative">
               <DialogTitle className="text-2xl font-bold flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10">
-                  <Target className="h-6 w-6 text-primary" />
+                  <Target className="h-4 w-4 text-primary" />
                 </div>
                 {isEditMode ? 'Editar Meta' : 'Nova Meta'}
               </DialogTitle>
@@ -878,7 +878,7 @@ export default function AlunoMetas() {
             </Button>
             <Button 
               onClick={handleSubmit}
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow hover:shadow-sm transition-all duration-300 hover:scale-[1.01]"
             >
               {isEditMode ? (
                 <>

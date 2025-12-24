@@ -320,7 +320,7 @@ export default function AlunoAutodiagnostico() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
+            <Zap className="h-5 w-5 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -330,21 +330,21 @@ export default function AlunoAutodiagnostico() {
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
       {/* Elementos decorativos */}
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
       {/* Box Motivacional */}
-      <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-2xl animate-slide-up shadow-lg">
-        <CardContent className="pt-6">
+      <Card className="border-2 border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-lg animate-slide-up shadow">
+        <CardContent className="pt-4">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
-              <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+              <div className="p-3 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="flex-1">
               <p className="text-base leading-relaxed text-gray-700 dark:text-gray-200">
-                <strong className="font-black text-emerald-700 dark:text-emerald-400">Não encare seus erros como fracasso, mas sim como o GPS da sua aprovação.</strong> Cada questão errada mostra uma lacuna específica no seu conhecimento, funcionando como um mapa que ajuda a direcionar corretamente sua energia. Ao registrar seus erros aqui e corrigi-los, você transforma uma falha momentânea em retenção de longo prazo e garante que o seu esforço seja cirúrgico. <strong className="font-black text-teal-700 dark:text-teal-400">Quem mapeia o erro hoje, maximiza as chances de acerto no ENEM.</strong>
+                <strong className="font-semibold text-emerald-700 dark:text-emerald-400">Não encare seus erros como fracasso, mas sim como o GPS da sua aprovação.</strong> Cada questão errada mostra uma lacuna específica no seu conhecimento, funcionando como um mapa que ajuda a direcionar corretamente sua energia. Ao registrar seus erros aqui e corrigi-los, você transforma uma falha momentânea em retenção de longo prazo e garante que o seu esforço seja cirúrgico. <strong className="font-semibold text-teal-700 dark:text-teal-400">Quem mapeia o erro hoje, maximiza as chances de acerto no ENEM.</strong>
               </p>
             </div>
           </div>
@@ -352,14 +352,14 @@ export default function AlunoAutodiagnostico() {
       </Card>
 
       {/* Formulário Premium */}
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up">
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">{editandoId ? "Editar Autodiagnóstico" : "Novo Autodiagnóstico"}</CardTitle>
+              <CardTitle className="text-2xl font-semibold">{editandoId ? "Editar Autodiagnóstico" : "Novo Autodiagnóstico"}</CardTitle>
               <CardDescription className="text-base">Registre os erros de uma prova ou simulado para identificar padrões</CardDescription>
             </div>
           </div>
@@ -388,10 +388,10 @@ export default function AlunoAutodiagnostico() {
                 {[...questoes].reverse().map((questao, reversedIndex) => {
                   const originalIndex = questoes.length - 1 - reversedIndex;
                   return (
-                  <Card key={questao.id} className="p-4 border-2 hover:shadow-lg transition-shadow">
+                  <Card key={questao.id} className="p-4 border-2 hover:shadow transition-shadow">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Questão {originalIndex + 1}</span>
+                        <span className="text-sm font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 ">Questão {originalIndex + 1}</span>
                         {questoes.length > 1 && (
                           <Button type="button" onClick={() => removeQuestao(originalIndex)} size="sm" variant="ghost" className="text-red-500 hover:text-red-700 hover:bg-red-100">
                             <Trash2 className="h-4 w-4" />
@@ -471,11 +471,11 @@ export default function AlunoAutodiagnostico() {
             </div>
             <div className="flex gap-3">
               {editandoId && (
-                <Button type="button" onClick={handleCancelEdit} variant="outline" className="flex-1 font-bold text-lg py-6 border-2">
+                <Button type="button" onClick={handleCancelEdit} variant="outline" className="flex-1 font-bold text-lg py-3 border-2">
                   Cancelar
                 </Button>
               )}
-              <Button type="submit" disabled={isSaving} className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-6">
+              <Button type="submit" disabled={isSaving} className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold text-lg py-3">
                 {isSaving ? "Salvando..." : editandoId ? "Atualizar Autodiagnóstico" : "Salvar Autodiagnóstico"}
               </Button>
             </div>
@@ -485,14 +485,14 @@ export default function AlunoAutodiagnostico() {
 
       {/* Gráfico Premium */}
       {autodiagnosticos.length > 0 && (
-        <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+              <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
                 <TrendingDown className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-2xl font-black">Distribuição de Tipos de Erro</CardTitle>
+                <CardTitle className="text-2xl font-semibold">Distribuição de Tipos de Erro</CardTitle>
                 <CardDescription className="text-base">Análise de {totalErros} erros registrados {filtroArea !== "geral" && `em ${getAreaLabel(filtroArea)}`}</CardDescription>
               </div>
             </div>
@@ -551,7 +551,7 @@ export default function AlunoAutodiagnostico() {
                   </BarChart>
                 </ResponsiveContainer>
                 <div className="mt-6 space-y-2">
-                  <h4 className="font-black text-sm">💡 Insights:</h4>
+                  <h4 className="font-semibold text-sm">💡 Insights:</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                     {dadosDistribuicao.filter(d => d.quantidade > 0).sort((a, b) => b.quantidade - a.quantidade).map(d => {
                       const percentual = ((d.quantidade / totalErros) * 100).toFixed(1);
@@ -576,14 +576,14 @@ export default function AlunoAutodiagnostico() {
       )}
 
       {/* Lista Premium */}
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">Autodiagnósticos Salvos</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Autodiagnósticos Salvos</CardTitle>
               <CardDescription className="text-base">
                 {autodiagnosticos.length > 0 ? `${autodiagnosticos.length} autodiagnóstico(s) registrado(s)` : "Nenhum autodiagnóstico registrado ainda"}
               </CardDescription>
@@ -607,7 +607,7 @@ export default function AlunoAutodiagnostico() {
                             <FileText className="h-5 w-5 text-white" />
                           </div>
                           <div className="text-left">
-                            <div className="font-black">{auto.prova}</div>
+                            <div className="font-semibold">{auto.prova}</div>
                             <div className="text-sm text-muted-foreground font-semibold">
                               {auto.totalQuestoes || auto.questoes?.length || 0} questão(ões) errada(s)
                               {auto.dataProva && (
@@ -632,7 +632,7 @@ export default function AlunoAutodiagnostico() {
                           if (!questoesDaArea || questoesDaArea.length === 0) return null;
                           return (
                             <div key={area.value} className="space-y-3">
-                              <h4 className="font-black text-sm flex items-center gap-2">
+                              <h4 className="font-semibold text-sm flex items-center gap-2">
                                 {area.label}
                                 <span className="text-muted-foreground font-semibold">({questoesDaArea.length} questão{questoesDaArea.length !== 1 ? 'ões' : ''})</span>
                               </h4>
@@ -640,10 +640,10 @@ export default function AlunoAutodiagnostico() {
                                 <table className="w-full text-sm">
                                   <thead>
                                     <tr className="border-b bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
-                                      <th className="text-left py-2 px-3 font-black">Questão</th>
-                                      <th className="text-left py-2 px-3 font-black">Macroassunto</th>
-                                      <th className="text-left py-2 px-3 font-black">Microassunto</th>
-                                      <th className="text-left py-2 px-3 font-black">Motivo do Erro</th>
+                                      <th className="text-left py-2 px-3 font-semibold">Questão</th>
+                                      <th className="text-left py-2 px-3 font-semibold">Macroassunto</th>
+                                      <th className="text-left py-2 px-3 font-semibold">Microassunto</th>
+                                      <th className="text-left py-2 px-3 font-semibold">Motivo do Erro</th>
                                     </tr>
                                   </thead>
                                   <tbody>

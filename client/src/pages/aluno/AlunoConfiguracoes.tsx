@@ -224,7 +224,7 @@ export default function AlunoConfiguracoes() {
         <div className="relative">
           <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-emerald-500"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <Zap className="h-8 w-8 text-emerald-500 animate-pulse" />
+            <Zap className="h-5 w-5 text-emerald-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -233,39 +233,39 @@ export default function AlunoConfiguracoes() {
 
   return (
     <div className="space-y-8 pb-8 animate-fade-in">
-      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float-delayed pointer-events-none" />
+      <div className="fixed top-20 right-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-none animate-float pointer-events-none" />
+      <div className="fixed bottom-20 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-none animate-float-delayed pointer-events-none" />
 
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-8 text-white animate-slide-up">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+      <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-500 p-4 text-white animate-slide-up">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-none"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-none"></div>
         <div className="relative flex items-center gap-4">
-          <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
+          <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
             <Settings className="w-10 h-10" />
           </div>
           <div>
-            <h1 className="text-4xl font-black mb-2">Configurações</h1>
+            <h1 className="text-2xl font-semibold mb-2">Configurações</h1>
             <p className="text-emerald-50 text-lg">Gerencie suas informações pessoais e preferências de conta</p>
           </div>
         </div>
       </div>
 
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <Camera className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">Foto de Perfil</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Foto de Perfil</CardTitle>
               <CardDescription className="font-semibold">Adicione ou atualize sua foto de perfil</CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4">
             <div className="relative group">
-              <div className="w-40 h-40 rounded-full overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border-4 border-emerald-200 shadow-2xl group-hover:scale-105 transition-transform">
+              <div className="w-40 h-40 rounded-full overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 border-4 border-emerald-200 shadow-sm group-hover:scale-[1.01] transition-transform">
                 {photoPreview ? (
                   <img
                     src={photoPreview}
@@ -283,7 +283,7 @@ export default function AlunoConfiguracoes() {
                   <div className="relative">
                     <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white"></div>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <Zap className="h-6 w-6 text-white animate-pulse" />
+                      <Zap className="h-4 w-4 text-white animate-pulse" />
                     </div>
                   </div>
                 </div>
@@ -302,7 +302,7 @@ export default function AlunoConfiguracoes() {
               <Button
                 onClick={() => fileInputRef.current?.click()}
                 disabled={loadingPhoto}
-                className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg border-0"
+                className="w-full md:w-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow border-0"
               >
                 <Upload className="mr-2 h-4 w-4" />
                 {photoPreview ? "Alterar Foto" : "Adicionar Foto"}
@@ -313,7 +313,7 @@ export default function AlunoConfiguracoes() {
                   onClick={handleDeletePhoto}
                   disabled={loadingPhoto}
                   variant="destructive"
-                  className="w-full md:w-auto font-bold shadow-lg"
+                  className="w-full md:w-auto font-bold shadow"
                 >
                   <Trash2 className="mr-2 h-4 w-4" />
                   Remover Foto
@@ -333,14 +333,14 @@ export default function AlunoConfiguracoes() {
 
       <Separator className="my-8" />
 
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <User className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">Informações do Perfil</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Informações do Perfil</CardTitle>
               <CardDescription className="font-semibold">Atualize suas informações pessoais</CardDescription>
             </div>
           </div>
@@ -388,7 +388,7 @@ export default function AlunoConfiguracoes() {
             <Separator className="my-4" />
             
             <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl border-2 border-purple-200/50">
-              <h3 className="text-lg font-black text-purple-900 dark:text-purple-300 mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-300 mb-4 flex items-center gap-2">
                 🎯 Objetivo de Aprovação
               </h3>
               <p className="text-sm font-semibold text-purple-700 dark:text-purple-400 mb-4">
@@ -423,7 +423,7 @@ export default function AlunoConfiguracoes() {
             <Button 
               type="submit" 
               disabled={loadingProfile}
-              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg border-0"
+              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow border-0"
             >
               {loadingProfile && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loadingProfile ? "Salvando..." : "Salvar Alterações"}
@@ -434,14 +434,14 @@ export default function AlunoConfiguracoes() {
 
       <Separator className="my-8" />
 
-      <Card className="border-2 hover:shadow-2xl transition-shadow rounded-2xl animate-slide-up" style={{ animationDelay: '0.3s' }}>
+      <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow-lg">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl shadow">
               <Lock className="w-6 h-6 text-white" />
             </div>
             <div>
-              <CardTitle className="text-2xl font-black">Alterar Senha</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Alterar Senha</CardTitle>
               <CardDescription className="font-semibold">Atualize sua senha de acesso</CardDescription>
             </div>
           </div>
@@ -491,7 +491,7 @@ export default function AlunoConfiguracoes() {
             <Button 
               type="submit" 
               disabled={loadingPassword}
-              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow-lg border-0"
+              className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 font-bold shadow border-0"
             >
               {loadingPassword && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loadingPassword ? "Alterando..." : "Alterar Senha"}

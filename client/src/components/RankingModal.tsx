@@ -503,7 +503,7 @@ export function RankingResumo({ onClick }: RankingResumoProps) {
     <Button
       variant="outline"
       onClick={onClick}
-      className="flex flex-col items-start gap-2 h-auto p-4 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20 border-2 border-yellow-200 dark:border-yellow-800 hover:border-yellow-400 dark:hover:border-yellow-600 transition-all hover:shadow-lg hover:shadow-yellow-500/20"
+      className="flex flex-col items-start gap-2 h-auto p-4 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20 border-2 border-yellow-200 dark:border-yellow-800 hover:border-yellow-400 dark:hover:border-yellow-600 transition-all hover:shadow hover:shadow-yellow-500/20"
     >
       <div className="flex items-center gap-2 w-full">
         <Trophy className="h-5 w-5 text-yellow-500" />
