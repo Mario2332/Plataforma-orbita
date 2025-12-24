@@ -292,7 +292,7 @@ export default function AlunoCronograma() {
       <Card className="border-2 hover:shadow-sm transition-shadow animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             Instruções
@@ -300,7 +300,7 @@ export default function AlunoCronograma() {
         </CardHeader>
         <CardContent className="grid md:grid-cols-2 gap-4">
           <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+            <div className="p-2 bg-emerald-500 rounded-lg">
               <span className="text-white font-bold text-sm">1</span>
             </div>
             <div>
@@ -309,7 +309,7 @@ export default function AlunoCronograma() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+            <div className="p-2 bg-emerald-500 rounded-lg">
               <span className="text-white font-bold text-sm">2</span>
             </div>
             <div>
@@ -318,7 +318,7 @@ export default function AlunoCronograma() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+            <div className="p-2 bg-emerald-500 rounded-lg">
               <span className="text-white font-bold text-sm">3</span>
             </div>
             <div>
@@ -327,7 +327,7 @@ export default function AlunoCronograma() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-800/50">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+            <div className="p-2 bg-emerald-500 rounded-lg">
               <span className="text-white font-bold text-sm">4</span>
             </div>
             <div>
@@ -342,7 +342,7 @@ export default function AlunoCronograma() {
       <Card className="border-2 hover:shadow-sm transition-shadow animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Clock className="h-5 w-5 text-white" />
             </div>
             Grade Semanal

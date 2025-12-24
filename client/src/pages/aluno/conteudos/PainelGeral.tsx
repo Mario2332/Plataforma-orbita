@@ -113,7 +113,7 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-sm transition-all rounded-lg group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg font-semibold">Total de Tópicos</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl group-hover:scale-[1.01] transition-transform">
+            <div className="p-2 bg-emerald-500 rounded-xl group-hover:scale-[1.01] transition-transform">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
           </CardHeader>
@@ -130,7 +130,7 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-sm transition-all rounded-lg group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg font-semibold">Tópicos Estudados</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl group-hover:scale-[1.01] transition-transform">
+            <div className="p-2 bg-emerald-500 rounded-xl group-hover:scale-[1.01] transition-transform">
               <CheckCircle2 className="h-5 w-5 text-white" />
             </div>
           </CardHeader>
@@ -155,7 +155,7 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="p-2 bg-emerald-500 rounded-xl">
                 <BarChart3 className="w-6 h-6 text-white" />
               </div>
               <CardTitle className="text-2xl font-semibold">Progresso por Matéria</CardTitle>
@@ -178,7 +178,7 @@ export default function PainelGeral() {
         <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="p-2 bg-emerald-500 rounded-xl">
                 <PieChartIcon className="w-6 h-6 text-white" />
               </div>
               <CardTitle className="text-2xl font-semibold">Distribuição de Tópicos Estudados</CardTitle>
@@ -211,7 +211,7 @@ export default function PainelGeral() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <CardTitle className="text-2xl font-semibold">Resumo por Matéria</CardTitle>

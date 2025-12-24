@@ -374,7 +374,7 @@ export default function AlunoHome() {
             </div>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <Flame className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -412,7 +412,7 @@ export default function AlunoHome() {
             <CardTitle className="text-sm font-semibold">Tempo Total</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <Clock className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -445,7 +445,7 @@ export default function AlunoHome() {
             </div>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <CheckCircle2 className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -469,7 +469,7 @@ export default function AlunoHome() {
             <CardTitle className="text-sm font-semibold">Último Simulado</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <FileText className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -517,7 +517,7 @@ export default function AlunoHome() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   
-                  <div className="relative p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
+                  <div className="relative p-4 bg-emerald-500 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
                     <PlayCircle className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -543,7 +543,7 @@ export default function AlunoHome() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   
-                  <div className="relative p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
+                  <div className="relative p-4 bg-emerald-500 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
                     <Plus className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -569,7 +569,7 @@ export default function AlunoHome() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   
-                  <div className="relative p-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
+                  <div className="relative p-4 bg-emerald-500 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
                     <FileText className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -592,7 +592,7 @@ export default function AlunoHome() {
               <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
                 <div className="relative">
                   
-                  <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow-sm">
+                  <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
                     <Calendar className="h-4 w-4 text-white" />
                   </div>
                 </div>
@@ -637,7 +637,7 @@ export default function AlunoHome() {
             <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
               <div className="relative">
                 
-                <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow-sm">
+                <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
                   <TrendingUp className="h-4 w-4 text-white" />
                 </div>
               </div>
@@ -767,7 +767,7 @@ export default function AlunoHome() {
             <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
               <div className="relative">
                 
-                <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow-sm">
+                <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
                   <Activity className="h-4 w-4 text-white" />
                 </div>
               </div>
@@ -781,7 +781,7 @@ export default function AlunoHome() {
                   <div key={index} className="group flex items-start gap-4 pb-4 border-b last:border-0 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 p-3 rounded-xl transition-all duration-300">
                     <div className="relative">
                       
-                      <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow group-hover:scale-[1.01] transition-transform">
+                      <div className="relative p-3 bg-emerald-500 rounded-lg shadow group-hover:scale-[1.01] transition-transform">
                         <BookOpen className="h-5 w-5 text-white" />
                       </div>
                     </div>

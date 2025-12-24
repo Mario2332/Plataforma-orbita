@@ -249,7 +249,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Camera className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -332,7 +332,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <User className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -433,7 +433,7 @@ export default function AlunoConfiguracoes() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Lock className="w-6 h-6 text-white" />
             </div>
             <div>

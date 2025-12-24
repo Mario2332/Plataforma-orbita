@@ -293,7 +293,7 @@ export default function AlunoSimulados() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+                  <div className="p-2 bg-emerald-500 rounded-xl">
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -499,7 +499,7 @@ export default function AlunoSimulados() {
           <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+                <div className="p-2 bg-emerald-500 rounded-xl">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div>

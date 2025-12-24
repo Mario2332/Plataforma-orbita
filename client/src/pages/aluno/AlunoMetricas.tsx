@@ -342,7 +342,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Tempo Total</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Clock className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -358,7 +358,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Questões</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <BarChart3 className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -374,7 +374,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Acertos</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <TrendingUp className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -390,7 +390,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Taxa de Acerto</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Target className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -406,7 +406,7 @@ export default function AlunoMetricas() {
           
           <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-bold">Dias de Estudo</CardTitle>
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Award className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -437,7 +437,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+                <div className="p-2 bg-emerald-500 rounded-xl">
                   <TrendingUp className="h-5 w-5 text-white" />
                 </div>
                 Evolução do Desempenho
@@ -510,7 +510,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+                <div className="p-2 bg-emerald-500 rounded-xl">
                   <BarChart3 className="h-5 w-5 text-white" />
                 </div>
                 Desempenho por Matéria
@@ -552,7 +552,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+                <div className="p-2 bg-emerald-500 rounded-xl">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 Taxa de Acerto por Matéria
@@ -617,7 +617,7 @@ export default function AlunoMetricas() {
           <Card className="border-2 hover:shadow-sm transition-shadow">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow">
+                <div className="p-2 bg-emerald-500 rounded-lg shadow">
                   <PieChart className="h-5 w-5 text-white" />
                 </div>
                 Distribuição de Tempo por Matéria/Atividade

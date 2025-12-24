@@ -732,7 +732,7 @@ export default function AlunoRedacoes() {
             <CardTitle className="text-sm font-semibold">Média Geral (últimas 5)</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -764,7 +764,7 @@ export default function AlunoRedacoes() {
             </div>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg shadow-sm">
+              <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
                 <Award className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -791,7 +791,7 @@ export default function AlunoRedacoes() {
             <CardTitle className="text-sm font-semibold">Redações Produzidas</CardTitle>
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <FileText className="h-4 w-4 text-white" />
               </div>
             </div>
@@ -890,7 +890,7 @@ export default function AlunoRedacoes() {
           <CardTitle className="text-lg font-bold flex items-center gap-2">
             <div className="relative">
               
-              <div className="relative p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+              <div className="relative p-2 bg-emerald-500 rounded-lg">
                 <Target className="h-5 w-5 text-white" />
               </div>
             </div>
@@ -1006,7 +1006,7 @@ export default function AlunoRedacoes() {
               <CardTitle className="text-lg font-bold flex items-center gap-2">
                 <div className="relative">
                   
-                  <div className="relative p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+                  <div className="relative p-2 bg-emerald-500 rounded-lg">
                     <Zap className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -1148,7 +1148,7 @@ export default function AlunoRedacoes() {
             <div className="flex items-center gap-3">
               <div className="relative">
                 
-                <div className="relative p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+                <div className="relative p-2 bg-emerald-500 rounded-lg">
                   <FileText className="h-5 w-5 text-white" />
                 </div>
               </div>

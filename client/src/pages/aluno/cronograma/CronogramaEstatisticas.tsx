@@ -270,7 +270,7 @@ export default function CronogramaEstatisticas() {
       {/* Estatísticas por Área Premium */}
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-          <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+          <div className="p-2 bg-emerald-500 rounded-xl">
             <PieChart className="w-6 h-6 text-white" />
           </div>
           Progresso por Área de Conhecimento
@@ -311,7 +311,7 @@ export default function CronogramaEstatisticas() {
       {/* Estatísticas por Ciclo Premium */}
       <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm p-8 border-2 border-gray-100 dark:border-gray-800 animate-slide-up" style={{ animationDelay: '0.4s' }}>
         <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-          <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+          <div className="p-2 bg-emerald-500 rounded-xl">
             <TrendingUp className="w-6 h-6 text-white" />
           </div>
           Progresso por Ciclo

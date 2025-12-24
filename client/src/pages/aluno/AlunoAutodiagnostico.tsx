@@ -336,7 +336,7 @@ export default function AlunoAutodiagnostico() {
         <CardContent className="pt-4">
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0">
-              <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="p-3 bg-emerald-500 rounded-xl">
                 <Lightbulb className="w-6 h-6 text-white" />
               </div>
             </div>
@@ -353,7 +353,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <Target className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -486,7 +486,7 @@ export default function AlunoAutodiagnostico() {
         <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="p-2 bg-emerald-500 rounded-xl">
                 <TrendingDown className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -577,7 +577,7 @@ export default function AlunoAutodiagnostico() {
       <Card className="border-2 hover:shadow-sm transition-shadow rounded-lg animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+            <div className="p-2 bg-emerald-500 rounded-xl">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>

@@ -386,7 +386,7 @@ export default function AlunoPlanoAcao() {
         <Card className="border-2 mt-8">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+              <div className="p-2 bg-emerald-500 rounded-lg">
                 <CheckCircle2 className="h-5 w-5 text-white" />
               </div>
               <div>

@@ -576,7 +576,7 @@ export default function AlunoEstudos() {
               <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
                 <div className="relative">
                   
-                  <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+                  <div className="relative p-3 bg-emerald-500 rounded-xl">
                     <Timer className="h-4 w-4 text-white" />
                   </div>
                 </div>
@@ -706,7 +706,7 @@ export default function AlunoEstudos() {
           <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
             <div className="relative">
               
-              <div className="relative p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+              <div className="relative p-3 bg-emerald-500 rounded-xl">
                 <BookOpen className="h-4 w-4 text-white" />
               </div>
             </div>
