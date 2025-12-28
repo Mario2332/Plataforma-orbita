@@ -416,6 +416,34 @@ export function TenantProvider({ children }: TenantProviderProps) {
         /* Sidebar menu item hover */
         [data-sidebar] .hover\\:bg-emerald-50:hover { background-color: ${corPrimaria}18 !important; }
         [data-sidebar] .hover\\:bg-emerald-900\\/20:hover { background-color: ${corPrimaria}25 !important; }
+        
+        /* ===== SIDEBAR GRADIENTS - CORRIGIR FUNDO VERDE CLARO ===== */
+        /* Gradientes da sidebar - usar cor do tenant */
+        .from-emerald-50\\/30 { --tw-gradient-from: ${corPrimaria}0d !important; }
+        .to-emerald-50\\/30 { --tw-gradient-to: ${corPrimaria}0d !important; }
+        .via-emerald-50\\/30 { --tw-gradient-via: ${corPrimaria}0d !important; }
+        .from-teal-50\\/30 { --tw-gradient-from: ${corSecundaria}0d !important; }
+        .to-teal-50\\/30 { --tw-gradient-to: ${corSecundaria}0d !important; }
+        .via-teal-50\\/30 { --tw-gradient-via: ${corSecundaria}0d !important; }
+        .from-emerald-500\\/5 { --tw-gradient-from: ${corPrimaria}0d !important; }
+        .to-emerald-500\\/5 { --tw-gradient-to: ${corPrimaria}0d !important; }
+        .from-teal-500\\/5 { --tw-gradient-from: ${corSecundaria}0d !important; }
+        .to-teal-500\\/5 { --tw-gradient-to: ${corSecundaria}0d !important; }
+        .from-emerald-950\\/10 { --tw-gradient-from: ${corPrimaria}1a !important; }
+        .to-emerald-950\\/10 { --tw-gradient-to: ${corPrimaria}1a !important; }
+        .via-emerald-950\\/10 { --tw-gradient-via: ${corPrimaria}1a !important; }
+        .from-teal-950\\/10 { --tw-gradient-from: ${corSecundaria}1a !important; }
+        .to-teal-950\\/10 { --tw-gradient-to: ${corSecundaria}1a !important; }
+        .via-teal-950\\/10 { --tw-gradient-via: ${corSecundaria}1a !important; }
+        
+        /* ===== FIX TEXT-TRANSPARENT - Texto dos ciclos ===== */
+        /* Remover bg-clip-text text-transparent que deixa texto invisivel */
+        .bg-clip-text.text-transparent {
+          background-clip: unset !important;
+          -webkit-background-clip: unset !important;
+          -webkit-text-fill-color: unset !important;
+          color: inherit !important;
+        }
       `;
       
       // Atualizar favicon se disponível
