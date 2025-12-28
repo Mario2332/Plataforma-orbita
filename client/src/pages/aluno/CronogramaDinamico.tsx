@@ -2276,13 +2276,11 @@ const SettingsStep = ({
                 </button>
                 <button 
                     onClick={onGenerate} 
-                    className="group bg-emerald-600 hover:bg-emerald-700"
+                    className="group flex items-center gap-3 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
-                    <RefreshCw className="w-6 h-6" /> 
+                    <RefreshCw className="w-5 h-5" /> 
                     Gerar Cronograma
-                    <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                        ✨
-                    </div>
+                    <span className="text-lg">✨</span>
                 </button>
             </div>
         </div>

@@ -347,6 +347,56 @@ export function TenantProvider({ children }: TenantProviderProps) {
         /* ===== ACCENT ===== */
         .accent-emerald-500 { accent-color: ${corPrimaria} !important; }
         .accent-emerald-600 { accent-color: ${corPrimaria} !important; }
+        
+        /* ===== CONTRASTE - TEXTO ESCURO EM FUNDOS CLAROS ===== */
+        /* Quando o fundo é claro (50-200), o texto deve ser escuro para legibilidade */
+        .bg-emerald-50 .text-emerald-600,
+        .bg-emerald-50 .text-emerald-500,
+        .bg-emerald-100 .text-emerald-600,
+        .bg-emerald-100 .text-emerald-500 { color: ${corPrimariaHover} !important; }
+        
+        /* Headers em cards com fundo claro - usar cor escura */
+        .bg-emerald-50 h1, .bg-emerald-50 h2, .bg-emerald-50 h3,
+        .bg-emerald-100 h1, .bg-emerald-100 h2, .bg-emerald-100 h3,
+        .bg-emerald-200 h1, .bg-emerald-200 h2, .bg-emerald-200 h3 { color: #1f2937 !important; }
+        
+        /* Texto em fundos claros deve ser escuro */
+        .bg-emerald-50 p, .bg-emerald-100 p, .bg-emerald-200 p { color: #374151 !important; }
+        
+        /* Texto claro (300-400) em fundos claros - escurecer */
+        .bg-emerald-50 .text-emerald-300,
+        .bg-emerald-50 .text-emerald-400,
+        .bg-emerald-100 .text-emerald-300,
+        .bg-emerald-100 .text-emerald-400,
+        .bg-emerald-50\\/50 .text-emerald-300,
+        .bg-emerald-50\\/50 .text-emerald-400 { color: ${corPrimariaHover} !important; }
+        
+        /* Garantir que texto branco em fundos escuros (500+) */
+        .bg-emerald-500 .text-white,
+        .bg-emerald-600 .text-white,
+        .bg-emerald-700 .text-white { color: white !important; }
+        
+        /* Texto em fundos claros - forcar escuro para legibilidade */
+        .bg-emerald-50 span:not(.text-white),
+        .bg-emerald-100 span:not(.text-white),
+        .bg-emerald-50\\/50 span:not(.text-white) { color: #374151 !important; }
+        
+        /* Excecao: icones e badges podem manter cor */
+        .bg-emerald-50 svg,
+        .bg-emerald-100 svg,
+        .bg-emerald-50\\/50 svg { color: ${corPrimaria} !important; }
+        
+        /* Cards com fundo claro - garantir texto legivel */
+        [class*="bg-emerald-50"] [class*="text-emerald-"],
+        [class*="bg-emerald-100"] [class*="text-emerald-"] {
+          color: ${corPrimariaHover} !important;
+        }
+        
+        /* Texto em fundos com opacidade baixa - escurecer */
+        .bg-emerald-900\\/10 .text-emerald-300,
+        .bg-emerald-900\\/10 .text-emerald-400,
+        .bg-emerald-900\\/20 .text-emerald-300,
+        .bg-emerald-900\\/20 .text-emerald-400 { color: ${corPrimaria} !important; }
       `;
       
       // Atualizar favicon se disponível
