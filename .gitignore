@@ -118,3 +118,10 @@ functions/serviceAccountKey.json
 
 functions/libfunctions/.env
 functions/.env.local
+
+# Firebase Service Account Keys - orbita-free e plataforma-orbita (NEVER commit these!)
+*firebase-adminsdk*.json
+upload/*firebase*.json
+upload/*.json
+orbita-free-*.json
+plataforma-orbita-*.json
