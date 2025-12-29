@@ -125,3 +125,6 @@ upload/*firebase*.json
 upload/*.json
 orbita-free-*.json
 plataforma-orbita-*.json
+
+# Firebase credentials directory (local storage only)
+firebase-credentials/
