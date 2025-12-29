@@ -15,6 +15,10 @@ import {
   Zap,
   Sparkles
 } from "lucide-react";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { useTenant } from "@/contexts/TenantContext";
+import { toast } from "sonner";
+import LoginCTA from "@/components/LoginCTA";
 
 type CronogramaTipo = "extensive" | "intensive";
 
@@ -33,6 +37,9 @@ interface CronogramaData {
 }
 
 export default function CronogramaAnual() {
+  const { user } = useAuthContext();
+  const { isFreePlan } = useTenant();
+  const isReadOnly = isFreePlan && !user;
   const [tipo, setTipo] = useState<CronogramaTipo>("extensive");
   const [cronograma, setCronograma] = useState<CronogramaData | null>(null);
   const [completedTopics, setCompletedTopics] = useState<Record<string, boolean>>({});
@@ -68,6 +75,10 @@ export default function CronogramaAnual() {
   };
 
   const handleToggleTopico = async (topicoId: string) => {
+    if (isReadOnly) {
+      toast.error("Você precisa estar logado para marcar tópicos como concluídos.");
+      return;
+    }
     const newCompleted = !completedTopics[topicoId];
     
     setCompletedTopics(prev => ({
@@ -308,6 +319,15 @@ export default function CronogramaAnual() {
         </div>
       </div>
 
+      {isReadOnly && (
+        <div className="mb-6">
+          <LoginCTA 
+            title="Cronograma: Interação Exclusiva para Usuários Logados"
+            description="Para marcar tópicos como concluídos e salvar seu progresso, faça login ou crie sua conta gratuita."
+          />
+        </div>
+      )}
+
       {/* Barra de progresso Premium */}
       <div className="relative overflow-hidden rounded-lg bg-emerald-600 p-8 shadow-sm shadow-sm animate-slide-up" style={{ animationDelay: '0.3s' }}>
         
@@ -432,6 +452,7 @@ export default function CronogramaAnual() {
                               <button
                                 onClick={() => handleToggleTopico(topicId)}
                                 className="flex-shrink-0 mt-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-full transition-transform hover:scale-[1.01]"
+                                disabled={isReadOnly}
                               >
                                 {isCompleted ? (
                                   <CheckCircle2 className="w-6 h-6 text-green-600 drop-shadow" />

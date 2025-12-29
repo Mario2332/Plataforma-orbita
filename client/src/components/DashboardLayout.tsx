@@ -139,7 +139,7 @@ export default function DashboardLayout({
     return saved || "light";
   });
   const { loading, user, userData } = useAuthContext();
-  const { tenant } = useTenant();
+  const { tenant, isFreePlan } = useTenant();
   
   // Usar branding do tenant ou fallback para constantes
   const logoUrl = tenant?.branding?.logo || APP_LOGO;
@@ -170,11 +170,17 @@ export default function DashboardLayout({
     localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
   }, [sidebarWidth]);
 
-  if (loading || !userData?.role) {
+  if (loading) {
     return <DashboardLayoutSkeleton />
   }
 
-  if (!user || !userData) {
+  // Lógica de Redirecionamento:
+  // 1. Se não estiver logado E NÃO for o plano Free, redireciona para o login.
+  // 2. Se for o plano Free, permite o acesso para visualização (o bloqueio de escrita será feito nos componentes).
+  // 3. Se estiver logado, prossegue.
+  const shouldRedirectToLogin = !user && !isFreePlan;
+
+  if (shouldRedirectToLogin) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="flex flex-col items-center gap-8 p-8 max-w-md w-full">
@@ -198,23 +204,39 @@ export default function DashboardLayout({
           </div>
           <Button
             onClick={() => {
-              window.location.href = getLoginUrl();
+              navigate(getLoginUrl(userData?.role));
             }}
-            size="lg"
-            className="w-full bg-emerald-600 hover:bg-emerald-700 shadow hover:shadow-sm transition-all font-bold border-0"
+            className="w-full"
           >
-            Entrar
+            Fazer Login
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              navigate("/cadastro");
+            }}
+            className="w-full"
+          >
+            Criar Conta
           </Button>
         </div>
       </div>
     );
   }
 
-  return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": `${sidebarWidth}px`,
+  // Se estiver logado, mas sem dados de usuário (role), mostra o skeleton ou redireciona para o onboarding/configuração
+  if (user && !userData?.role) {
+    return <DashboardLayoutSkeleton />
+  }
+
+  // Se não estiver logado E for Free Plan, o userData será null, então o role também.
+  // Para o Free Plan, precisamos de um role default para que o menu seja renderizado.
+  const userRole = userData?.role || (isFreePlan ? 'aluno' : undefined);
+
+  if (!userRole) {
+    // Caso de fallback, não deve acontecer se a lógica acima estiver correta
+    return <DashboardLayoutSkeleton />
+  }`,
         } as CSSProperties
       }
     >
@@ -387,9 +409,9 @@ function DashboardLayoutContent({
                         />
                         <span>{item.label}</span>
                         {hasSubmenu && (
-                          <ChevronDown
-                            className={`ml-auto h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-                          />
+                            <ChevronDown
+                              className={`ml-auto h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                            />
                         )}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -402,8 +424,7 @@ function DashboardLayoutContent({
                               <SidebarMenuButton
                                 isActive={isSubActive}
                                 onClick={() => setLocation(subItem.path)}
-                                tooltip={subItem.label}
-                                className={`h-10 text-sm font-semibold rounded-lg ${
+                                tooltip={subItem.label}                                  className={`h-10 text-sm font-semibold rounded-lg ${
                                   isSubActive 
                                     ? "bg-emerald-400 text-white shadow-md" 
                                     : "hover:bg-emerald-50 dark:hover:bg-emerald-900/20"

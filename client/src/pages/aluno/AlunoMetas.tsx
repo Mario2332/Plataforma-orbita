@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAlunoApi } from "@/hooks/useAlunoApi";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { useTenant } from "@/contexts/TenantContext";
+import LoginCTA from "@/components/LoginCTA";
 import { 
   Target, 
   Plus, 
@@ -142,6 +145,9 @@ const TIPOS_META = {
 
 export default function AlunoMetas() {
   const api = useAlunoApi();
+  const { user } = useAuthContext();
+  const { isFreePlan } = useTenant();
+  const isReadOnly = isFreePlan && !user;
   const [metas, setMetas] = useState<Meta[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -184,6 +190,10 @@ export default function AlunoMetas() {
   }, []);
 
   const handleOpenDialog = (meta?: Meta) => {
+    if (isReadOnly) {
+      toast.info("Faça login para criar ou editar metas.");
+      return;
+    }
     if (meta) {
       setIsEditMode(true);
       setMetaEditando(meta);
@@ -218,6 +228,10 @@ export default function AlunoMetas() {
   };
 
   const handleSubmit = async () => {
+    if (isReadOnly) {
+      toast.error("Você precisa estar logado para salvar metas.");
+      return;
+    }
     // Validação
     if (!nome || !valorAlvo || !dataInicio || !dataFim) {
       toast.error("Preencha todos os campos obrigatórios");
@@ -265,6 +279,10 @@ export default function AlunoMetas() {
   };
 
   const handleDelete = async (metaId: string) => {
+    if (isReadOnly) {
+      toast.error("Você precisa estar logado para excluir metas.");
+      return;
+    }
     if (!confirm("Tem certeza que deseja excluir esta meta?")) return;
 
     try {
@@ -277,6 +295,10 @@ export default function AlunoMetas() {
   };
 
   const handleCancelMeta = async (metaId: string) => {
+    if (isReadOnly) {
+      toast.error("Você precisa estar logado para cancelar metas.");
+      return;
+    }
     try {
       await api.updateMeta({
         metaId,
@@ -409,12 +431,20 @@ export default function AlunoMetas() {
             onClick={() => handleOpenDialog()} 
             className="gap-2 bg-emerald-600 hover:bg-emerald-700"
             size="lg"
+            disabled={isReadOnly}
           >
             <Plus className="h-5 w-5" />
             Nova Meta
           </Button>
         </div>
       </div>
+      
+      {isReadOnly && (
+        <LoginCTA 
+          title="Metas: Ação Exclusiva para Usuários Logados"
+          description="Para criar, editar ou salvar seu progresso em metas, faça login ou crie sua conta gratuita."
+        />
+      )}
 
       {/* Cards de Estatísticas */}
       <EstatisticasMetasCards metas={metasExibir} />
@@ -536,24 +566,26 @@ export default function AlunoMetas() {
 
                     {/* Ações */}
                     <div className="flex gap-2 pt-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleOpenDialog(meta)}
-                        className="flex-1 hover:bg-primary/10 hover:border-primary transition-all duration-300"
-                      >
-                        <Edit className="h-4 w-4 mr-2" />
-                        Editar
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleCancelMeta(meta.id)}
-                        className="flex-1 hover:bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300/10 hover:border-orange-500 hover:text-orange-600 transition-all duration-300"
-                      >
-                        <XCircle className="h-4 w-4 mr-2" />
-                        Cancelar
-                      </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1 text-emerald-500 hover:text-emerald-700"
+                onClick={() => handleOpenDialog(meta)}
+                disabled={isReadOnly}
+              >
+                <Edit className="h-4 w-4" />
+                Editar
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1 text-orange-500 hover:text-orange-700"
+                onClick={() => handleCancelMeta(meta.id)}
+                disabled={isReadOnly}
+              >
+                <XCircle className="h-4 w-4" />
+                Cancelar
+              </Button>
                       <Button
                         variant="outline"
                         size="sm"
@@ -679,15 +711,16 @@ export default function AlunoMetas() {
                         {meta.valorAtual} / {meta.valorAlvo} {meta.unidade}
                       </span>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDelete(meta.id)}
-                      className="w-full hover:bg-destructive/10 hover:border-destructive hover:text-destructive transition-all duration-300"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Excluir
-                    </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="gap-1 text-red-500 hover:text-red-700"
+                onClick={() => handleDelete(meta.id)}
+                disabled={isReadOnly}
+              >
+                <Trash2 className="h-4 w-4" />
+                Excluir
+              </Button>
                   </CardContent>
                 </Card>
               );
