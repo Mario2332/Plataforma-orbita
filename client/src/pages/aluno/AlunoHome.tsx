@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-// Acesso direto ao Firestore (elimina cold start de ~24s)
 import { getEstudosDirect, getSimuladosDirect, getMetasDirect } from "@/lib/firestore-direct";
 import { 
   Activity, 
@@ -20,12 +19,17 @@ import {
   Zap,
   Star,
   Award,
-  TrendingDown, Heart
+  TrendingDown,
+  Heart,
+  Brain,
+  Sparkles,
+  Rocket,
+  ChevronRight,
+  CircleDot
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
 import { RankingModal, RankingResumo } from "@/components/RankingModal";
 import { InContentAd, ResponsiveAd } from "@/components/ads";
 
@@ -51,8 +55,6 @@ const MATERIAS_ENEM = [
 ] as const;
 
 export default function AlunoHome() {
-  console.log('[AlunoHome] Componente montado!');
-  // Removido useAlunoApi - usando acesso direto ao Firestore para eliminar cold start
   const [, setLocation] = useLocation();
   const { userData } = useAuthContext();
   const [estudos, setEstudos] = useState<any[]>([]);
@@ -64,7 +66,6 @@ export default function AlunoHome() {
   const loadData = async () => {
     try {
       setIsLoading(true);
-      // Acesso direto ao Firestore (elimina cold start)
       const [estudosData, simuladosData, metasData] = await Promise.all([
         getEstudosDirect(),
         getSimuladosDirect(),
@@ -176,78 +177,35 @@ export default function AlunoHome() {
 
   const streak = calcularStreak();
 
-  // Gerar dados para o mapa de calor
-  const gerarMapaCalor = () => {
-    const dias: { data: Date; count: number; }[] = [];
-    const hoje = new Date();
-    
-    const contagemPorDia = new Map<string, number>();
-    
-    estudos.forEach(e => {
-      try {
-        let data: Date;
-        
-        if (e.data?.seconds || e.data?._seconds) {
-          const seconds = e.data.seconds || e.data._seconds;
-          data = new Date(seconds * 1000);
-        } else if (e.data?.toDate) {
-          data = e.data.toDate();
-        } else {
-          data = new Date(e.data);
-        }
-        
-        if (isNaN(data.getTime())) {
-          return;
-        }
-        
-        const dataStr = formatarDataBrasil(data);
-        contagemPorDia.set(dataStr, (contagemPorDia.get(dataStr) || 0) + 1);
-      } catch (error) {
-        console.error('Erro ao processar data no mapa de calor:', error);
-      }
-    });
-    
-    for (let i = 149; i >= 0; i--) {
-      const data = new Date(hoje);
-      data.setDate(data.getDate() - i);
-      const dataStr = formatarDataBrasil(data);
-      
-      dias.push({
-        data: data,
-        count: contagemPorDia.get(dataStr) || 0,
-      });
-    }
-    
-    return dias;
-  };
-  
-  const mapaCalor = gerarMapaCalor();
-  
   // Análise por matéria
   const calcularAnalisePorMateria = () => {
     if (!estudos || estudos.length === 0) {
-      return { pontosFortes: [], pontosFracos: [] };
+      return { pontosFortes: [], pontosFracos: [], todas: [] };
     }
     
-    const porMateria: Record<string, { questoes: number; acertos: number }> = {};
+    const porMateria: Record<string, { questoes: number; acertos: number; tempo: number }> = {};
     
     for (const estudo of estudos) {
       const materia = estudo.materia;
       if (!porMateria[materia]) {
-        porMateria[materia] = { questoes: 0, acertos: 0 };
+        porMateria[materia] = { questoes: 0, acertos: 0, tempo: 0 };
       }
       porMateria[materia].questoes += estudo.questoesFeitas || 0;
       porMateria[materia].acertos += estudo.questoesAcertadas || 0;
+      porMateria[materia].tempo += estudo.tempoMinutos || 0;
     }
     
     const pontosFortes: Array<{ materia: string; percentual: number; acertos: number; questoes: number }> = [];
     const pontosFracos: Array<{ materia: string; percentual: number; acertos: number; questoes: number }> = [];
+    const todas: Array<{ materia: string; percentual: number; tempo: number; questoes: number }> = [];
     
     for (const [materia, dados] of Object.entries(porMateria)) {
+      const percentual = dados.questoes > 0 ? Math.round((dados.acertos / dados.questoes) * 100) : 0;
+      const item = { materia, percentual, acertos: dados.acertos, questoes: dados.questoes, tempo: dados.tempo };
+      
+      todas.push(item);
+      
       if (dados.questoes >= 5) {
-        const percentual = Math.round((dados.acertos / dados.questoes) * 100);
-        const item = { materia, percentual, acertos: dados.acertos, questoes: dados.questoes };
-        
         if (percentual >= 80) {
           pontosFortes.push(item);
         } else if (percentual < 60) {
@@ -256,685 +214,426 @@ export default function AlunoHome() {
       }
     }
     
-    return { pontosFortes, pontosFracos };
+    todas.sort((a, b) => b.tempo - a.tempo);
+    
+    return { pontosFortes, pontosFracos, todas: todas.slice(0, 5) };
   };
   
   const analisePorMateria = calcularAnalisePorMateria();
-  
-  const getCorIntensidade = (count: number) => {
-    if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
-    if (count === 1) return 'bg-emerald-200 dark:bg-emerald-900';
-    if (count === 2) return 'bg-emerald-400 dark:bg-emerald-700';
-    if (count >= 3) return 'bg-emerald-600 dark:bg-emerald-500';
-    return 'bg-gray-100 dark:bg-gray-800';
-  };
 
-  // Componente de progresso circular
-  const CircularProgress = ({ value, max, color }: { value: number; max: number; color: string }) => {
-    const percentage = max > 0 ? (value / max) * 100 : 0;
-    const circumference = 2 * Math.PI * 36;
-    const offset = circumference - (percentage / 100) * circumference;
+  // Últimos estudos (timeline)
+  const ultimosEstudos = estudos
+    .slice(0, 5)
+    .map(e => {
+      try {
+        let data: Date;
+        if (e.data?.seconds || e.data?._seconds) {
+          const seconds = e.data.seconds || e.data._seconds;
+          data = new Date(seconds * 1000);
+        } else if (e.data?.toDate) {
+          data = e.data.toDate();
+        } else {
+          data = new Date(e.data);
+        }
+        return { ...e, dataFormatada: data };
+      } catch {
+        return { ...e, dataFormatada: new Date() };
+      }
+    });
 
-    return (
-      <div className="relative w-24 h-24">
-        <svg className="transform -rotate-90 w-24 h-24">
-          <circle
-            cx="48"
-            cy="48"
-            r="36"
-            stroke="currentColor"
-            strokeWidth="8"
-            fill="none"
-            className="text-gray-200 dark:text-gray-700"
-          />
-          <circle
-            cx="48"
-            cy="48"
-            r="36"
-            stroke="currentColor"
-            strokeWidth="8"
-            fill="none"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            className={`${color} transition-all duration-1000 ease-out`}
-            strokeLinecap="round"
-          />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-2xl font-bold">{Math.round(percentage)}%</span>
-        </div>
-      </div>
-    );
-  };
+  // Metas ativas
+  const metasAtivas = metas.filter(m => m.status === 'ativa').slice(0, 3);
 
-    return (
+  return (
     <div className="space-y-6 pb-6">
       
-      {/* Header Clean e Elegante */}
-      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-xl">
-              <TrendingUp className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
-            </div>
+      {/* Hero Section - Banner Grande com Estatísticas Principais */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 rounded-2xl p-8 text-white shadow-xl">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-400/20 rounded-full -ml-48 -mb-48 blur-3xl"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-start justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Olá, {userData?.name?.split(' ')[0] || "Aluno"}!
-              </h1>
-              <div className="flex items-center gap-3 mt-1">
-                {streak > 0 && (
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-orange-50 dark:bg-orange-900/30 rounded-full">
-                    <Flame className="h-4 w-4 text-orange-500" />
-                    <span className="text-xs font-medium text-orange-600 dark:text-orange-400">{streak} dias</span>
-                  </div>
-                )}
+              <div className="flex items-center gap-3 mb-2">
+                <Sparkles className="h-8 w-8" />
+                <h1 className="text-4xl font-bold">
+                  Olá, {userData?.name?.split(' ')[0] || "Aluno"}!
+                </h1>
+              </div>
+              <p className="text-emerald-100 text-lg">
+                Seu progresso está incrível. Continue assim!
+              </p>
+            </div>
+            
+            {/* Streak Badge */}
+            {streak > 0 && (
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center min-w-[120px]">
+                <Flame className="h-8 w-8 mx-auto mb-2 text-orange-300" />
+                <div className="text-3xl font-bold">{streak}</div>
+                <div className="text-sm text-emerald-100">dias seguidos</div>
+              </div>
+            )}
+          </div>
+
+          {/* Estatísticas Principais em Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="flex items-center gap-3 mb-2">
+                <Clock className="h-5 w-5 text-emerald-200" />
+                <span className="text-sm text-emerald-100">Tempo Total</span>
+              </div>
+              <div className="text-3xl font-bold">
+                {Math.floor(tempoTotal / 60)}h {tempoTotal % 60}min
+              </div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="flex items-center gap-3 mb-2">
+                <CheckCircle2 className="h-5 w-5 text-emerald-200" />
+                <span className="text-sm text-emerald-100">Questões Resolvidas</span>
+              </div>
+              <div className="text-3xl font-bold">{questoesTotal}</div>
+              <div className="text-sm text-emerald-200 mt-1">{percentualAcerto}% de acerto</div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="flex items-center gap-3 mb-2">
+                <FileText className="h-5 w-5 text-emerald-200" />
+                <span className="text-sm text-emerald-100">Último Simulado</span>
+              </div>
+              <div className="text-3xl font-bold">{acertosUltimoSimulado}/180</div>
+              <div className="text-sm text-emerald-200 mt-1">
+                {Math.round((acertosUltimoSimulado / 180) * 100)}% de aproveitamento
               </div>
             </div>
           </div>
-          
-          {/* Ranking - lado direito */}
-          <div className="hidden md:block">
-            <RankingResumo onClick={() => setRankingModalOpen(true)} />
-          </div>
-        </div>
-        
-        <p className="mt-4 text-gray-600 dark:text-gray-400">
-          Continue focado nos seus estudos e alcance seus objetivos!
-        </p>
-        
-        <div className="flex items-center gap-3 mt-4">
-          <button 
-            onClick={() => setLocation('/aluno/diario')}
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-lg transition-colors text-sm font-medium"
-          >
-            <Heart className="h-4 w-4" />
-            Diário de Bordo
-            <ArrowRight className="h-4 w-4" />
-          </button>
         </div>
       </div>
-      
-      {/* Botão de ranking para mobile */}
+
+      {/* Ranking para mobile */}
       <div className="md:hidden">
         <RankingResumo onClick={() => setRankingModalOpen(true)} />
       </div>
 
-      {/* Cards de Métricas com Progresso Circular */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {/* Card Sequência Premium */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.1s' }}>
+      {/* Layout Assimétrico - 2 Colunas */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* Coluna Esquerda (2/3) */}
+        <div className="lg:col-span-2 space-y-6">
           
-          
-          
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <div className="space-y-1">
-              <CardTitle className="text-sm font-semibold flex items-center gap-2">
-                Sequência de Dias
-                {streak >= 7 && <Star className="h-4 w-4 text-orange-500 fill-orange-500 animate-spin-slow" />}
-              </CardTitle>
-            </div>
-            <div className="relative">
-              
-              <div className="relative p-3 bg-emerald-500 rounded-xl">
-                <Flame className="h-4 w-4 text-white" />
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold text-gray-900 dark:text-white ">
-                {streak}
-              </div>
-              <span className="text-lg font-bold text-muted-foreground">dias</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `${Math.min((streak / (metas.find(m => m.tipo === 'sequencia' && m.status === 'ativa')?.valorAlvo || 30)) * 100, 100)}%` }}
-                />
-              </div>
-              <span className="text-xs font-medium text-muted-foreground">
-                Meta: {metas.find(m => m.tipo === 'sequencia' && m.status === 'ativa')?.valorAlvo || 30}
-              </span>
-            </div>
-            <p className="text-xs text-muted-foreground font-medium">
-              {streak > 0 ? "🔥 Mantenha o ritmo!" : "Comece hoje!"}
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Card Tempo com Progresso */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.2s' }}>
-          
-          
-          
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold">Tempo Total</CardTitle>
-            <div className="relative">
-              
-              <div className="relative p-3 bg-emerald-500 rounded-xl">
-                <Clock className="h-4 w-4 text-white" />
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold text-gray-900 dark:text-white ">
-                {Math.floor(tempoTotal / 60)}h
-              </div>
-              <span className="text-2xl font-bold text-muted-foreground">{tempoTotal % 60}min</span>
-            </div>
-            <p className="text-xs text-muted-foreground font-medium">
-              Dedicados aos estudos 📚
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Card Questões com Gráfico Circular */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.3s' }}>
-          
-          
-          
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <div className="space-y-1">
-              <CardTitle className="text-sm font-semibold">Questões</CardTitle>
-              <div className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-emerald-500" />
-                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">{percentualAcerto}% acerto</span>
-              </div>
-            </div>
-            <div className="relative">
-              
-              <div className="relative p-3 bg-emerald-500 rounded-xl">
-                <CheckCircle2 className="h-4 w-4 text-white" />
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold text-gray-900 dark:text-white ">
-                {questoesTotal}
-              </div>
-              <span className="text-lg font-bold text-muted-foreground">resolvidas</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Card Simulado */}
-        <Card className="relative overflow-hidden transition-all duration-500 hover:shadow-sm hover:shadow-sm group animate-slide-up candy-cane-border" style={{ animationDelay: '0.4s' }}>
-          
-          
-          
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-sm font-semibold">Último Simulado</CardTitle>
-            <div className="relative">
-              
-              <div className="relative p-3 bg-emerald-500 rounded-xl">
-                <FileText className="h-4 w-4 text-white" />
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-semibold text-gray-900 dark:text-white ">
-                {acertosUltimoSimulado}
-              </div>
-              <span className="text-2xl font-bold text-muted-foreground">/180</span>
-            </div>
-            <p className="text-xs text-muted-foreground font-medium">
-              {ultimoSimulado ? (() => {
-                try {
-                  let data: Date;
-                  if (ultimoSimulado.data?.seconds || ultimoSimulado.data?._seconds) {
-                    const seconds = ultimoSimulado.data.seconds || ultimoSimulado.data._seconds;
-                    data = new Date(seconds * 1000);
-                  } else if (ultimoSimulado.data?.toDate) {
-                    data = ultimoSimulado.data.toDate();
-                  } else {
-                    data = new Date(ultimoSimulado.data);
-                  }
-                  return !isNaN(data.getTime()) ? data.toLocaleDateString('pt-BR') : 'Data inválida';
-                } catch {
-                  return 'Data inválida';
-                }
-              })() : "Nenhum simulado realizado"}
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Ações Rápidas Premium */}
-      <div className="grid gap-5 md:grid-cols-3 animate-slide-up" style={{ animationDelay: '0.5s' }}>
-        <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-sm hover:-translate-y-0.5 bg-white dark:bg-gray-900" 
-          onClick={() => setLocation("/aluno/estudos")}
-        >
-          
-          
-          
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  
-                  <div className="relative p-4 bg-emerald-500 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
-                    <PlayCircle className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-semibold">Iniciar Cronômetro</CardTitle>
-                  <CardDescription className="text-sm mt-1">Registre seu tempo de estudo</CardDescription>
-                </div>
-              </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500 group-hover:translate-x-2 transition-all duration-300" />
-            </div>
-          </CardHeader>
-        </Card>
-
-        <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-sm hover:-translate-y-0.5 bg-white dark:bg-gray-900" 
-          onClick={() => setLocation("/aluno/estudos")}
-        >
-          
-          
-          
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  
-                  <div className="relative p-4 bg-emerald-500 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
-                    <Plus className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-semibold">Registrar Estudo</CardTitle>
-                  <CardDescription className="text-sm mt-1">Adicione manualmente</CardDescription>
-                </div>
-              </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500 group-hover:translate-x-2 transition-all duration-300" />
-            </div>
-          </CardHeader>
-        </Card>
-
-        <Card 
-          className="relative overflow-hidden border-2 border-transparent hover:border-purple-500 transition-all duration-500 cursor-pointer group hover:shadow-sm hover:shadow-sm hover:-translate-y-0.5 bg-white dark:bg-gray-900" 
-          onClick={() => setLocation("/aluno/simulados")}
-        >
-          
-          
-          
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  
-                  <div className="relative p-4 bg-emerald-500 rounded-lg group-hover:scale-[1.01] transition-transform duration-300">
-                    <FileText className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-semibold">Novo Simulado</CardTitle>
-                  <CardDescription className="text-sm mt-1">Registre seus resultados</CardDescription>
-                </div>
-              </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-purple-500 group-hover:translate-x-2 transition-all duration-300" />
-            </div>
-          </CardHeader>
-        </Card>
-      </div>
-
-      {/* Anúncio entre seções */}
-      <InContentAd className="animate-slide-up" />
-
-      {/* Mapa de Calor Premium */}
-      <Card className="hover:shadow-sm transition-all duration-500 animate-slide-up candy-cane-border" style={{ animationDelay: '0.6s' }}>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-                <div className="relative">
-                  
-                  <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
-                    <Calendar className="h-4 w-4 text-white" />
-                  </div>
-                </div>
-                Atividade de Estudos
-              </CardTitle>
-              <CardDescription className="mt-3 text-base">
-                Últimos 150 dias - Quanto mais escuro, mais sessões registradas
-              </CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <div className="grid grid-cols-30 gap-2 min-w-[800px]">
-              {mapaCalor.map((dia, index) => (
-                <div
-                  key={index}
-                  className={`w-3.5 h-3.5 rounded-md ${getCorIntensidade(dia.count)} hover:ring-2 hover:ring-primary hover:scale-150 transition-all duration-300 cursor-pointer shadow-sm`}
-                  title={`${dia.data.toLocaleDateString('pt-BR')}: ${dia.count} sessões`}
-                />
-              ))}
-            </div>
-            <div className="flex items-center gap-5 mt-8 text-sm font-medium text-muted-foreground">
-              <span>Menos</span>
-              <div className="flex gap-2">
-                <div className="w-5 h-5 rounded-md bg-gray-100 dark:bg-gray-800 border-2 shadow-sm" />
-                <div className="w-5 h-5 rounded-md bg-emerald-200 dark:bg-emerald-900 shadow-sm" />
-                <div className="w-5 h-5 rounded-md bg-emerald-400 dark:bg-emerald-700 shadow-sm" />
-                <div className="w-5 h-5 rounded-md bg-emerald-600 dark:bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400-sm" />
-              </div>
-              <span>Mais</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Análise e Atividade */}
-      <div className="grid gap-4 md:grid-cols-2 animate-slide-up" style={{ animationDelay: '0.7s' }}>
-        {/* Análise Inteligente Premium */}
-        <Card className="hover:shadow-sm transition-shadow candy-cane-border">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-              <div className="relative">
-                
-                <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
-                  <TrendingUp className="h-4 w-4 text-white" />
-                </div>
-              </div>
-              Análise Inteligente
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-5">
-            {analisePorMateria.pontosFortes.length > 0 && (
-              <div className="relative overflow-hidden p-4 bg-white dark:bg-gray-900">
-                
-                
-                
-                <div className="relative">
-                  <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 mb-4 flex items-center gap-2">
-                    <Trophy className="h-5 w-5 fill-emerald-600" />
-                    Pontos Fortes (≥ 80%)
-                  </p>
-                  <div className="space-y-3">
-                    {analisePorMateria.pontosFortes.map(m => (
-                      <div key={m.materia} className="flex justify-between items-center bg-white/60 dark:bg-black/30 p-3 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <span className="text-sm font-bold text-emerald-700 dark:text-emerald-300">{m.materia}</span>
-                        <div className="flex items-center gap-2">
-                          <div className="px-3 py-1 bg-emerald-600 text-white rounded-full text-sm font-semibold shadow-md">
-                            {m.percentual}%
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            {analisePorMateria.pontosFracos.length > 0 && (
-              <div className="relative overflow-hidden p-4 bg-white dark:bg-gray-900">
-                
-                
-                
-                <div className="relative">
-                  <p className="text-base font-semibold text-red-900 dark:text-red-100 mb-4 flex items-center gap-2">
-                    <Target className="h-5 w-5" />
-                    Pontos Fracos (&lt; 60%)
-                  </p>
-                  <div className="space-y-3">
-                    {analisePorMateria.pontosFracos.map(m => (
-                      <div key={m.materia} className="flex justify-between items-center bg-white/60 dark:bg-black/30 p-3 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <span className="text-sm font-bold text-red-700 dark:text-red-300">{m.materia}</span>
-                        <div className="flex items-center gap-2">
-                          <div className="px-3 py-1 bg-red-600 text-white rounded-full text-sm font-semibold shadow-md">
-                            {m.percentual}%
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-4 p-4 bg-white/40 dark:bg-black/20 rounded-xl border border-red-200 dark:border-red-800">
-                    <p className="text-sm text-red-800 dark:text-red-200 font-semibold">
-                      💡 <strong>Dica:</strong> Foque nos tópicos de maior incidência dessas matérias
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            {streak === 0 && (
-              <div className="p-4 bg-white dark:bg-gray-900">
-                <p className="text-base font-semibold text-orange-900 dark:text-orange-100 flex items-center gap-2">
-                  <Zap className="h-5 w-5" />
-                  Comece sua sequência hoje!
-                </p>
-                <p className="text-sm text-orange-700 dark:text-orange-300 mt-2 font-medium">
-                  Estudar todos os dias te aproxima cada vez mais de ver seu nome na lista de aprovados!
-                </p>
-              </div>
-            )}
-            
-            {streak > 0 && streak < 7 && (
-              <div className="p-4 bg-white dark:bg-gray-900">
-                <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
-                  <Flame className="h-5 w-5" />
-                  {streak} dias de sequência!
-                </p>
-                <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-2 font-medium">
-                  Continue para formar o hábito de estudar todos os dias
-                </p>
-              </div>
-            )}
-
-            {streak >= 7 && (
-              <div className="p-4 bg-white dark:bg-gray-900">
-                <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
-                  <Trophy className="h-5 w-5 fill-emerald-600" />
-                  {streak} dias consecutivos!
-                </p>
-                <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-2 font-medium">
-                  Excelente consistência! Você está no caminho certo.
-                </p>
-              </div>
-            )}
-            
-            {analisePorMateria.pontosFortes.length === 0 && analisePorMateria.pontosFracos.length === 0 && (
-              <div className="p-4 bg-white dark:bg-gray-900">
-                <p className="text-base font-semibold text-emerald-900 dark:text-emerald-100 flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5" />
-                  Dados insuficientes
-                </p>
-                <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-2 font-medium">
-                  Faça pelo menos 5 questões de cada matéria para ver sua análise detalhada
-                </p>
-              </div>
-            )}
-
-            <Button 
-              variant="outline" 
-              className="w-full border-2 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 font-bold text-base py-3 shadow hover:shadow-sm"
-              onClick={() => setLocation("/aluno/metricas")}
+          {/* Cards de Ação Rápida */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <button
+              onClick={() => setLocation('/aluno/estudos')}
+              className="group relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white hover:shadow-lg transition-all duration-300 hover:scale-105"
             >
-              <BarChart3 className="h-5 w-5 mr-2" />
-              Ver Análise Completa
-            </Button>
-          </CardContent>
-        </Card>
+              <BookOpen className="h-8 w-8 mb-3" />
+              <div className="text-sm font-medium">Registrar</div>
+              <div className="text-xs opacity-90">Estudo</div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+            </button>
 
-        {/* Anúncio entre seções */}
-        <InContentAd className="col-span-full" />
+            <button
+              onClick={() => setLocation('/aluno/simulados')}
+              className="group relative overflow-hidden bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <FileText className="h-8 w-8 mb-3" />
+              <div className="text-sm font-medium">Adicionar</div>
+              <div className="text-xs opacity-90">Simulado</div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+            </button>
 
-        {/* Atividade Recente Premium */}
-        <Card className="hover:shadow-sm transition-shadow candy-cane-border">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-2xl font-semibold">
-              <div className="relative">
-                
-                <div className="relative p-3 bg-emerald-500 rounded-lg shadow-sm">
-                  <Activity className="h-4 w-4 text-white" />
+            <button
+              onClick={() => setLocation('/aluno/metas')}
+              className="group relative overflow-hidden bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 text-white hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <Target className="h-8 w-8 mb-3" />
+              <div className="text-sm font-medium">Criar</div>
+              <div className="text-xs opacity-90">Meta</div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+            </button>
+
+            <button
+              onClick={() => setLocation('/aluno/diario')}
+              className="group relative overflow-hidden bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl p-6 text-white hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <Heart className="h-8 w-8 mb-3" />
+              <div className="text-sm font-medium">Abrir</div>
+              <div className="text-xs opacity-90">Diário</div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+            </button>
+          </div>
+
+          {/* Timeline de Últimos Estudos */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Activity className="h-5 w-5 text-emerald-600" />
+                    Atividade Recente
+                  </CardTitle>
+                  <CardDescription>Seus últimos estudos registrados</CardDescription>
                 </div>
+                <button
+                  onClick={() => setLocation('/aluno/estudos')}
+                  className="text-sm text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1"
+                >
+                  Ver todos
+                  <ChevronRight className="h-4 w-4" />
+                </button>
               </div>
-              Atividade Recente
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {estudos && estudos.length > 0 ? (
-                estudos.slice(0, 5).map((estudo, index) => (
-                  <div key={index} className="group flex items-start gap-4 pb-4 border-b last:border-0 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 p-3 rounded-xl transition-all duration-300">
-                    <div className="relative">
-                      
-                      <div className="relative p-3 bg-emerald-500 rounded-lg shadow group-hover:scale-[1.01] transition-transform">
-                        <BookOpen className="h-5 w-5 text-white" />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-base font-bold truncate">{estudo.materia}</p>
-                      <p className="text-sm text-muted-foreground truncate">{estudo.conteudo}</p>
-                      <div className="flex items-center gap-4 mt-2 text-xs font-medium text-muted-foreground">
-                        <span className="flex items-center gap-1.5 px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
-                          <Clock className="h-3.5 w-3.5" />
-                          {estudo.tempoMinutos}min
-                        </span>
-                        {estudo.questoesFeitas > 0 && (
-                          <span className="flex items-center gap-1.5 px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 rounded-full">
-                            <CheckCircle2 className="h-3.5 w-3.5" />
-                            {estudo.questoesAcertadas}/{estudo.questoesFeitas}
-                          </span>
+            </CardHeader>
+            <CardContent>
+              {ultimosEstudos.length > 0 ? (
+                <div className="space-y-4">
+                  {ultimosEstudos.map((estudo, index) => (
+                    <div key={index} className="flex items-start gap-4 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      <div className="relative">
+                        <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                          <BookOpen className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+                        </div>
+                        {index < ultimosEstudos.length - 1 && (
+                          <div className="absolute top-10 left-5 w-px h-8 bg-gray-200 dark:bg-gray-700"></div>
                         )}
                       </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <h4 className="font-medium text-gray-900 dark:text-white">
+                            {estudo.materia}
+                          </h4>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            {estudo.dataFormatada.toLocaleDateString('pt-BR')}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {estudo.tempoMinutos}min
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <CheckCircle2 className="h-3 w-3" />
+                            {estudo.questoesFeitas} questões
+                          </span>
+                          {estudo.questoesFeitas > 0 && (
+                            <span className="text-emerald-600 dark:text-emerald-400 font-medium">
+                              {Math.round((estudo.questoesAcertadas / estudo.questoesFeitas) * 100)}% acerto
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               ) : (
-                <div className="text-center py-16">
-                  <div className="relative mx-auto w-20 h-20 mb-6">
-                    
-                    <div className="relative p-5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center justify-center">
-                      <BookOpen className="h-10 w-10 text-primary" />
-                    </div>
-                  </div>
-                  <p className="text-base text-muted-foreground mb-6 font-medium">
-                    Nenhum estudo registrado ainda
-                  </p>
-                  <Button 
-                    size="lg"
-                    onClick={() => setLocation("/aluno/estudos")}
-                    className="bg-emerald-600 hover:bg-emerald-700"
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                  <BookOpen className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                  <p>Nenhum estudo registrado ainda</p>
+                  <button
+                    onClick={() => setLocation('/aluno/estudos')}
+                    className="mt-3 text-emerald-600 hover:text-emerald-700 font-medium text-sm"
                   >
-                    <Plus className="h-5 w-5 mr-2" />
-                    Registrar Primeiro Estudo
-                  </Button>
+                    Registrar primeiro estudo
+                  </button>
                 </div>
               )}
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+
+          {/* Performance por Matéria */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Brain className="h-5 w-5 text-emerald-600" />
+                Performance por Matéria
+              </CardTitle>
+              <CardDescription>Top 5 matérias mais estudadas</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {analisePorMateria.todas.length > 0 ? (
+                <div className="space-y-4">
+                  {analisePorMateria.todas.map((item, index) => (
+                    <div key={index} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium text-gray-900 dark:text-white">{item.materia}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                            {Math.floor(item.tempo / 60)}h {item.tempo % 60}min
+                          </span>
+                          {item.questoes > 0 && (
+                            <span className={`text-sm font-medium ${
+                              item.percentual >= 80 ? 'text-emerald-600' :
+                              item.percentual >= 60 ? 'text-yellow-600' :
+                              'text-red-600'
+                            }`}>
+                              {item.percentual}%
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            item.percentual >= 80 ? 'bg-emerald-500' :
+                            item.percentual >= 60 ? 'bg-yellow-500' :
+                            'bg-red-500'
+                          }`}
+                          style={{ width: `${item.percentual}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                  <Brain className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                  <p>Comece a estudar para ver sua performance</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+        </div>
+
+        {/* Coluna Direita (1/3) */}
+        <div className="space-y-6">
+          
+          {/* Ranking - Desktop */}
+          <div className="hidden md:block">
+            <RankingResumo onClick={() => setRankingModalOpen(true)} />
+          </div>
+
+          {/* Metas em Destaque */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="h-5 w-5 text-emerald-600" />
+                  Metas Ativas
+                </CardTitle>
+                <button
+                  onClick={() => setLocation('/aluno/metas')}
+                  className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {metasAtivas.length > 0 ? (
+                <div className="space-y-4">
+                  {metasAtivas.map((meta, index) => (
+                    <div key={index} className="p-4 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 dark:border-emerald-800">
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="font-medium text-gray-900 dark:text-white text-sm">
+                          {meta.titulo || meta.tipo}
+                        </h4>
+                        <Trophy className="h-4 w-4 text-emerald-600" />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
+                          <span>Progresso</span>
+                          <span className="font-medium">
+                            {meta.valorAtual || 0} / {meta.valorAlvo}
+                          </span>
+                        </div>
+                        <div className="h-2 bg-white/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                            style={{ 
+                              width: `${Math.min(((meta.valorAtual || 0) / meta.valorAlvo) * 100, 100)}%` 
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                  <Target className="h-12 w-12 mx-auto mb-3 opacity-50" />
+                  <p className="text-sm">Nenhuma meta ativa</p>
+                  <button
+                    onClick={() => setLocation('/aluno/metas')}
+                    className="mt-3 text-emerald-600 hover:text-emerald-700 font-medium text-sm"
+                  >
+                    Criar meta
+                  </button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Conquistas */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Award className="h-5 w-5 text-emerald-600" />
+                Conquistas
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-3 gap-3">
+                {/* Badge Streak */}
+                <div className={`p-3 rounded-lg text-center ${
+                  streak >= 7 ? 'bg-orange-100 dark:bg-orange-900/30' : 'bg-gray-100 dark:bg-gray-800'
+                }`}>
+                  <Flame className={`h-6 w-6 mx-auto mb-1 ${
+                    streak >= 7 ? 'text-orange-500' : 'text-gray-400'
+                  }`} />
+                  <div className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    {streak >= 7 ? 'Fogo!' : 'Streak'}
+                  </div>
+                </div>
+
+                {/* Badge Questões */}
+                <div className={`p-3 rounded-lg text-center ${
+                  questoesTotal >= 100 ? 'bg-blue-100 dark:bg-blue-900/30' : 'bg-gray-100 dark:bg-gray-800'
+                }`}>
+                  <CheckCircle2 className={`h-6 w-6 mx-auto mb-1 ${
+                    questoesTotal >= 100 ? 'text-blue-500' : 'text-gray-400'
+                  }`} />
+                  <div className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    {questoesTotal >= 100 ? 'Expert' : 'Questões'}
+                  </div>
+                </div>
+
+                {/* Badge Tempo */}
+                <div className={`p-3 rounded-lg text-center ${
+                  tempoTotal >= 600 ? 'bg-purple-100 dark:bg-purple-900/30' : 'bg-gray-100 dark:bg-gray-800'
+                }`}>
+                  <Clock className={`h-6 w-6 mx-auto mb-1 ${
+                    tempoTotal >= 600 ? 'text-purple-500' : 'text-gray-400'
+                  }`} />
+                  <div className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    {tempoTotal >= 600 ? 'Dedicado' : 'Tempo'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg border border-emerald-200 dark:border-emerald-800">
+                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <Rocket className="h-4 w-4 text-emerald-600" />
+                  <span className="font-medium">Continue assim!</span>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  Você está no caminho certo para alcançar seus objetivos.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
       </div>
 
-      <style>{`
-        @keyframes wave {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(20deg); }
-          75% { transform: rotate(-15deg); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-30px); }
-        }
-        
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 0.8; }
-        }
-        
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        
-        @keyframes bounce-subtle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
-        }
-        
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-wave {
-          animation: wave 2s ease-in-out infinite;
-          transform-origin: 70% 70%;
-        }
-        
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-          animation: float-delayed 10s ease-in-out infinite;
-        }
-        
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        
-        . {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-        
-        .animate-spin-slow {
-          animation: spin-slow 3s linear infinite;
-        }
-        
-        .animate-bounce-subtle {
-          animation: bounce-subtle 2s ease-in-out infinite;
-        }
-        
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-        
-        .animate-slide-up {
-          animation: slide-up 0.6s ease-out;
-        }
-      `}</style>
-      
-      {/* Anúncio no final da página */}
-      <ResponsiveAd className="mt-6" />
+      {/* Anúncio */}
+      <InContentAd />
 
       {/* Modal de Ranking */}
       <RankingModal 
         open={rankingModalOpen} 
-        onOpenChange={setRankingModalOpen} 
+        onOpenChange={setRankingModalOpen}
       />
     </div>
   );
