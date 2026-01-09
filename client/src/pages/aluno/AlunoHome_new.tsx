@@ -7,6 +7,7 @@ import {
   BookOpen, 
   Calendar, 
   FileText, 
+  Target, 
   TrendingUp, 
   Clock,
   CheckCircle2,
@@ -15,8 +16,10 @@ import {
   Plus,
   ArrowRight,
   Flame,
+  Trophy,
   Zap,
   Star,
+  Award,
   TrendingDown, Heart
 } from "lucide-react";
 import { useLocation } from "wouter";
@@ -65,6 +68,7 @@ export default function AlunoHome() {
       const [estudosData, simuladosData, metasData] = await Promise.all([
         getEstudosDirect(),
         getSimuladosDirect(),
+        getMetasDirect(),
       ]);
       setEstudos(estudosData as any[]);
       setSimulados(simuladosData as any[]);
