@@ -4,7 +4,7 @@ import { getEstudosDirect, getSimuladosDirect } from "@/lib/firestore-direct";
 import { 
   Activity, BookOpen, Calendar, FileText, TrendingUp, Clock,
   CheckCircle2, BarChart3, PlayCircle, Plus, ArrowRight,
-  Flame, Zap, Star, TrendingDown, Heart
+  Flame, Zap, Star, TrendingDown, Heart, CalendarDays
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useAuthContext } from "@/contexts/AuthContext";
@@ -189,7 +189,7 @@ export default function AlunoHome() {
         </div>
       </div>
 
-      {/* Cards de Ação Rápida */}
+      {/* Cards de Ação Rápida - Linha 1 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <button
           onClick={() => setLocation("/aluno/estudos")}
@@ -205,36 +205,36 @@ export default function AlunoHome() {
         </button>
         
         <button
-          onClick={() => setLocation("/aluno/estudos")}
+          onClick={() => setLocation("/aluno/cronograma")}
           className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
         >
           <div className="flex items-center gap-4">
-            <Plus className="h-12 w-12" />
+            <CalendarDays className="h-12 w-12" />
             <div className="text-left">
-              <div className="text-xl font-bold">Registrar Estudo</div>
-              <div className="text-sm text-purple-100">Adicione manualmente</div>
+              <div className="text-xl font-bold">Cronogramas</div>
+              <div className="text-sm text-purple-100">Organize seus estudos</div>
             </div>
           </div>
         </button>
         
         <button
-          onClick={() => setLocation("/aluno/simulados")}
+          onClick={() => setLocation("/aluno/metricas")}
           className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
         >
           <div className="flex items-center gap-4">
-            <FileText className="h-12 w-12" />
+            <BarChart3 className="h-12 w-12" />
             <div className="text-left">
-              <div className="text-xl font-bold">Novo Simulado</div>
-              <div className="text-sm text-teal-100">Registre seus resultados</div>
+              <div className="text-xl font-bold">Métricas</div>
+              <div className="text-sm text-teal-100">Analise seu desempenho</div>
             </div>
           </div>
         </button>
       </div>
 
-      {/* Mapa de Calor e Ranking lado a lado */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Mapa de Calor - 2 colunas */}
-        <Card className="lg:col-span-2 hover:shadow-lg transition-shadow">
+      {/* Mapa de Calor, Simulados e Ranking */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Mapa de Calor - 3 colunas */}
+        <Card className="lg:col-span-3 hover:shadow-lg transition-shadow">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -275,8 +275,23 @@ export default function AlunoHome() {
           </CardContent>
         </Card>
 
-        {/* Ranking - 1 coluna */}
-        <div className="lg:col-span-1">
+        {/* Coluna direita - Simulados e Ranking */}
+        <div className="lg:col-span-1 flex flex-col gap-6">
+          {/* Card Simulados */}
+          <button
+            onClick={() => setLocation("/aluno/simulados")}
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 text-left"
+          >
+            <div className="flex flex-col gap-3">
+              <FileText className="h-12 w-12" />
+              <div>
+                <div className="text-xl font-bold">Simulados</div>
+                <div className="text-sm text-orange-100">Registre seus resultados</div>
+              </div>
+            </div>
+          </button>
+
+          {/* Ranking */}
           <RankingResumo />
         </div>
       </div>
