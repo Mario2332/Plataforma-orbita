@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 // Acesso direto ao Firestore (elimina cold start de ~24s)
-import { getEstudosDirect, getSimuladosDirect, getMetasDirect } from "@/lib/firestore-direct";
+import { getEstudosDirect, getSimuladosDirect } from "@/lib/firestore-direct";
 import { 
   Activity, 
   BookOpen, 
@@ -17,7 +17,8 @@ import {
   Flame,
   Zap,
   Star,
-  TrendingDown, Heart
+  TrendingDown,
+  Heart
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useAuthContext } from "@/contexts/AuthContext";
@@ -383,17 +384,7 @@ export default function AlunoHome() {
               </div>
               <span className="text-lg font-bold text-muted-foreground">dias</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `${Math.min((streak / (metas.find(m => m.tipo === 'sequencia' && m.status === 'ativa')?.valorAlvo || 30)) * 100, 100)}%` }}
-                />
-              </div>
-              <span className="text-xs font-medium text-muted-foreground">
-                Meta: {metas.find(m => m.tipo === 'sequencia' && m.status === 'ativa')?.valorAlvo || 30}
-              </span>
-            </div>
+
             <p className="text-xs text-muted-foreground font-medium">
               {streak > 0 ? "🔥 Mantenha o ritmo!" : "Comece hoje!"}
             </p>
@@ -436,7 +427,7 @@ export default function AlunoHome() {
             <div className="space-y-1">
               <CardTitle className="text-sm font-semibold">Questões</CardTitle>
               <div className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">{percentualAcerto}% acerto</span>
               </div>
             </div>
