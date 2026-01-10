@@ -10,9 +10,9 @@ export default function Home() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    if (!loading && isAuthenticated && user) {
+    if (!loading && isAuthenticated && userData) {
       // Redirecionar baseado no role do usuário
-      switch (user.role) {
+      switch (userData.role) {
         case "aluno":
           setLocation("/aluno");
           break;
@@ -27,7 +27,7 @@ export default function Home() {
           break;
       }
     }
-  }, [loading, isAuthenticated, user, setLocation]);
+  }, [loading, isAuthenticated, userData, setLocation]);
 
   if (loading) {
     return (
