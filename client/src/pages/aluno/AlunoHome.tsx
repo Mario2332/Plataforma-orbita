@@ -77,6 +77,61 @@ export default function AlunoHome() {
     };
   };
 
+  // Gerar dados para o mapa de calor
+  const gerarMapaCalor = () => {
+    const dias: { data: Date; count: number; }[] = [];
+    const hoje = new Date();
+    
+    const contagemPorDia = new Map<string, number>();
+    
+    estudos.forEach(e => {
+      try {
+        let data: Date;
+        
+        if (e.data?.seconds || e.data?._seconds) {
+          const seconds = e.data.seconds || e.data._seconds;
+          data = new Date(seconds * 1000);
+        } else if (e.data?.toDate) {
+          data = e.data.toDate();
+        } else {
+          data = new Date(e.data);
+        }
+        
+        if (isNaN(data.getTime())) {
+          return;
+        }
+        
+        const dataStr = formatarDataBrasil(data);
+        contagemPorDia.set(dataStr, (contagemPorDia.get(dataStr) || 0) + 1);
+      } catch (error) {
+        console.error('Erro ao processar data no mapa de calor:', error);
+      }
+    });
+    
+    for (let i = 149; i >= 0; i--) {
+      const data = new Date(hoje);
+      data.setDate(data.getDate() - i);
+      const dataStr = formatarDataBrasil(data);
+      
+      dias.push({
+        data: data,
+        count: contagemPorDia.get(dataStr) || 0,
+      });
+    }
+    
+    return dias;
+  };
+  
+  const mapaCalor = gerarMapaCalor();
+  
+  const getCorIntensidade = (count: number) => {
+    if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
+    if (count === 1) return 'bg-emerald-200 dark:bg-emerald-900';
+    if (count === 2) return 'bg-emerald-400 dark:bg-emerald-700';
+    if (count >= 3) return 'bg-emerald-600 dark:bg-emerald-500';
+    return 'bg-gray-100 dark:bg-gray-800';
+  };
+
   const stats = calcularEstatisticas();
 
   if (loading) {
@@ -176,6 +231,56 @@ export default function AlunoHome() {
         </button>
       </div>
 
+      {/* Mapa de Calor e Ranking lado a lado */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Mapa de Calor - 2 colunas */}
+        <Card className="lg:col-span-2 hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center gap-3 text-xl font-semibold">
+                  <div className="p-2 bg-emerald-500 rounded-lg">
+                    <Calendar className="h-5 w-5 text-white" />
+                  </div>
+                  Atividade de Estudos
+                </CardTitle>
+                <CardDescription className="mt-2">
+                  Últimos 150 dias - Quanto mais escuro, mais sessões registradas
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <div className="grid grid-cols-30 gap-1.5 min-w-[700px]">
+                {mapaCalor.map((dia, index) => (
+                  <div
+                    key={index}
+                    className={`w-3 h-3 rounded-sm ${getCorIntensidade(dia.count)} hover:ring-2 hover:ring-emerald-500 hover:scale-125 transition-all duration-200 cursor-pointer`}
+                    title={`${dia.data.toLocaleDateString('pt-BR')}: ${dia.count} sessões`}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-4 mt-6 text-sm text-muted-foreground">
+                <span>Menos</span>
+                <div className="flex gap-1.5">
+                  <div className="w-4 h-4 rounded-sm bg-gray-100 dark:bg-gray-800 border" />
+                  <div className="w-4 h-4 rounded-sm bg-emerald-200 dark:bg-emerald-900" />
+                  <div className="w-4 h-4 rounded-sm bg-emerald-400 dark:bg-emerald-700" />
+                  <div className="w-4 h-4 rounded-sm bg-emerald-600 dark:bg-emerald-500" />
+                </div>
+                <span>Mais</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Ranking - 1 coluna */}
+        <div className="lg:col-span-1">
+          <RankingResumo />
+        </div>
+      </div>
+
       <InContentAd />
 
       {/* Timeline de Atividade Recente */}
@@ -225,8 +330,6 @@ export default function AlunoHome() {
       </Card>
 
       <ResponsiveAd />
-      
-      <RankingResumo />
     </div>
   );
 }
