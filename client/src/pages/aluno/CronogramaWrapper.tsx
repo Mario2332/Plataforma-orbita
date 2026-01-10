@@ -4,10 +4,15 @@ import AlunoCronograma from "./AlunoCronograma";
 import CronogramaAnual from "./cronograma/CronogramaAnual";
 import CronogramaEstatisticas from "./cronograma/CronogramaEstatisticas";
 import CronogramaDinamico from "./CronogramaDinamico";
+import { useTenant } from "@/contexts/TenantContext";
 
 export default function CronogramaWrapper() {
+  const { tenant } = useTenant();
   const [activeTab, setActiveTab] = useState<"semanal" | "anual-ciclos" | "anual-dinamico">("semanal");
   const [anualSubTab, setAnualSubTab] = useState<"ciclos" | "estatisticas">("ciclos");
+  
+  // Verificar se cronograma dinâmico está habilitado
+  const cronogramaDinamicoHabilitado = tenant?.features?.cronogramaDinamico ?? true;
 
   return (
     <div className="space-y-6 pb-8 animate-fade-in">
@@ -64,20 +69,22 @@ export default function CronogramaWrapper() {
             <RefreshCw className="w-4 h-4" />
             Anual - Ciclos
           </button>
-          <button
-            onClick={() => setActiveTab("anual-dinamico")}
-            className={`
-              flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all
-              ${
-                activeTab === "anual-dinamico"
-                  ? "bg-purple-500 text-white shadow-md"
-                  : "text-gray-600 hover:bg-gray-100"
-              }
-            `}
-          >
-            <Zap className="w-4 h-4" />
-            Anual - Dinâmico
-          </button>
+          {cronogramaDinamicoHabilitado && (
+            <button
+              onClick={() => setActiveTab("anual-dinamico")}
+              className={`
+                flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all
+                ${
+                  activeTab === "anual-dinamico"
+                    ? "bg-purple-500 text-white shadow-md"
+                    : "text-gray-600 hover:bg-gray-100"
+                }
+              `}
+            >
+              <Zap className="w-4 h-4" />
+              Anual - Dinâmico
+            </button>
+          )}
         </nav>
       </div>
 
@@ -124,7 +131,7 @@ export default function CronogramaWrapper() {
             {anualSubTab === "estatisticas" && <CronogramaEstatisticas />}
           </>
         )}
-        {activeTab === "anual-dinamico" && <CronogramaDinamico />}
+        {activeTab === "anual-dinamico" && cronogramaDinamicoHabilitado && <CronogramaDinamico />}
       </div>
     </div>
   );

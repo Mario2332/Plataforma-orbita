@@ -52,6 +52,7 @@ import { toast } from "sonner";
 import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
+import { adminDb, adminStorage } from "@/lib/firebase-admin";
 import { TenantConfig } from "@/types/tenant";
 
 interface ClienteForm {
@@ -164,7 +165,7 @@ export default function GestorClientes() {
   const carregarClientes = async () => {
     setIsLoading(true);
     try {
-      const tenantsRef = collection(db, "tenants");
+      const tenantsRef = collection(adminDb, "tenants");
       const snapshot = await getDocs(tenantsRef);
       const lista: TenantConfig[] = [];
       
@@ -219,7 +220,7 @@ export default function GestorClientes() {
     setUploadingLogo(true);
     try {
       const slug = form.slug || `temp-${Date.now()}`;
-      const storageRef = ref(storage, `tenants/${slug}/logo-${Date.now()}.${file.name.split('.').pop()}`);
+      const storageRef = ref(adminStorage, `tenants/${slug}/logo-${Date.now()}.${file.name.split('.').pop()}`);
       
       await uploadBytes(storageRef, file);
       const downloadURL = await getDownloadURL(storageRef);
@@ -334,7 +335,7 @@ export default function GestorClientes() {
         ...(editando ? {} : { criadoEm: Timestamp.now() }),
       };
 
-      const tenantRef = doc(db, "tenants", docId);
+      const tenantRef = doc(adminDb, "tenants", docId);
       
       if (editando) {
         await updateDoc(tenantRef, tenantData);
@@ -359,7 +360,7 @@ export default function GestorClientes() {
     if (!clienteParaDeletar) return;
 
     try {
-      await deleteDoc(doc(db, "tenants", clienteParaDeletar.id));
+      await deleteDoc(doc(adminDb, "tenants", clienteParaDeletar.id));
       toast.success("Cliente excluído com sucesso!");
       setDeleteDialogOpen(false);
       setClienteParaDeletar(null);
@@ -374,7 +375,7 @@ export default function GestorClientes() {
   const handleToggleStatus = async (cliente: TenantConfig) => {
     try {
       const novoStatus = cliente.status === "ativo" ? "inativo" : "ativo";
-      await updateDoc(doc(db, "tenants", cliente.id), {
+      await updateDoc(doc(adminDb, "tenants", cliente.id), {
         status: novoStatus,
         atualizadoEm: Timestamp.now(),
       });
