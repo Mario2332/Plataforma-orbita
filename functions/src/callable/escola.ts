@@ -149,7 +149,7 @@ const getAlunos = functions
       id: doc.id,
       ...doc.data(),
     }));
-  });}
+  });
 
 /**
  * Obter aluno específico
