@@ -1,0 +1,45 @@
+name: Deploy para Firebase
+
+on:
+  push:
+    branches:
+      - main
+      - feature/escola-tenant-isolation
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Completo
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: 📦 Install pnpm
+        run: npm install -g pnpm
+      
+      - name: 📦 Install dependencies
+        run: pnpm install
+      
+      - name: 🏗️ Build Frontend
+        run: cd client && pnpm run build
+      
+      - name: 🏗️ Build Functions
+        run: cd functions && npm install && npm run build
+      
+      - name: 🔑 Setup Firebase
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > $HOME/firebase-key.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/firebase-key.json" >> $GITHUB_ENV
+      
+      - name: 📦 Install Firebase CLI
+        run: npm install -g firebase-tools
+      
+      - name: 🚀 Deploy All
+        run: firebase deploy --project plataforma-orbita --non-interactive
