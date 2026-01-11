@@ -72,7 +72,7 @@ export default function LoginGestor() {
           </h2>
           
           <p className="text-gray-600 text-lg font-semibold">
-            Gerencie toda a plataforma, configure mentores e acompanhe o crescimento da rede de estudantes com controle total.
+            Gerencie toda a plataforma, configure escolas e acompanhe o crescimento da rede de estudantes com controle total.
           </p>
 
           <div className="space-y-4 pt-4">
@@ -82,7 +82,7 @@ export default function LoginGestor() {
               </div>
               <div>
                 <h3 className="font-bold text-gray-800">Configuração White-label</h3>
-                <p className="text-sm text-gray-600 font-semibold">Personalize plataformas para cada mentor</p>
+                <p className="text-sm text-gray-600 font-semibold">Personalize plataformas para cada escola</p>
               </div>
             </div>
 

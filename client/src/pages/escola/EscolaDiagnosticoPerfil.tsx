@@ -44,7 +44,7 @@ interface AlunoComPerfil {
   perfilAtualizadoEm?: Date;
 }
 
-export default function MentorDiagnosticoPerfil() {
+export default function EscolaDiagnosticoPerfil() {
   const [activeTab, setActiveTab] = useState("perguntas");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

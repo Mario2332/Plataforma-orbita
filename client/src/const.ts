@@ -4,7 +4,7 @@ export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "Plataforma Órbita";
 
 export const APP_LOGO =
   import.meta.env.VITE_APP_LOGO ||
-  "https://firebasestorage.googleapis.com/v0/b/plataforma-mentoria-mario.firebasestorage.app/o/Logo%2FLogo%20mentoria%20sem%20texto.png?alt=media&token=452fed10-1481-41ad-a4c1-ddd61b039409";
+  "https://firebasestorage.googleapis.com/v0/b/plataforma-escolaia-mario.firebasestorage.app/o/Logo%2FLogo%20escolaia%20sem%20texto.png?alt=media&token=452fed10-1481-41ad-a4c1-ddd61b039409";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
 export const getLoginUrl = () => {

@@ -13,29 +13,29 @@ async function callFunction<T = any, R = any>(functionName: string, data?: T): P
 // ============================================
 
 export const gestorApi = {
-  // Mentores
-  getMentores: () => callFunction("gestorFunctions-getMentores"),
-  createMentor: (data: {
+  // Escolaes
+  getEscolaes: () => callFunction("gestorFunctions-getEscolaes"),
+  createEscola: (data: {
     nome: string;
     email: string;
     password: string;
     nomePlataforma: string;
     logoUrl?: string;
     corPrincipal?: string;
-  }) => callFunction("gestorFunctions-createMentor", data),
+  }) => callFunction("gestorFunctions-createEscola", data),
   
-  updateMentor: (data: {
-    mentorId: string;
+  updateEscola: (data: {
+    escolaId: string;
     nome?: string;
     email?: string;
     nomePlataforma?: string;
     logoUrl?: string;
     corPrincipal?: string;
-  }) => callFunction("gestorFunctions-updateMentor", data),
+  }) => callFunction("gestorFunctions-updateEscola", data),
   
-  deleteMentor: (mentorId: string) => callFunction("gestorFunctions-deleteMentor", { mentorId }),
+  deleteEscola: (escolaId: string) => callFunction("gestorFunctions-deleteEscola", { escolaId }),
   
-  toggleMentorStatus: (mentorId: string) => callFunction("gestorFunctions-toggleMentorStatus", { mentorId }),
+  toggleEscolaStatus: (escolaId: string) => callFunction("gestorFunctions-toggleEscolaStatus", { escolaId }),
 
   // Alunos
   getAllAlunos: () => callFunction("gestorFunctions-getAllAlunos"),
@@ -43,24 +43,24 @@ export const gestorApi = {
     alunoId: string;
     nome?: string;
     email?: string;
-    mentorId?: string;
+    escolaId?: string;
   }) => callFunction("gestorFunctions-updateAluno", data),
   deleteAluno: (alunoId: string) => callFunction("gestorFunctions-deleteAluno", { alunoId }),
 };
 
 // ============================================
-// MENTOR API
+// ESCOLA API
 // ============================================
 
-export const mentorApi = {
+export const escolaApi = {
   // Alunos
-  getAlunos: () => callFunction("mentorFunctions-getAlunos"),
+  getAlunos: () => callFunction("escolaFunctions-getAlunos"),
   createAluno: (data: {
     nome: string;
     email: string;
     celular?: string;
     plano?: string;
-  }) => callFunction("mentorFunctions-createAluno", data),
+  }) => callFunction("escolaFunctions-createAluno", data),
   
   updateAluno: (data: {
     alunoId: string;
@@ -68,35 +68,35 @@ export const mentorApi = {
     email?: string;
     celular?: string;
     plano?: string;
-  }) => callFunction("mentorFunctions-updateAluno", data),
+  }) => callFunction("escolaFunctions-updateAluno", data),
   
-  deleteAluno: (alunoId: string) => callFunction("mentorFunctions-deleteAluno", { alunoId }),
+  deleteAluno: (alunoId: string) => callFunction("escolaFunctions-deleteAluno", { alunoId }),
   
-  toggleAlunoStatus: (alunoId: string) => callFunction("mentorFunctions-toggleAlunoStatus", { alunoId }),
+  toggleAlunoStatus: (alunoId: string) => callFunction("escolaFunctions-toggleAlunoStatus", { alunoId }),
 
   // Configurações
-  getConfig: () => callFunction("mentorFunctions-getConfig"),
+  getConfig: () => callFunction("escolaFunctions-getConfig"),
   updateConfig: (data: {
     nomePlataforma?: string;
     logoUrl?: string;
     corPrincipal?: string;
-  }) => callFunction("mentorFunctions-updateConfig", data),
+  }) => callFunction("escolaFunctions-updateConfig", data),
 
   // Métricas e Evolução
-  getAlunosMetricas: () => callFunction("mentorFunctions-getAlunosMetricas"),
-  getEvolucaoAlunos: () => callFunction("mentorFunctions-getEvolucaoAlunos"),
+  getAlunosMetricas: () => callFunction("escolaFunctions-getAlunosMetricas"),
+  getEvolucaoAlunos: () => callFunction("escolaFunctions-getEvolucaoAlunos"),
   
   // Visualização da área do aluno
-  getAlunoAreaCompleta: (alunoId: string) => callFunction("mentorFunctions-getAlunoAreaCompleta", { alunoId }),
+  getAlunoAreaCompleta: (alunoId: string) => callFunction("escolaFunctions-getAlunoAreaCompleta", { alunoId }),
   
-  // Funções para mentor gerenciar dados do aluno
+  // Funções para escola gerenciar dados do aluno
   createAlunoEstudo: (data: {
     alunoId: string;
     materia: string;
     topico: string;
     tempoMinutos: number;
     observacoes?: string;
-  }) => callFunction("mentorFunctions-createAlunoEstudo", data),
+  }) => callFunction("escolaFunctions-createAlunoEstudo", data),
   
   updateAlunoEstudo: (data: {
     alunoId: string;
@@ -108,12 +108,12 @@ export const mentorApi = {
     questoesFeitas?: number;
     questoesAcertadas?: number;
     flashcardsRevisados?: number;
-  }) => callFunction("mentorFunctions-updateAlunoEstudo", data),
+  }) => callFunction("escolaFunctions-updateAlunoEstudo", data),
   
   deleteAlunoEstudo: (data: {
     alunoId: string;
     estudoId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoEstudo", data),
+  }) => callFunction("escolaFunctions-deleteAlunoEstudo", data),
   
   createAlunoSimulado: (data: {
     alunoId: string;
@@ -126,7 +126,7 @@ export const mentorApi = {
     notaCienciasNatureza?: number;
     notaCienciasHumanas?: number;
     observacoes?: string;
-  }) => callFunction("mentorFunctions-createAlunoSimulado", data),
+  }) => callFunction("escolaFunctions-createAlunoSimulado", data),
   
   updateAlunoSimulado: (data: {
     alunoId: string;
@@ -140,17 +140,17 @@ export const mentorApi = {
     notaCienciasNatureza?: number;
     notaCienciasHumanas?: number;
     observacoes?: string;
-  }) => callFunction("mentorFunctions-updateAlunoSimulado", data),
+  }) => callFunction("escolaFunctions-updateAlunoSimulado", data),
   
   deleteAlunoSimulado: (data: {
     alunoId: string;
     simuladoId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoSimulado", data),
+  }) => callFunction("escolaFunctions-deleteAlunoSimulado", data),
   
   getAlunoData: (data: {
     alunoId: string;
     collection: string;
-  }) => callFunction("mentorFunctions-getAlunoData", data),
+  }) => callFunction("escolaFunctions-getAlunoData", data),
   
   // Horários
   createAlunoHorario: (data: {
@@ -161,7 +161,7 @@ export const mentorApi = {
     materia: string;
     descricao?: string;
     cor?: string;
-  }) => callFunction("mentorFunctions-createAlunoHorario", data),
+  }) => callFunction("escolaFunctions-createAlunoHorario", data),
   
   updateAlunoHorario: (data: {
     alunoId: string;
@@ -172,33 +172,33 @@ export const mentorApi = {
     materia?: string;
     descricao?: string;
     cor?: string;
-  }) => callFunction("mentorFunctions-updateAlunoHorario", data),
+  }) => callFunction("escolaFunctions-updateAlunoHorario", data),
   
   deleteAlunoHorario: (data: {
     alunoId: string;
     horarioId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoHorario", data),
+  }) => callFunction("escolaFunctions-deleteAlunoHorario", data),
   
   clearAlunoHorarios: (data: {
     alunoId: string;
-  }) => callFunction("mentorFunctions-clearAlunoHorarios", data),
+  }) => callFunction("escolaFunctions-clearAlunoHorarios", data),
   
   // Templates
   saveAlunoTemplate: (data: {
     alunoId: string;
     nome: string;
     horarios: any[];
-  }) => callFunction("mentorFunctions-saveAlunoTemplate", data),
+  }) => callFunction("escolaFunctions-saveAlunoTemplate", data),
   
   loadAlunoTemplate: (data: {
     alunoId: string;
     templateId: string;
-  }) => callFunction("mentorFunctions-loadAlunoTemplate", data),
+  }) => callFunction("escolaFunctions-loadAlunoTemplate", data),
   
   deleteAlunoTemplate: (data: {
     alunoId: string;
     templateId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoTemplate", data),
+  }) => callFunction("escolaFunctions-deleteAlunoTemplate", data),
   
   // Diário Emocional
   createAlunoDiarioEmocional: (data: {
@@ -207,12 +207,12 @@ export const mentorApi = {
     estadoEmocional: string;
     nivelCansaco: string;
     observacoes?: string;
-  }) => callFunction("mentorFunctions-createAlunoDiarioEmocional", data),
+  }) => callFunction("escolaFunctions-createAlunoDiarioEmocional", data),
   
   deleteAlunoDiarioEmocional: (data: {
     alunoId: string;
     registroId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoDiarioEmocional", data),
+  }) => callFunction("escolaFunctions-deleteAlunoDiarioEmocional", data),
   
   // Autodiagnósticos
   createAlunoAutodiagnostico: (data: {
@@ -227,12 +227,12 @@ export const mentorApi = {
       anotacoes?: string;
       imagemUrl?: string;
     }>;
-  }) => callFunction("mentorFunctions-createAlunoAutodiagnostico", data),
+  }) => callFunction("escolaFunctions-createAlunoAutodiagnostico", data),
   
   deleteAlunoAutodiagnostico: (data: {
     alunoId: string;
     autodiagnosticoId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoAutodiagnostico", data),
+  }) => callFunction("escolaFunctions-deleteAlunoAutodiagnostico", data),
   
   // Progresso
   updateAlunoProgresso: (data: {
@@ -240,7 +240,7 @@ export const mentorApi = {
     materia: string;
     topico: string;
     concluido: boolean;
-  }) => callFunction("mentorFunctions-updateAlunoProgresso", data),
+  }) => callFunction("escolaFunctions-updateAlunoProgresso", data),
   
   // Perfil
   updateAlunoProfile: (data: {
@@ -250,7 +250,7 @@ export const mentorApi = {
     telefone?: string;
     plano?: string;
     [key: string]: any;
-  }) => callFunction("mentorFunctions-updateAlunoProfile", data),
+  }) => callFunction("escolaFunctions-updateAlunoProfile", data),
   
   // Cronogramas
   createAlunoCronograma: (data: {
@@ -259,7 +259,7 @@ export const mentorApi = {
     descricao?: string;
     dataInicio?: string;
     dataFim?: string;
-  }) => callFunction("mentorFunctions-createAlunoCronograma", data),
+  }) => callFunction("escolaFunctions-createAlunoCronograma", data),
   
   updateAlunoCronograma: (data: {
     alunoId: string;
@@ -268,12 +268,12 @@ export const mentorApi = {
     descricao?: string;
     dataInicio?: string;
     dataFim?: string;
-  }) => callFunction("mentorFunctions-updateAlunoCronograma", data),
+  }) => callFunction("escolaFunctions-updateAlunoCronograma", data),
   
   deleteAlunoCronograma: (data: {
     alunoId: string;
     cronogramaId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoCronograma", data),
+  }) => callFunction("escolaFunctions-deleteAlunoCronograma", data),
   
   // Tarefas
   createAlunoTarefa: (data: {
@@ -282,7 +282,7 @@ export const mentorApi = {
     titulo: string;
     descricao?: string;
     concluida?: boolean;
-  }) => callFunction("mentorFunctions-createAlunoTarefa", data),
+  }) => callFunction("escolaFunctions-createAlunoTarefa", data),
   
   updateAlunoTarefa: (data: {
     alunoId: string;
@@ -291,13 +291,13 @@ export const mentorApi = {
     titulo?: string;
     descricao?: string;
     concluida?: boolean;
-  }) => callFunction("mentorFunctions-updateAlunoTarefa", data),
+  }) => callFunction("escolaFunctions-updateAlunoTarefa", data),
   
   deleteAlunoTarefa: (data: {
     alunoId: string;
     cronogramaId: string;
     tarefaId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoTarefa", data),
+  }) => callFunction("escolaFunctions-deleteAlunoTarefa", data),
   
   // Metas
   createAlunoMeta: (data: {
@@ -311,7 +311,7 @@ export const mentorApi = {
     dataFim: string;
     materia?: string;
     incidencia?: string;
-  }) => callFunction("mentorFunctions-createAlunoMeta", data),
+  }) => callFunction("escolaFunctions-createAlunoMeta", data),
   
   updateAlunoMeta: (data: {
     alunoId: string;
@@ -321,12 +321,12 @@ export const mentorApi = {
     valorAlvo?: number;
     dataFim?: string;
     status?: string;
-  }) => callFunction("mentorFunctions-updateAlunoMeta", data),
+  }) => callFunction("escolaFunctions-updateAlunoMeta", data),
   
   deleteAlunoMeta: (data: {
     alunoId: string;
     metaId: string;
-  }) => callFunction("mentorFunctions-deleteAlunoMeta", data),
+  }) => callFunction("escolaFunctions-deleteAlunoMeta", data),
 };
 
 // ============================================

@@ -4,7 +4,7 @@ import { BookOpen } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import studyData from "@shared/study-content-data.json";
 
-export default function MentorPainelGeral() {
+export default function EscolaPainelGeral() {
   const stats = useMemo(() => {
     const materias = Object.entries(studyData as Record<string, any>);
     let totalTopicos = 0;

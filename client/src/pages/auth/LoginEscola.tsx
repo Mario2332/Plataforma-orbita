@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { useAuthContext } from "@/contexts/AuthContext";
 
-export default function LoginMentor() {
+export default function LoginEscola() {
   const [, setLocation] = useLocation();
   const { signIn } = useAuthContext();
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function LoginMentor() {
     try {
       await signIn(loginData.email, loginData.senha);
       toast.success("Login realizado com sucesso!");
-      setLocation("/mentor");
+      setLocation("/escola");
     } catch (error: any) {
       console.error("Erro ao fazer login:", error);
       
@@ -72,7 +72,7 @@ export default function LoginMentor() {
           </h2>
           
           <p className="text-gray-600 text-lg font-semibold">
-            Gerencie seus alunos e acompanhe o progresso de cada um com nossa plataforma completa de gestão de mentoria.
+            Gerencie seus alunos e acompanhe o progresso de cada um com nossa plataforma completa de gestão de escolaia.
           </p>
 
           <div className="space-y-4 pt-4">

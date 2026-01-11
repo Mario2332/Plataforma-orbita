@@ -40,7 +40,7 @@ import DashboardLayout from "./components/DashboardLayout";
 
 // Lazy load de páginas de autenticação
 const LoginAluno = lazy(() => import("./pages/auth/LoginAluno"));
-const LoginMentor = lazy(() => import("./pages/auth/LoginMentor"));
+const LoginEscola = lazy(() => import("./pages/auth/LoginEscola"));
 const LoginGestor = lazy(() => import("./pages/auth/LoginGestor"));
 
 // Lazy load de páginas do Aluno
@@ -64,26 +64,26 @@ const Linguagens = lazy(() => import("./pages/aluno/conteudos/Linguagens"));
 const Filosofia = lazy(() => import("./pages/aluno/conteudos/Filosofia"));
 const Sociologia = lazy(() => import("./pages/aluno/conteudos/Sociologia"));
 
-// Lazy load de páginas do Mentor
-const MentorHome = lazy(() => import("./pages/mentor/MentorHome"));
-const MentorAlunos = lazy(() => import("./pages/mentor/MentorAlunos"));
-const MentorConfiguracoes = lazy(() => import("./pages/mentor/MentorConfiguracoes"));
-const MentorViewAluno = lazy(() => import("./pages/mentor/MentorViewAluno"));
-const MentorPainelGeral = lazy(() => import("./pages/mentor/conteudos/MentorPainelGeral"));
-const MentorMatematica = lazy(() => import("./pages/mentor/conteudos/Matematica"));
-const MentorBiologia = lazy(() => import("./pages/mentor/conteudos/Biologia"));
-const MentorFisica = lazy(() => import("./pages/mentor/conteudos/Fisica"));
-const MentorQuimica = lazy(() => import("./pages/mentor/conteudos/Quimica"));
-const MentorHistoria = lazy(() => import("./pages/mentor/conteudos/Historia"));
-const MentorGeografia = lazy(() => import("./pages/mentor/conteudos/Geografia"));
-const MentorLinguagens = lazy(() => import("./pages/mentor/conteudos/Linguagens"));
-const MentorFilosofia = lazy(() => import("./pages/mentor/conteudos/Filosofia"));
-const MentorSociologia = lazy(() => import("./pages/mentor/conteudos/Sociologia"));
-const MentorDiagnosticoPerfil = lazy(() => import("./pages/mentor/MentorDiagnosticoPerfil"));
+// Lazy load de páginas do Escola
+const EscolaHome = lazy(() => import("./pages/escola/EscolaHome"));
+const EscolaAlunos = lazy(() => import("./pages/escola/EscolaAlunos"));
+const EscolaConfiguracoes = lazy(() => import("./pages/escola/EscolaConfiguracoes"));
+const EscolaViewAluno = lazy(() => import("./pages/escola/EscolaViewAluno"));
+const EscolaPainelGeral = lazy(() => import("./pages/escola/conteudos/EscolaPainelGeral"));
+const EscolaMatematica = lazy(() => import("./pages/escola/conteudos/Matematica"));
+const EscolaBiologia = lazy(() => import("./pages/escola/conteudos/Biologia"));
+const EscolaFisica = lazy(() => import("./pages/escola/conteudos/Fisica"));
+const EscolaQuimica = lazy(() => import("./pages/escola/conteudos/Quimica"));
+const EscolaHistoria = lazy(() => import("./pages/escola/conteudos/Historia"));
+const EscolaGeografia = lazy(() => import("./pages/escola/conteudos/Geografia"));
+const EscolaLinguagens = lazy(() => import("./pages/escola/conteudos/Linguagens"));
+const EscolaFilosofia = lazy(() => import("./pages/escola/conteudos/Filosofia"));
+const EscolaSociologia = lazy(() => import("./pages/escola/conteudos/Sociologia"));
+const EscolaDiagnosticoPerfil = lazy(() => import("./pages/escola/EscolaDiagnosticoPerfil"));
 
 // Lazy load de páginas do Gestor
 const GestorHome = lazy(() => import("./pages/gestor/GestorHome"));
-const GestorMentores = lazy(() => import("./pages/gestor/GestorMentores"));
+const GestorEscolas = lazy(() => import("./pages/gestor/GestorEscolas"));
 const GestorAlunos = lazy(() => import("./pages/gestor/GestorAlunos"));
 const GestorConfiguracoes = lazy(() => import("./pages/gestor/GestorConfiguracoes"));
 const GestorMensagens = lazy(() => import("./pages/gestor/GestorMensagens"));
@@ -136,9 +136,9 @@ function Router() {
           <LoginAluno />
         </Suspense>
       </Route>
-      <Route path="/login/mentor">
+      <Route path="/login/escola">
         <Suspense fallback={<PageLoader />}>
-          <LoginMentor />
+          <LoginEscola />
         </Suspense>
       </Route>
       <Route path="/login/gestor">
@@ -289,113 +289,113 @@ function Router() {
         </DashboardLayout>
       </Route>
       
-      {/* Rotas do Mentor */}
-      <Route path="/mentor">
+      {/* Rotas do Escola */}
+      <Route path="/escola">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorHome />
+            <EscolaHome />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/alunos">
+      <Route path="/escola/alunos">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorAlunos />
+            <EscolaAlunos />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/alunos/:alunoId">
+      <Route path="/escola/alunos/:alunoId">
         {(params) => (
           <DashboardLayout>
             <Suspense fallback={<PageLoader />}>
-              <MentorViewAluno alunoId={params.alunoId} />
+              <EscolaViewAluno alunoId={params.alunoId} />
             </Suspense>
           </DashboardLayout>
         )}
       </Route>
-      <Route path="/mentor/configuracoes">
+      <Route path="/escola/configuracoes">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorConfiguracoes />
+            <EscolaConfiguracoes />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/diagnostico-perfil">
+      <Route path="/escola/diagnostico-perfil">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorDiagnosticoPerfil />
+            <EscolaDiagnosticoPerfil />
           </Suspense>
         </DashboardLayout>
       </Route>
       
-      {/* Rotas de Conteúdos do Mentor */}
-      <Route path="/mentor/conteudos">
+      {/* Rotas de Conteúdos do Escola */}
+      <Route path="/escola/conteudos">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorPainelGeral />
+            <EscolaPainelGeral />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/matematica">
+      <Route path="/escola/conteudos/matematica">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorMatematica />
+            <EscolaMatematica />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/biologia">
+      <Route path="/escola/conteudos/biologia">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorBiologia />
+            <EscolaBiologia />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/fisica">
+      <Route path="/escola/conteudos/fisica">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorFisica />
+            <EscolaFisica />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/quimica">
+      <Route path="/escola/conteudos/quimica">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorQuimica />
+            <EscolaQuimica />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/historia">
+      <Route path="/escola/conteudos/historia">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorHistoria />
+            <EscolaHistoria />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/geografia">
+      <Route path="/escola/conteudos/geografia">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorGeografia />
+            <EscolaGeografia />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/linguagens">
+      <Route path="/escola/conteudos/linguagens">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorLinguagens />
+            <EscolaLinguagens />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/filosofia">
+      <Route path="/escola/conteudos/filosofia">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorFilosofia />
+            <EscolaFilosofia />
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/mentor/conteudos/sociologia">
+      <Route path="/escola/conteudos/sociologia">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <MentorSociologia />
+            <EscolaSociologia />
           </Suspense>
         </DashboardLayout>
       </Route>
@@ -408,10 +408,10 @@ function Router() {
           </Suspense>
         </DashboardLayout>
       </Route>
-      <Route path="/gestor/mentores">
+      <Route path="/gestor/escolas">
         <DashboardLayout>
           <Suspense fallback={<PageLoader />}>
-            <GestorMentores />
+            <GestorEscolas />
           </Suspense>
         </DashboardLayout>
       </Route>

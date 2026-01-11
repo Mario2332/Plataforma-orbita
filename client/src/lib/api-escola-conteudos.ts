@@ -74,7 +74,7 @@ async function callWithRetry<T>(
   throw new Error(errorMessage);
 }
 
-export const mentorConteudosApi = {
+export const escolaConteudosApi = {
   /**
    * Obter conteúdos mesclados de uma matéria
    */

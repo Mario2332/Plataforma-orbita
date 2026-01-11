@@ -27,7 +27,7 @@ export default function LoginAluno() {
     celular: "",
     senha: "",
     confirmarSenha: "",
-    mentorId: "",
+    escolaId: "",
   });
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -84,11 +84,11 @@ export default function LoginAluno() {
       return;
     }
 
-    const mentorId = cadastroData.mentorId || null;
+    const escolaId = cadastroData.escolaId || null;
     setLoading(true);
 
     try {
-      await signUp(cadastroData.email, cadastroData.senha, cadastroData.nome, mentorId);
+      await signUp(cadastroData.email, cadastroData.senha, cadastroData.nome, escolaId);
       toast.success("Cadastro realizado com sucesso!");
       setLocation("/aluno");
     } catch (error: any) {
@@ -118,7 +118,7 @@ export default function LoginAluno() {
           <div className="flex items-center justify-center md:justify-start gap-3">
             <div className="relative">
               <img 
-                src="https://firebasestorage.googleapis.com/v0/b/plataforma-mentoria-mario.firebasestorage.app/o/Logo%2FLogo%20mentoria%20sem%20texto.png?alt=media&token=452fed10-1481-41ad-a4c1-ddd61b039409" 
+                src="https://firebasestorage.googleapis.com/v0/b/plataforma-escolaia-mario.firebasestorage.app/o/Logo%2FLogo%20escolaia%20sem%20texto.png?alt=media&token=452fed10-1481-41ad-a4c1-ddd61b039409" 
                 alt="Logo Plataforma Órbita" 
                 className="w-16 h-16 object-contain relative z-10 drop-shadow-sm"
               />

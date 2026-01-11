@@ -3,7 +3,7 @@ import { useRoute, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { mentorApi } from "@/lib/api";
+import { escolaApi } from "@/lib/api";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -16,20 +16,20 @@ import AlunoCronograma from "../aluno/AlunoCronograma";
 import AlunoDiario from "../aluno/AlunoDiario";
 
 // Contexto para passar o alunoId para os componentes filhos
-interface MentorViewContextType {
+interface EscolaViewContextType {
   alunoId: string;
-  isMentorView: boolean;
+  isEscolaView: boolean;
 }
 
-const MentorViewContext = createContext<MentorViewContextType | null>(null);
+const EscolaViewContext = createContext<EscolaViewContextType | null>(null);
 
-export const useMentorView = () => {
-  const context = useContext(MentorViewContext);
+export const useEscolaView = () => {
+  const context = useContext(EscolaViewContext);
   return context;
 };
 
-export default function MentorViewAluno() {
-  const [match, params] = useRoute("/mentor/alunos/:alunoId");
+export default function EscolaViewAluno() {
+  const [match, params] = useRoute("/escola/alunos/:alunoId");
   const [, setLocation] = useLocation();
   const alunoId = params?.alunoId;
   const [isLoading, setIsLoading] = useState(true);
@@ -42,17 +42,17 @@ export default function MentorViewAluno() {
   const loadAlunoData = async () => {
     if (!alunoId) {
       toast.error("ID do aluno não fornecido");
-      setLocation("/mentor/alunos");
+      setLocation("/escola/alunos");
       return;
     }
 
     try {
       setIsLoading(true);
-      const data = await mentorApi.getAlunoAreaCompleta(alunoId);
+      const data = await escolaApi.getAlunoAreaCompleta(alunoId);
       setAlunoData(data);
     } catch (error: any) {
       toast.error(error.message || "Erro ao carregar dados do aluno");
-      setLocation("/mentor/alunos");
+      setLocation("/escola/alunos");
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +70,7 @@ export default function MentorViewAluno() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
         <p className="text-muted-foreground mb-4">Aluno não encontrado</p>
-        <Button onClick={() => setLocation("/mentor/alunos")}>
+        <Button onClick={() => setLocation("/escola/alunos")}>
           <ArrowLeft className="h-4 w-4 mr-2" />
           Voltar
         </Button>
@@ -79,7 +79,7 @@ export default function MentorViewAluno() {
   }
 
   return (
-    <MentorViewContext.Provider value={{ alunoId: alunoId!, isMentorView: true }}>
+    <EscolaViewContext.Provider value={{ alunoId: alunoId!, isEscolaView: true }}>
       <div className="space-y-6">
         {/* Header com informações do aluno */}
         <div className="flex items-center justify-between">
@@ -88,7 +88,7 @@ export default function MentorViewAluno() {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setLocation("/mentor/alunos")}
+                onClick={() => setLocation("/escola/alunos")}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Voltar
@@ -96,7 +96,7 @@ export default function MentorViewAluno() {
             </div>
             <h1 className="text-3xl font-bold">{alunoData.aluno.nome}</h1>
             <p className="text-muted-foreground mt-1">
-              Visualizando e editando como mentor • {alunoData.aluno.email}
+              Visualizando e editando como escola • {alunoData.aluno.email}
             </p>
           </div>
         </div>
@@ -147,6 +147,6 @@ export default function MentorViewAluno() {
           </TabsContent>
         </Tabs>
       </div>
-    </MentorViewContext.Provider>
+    </EscolaViewContext.Provider>
   );
 }

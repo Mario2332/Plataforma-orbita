@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { mentorApi } from "@/lib/api";
+import { escolaApi } from "@/lib/api";
 import { Users, TrendingUp, Activity } from "lucide-react";
 import { toast } from "sonner";
 import { useAuthContext } from "@/contexts/AuthContext";
 
-export default function MentorHome() {
+export default function EscolaHome() {
   const { userData } = useAuthContext();
   const [alunos, setAlunos] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ export default function MentorHome() {
   const loadData = async () => {
     try {
       setIsLoading(true);
-      const alunosData = await mentorApi.getAlunos();
+      const alunosData = await escolaApi.getAlunos();
       setAlunos(alunosData as any[]);
     } catch (error: any) {
       toast.error(error.message || "Erro ao carregar dados");
@@ -40,7 +40,7 @@ export default function MentorHome() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Dashboard do Mentor</h1>
+        <h1 className="text-3xl font-bold">Dashboard do Escola</h1>
         <p className="text-muted-foreground mt-2">Bem-vindo, {userData?.name}!</p>
       </div>
 
@@ -64,7 +64,7 @@ export default function MentorHome() {
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{userData?.nomePlataforma || "Mentoria"}</div>
+            <div className="text-2xl font-bold">{userData?.nomePlataforma || "Escolaia"}</div>
             <p className="text-xs text-muted-foreground mt-1">
               Seu espaço personalizado
             </p>
@@ -88,7 +88,7 @@ export default function MentorHome() {
       <Card>
         <CardHeader>
           <CardTitle>Visão Geral</CardTitle>
-          <CardDescription>Resumo da sua plataforma de mentoria</CardDescription>
+          <CardDescription>Resumo da sua plataforma de escolaia</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">

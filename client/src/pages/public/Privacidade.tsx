@@ -150,7 +150,7 @@ export default function Privacidade() {
                 Não vendemos suas informações pessoais. Podemos compartilhar dados com:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong>Mentores:</strong> Se você estiver vinculado a um mentor, ele terá acesso aos seus dados de estudo</li>
+                <li><strong>Escolaes:</strong> Se você estiver vinculado a um escola, ele terá acesso aos seus dados de estudo</li>
                 <li><strong>Instituições:</strong> Se sua conta for gerenciada por uma escola ou cursinho</li>
                 <li><strong>Prestadores de serviço:</strong> Empresas que nos ajudam a operar a plataforma (hospedagem, análise)</li>
                 <li><strong>Parceiros de publicidade:</strong> Dados anonimizados para exibição de anúncios</li>

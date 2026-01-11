@@ -48,21 +48,21 @@ service cloud.firestore {
     }
     
     // ============================================
-    // MENTORES
+    // ESCOLAS
     // ============================================
-    match /mentores/{mentorId} {
-      // Gestor pode ler todos os mentores
+    match /escolas/{escolaId} {
+      // Gestor pode ler todas as escolas
       allow read: if hasRole('gestor');
       
-      // Mentor pode ler seus próprios dados
-      allow read: if hasRole('mentor') && isOwner(mentorId);
+      // Escola pode ler seus próprios dados
+      allow read: if hasRole('escola') && isOwner(escolaId);
       
-      // Apenas gestor pode criar/atualizar/deletar mentores (via Cloud Functions)
+      // Apenas gestor pode criar/atualizar/deletar escolas (via Cloud Functions)
       allow write: if false;
       
-      // Anotações do mentor sobre alunos
+      // Anotações da escola sobre alunos
       match /anotacoes/{anotacaoId} {
-        allow read, write: if hasRole('mentor') && isOwner(mentorId);
+        allow read, write: if hasRole('escola') && isOwner(escolaId);
       }
     }
     
@@ -73,17 +73,19 @@ service cloud.firestore {
       // Gestor pode ler todos os alunos
       allow read: if hasRole('gestor');
       
-      // Mentor pode ler alunos vinculados a ele
-      allow read: if hasRole('mentor') && 
-                     get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+      // Escola pode ler alunos vinculados a ela e do mesmo tenant
+      allow read: if hasRole('escola') && 
+                     get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid &&
+                     get(/databases/$(database)/documents/alunos/$(alunoId)).data.tenantId == getUserData().tenantId;
       
-      // Aluno pode ler dados de outros alunos (necessário para o ranking)
-      allow read: if hasRole('aluno');
+      // Aluno pode ler dados de outros alunos do mesmo tenant (necessário para o ranking)
+      allow read: if hasRole('aluno') && 
+                     get(/databases/$(database)/documents/alunos/$(alunoId)).data.tenantId == getUserData().tenantId;
       
       // Aluno pode atualizar seu perfil (exceto campos críticos)
       allow update: if hasRole('aluno') && 
                        isOwner(alunoId) && 
-                       !request.resource.data.diff(resource.data).affectedKeys().hasAny(['userId', 'mentorId', 'ativo']);
+                       !request.resource.data.diff(resource.data).affectedKeys().hasAny(['userId', 'escolaId', 'tenantId', 'ativo']);
       
       // Permitir criação durante cadastro (usuário autenticado criando seu próprio documento)
       allow create: if isAuthenticated() && request.auth.uid == alunoId;
@@ -98,9 +100,9 @@ service cloud.firestore {
         // Aluno pode ler, criar, atualizar e deletar seus próprios estudos
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode ler estudos dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode ler estudos dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
         
         // Gestor pode ler todos os estudos
         allow read: if hasRole('gestor');
@@ -113,9 +115,9 @@ service cloud.firestore {
         // Aluno pode ler, criar, atualizar e deletar seus próprios simulados
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode ler simulados dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode ler simulados dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
         
         // Gestor pode ler todos os simulados
         allow read: if hasRole('gestor');
@@ -128,9 +130,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seu cronograma
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar cronograma dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar cronograma dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -140,9 +142,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seu progresso de conteúdos
         allow read, create, update: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar progresso dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar progresso dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -171,9 +173,9 @@ service cloud.firestore {
         // Aluno pode gerenciar suas próprias metas
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar metas dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar metas dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -183,9 +185,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seu progresso de conteúdos
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar progresso dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar progresso dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -195,9 +197,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seus próprios planos de ação
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar planos de ação dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar planos de ação dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -207,9 +209,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seu próprio diagnóstico de perfil
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar diagnóstico de perfil dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar diagnóstico de perfil dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -219,9 +221,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seus próprios autodiagnósticos
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar autodiagnósticos dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar autodiagnósticos dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -231,9 +233,9 @@ service cloud.firestore {
         // Aluno pode gerenciar suas próprias redações
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar redações dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar redações dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -243,9 +245,9 @@ service cloud.firestore {
         // Aluno pode gerenciar suas próprias configurações
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar configurações dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar configurações dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -255,9 +257,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seu próprio diário emocional
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar diário emocional dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar diário emocional dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
       
       // ============================================
@@ -267,9 +269,9 @@ service cloud.firestore {
         // Aluno pode gerenciar seu próprio cronograma dinâmico
         allow read, create, update, delete: if hasRole('aluno') && isOwner(alunoId);
         
-        // Mentor pode visualizar cronograma dos seus alunos
-        allow read: if hasRole('mentor') && 
-                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.mentorId == request.auth.uid;
+        // Escola pode visualizar cronograma dos seus alunos
+        allow read: if hasRole('escola') && 
+                       get(/databases/$(database)/documents/alunos/$(alunoId)).data.escolaId == request.auth.uid;
       }
     }
     
@@ -305,8 +307,8 @@ service cloud.firestore {
       // Qualquer usuário autenticado pode ler a configuração
       allow read: if isAuthenticated();
       
-      // Apenas mentores podem escrever
-      allow write: if hasRole('mentor');
+      // Apenas escolaes podem escrever
+      allow write: if hasRole('escola');
     }
     
     // ============================================

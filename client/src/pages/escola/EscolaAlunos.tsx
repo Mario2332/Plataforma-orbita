@@ -9,12 +9,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { mentorApi } from "@/lib/api";
+import { escolaApi } from "@/lib/api";
 import { Plus, Users, ArrowUpDown, Edit, Trash2, Search, TrendingUp, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-export default function MentorAlunos() {
+export default function EscolaAlunos() {
   const [, setLocation] = useLocation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -48,9 +48,9 @@ export default function MentorAlunos() {
     try {
       setIsLoading(true);
       const [alunosData, metricasData, evolucaoData] = await Promise.all([
-        mentorApi.getAlunos(),
-        mentorApi.getAlunosMetricas(),
-        mentorApi.getEvolucaoAlunos(),
+        escolaApi.getAlunos(),
+        escolaApi.getAlunosMetricas(),
+        escolaApi.getEvolucaoAlunos(),
       ]);
       setAlunos(alunosData as any[]);
       setMetricas(metricasData as any[]);
@@ -71,7 +71,7 @@ export default function MentorAlunos() {
     
     try {
       setIsSaving(true);
-      await mentorApi.createAluno(formData);
+      await escolaApi.createAluno(formData);
       toast.success("Aluno adicionado!");
       setDialogOpen(false);
       setFormData({
@@ -116,7 +116,7 @@ export default function MentorAlunos() {
     
     try {
       setIsSaving(true);
-      await mentorApi.updateAluno({
+      await escolaApi.updateAluno({
         alunoId: selectedAluno.id,
         ...editFormData,
       });
@@ -141,7 +141,7 @@ export default function MentorAlunos() {
     
     try {
       setIsDeleting(true);
-      await mentorApi.deleteAluno(selectedAluno.id);
+      await escolaApi.deleteAluno(selectedAluno.id);
       toast.success("Aluno excluído!");
       setDeleteDialogOpen(false);
       setSelectedAluno(null);
@@ -470,7 +470,7 @@ export default function MentorAlunos() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => setLocation(`/mentor/alunos/${aluno.id}`)}
+                            onClick={() => setLocation(`/escola/alunos/${aluno.id}`)}
                             title="Ver como aluno"
                           >
                             <Eye className="h-4 w-4" />

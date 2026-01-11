@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { mentorApi } from "@/lib/api";
+import { escolaApi } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { User, Lock, Building, Palette, Image } from "lucide-react";
 
-export default function MentorConfiguracoes() {
+export default function EscolaConfiguracoes() {
   const { user, userData, changePassword } = useAuthContext();
   const [isLoadingConfig, setIsLoadingConfig] = useState(true);
   const [isSavingConfig, setIsSavingConfig] = useState(false);
@@ -32,7 +32,7 @@ export default function MentorConfiguracoes() {
   const loadConfig = async () => {
     try {
       setIsLoadingConfig(true);
-      const config = await mentorApi.getConfig();
+      const config = await escolaApi.getConfig();
       setConfigData({
         nomePlataforma: config.nomePlataforma || "",
         logoUrl: config.logoUrl || "",
@@ -55,7 +55,7 @@ export default function MentorConfiguracoes() {
 
     try {
       setIsSavingConfig(true);
-      await mentorApi.updateConfig(configData);
+      await escolaApi.updateConfig(configData);
       toast.success("Configurações atualizadas com sucesso!");
     } catch (error: any) {
       toast.error(error.message || "Erro ao salvar configurações");
@@ -151,7 +151,7 @@ export default function MentorConfiguracoes() {
                   onChange={(e) =>
                     setConfigData({ ...configData, nomePlataforma: e.target.value })
                   }
-                  placeholder="Mentoria ENEM Pro"
+                  placeholder="Escolaia ENEM Pro"
                   required
                   disabled={isLoadingConfig}
                 />

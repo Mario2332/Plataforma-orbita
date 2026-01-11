@@ -83,31 +83,31 @@ const getMenuItems = (role?: string, features?: TenantFeatures): MenuItem[] => {
           ]
         },
       ]);
-    case "mentor":
+    case "escola":
       return [
-        { icon: Users, label: "Alunos", path: "/mentor/alunos" },
+        { icon: Users, label: "Alunos", path: "/escola/alunos" },
         { 
           icon: BookOpen, 
           label: "Conteúdos", 
-          path: "/mentor/conteudos",
+          path: "/escola/conteudos",
           submenu: [
-            { label: "Painel Geral", path: "/mentor/conteudos" },
-            { label: "Matemática", path: "/mentor/conteudos/matematica" },
-            { label: "Biologia", path: "/mentor/conteudos/biologia" },
-            { label: "Física", path: "/mentor/conteudos/fisica" },
-            { label: "Química", path: "/mentor/conteudos/quimica" },
-            { label: "História", path: "/mentor/conteudos/historia" },
-            { label: "Geografia", path: "/mentor/conteudos/geografia" },
-            { label: "Linguagens", path: "/mentor/conteudos/linguagens" },
-            { label: "Filosofia", path: "/mentor/conteudos/filosofia" },
-            { label: "Sociologia", path: "/mentor/conteudos/sociologia" },
+            { label: "Painel Geral", path: "/escola/conteudos" },
+            { label: "Matemática", path: "/escola/conteudos/matematica" },
+            { label: "Biologia", path: "/escola/conteudos/biologia" },
+            { label: "Física", path: "/escola/conteudos/fisica" },
+            { label: "Química", path: "/escola/conteudos/quimica" },
+            { label: "História", path: "/escola/conteudos/historia" },
+            { label: "Geografia", path: "/escola/conteudos/geografia" },
+            { label: "Linguagens", path: "/escola/conteudos/linguagens" },
+            { label: "Filosofia", path: "/escola/conteudos/filosofia" },
+            { label: "Sociologia", path: "/escola/conteudos/sociologia" },
           ]
         },
       ];
     case "gestor":
       return [
         { icon: Home, label: "Início", path: "/gestor" },
-        { icon: Users, label: "Mentores", path: "/gestor/mentores" },
+        { icon: Users, label: "Escolaes", path: "/gestor/escolas" },
         { icon: GraduationCap, label: "Alunos", path: "/gestor/alunos" },
         { icon: MessageSquare, label: "Mensagens", path: "/gestor/mensagens" },
         { icon: Building2, label: "Clientes", path: "/gestor/clientes" },

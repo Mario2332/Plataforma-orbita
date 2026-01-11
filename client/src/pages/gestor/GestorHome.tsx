@@ -8,18 +8,18 @@ import { toast } from "sonner";
 
 export default function GestorHome() {
   const { user } = useAuthContext();
-  const [mentores, setMentores] = useState<any[]>([]);
+  const [escolas, setEscolaes] = useState<any[]>([]);
   const [alunos, setAlunos] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const loadData = async () => {
     try {
       setIsLoading(true);
-      const [mentoresData, alunosData] = await Promise.all([
-        gestorApi.getMentores(),
+      const [escolasData, alunosData] = await Promise.all([
+        gestorApi.getEscolaes(),
         gestorApi.getAllAlunos(),
       ]);
-      setMentores(mentoresData as any[]);
+      setEscolaes(escolasData as any[]);
       setAlunos(alunosData as any[]);
     } catch (error: any) {
       toast.error(error.message || "Erro ao carregar dados");
@@ -60,14 +60,14 @@ export default function GestorHome() {
     });
   };
 
-  // Calcular crescimento de mentores por mês
-  const getMentoresGrowthData = () => {
-    if (!mentores) return [];
+  // Calcular crescimento de escolas por mês
+  const getEscolaesGrowthData = () => {
+    if (!escolas) return [];
     
     const monthlyData: Record<string, number> = {};
     
-    mentores.forEach((mentor: any) => {
-      const date = new Date(mentor.createdAt);
+    escolas.forEach((escola: any) => {
+      const date = new Date(escola.createdAt);
       const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
       monthlyData[monthKey] = (monthlyData[monthKey] || 0) + 1;
     });
@@ -87,25 +87,25 @@ export default function GestorHome() {
     });
   };
 
-  // Calcular alunos por mentor
-  const getAlunosPorMentor = () => {
-    if (!alunos || !mentores) return [];
+  // Calcular alunos por escola
+  const getAlunosPorEscola = () => {
+    if (!alunos || !escolas) return [];
     
-    const mentorCount: Record<string, number> = {};
+    const escolaCount: Record<string, number> = {};
     
     alunos.forEach((aluno: any) => {
-      mentorCount[aluno.mentorId] = (mentorCount[aluno.mentorId] || 0) + 1;
+      escolaCount[aluno.escolaId] = (escolaCount[aluno.escolaId] || 0) + 1;
     });
     
-    return mentores.map((mentor: any) => ({
-      nome: mentor.nome,
-      alunos: mentorCount[mentor.id] || 0,
+    return escolas.map((escola: any) => ({
+      nome: escola.nome,
+      alunos: escolaCount[escola.id] || 0,
     })).sort((a: any, b: any) => b.alunos - a.alunos);
   };
 
   const alunosGrowthData = getAlunosGrowthData();
-  const mentoresGrowthData = getMentoresGrowthData();
-  const alunosPorMentor = getAlunosPorMentor();
+  const escolasGrowthData = getEscolaesGrowthData();
+  const alunosPorEscola = getAlunosPorEscola();
 
   // Calcular crescimento percentual
   const calcularCrescimento = (data: any[]) => {
@@ -117,7 +117,7 @@ export default function GestorHome() {
   };
 
   const crescimentoAlunos = calcularCrescimento(alunosGrowthData);
-  const crescimentoMentores = calcularCrescimento(mentoresGrowthData);
+  const crescimentoEscolaes = calcularCrescimento(escolasGrowthData);
 
   if (isLoading) {
     return (
@@ -140,13 +140,13 @@ export default function GestorHome() {
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Mentores</CardTitle>
+            <CardTitle className="text-sm font-medium">Total de Escolaes</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mentores?.length || 0}</div>
+            <div className="text-2xl font-bold">{escolas?.length || 0}</div>
             <p className="text-xs text-muted-foreground">
-              {mentores?.filter((m: any) => m.ativo).length || 0} ativos
+              {escolas?.filter((m: any) => m.ativo).length || 0} ativos
             </p>
           </CardContent>
         </Card>
@@ -192,7 +192,7 @@ export default function GestorHome() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            Gerencie mentores, configure plataformas white-label e acompanhe o crescimento da rede de estudantes.
+            Gerencie escolas, configure plataformas white-label e acompanhe o crescimento da rede de estudantes.
           </p>
         </CardContent>
       </Card>
@@ -227,13 +227,13 @@ export default function GestorHome() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Crescimento de Mentores</CardTitle>
-            <CardDescription>Evolução do número de mentores ao longo do tempo</CardDescription>
+            <CardTitle>Crescimento de Escolaes</CardTitle>
+            <CardDescription>Evolução do número de escolas ao longo do tempo</CardDescription>
           </CardHeader>
           <CardContent>
-            {mentoresGrowthData.length > 0 ? (
+            {escolasGrowthData.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={mentoresGrowthData}>
+                <LineChart data={escolasGrowthData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="mes" />
                   <YAxis />
@@ -252,16 +252,16 @@ export default function GestorHome() {
         </Card>
       </div>
 
-      {/* Distribuição de Alunos por Mentor */}
+      {/* Distribuição de Alunos por Escola */}
       <Card>
         <CardHeader>
-          <CardTitle>Alunos por Mentor</CardTitle>
-          <CardDescription>Distribuição de alunos entre os mentores</CardDescription>
+          <CardTitle>Alunos por Escola</CardTitle>
+          <CardDescription>Distribuição de alunos entre os escolas</CardDescription>
         </CardHeader>
         <CardContent>
-          {alunosPorMentor.length > 0 ? (
+          {alunosPorEscola.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={alunosPorMentor}>
+              <BarChart data={alunosPorEscola}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="nome" />
                 <YAxis />

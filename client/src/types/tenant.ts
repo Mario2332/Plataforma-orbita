@@ -16,8 +16,8 @@ export interface TenantFeatures {
   planoAcao: boolean;
   autodiagnostico: boolean;
   
-  // Funcionalidades de mentoria
-  mentoria: boolean;
+  // Funcionalidades de escolaia
+  escolaia: boolean;
   
   // Funcionalidades premium
   relatoriosAvancados: boolean;
@@ -105,7 +105,7 @@ export const DEFAULT_TENANT_CONFIG: Omit<TenantConfig, 'id' | 'slug' | 'dominios
     diarioBordo: true,
     planoAcao: true,
     autodiagnostico: true,
-    mentoria: true,
+    escolaia: true,
     relatoriosAvancados: false,
     exportacaoPDF: false,
     integracaoCalendario: false,
@@ -128,7 +128,7 @@ export const WHITE_LABEL_FEATURES: TenantFeatures = {
   diarioBordo: true,
   planoAcao: true,
   autodiagnostico: true,
-  mentoria: true,
+  escolaia: true,
   relatoriosAvancados: true,
   exportacaoPDF: true,
   integracaoCalendario: true,
@@ -146,7 +146,7 @@ export const FREE_FEATURES: TenantFeatures = {
   diarioBordo: true,
   planoAcao: false,           // Premium only
   autodiagnostico: true,
-  mentoria: false,            // Premium only
+  escolaia: false,            // Premium only
   relatoriosAvancados: false,
   exportacaoPDF: false,
   integracaoCalendario: false,

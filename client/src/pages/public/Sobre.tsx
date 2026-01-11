@@ -228,7 +228,7 @@ export default function Sobre() {
               <ul className="space-y-2 text-sm">
                 <li><Link href="/sobre" className="hover:text-white">Sobre</Link></li>
                 <li><Link href="/login/aluno" className="hover:text-white">Área do Aluno</Link></li>
-                <li><Link href="/login/mentor" className="hover:text-white">Área do Mentor</Link></li>
+                <li><Link href="/login/escola" className="hover:text-white">Área do Escola</Link></li>
               </ul>
             </div>
             <div>

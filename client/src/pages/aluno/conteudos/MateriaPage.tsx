@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { alunoApi } from "@/lib/api";
-import { mentorConteudosApi } from "@/lib/api-mentor-conteudos";
+import { escolaConteudosApi } from "@/lib/api-escola-conteudos";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -32,7 +32,7 @@ export default function MateriaPage({ materiaKey }: MateriaPageProps) {
 
   const loadConteudos = async () => {
     try {
-      const data = await mentorConteudosApi.getConteudos(materiaKey) as any;
+      const data = await escolaConteudosApi.getConteudos(materiaKey) as any;
       setMateria(data);
       setTopics(data.topics || []);
     } catch (error: any) {

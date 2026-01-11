@@ -1,0 +1,433 @@
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
+import { getAuthContext, requireRole } from "../utils/auth";
+
+const db = admin.firestore();
+
+// Mapeamento de incidência texto → valor
+const INCIDENCE_MAP: Record<string, number> = {
+  "Muito alta!": 0.05,
+  "Alta!": 0.04,
+  "Média": 0.03,
+  "Baixa": 0.02,
+  "Muito baixa": 0.01,
+};
+
+// Flag para controlar inicialização
+let isInitialized = false;
+let baseDataCache: Record<string, any> | null = null;
+
+/**
+ * Inicializar dados base do Firestore (executa apenas uma vez)
+ */
+async function initializeBaseData() {
+  if (isInitialized && baseDataCache) {
+    return baseDataCache;
+  }
+
+  functions.logger.info("🔄 Verificando se conteudos_base existe...");
+  
+  // Verificar se já existe
+  const snapshot = await db.collection("conteudos_base").limit(1).get();
+  
+  if (!snapshot.empty) {
+    functions.logger.info("✅ conteudos_base já existe");
+    isInitialized = true;
+    return null; // Dados já estão no Firestore
+  }
+
+  functions.logger.info("📦 Inicializando conteudos_base pela primeira vez...");
+  
+  // Carregar JSON inline (sem dependência de arquivo externo)
+  const fs = require("fs");
+  const path = require("path");
+  
+  try {
+    const jsonPath = path.join(__dirname, "..", "study-content-data.json");
+    const jsonContent = fs.readFileSync(jsonPath, "utf-8");
+    const baseData = JSON.parse(jsonContent);
+    
+    // Salvar no Firestore
+    const batch = db.batch();
+    for (const [key, value] of Object.entries(baseData)) {
+      const docRef = db.collection("conteudos_base").doc(key);
+      batch.set(docRef, value);
+    }
+    await batch.commit();
+    
+    functions.logger.info("✅ conteudos_base inicializado com sucesso!");
+    isInitialized = true;
+    baseDataCache = baseData;
+    return baseData;
+  } catch (error: any) {
+    functions.logger.error("❌ Erro ao inicializar:", error);
+    throw error;
+  }
+}
+
+/**
+ * Carregar dados base do Firestore
+ */
+async function loadBaseData(materiaKey?: string): Promise<Record<string, any>> {
+  // Tentar inicializar se necessário
+  await initializeBaseData();
+  
+  if (materiaKey) {
+    // Carregar apenas uma matéria
+    const doc = await db.collection("conteudos_base").doc(materiaKey).get();
+    if (!doc.exists) {
+      throw new functions.https.HttpsError("not-found", "Matéria não encontrada");
+    }
+    return { [materiaKey]: doc.data() };
+  } else {
+    // Carregar todas as matérias
+    const snapshot = await db.collection("conteudos_base").get();
+    const allData: Record<string, any> = {};
+    snapshot.docs.forEach(doc => {
+      allData[doc.id] = doc.data();
+    });
+    return allData;
+  }
+}
+
+/**
+ * Obter conteúdos mesclados (Firestore base + customizações)
+ * Disponível para alunos e escolas
+ */
+export const getConteudos = functions
+  .region("southamerica-east1")
+  .runWith({
+    memory: "512MB",
+    timeoutSeconds: 60,
+  })
+  .https.onCall(async (data, context) => {
+    functions.logger.info("🔵 getConteudos chamada", { 
+      data, 
+      hasAuth: !!context.auth,
+      uid: context.auth?.uid 
+    });
+    
+    // Verificar autenticação
+    if (!context.auth) {
+      functions.logger.error("❌ Usuário não autenticado");
+      throw new functions.https.HttpsError(
+        "unauthenticated",
+        "Você precisa estar autenticado para acessar este recurso"
+      );
+    }
+    
+    const auth = await getAuthContext(context);
+    functions.logger.info("✅ Auth OK", { uid: auth.uid, role: auth.role });
+    
+    const { materiaKey } = data;
+
+    try {
+      // Carregar dados base do Firestore (inicializa automaticamente se necessário)
+      functions.logger.info("📂 Carregando dados base...");
+      const baseData = await loadBaseData(materiaKey);
+      functions.logger.info("✅ Dados base carregados", {
+        materias: Object.keys(baseData).length
+      });
+      
+      if (materiaKey) {
+        // Retornar apenas uma matéria
+        const materia = baseData[materiaKey];
+        const topics = materia.topics || [];
+
+        // Buscar customizações do Firestore
+        const customizacoesSnapshot = await db
+          .collection("conteudos_customizados")
+          .doc(materiaKey)
+          .collection("topicos")
+          .get();
+
+        // Criar mapa de customizações
+        const customMap: Record<string, any> = {};
+        customizacoesSnapshot.docs.forEach((doc) => {
+          const data = doc.data();
+          customMap[data.id] = data;
+        });
+
+        // Mesclar tópicos
+        let mergedTopics = topics.map((topic: any) => {
+          if (customMap[topic.id]) {
+            const custom = customMap[topic.id];
+            if (custom.isDeleted) {
+              return null;
+            }
+            return {
+              ...topic,
+              name: custom.name,
+              incidenceLevel: custom.incidenceLevel,
+              incidenceValue: custom.incidenceValue,
+            };
+          }
+          return topic;
+        }).filter((t: any) => t !== null);
+
+        // Adicionar tópicos customizados novos
+        Object.values(customMap).forEach((custom: any) => {
+          if (custom.isCustom && !custom.isDeleted) {
+            mergedTopics.push({
+              id: custom.id,
+              name: custom.name,
+              incidenceLevel: custom.incidenceLevel,
+              incidenceValue: custom.incidenceValue,
+            });
+          }
+        });
+
+        functions.logger.info("✅ Conteúdos carregados", { 
+          materiaKey, 
+          topicsCount: mergedTopics.length 
+        });
+
+        return {
+          ...materia,
+          topics: mergedTopics,
+        };
+      } else {
+        // Retornar todas as matérias
+        const allMaterias: Record<string, any> = {};
+
+        for (const [key, materia] of Object.entries(baseData)) {
+          const materiaData = materia as any;
+          const topics = materiaData.topics || [];
+
+          const customizacoesSnapshot = await db
+            .collection("conteudos_customizados")
+            .doc(key)
+            .collection("topicos")
+            .get();
+
+          const customMap: Record<string, any> = {};
+          customizacoesSnapshot.docs.forEach((doc) => {
+            const data = doc.data();
+            customMap[data.id] = data;
+          });
+
+          let mergedTopics = topics.map((topic: any) => {
+            if (customMap[topic.id]) {
+              const custom = customMap[topic.id];
+              if (custom.isDeleted) return null;
+              return {
+                ...topic,
+                name: custom.name,
+                incidenceLevel: custom.incidenceLevel,
+                incidenceValue: custom.incidenceValue,
+              };
+            }
+            return topic;
+          }).filter((t: any) => t !== null);
+
+          Object.values(customMap).forEach((custom: any) => {
+            if (custom.isCustom && !custom.isDeleted) {
+              mergedTopics.push({
+                id: custom.id,
+                name: custom.name,
+                incidenceLevel: custom.incidenceLevel,
+                incidenceValue: custom.incidenceValue,
+              });
+            }
+          });
+
+          allMaterias[key] = {
+            ...materiaData,
+            topics: mergedTopics,
+          };
+        }
+
+        functions.logger.info("✅ Todas as matérias carregadas");
+        return allMaterias;
+      }
+    } catch (error: any) {
+      functions.logger.error("❌ Erro em getConteudos:", {
+        message: error.message,
+        code: error.code,
+        stack: error.stack
+      });
+      
+      if (error.code && error.code.startsWith('functions/')) {
+        throw error;
+      }
+      
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });
+
+/**
+ * Criar novo tópico (escola)
+ */
+export const createTopico = functions
+  .region("southamerica-east1")
+  .runWith({
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
+  .https.onCall(async (data, context) => {
+    const auth = await getAuthContext(context);
+    requireRole(auth, "escola");
+
+    const { materiaKey, name, incidenceLevel } = data;
+
+    if (!materiaKey || !name || !incidenceLevel) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Matéria, nome e nível de incidência são obrigatórios"
+      );
+    }
+
+    if (!INCIDENCE_MAP[incidenceLevel]) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Nível de incidência inválido"
+      );
+    }
+
+    try {
+      const topicoId = `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+      const topicoData = {
+        id: topicoId,
+        name,
+        incidenceLevel,
+        incidenceValue: INCIDENCE_MAP[incidenceLevel],
+        isCustom: true,
+        isDeleted: false,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      await db
+        .collection("conteudos_customizados")
+        .doc(materiaKey)
+        .collection("topicos")
+        .doc(topicoId)
+        .set(topicoData);
+
+      return { success: true, topicoId };
+    } catch (error: any) {
+      functions.logger.error("Erro ao criar tópico:", error);
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });
+
+/**
+ * Atualizar tópico existente (escola)
+ */
+export const updateTopico = functions
+  .region("southamerica-east1")
+  .runWith({
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
+  .https.onCall(async (data, context) => {
+    const auth = await getAuthContext(context);
+    requireRole(auth, "escola");
+
+    const { materiaKey, topicoId, name, incidenceLevel } = data;
+
+    if (!materiaKey || !topicoId) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Matéria e ID do tópico são obrigatórios"
+      );
+    }
+
+    if (incidenceLevel && !INCIDENCE_MAP[incidenceLevel]) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Nível de incidência inválido"
+      );
+    }
+
+    try {
+      const topicoRef = db
+        .collection("conteudos_customizados")
+        .doc(materiaKey)
+        .collection("topicos")
+        .doc(topicoId);
+
+      const topicoDoc = await topicoRef.get();
+
+      const updates: any = {
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      if (name !== undefined) updates.name = name;
+      if (incidenceLevel !== undefined) {
+        updates.incidenceLevel = incidenceLevel;
+        updates.incidenceValue = INCIDENCE_MAP[incidenceLevel];
+      }
+
+      if (topicoDoc.exists) {
+        await topicoRef.update(updates);
+      } else {
+        await topicoRef.set({
+          id: topicoId,
+          ...updates,
+          isCustom: false,
+          isDeleted: false,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      functions.logger.error("Erro ao atualizar tópico:", error);
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });
+
+/**
+ * Deletar tópico (soft delete - escola)
+ */
+export const deleteTopico = functions
+  .region("southamerica-east1")
+  .runWith({
+    memory: "256MB",
+    timeoutSeconds: 60,
+  })
+  .https.onCall(async (data, context) => {
+    const auth = await getAuthContext(context);
+    requireRole(auth, "escola");
+
+    const { materiaKey, topicoId } = data;
+
+    if (!materiaKey || !topicoId) {
+      throw new functions.https.HttpsError(
+        "invalid-argument",
+        "Matéria e ID do tópico são obrigatórios"
+      );
+    }
+
+    try {
+      const topicoRef = db
+        .collection("conteudos_customizados")
+        .doc(materiaKey)
+        .collection("topicos")
+        .doc(topicoId);
+
+      const topicoDoc = await topicoRef.get();
+
+      if (topicoDoc.exists) {
+        await topicoRef.update({
+          isDeleted: true,
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      } else {
+        await topicoRef.set({
+          id: topicoId,
+          isDeleted: true,
+          isCustom: false,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      }
+
+      return { success: true };
+    } catch (error: any) {
+      functions.logger.error("Erro ao deletar tópico:", error);
+      throw new functions.https.HttpsError("internal", error.message);
+    }
+  });

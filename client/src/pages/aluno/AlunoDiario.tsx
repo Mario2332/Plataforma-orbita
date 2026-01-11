@@ -376,7 +376,7 @@ export default function AlunoDiario() {
                     <p className="text-sm font-semibold mb-3">💡 Recomendações:</p>
                     <ul className="text-sm space-y-2 list-disc list-inside font-semibold">
                       <li>Considere fazer uma pausa nos estudos</li>
-                      <li>Converse com seu mentor sobre sua rotina</li>
+                      <li>Converse com seu escola sobre sua rotina</li>
                       <li>Priorize o descanso e atividades relaxantes</li>
                       <li>Procure apoio de amigos e familiares</li>
                       <li>Se necessário, busque ajuda profissional</li>

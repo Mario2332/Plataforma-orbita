@@ -16,8 +16,8 @@ export default function Home() {
         case "aluno":
           setLocation("/aluno");
           break;
-        case "mentor":
-          setLocation("/mentor");
+        case "escola":
+          setLocation("/escola");
           break;
         case "gestor":
           setLocation("/gestor");

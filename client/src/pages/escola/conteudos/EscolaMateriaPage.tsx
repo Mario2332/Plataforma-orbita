@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { mentorConteudosApi } from "@/lib/api-mentor-conteudos";
+import { escolaConteudosApi } from "@/lib/api-escola-conteudos";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ interface Topic {
   incidenceLevel: string;
 }
 
-interface MentorMateriaPageProps {
+interface EscolaMateriaPageProps {
   materiaKey: string;
 }
 
@@ -29,7 +29,7 @@ const INCIDENCE_OPTIONS = [
   { value: "Muito baixa", label: "Muito baixa", color: "bg-gray-400" },
 ];
 
-export default function MentorMateriaPage({ materiaKey }: MentorMateriaPageProps) {
+export default function EscolaMateriaPage({ materiaKey }: EscolaMateriaPageProps) {
   const [materia, setMateria] = useState<any>(null);
   const [topics, setTopics] = useState<Topic[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -52,7 +52,7 @@ export default function MentorMateriaPage({ materiaKey }: MentorMateriaPageProps
   const loadConteudos = async () => {
     try {
       setIsLoading(true);
-      const data = await mentorConteudosApi.getConteudos(materiaKey);
+      const data = await escolaConteudosApi.getConteudos(materiaKey);
       setMateria(data);
       setTopics(data.topics || []);
     } catch (error: any) {
@@ -124,7 +124,7 @@ export default function MentorMateriaPage({ materiaKey }: MentorMateriaPageProps
     }
 
     try {
-      await mentorConteudosApi.createTopico({
+      await escolaConteudosApi.createTopico({
         materiaKey,
         name: formName.trim(),
         incidenceLevel: formIncidence,
@@ -146,7 +146,7 @@ export default function MentorMateriaPage({ materiaKey }: MentorMateriaPageProps
     }
 
     try {
-      await mentorConteudosApi.updateTopico({
+      await escolaConteudosApi.updateTopico({
         materiaKey,
         topicoId: selectedTopic.id,
         name: formName.trim(),
@@ -167,7 +167,7 @@ export default function MentorMateriaPage({ materiaKey }: MentorMateriaPageProps
     if (!selectedTopic) return;
 
     try {
-      await mentorConteudosApi.deleteTopico({
+      await escolaConteudosApi.deleteTopico({
         materiaKey,
         topicoId: selectedTopic.id,
       });

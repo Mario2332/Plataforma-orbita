@@ -61,7 +61,7 @@ const FEATURE_NAMES: Record<FeatureName, { name: string; description: string }> 
   diarioBordo: { name: 'Diário de Bordo', description: 'Registre sua jornada de estudos' },
   planoAcao: { name: 'Plano de Ação', description: 'Crie planos estratégicos de estudo' },
   autodiagnostico: { name: 'Autodiagnóstico', description: 'Avalie seu nível em cada matéria' },
-  mentoria: { name: 'Mentoria', description: 'Tenha acompanhamento de um mentor' },
+  escolaia: { name: 'Escolaia', description: 'Tenha acompanhamento de um escola' },
   relatoriosAvancados: { name: 'Relatórios Avançados', description: 'Análises detalhadas do seu desempenho' },
   exportacaoPDF: { name: 'Exportação PDF', description: 'Exporte seus dados em PDF' },
   integracaoCalendario: { name: 'Integração com Calendário', description: 'Sincronize com Google Calendar' },

@@ -8,10 +8,10 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { toast } from "sonner";
 import { Users, Plus, Mail, Building, Palette, Image, Trash2, Edit } from "lucide-react";
 
-export default function GestorMentores() {
+export default function GestorEscolaes() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingMentor, setEditingMentor] = useState<any>(null);
-  const [mentores, setMentores] = useState<any[]>([]);
+  const [editingEscola, setEditingEscola] = useState<any>(null);
+  const [escolas, setEscolaes] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState({
@@ -23,20 +23,20 @@ export default function GestorMentores() {
     corPrincipal: "#3b82f6",
   });
 
-  const loadMentores = async () => {
+  const loadEscolaes = async () => {
     try {
       setIsLoading(true);
-      const data = await gestorApi.getMentores();
-      setMentores(data as any[]);
+      const data = await gestorApi.getEscolaes();
+      setEscolaes(data as any[]);
     } catch (error: any) {
-      toast.error(error.message || "Erro ao carregar mentores");
+      toast.error(error.message || "Erro ao carregar escolas");
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    loadMentores();
+    loadEscolaes();
   }, []);
 
   const resetForm = () => {
@@ -50,19 +50,19 @@ export default function GestorMentores() {
     });
   };
 
-  const handleOpenDialog = (mentor?: any) => {
-    if (mentor) {
-      setEditingMentor(mentor);
+  const handleOpenDialog = (escola?: any) => {
+    if (escola) {
+      setEditingEscola(escola);
       setFormData({
-        nome: mentor.nome,
-        email: mentor.email,
+        nome: escola.nome,
+        email: escola.email,
         senha: "",
-        nomePlataforma: mentor.nomePlataforma,
-        logoUrl: mentor.logoUrl || "",
-        corPrincipal: mentor.corPrincipal || "#3b82f6",
+        nomePlataforma: escola.nomePlataforma,
+        logoUrl: escola.logoUrl || "",
+        corPrincipal: escola.corPrincipal || "#3b82f6",
       });
     } else {
-      setEditingMentor(null);
+      setEditingEscola(null);
       resetForm();
     }
     setDialogOpen(true);
@@ -76,12 +76,12 @@ export default function GestorMentores() {
       return;
     }
 
-    if (!editingMentor && !formData.senha) {
-      toast.error("A senha é obrigatória para novos mentores");
+    if (!editingEscola && !formData.senha) {
+      toast.error("A senha é obrigatória para novos escolas");
       return;
     }
 
-    if (!editingMentor && formData.senha.length < 6) {
+    if (!editingEscola && formData.senha.length < 6) {
       toast.error("A senha deve ter no mínimo 6 caracteres");
       return;
     }
@@ -89,39 +89,39 @@ export default function GestorMentores() {
     try {
       setIsSaving(true);
       
-      if (editingMentor) {
-        await gestorApi.updateMentor({
-          mentorId: editingMentor.id,
+      if (editingEscola) {
+        await gestorApi.updateEscola({
+          escolaId: editingEscola.id,
           ...formData,
         });
-        toast.success("Mentor atualizado com sucesso!");
+        toast.success("Escola atualizado com sucesso!");
       } else {
-        await gestorApi.createMentor({
+        await gestorApi.createEscola({
           ...formData,
           password: formData.senha,
         });
-        toast.success("Mentor adicionado com sucesso!");
+        toast.success("Escola adicionado com sucesso!");
       }
       
       setDialogOpen(false);
-      setEditingMentor(null);
+      setEditingEscola(null);
       resetForm();
-      await loadMentores();
+      await loadEscolaes();
     } catch (error: any) {
-      toast.error(error.message || "Erro ao salvar mentor");
+      toast.error(error.message || "Erro ao salvar escola");
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string, nome: string) => {
-    if (window.confirm(`Tem certeza que deseja remover o mentor "${nome}"?`)) {
+    if (window.confirm(`Tem certeza que deseja remover o escola "${nome}"?`)) {
       try {
-        await gestorApi.deleteMentor(id);
-        toast.success("Mentor removido com sucesso!");
-        await loadMentores();
+        await gestorApi.deleteEscola(id);
+        toast.success("Escola removido com sucesso!");
+        await loadEscolaes();
       } catch (error: any) {
-        toast.error(error.message || "Erro ao remover mentor");
+        toast.error(error.message || "Erro ao remover escola");
       }
     }
   };
@@ -138,53 +138,53 @@ export default function GestorMentores() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Gestão de Mentores</h1>
+          <h1 className="text-3xl font-bold">Gestão de Escolaes</h1>
           <p className="text-muted-foreground mt-1">
-            Adicione e gerencie mentores/clientes da plataforma
+            Adicione e gerencie escolas/clientes da plataforma
           </p>
         </div>
         <Button onClick={() => handleOpenDialog()}>
           <Plus className="h-4 w-4 mr-2" />
-          Adicionar Mentor
+          Adicionar Escola
         </Button>
       </div>
 
-      {!mentores || mentores.length === 0 ? (
+      {!escolas || escolas.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center">
             <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">Nenhum mentor cadastrado ainda</p>
+            <p className="text-muted-foreground">Nenhum escola cadastrado ainda</p>
             <Button onClick={() => handleOpenDialog()} className="mt-4">
               <Plus className="h-4 w-4 mr-2" />
-              Adicionar Primeiro Mentor
+              Adicionar Primeiro Escola
             </Button>
           </CardContent>
         </Card>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {mentores.map((mentor) => (
-            <Card key={mentor.id} className="relative">
+          {escolas.map((escola) => (
+            <Card key={escola.id} className="relative">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-lg">{mentor.nome}</CardTitle>
+                    <CardTitle className="text-lg">{escola.nome}</CardTitle>
                     <CardDescription className="flex items-center gap-1 mt-1">
                       <Mail className="h-3 w-3" />
-                      {mentor.email}
+                      {escola.email}
                     </CardDescription>
                   </div>
                   <div className="flex gap-1">
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleOpenDialog(mentor)}
+                      onClick={() => handleOpenDialog(escola)}
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleDelete(mentor.id, mentor.nome)}
+                      onClick={() => handleDelete(escola.id, escola.nome)}
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
@@ -194,13 +194,13 @@ export default function GestorMentores() {
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2 text-sm">
                   <Building className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">{mentor.nomePlataforma}</span>
+                  <span className="font-medium">{escola.nomePlataforma}</span>
                 </div>
-                {mentor.logoUrl && (
+                {escola.logoUrl && (
                   <div className="flex items-center gap-2 text-sm">
                     <Image className="h-4 w-4 text-muted-foreground" />
                     <span className="text-xs text-muted-foreground truncate">
-                      {mentor.logoUrl}
+                      {escola.logoUrl}
                     </span>
                   </div>
                 )}
@@ -209,9 +209,9 @@ export default function GestorMentores() {
                   <div className="flex items-center gap-2">
                     <div
                       className="w-6 h-6 rounded border"
-                      style={{ backgroundColor: mentor.corPrincipal }}
+                      style={{ backgroundColor: escola.corPrincipal }}
                     />
-                    <span className="text-xs font-mono">{mentor.corPrincipal}</span>
+                    <span className="text-xs font-mono">{escola.corPrincipal}</span>
                   </div>
                 </div>
               </CardContent>
@@ -225,18 +225,18 @@ export default function GestorMentores() {
           <form onSubmit={handleSubmit}>
             <DialogHeader>
               <DialogTitle>
-                {editingMentor ? "Editar Mentor" : "Adicionar Novo Mentor"}
+                {editingEscola ? "Editar Escola" : "Adicionar Novo Escola"}
               </DialogTitle>
               <DialogDescription>
-                {editingMentor
-                  ? "Atualize as informações do mentor"
-                  : "Preencha os dados do novo mentor/cliente"}
+                {editingEscola
+                  ? "Atualize as informações do escola"
+                  : "Preencha os dados do novo escola/cliente"}
               </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4 py-4">
               <div className="space-y-2">
-                <Label htmlFor="nome">Nome do Mentor *</Label>
+                <Label htmlFor="nome">Nome do Escola *</Label>
                 <Input
                   id="nome"
                   value={formData.nome}
@@ -255,16 +255,16 @@ export default function GestorMentores() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="joao@exemplo.com"
                   required
-                  disabled={!!editingMentor}
+                  disabled={!!editingEscola}
                 />
-                {editingMentor && (
+                {editingEscola && (
                   <p className="text-xs text-muted-foreground">
                     O email não pode ser alterado
                   </p>
                 )}
               </div>
 
-              {!editingMentor && (
+              {!editingEscola && (
                 <div className="space-y-2">
                   <Label htmlFor="senha">Senha Inicial *</Label>
                   <Input
@@ -277,7 +277,7 @@ export default function GestorMentores() {
                     minLength={6}
                   />
                   <p className="text-xs text-muted-foreground">
-                    O mentor poderá alterar esta senha nas configurações
+                    O escola poderá alterar esta senha nas configurações
                   </p>
                 </div>
               )}
@@ -290,11 +290,11 @@ export default function GestorMentores() {
                   onChange={(e) =>
                     setFormData({ ...formData, nomePlataforma: e.target.value })
                   }
-                  placeholder="Mentoria ENEM Pro"
+                  placeholder="Escolaia ENEM Pro"
                   required
                 />
                 <p className="text-xs text-muted-foreground">
-                  Nome que aparecerá para os alunos deste mentor
+                  Nome que aparecerá para os alunos deste escola
                 </p>
               </div>
 
@@ -340,7 +340,7 @@ export default function GestorMentores() {
                 variant="outline"
                 onClick={() => {
                   setDialogOpen(false);
-                  setEditingMentor(null);
+                  setEditingEscola(null);
                   resetForm();
                 }}
               >
@@ -352,7 +352,7 @@ export default function GestorMentores() {
               >
                 {isSaving
                   ? "Salvando..."
-                  : editingMentor
+                  : editingEscola
                   ? "Atualizar"
                   : "Adicionar"}
               </Button>

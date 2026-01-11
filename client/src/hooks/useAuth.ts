@@ -13,7 +13,7 @@ import {
 import { doc, getDoc, getDocFromServer, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db, warmupFirestoreConnection } from "../lib/firebase";
 
-export type UserRole = "gestor" | "mentor" | "aluno";
+export type UserRole = "gestor" | "escola" | "aluno";
 
 export interface UserData {
   uid: string;
@@ -82,12 +82,12 @@ export function useAuth() {
                 role = "aluno";
                 console.log('[useAuth] Usuário identificado como aluno');
               } else {
-                // Verificar se é mentor
-                const mentorDocRef = doc(db, "mentores", firebaseUser.uid);
-                const mentorDoc = await getDoc(mentorDocRef);
-                if (mentorDoc.exists()) {
-                  role = "mentor";
-                  console.log('[useAuth] Usuário identificado como mentor');
+                // Verificar se é escola
+                const escolaDocRef = doc(db, "escolas", firebaseUser.uid);
+                const escolaDoc = await getDoc(escolaDocRef);
+                if (escolaDoc.exists()) {
+                  role = "escola";
+                  console.log('[useAuth] Usuário identificado como escola');
                 } else {
                   // Verificar se é gestor
                   const gestorDocRef = doc(db, "gestores", firebaseUser.uid);
@@ -208,7 +208,7 @@ export function useAuth() {
   };
 
   // Função de cadastro (apenas para alunos)
-  const signUp = async (email: string, password: string, name: string, mentorId: string | null) => {
+  const signUp = async (email: string, password: string, name: string, escolaId: string | null) => {
     try {
       setAuthState((prev) => ({ ...prev, loading: true, error: null }));
       
@@ -226,7 +226,7 @@ export function useAuth() {
       const alunoDocRef = doc(db, "alunos", user.uid);
       await setDoc(alunoDocRef, {
         userId: user.uid,
-        mentorId: mentorId,
+        escolaId: escolaId,
         nome: name,
         email: email,
         celular: null,
@@ -284,8 +284,8 @@ export function useAuth() {
       // Redirecionar para a página de login correta baseada no role
       if (currentRole === 'aluno') {
         window.location.href = '/login/aluno';
-      } else if (currentRole === 'mentor') {
-        window.location.href = '/login/mentor';
+      } else if (currentRole === 'escola') {
+        window.location.href = '/login/escola';
       } else if (currentRole === 'gestor') {
         window.location.href = '/login/gestor';
       } else {

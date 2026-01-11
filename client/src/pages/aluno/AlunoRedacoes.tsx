@@ -113,7 +113,7 @@ export default function AlunoRedacoes() {
   }, []);
 
   const getAlunoId = () => {
-    // Se estiver em modo mentor, pegar o alunoId da URL
+    // Se estiver em modo escola, pegar o alunoId da URL
     const urlParams = new URLSearchParams(window.location.search);
     const alunoIdFromUrl = urlParams.get('alunoId');
     if (alunoIdFromUrl) return alunoIdFromUrl;

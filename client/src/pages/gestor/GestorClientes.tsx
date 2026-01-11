@@ -79,7 +79,7 @@ interface ClienteForm {
     simulados: boolean;
     redacoes: boolean;
     diarioBordo: boolean;
-    mentoria: boolean;
+    escolaia: boolean;
     relatoriosAvancados: boolean;
     exportacaoPdf: boolean;
     planoAcao: boolean;
@@ -114,7 +114,7 @@ const defaultForm: ClienteForm = {
     simulados: true,
     redacoes: true,
     diarioBordo: true,
-    mentoria: true,
+    escolaia: true,
     relatoriosAvancados: true,
     exportacaoPdf: true,
     planoAcao: true,
@@ -135,7 +135,7 @@ const featureLabels: Record<string, string> = {
   simulados: "Simulados",
   redacoes: "Redações",
   diarioBordo: "Diário de Bordo",
-  mentoria: "Mentoria",
+  escolaia: "Escolaia",
   relatoriosAvancados: "Relatórios Avançados",
   exportacaoPdf: "Exportação PDF",
   planoAcao: "Plano de Ação",

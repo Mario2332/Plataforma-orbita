@@ -3,7 +3,7 @@
  * Usa o sistema de cache em memória para evitar chamadas repetidas ao backend
  */
 
-import { alunoApi, mentorApi } from "./api";
+import { alunoApi, escolaApi } from "./api";
 import { cache, CACHE_KEYS, CACHE_TTL, invalidateEstudosCache, invalidateSimuladosCache, invalidateHorariosCache, invalidateMetasCache } from "./cache";
 
 /**
@@ -216,88 +216,88 @@ export const cachedAlunoApi = {
 };
 
 /**
- * API do Mentor com cache
+ * API do Escola com cache
  */
-export const cachedMentorApi = {
+export const cachedEscolaApi = {
   getMe: () => cache.getOrFetch(
-    CACHE_KEYS.MENTOR_ME,
-    () => mentorApi.getMe(),
+    CACHE_KEYS.ESCOLA_ME,
+    () => escolaApi.getMe(),
     CACHE_TTL.LONG
   ),
 
   getAlunos: () => cache.getOrFetch(
-    CACHE_KEYS.MENTOR_ALUNOS,
-    () => mentorApi.getAlunos(),
+    CACHE_KEYS.ESCOLA_ALUNOS,
+    () => escolaApi.getAlunos(),
     CACHE_TTL.MEDIUM
   ),
 
   getAlunosMetricas: () => cache.getOrFetch(
-    CACHE_KEYS.MENTOR_METRICAS,
-    () => mentorApi.getAlunosMetricas(),
+    CACHE_KEYS.ESCOLA_METRICAS,
+    () => escolaApi.getAlunosMetricas(),
     CACHE_TTL.MEDIUM
   ),
 
   getAlunoData: (data: { alunoId: string; collection: string }) => cache.getOrFetch(
-    CACHE_KEYS.MENTOR_ALUNO_DATA(data.alunoId, data.collection),
-    () => mentorApi.getAlunoData(data),
+    CACHE_KEYS.ESCOLA_ALUNO_DATA(data.alunoId, data.collection),
+    () => escolaApi.getAlunoData(data),
     CACHE_TTL.MEDIUM
   ),
 
   // Funções de escrita com invalidação
-  createAluno: async (data: Parameters<typeof mentorApi.createAluno>[0]) => {
-    const result = await mentorApi.createAluno(data);
-    cache.delete(CACHE_KEYS.MENTOR_ALUNOS);
+  createAluno: async (data: Parameters<typeof escolaApi.createAluno>[0]) => {
+    const result = await escolaApi.createAluno(data);
+    cache.delete(CACHE_KEYS.ESCOLA_ALUNOS);
     return result;
   },
 
-  updateAluno: async (data: Parameters<typeof mentorApi.updateAluno>[0]) => {
-    const result = await mentorApi.updateAluno(data);
-    cache.delete(CACHE_KEYS.MENTOR_ALUNOS);
+  updateAluno: async (data: Parameters<typeof escolaApi.updateAluno>[0]) => {
+    const result = await escolaApi.updateAluno(data);
+    cache.delete(CACHE_KEYS.ESCOLA_ALUNOS);
     return result;
   },
 
   deleteAluno: async (alunoId: string) => {
-    const result = await mentorApi.deleteAluno(alunoId);
-    cache.delete(CACHE_KEYS.MENTOR_ALUNOS);
-    cache.deleteByPrefix(`mentor:aluno:${alunoId}`);
+    const result = await escolaApi.deleteAluno(alunoId);
+    cache.delete(CACHE_KEYS.ESCOLA_ALUNOS);
+    cache.deleteByPrefix(`escola:aluno:${alunoId}`);
     return result;
   },
 
   // Passthrough para outras funções
-  toggleAlunoStatus: mentorApi.toggleAlunoStatus,
-  getConfig: mentorApi.getConfig,
-  updateConfig: mentorApi.updateConfig,
-  getAlunoEstudos: mentorApi.getAlunoEstudos,
-  getAlunoSimulados: mentorApi.getAlunoSimulados,
-  getAlunoDashboard: mentorApi.getAlunoDashboard,
-  getAlunoAreaCompleta: mentorApi.getAlunoAreaCompleta,
-  getEvolucaoAlunos: mentorApi.getEvolucaoAlunos,
-  createAlunoEstudo: mentorApi.createAlunoEstudo,
-  updateAlunoEstudo: mentorApi.updateAlunoEstudo,
-  deleteAlunoEstudo: mentorApi.deleteAlunoEstudo,
-  createAlunoSimulado: mentorApi.createAlunoSimulado,
-  updateAlunoSimulado: mentorApi.updateAlunoSimulado,
-  deleteAlunoSimulado: mentorApi.deleteAlunoSimulado,
-  createAlunoHorario: mentorApi.createAlunoHorario,
-  updateAlunoHorario: mentorApi.updateAlunoHorario,
-  deleteAlunoHorario: mentorApi.deleteAlunoHorario,
-  clearAlunoHorarios: mentorApi.clearAlunoHorarios,
-  saveAlunoTemplate: mentorApi.saveAlunoTemplate,
-  loadAlunoTemplate: mentorApi.loadAlunoTemplate,
-  deleteAlunoTemplate: mentorApi.deleteAlunoTemplate,
-  createAlunoDiarioEmocional: mentorApi.createAlunoDiarioEmocional,
-  deleteAlunoDiarioEmocional: mentorApi.deleteAlunoDiarioEmocional,
-  createAlunoAutodiagnostico: mentorApi.createAlunoAutodiagnostico,
-  deleteAlunoAutodiagnostico: mentorApi.deleteAlunoAutodiagnostico,
-  updateAlunoProgresso: mentorApi.updateAlunoProgresso,
-  updateAlunoProfile: mentorApi.updateAlunoProfile,
-  createAlunoCronograma: mentorApi.createAlunoCronograma,
-  updateAlunoCronograma: mentorApi.updateAlunoCronograma,
-  deleteAlunoCronograma: mentorApi.deleteAlunoCronograma,
-  createAlunoTarefa: mentorApi.createAlunoTarefa,
-  updateAlunoTarefa: mentorApi.updateAlunoTarefa,
-  deleteAlunoTarefa: mentorApi.deleteAlunoTarefa,
-  createAlunoMeta: mentorApi.createAlunoMeta,
-  updateAlunoMeta: mentorApi.updateAlunoMeta,
-  deleteAlunoMeta: mentorApi.deleteAlunoMeta,
+  toggleAlunoStatus: escolaApi.toggleAlunoStatus,
+  getConfig: escolaApi.getConfig,
+  updateConfig: escolaApi.updateConfig,
+  getAlunoEstudos: escolaApi.getAlunoEstudos,
+  getAlunoSimulados: escolaApi.getAlunoSimulados,
+  getAlunoDashboard: escolaApi.getAlunoDashboard,
+  getAlunoAreaCompleta: escolaApi.getAlunoAreaCompleta,
+  getEvolucaoAlunos: escolaApi.getEvolucaoAlunos,
+  createAlunoEstudo: escolaApi.createAlunoEstudo,
+  updateAlunoEstudo: escolaApi.updateAlunoEstudo,
+  deleteAlunoEstudo: escolaApi.deleteAlunoEstudo,
+  createAlunoSimulado: escolaApi.createAlunoSimulado,
+  updateAlunoSimulado: escolaApi.updateAlunoSimulado,
+  deleteAlunoSimulado: escolaApi.deleteAlunoSimulado,
+  createAlunoHorario: escolaApi.createAlunoHorario,
+  updateAlunoHorario: escolaApi.updateAlunoHorario,
+  deleteAlunoHorario: escolaApi.deleteAlunoHorario,
+  clearAlunoHorarios: escolaApi.clearAlunoHorarios,
+  saveAlunoTemplate: escolaApi.saveAlunoTemplate,
+  loadAlunoTemplate: escolaApi.loadAlunoTemplate,
+  deleteAlunoTemplate: escolaApi.deleteAlunoTemplate,
+  createAlunoDiarioEmocional: escolaApi.createAlunoDiarioEmocional,
+  deleteAlunoDiarioEmocional: escolaApi.deleteAlunoDiarioEmocional,
+  createAlunoAutodiagnostico: escolaApi.createAlunoAutodiagnostico,
+  deleteAlunoAutodiagnostico: escolaApi.deleteAlunoAutodiagnostico,
+  updateAlunoProgresso: escolaApi.updateAlunoProgresso,
+  updateAlunoProfile: escolaApi.updateAlunoProfile,
+  createAlunoCronograma: escolaApi.createAlunoCronograma,
+  updateAlunoCronograma: escolaApi.updateAlunoCronograma,
+  deleteAlunoCronograma: escolaApi.deleteAlunoCronograma,
+  createAlunoTarefa: escolaApi.createAlunoTarefa,
+  updateAlunoTarefa: escolaApi.updateAlunoTarefa,
+  deleteAlunoTarefa: escolaApi.deleteAlunoTarefa,
+  createAlunoMeta: escolaApi.createAlunoMeta,
+  updateAlunoMeta: escolaApi.updateAlunoMeta,
+  deleteAlunoMeta: escolaApi.deleteAlunoMeta,
 };

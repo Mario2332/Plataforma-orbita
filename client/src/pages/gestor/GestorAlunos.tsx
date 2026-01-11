@@ -14,26 +14,26 @@ export default function GestorAlunos() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingAluno, setEditingAluno] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedMentorId, setSelectedMentorId] = useState<string>("all");
+  const [selectedEscolaId, setSelectedEscolaId] = useState<string>("all");
   const [alunos, setAlunos] = useState<any[]>([]);
-  const [mentores, setMentores] = useState<any[]>([]);
+  const [escolas, setEscolaes] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
-    mentorId: "",
+    escolaId: "",
   });
 
   const loadData = async () => {
     try {
       setIsLoading(true);
-      const [alunosData, mentoresData] = await Promise.all([
+      const [alunosData, escolasData] = await Promise.all([
         gestorApi.getAllAlunos(),
-        gestorApi.getMentores(),
+        gestorApi.getEscolaes(),
       ]);
       setAlunos(alunosData as any[]);
-      setMentores(mentoresData as any[]);
+      setEscolaes(escolasData as any[]);
     } catch (error: any) {
       toast.error(error.message || "Erro ao carregar dados");
     } finally {
@@ -49,7 +49,7 @@ export default function GestorAlunos() {
     setFormData({
       nome: "",
       email: "",
-      mentorId: "",
+      escolaId: "",
     });
   };
 
@@ -58,7 +58,7 @@ export default function GestorAlunos() {
     setFormData({
       nome: aluno.nome,
       email: aluno.email,
-      mentorId: aluno.mentorId,
+      escolaId: aluno.escolaId,
     });
     setDialogOpen(true);
   };
@@ -66,7 +66,7 @@ export default function GestorAlunos() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.nome || !formData.email || !formData.mentorId) {
+    if (!formData.nome || !formData.email || !formData.escolaId) {
       toast.error("Preencha todos os campos obrigatórios");
       return;
     }
@@ -101,16 +101,16 @@ export default function GestorAlunos() {
     }
   };
 
-  const getMentorNome = (mentorId: string) => {
-    const mentor = mentores?.find((m) => m.id === mentorId);
-    return mentor?.nome || "Sem mentor";
+  const getEscolaNome = (escolaId: string) => {
+    const escola = escolas?.find((m) => m.id === escolaId);
+    return escola?.nome || "Sem escola";
   };
 
   const filteredAlunos = alunos?.filter((aluno: any) => {
     const matchesSearch = aluno.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
       aluno.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesMentor = selectedMentorId === "all" || aluno.mentorId === selectedMentorId;
-    return matchesSearch && matchesMentor;
+    const matchesEscola = selectedEscolaId === "all" || aluno.escolaId === selectedEscolaId;
+    return matchesSearch && matchesEscola;
   });
 
   if (isLoading) {
@@ -144,15 +144,15 @@ export default function GestorAlunos() {
                 className="max-w-sm"
               />
             </div>
-            <Select value={selectedMentorId} onValueChange={setSelectedMentorId}>
+            <Select value={selectedEscolaId} onValueChange={setSelectedEscolaId}>
               <SelectTrigger className="w-[250px]">
-                <SelectValue placeholder="Filtrar por mentor" />
+                <SelectValue placeholder="Filtrar por escola" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos os mentores</SelectItem>
-                {mentores?.map((mentor: any) => (
-                  <SelectItem key={mentor.id} value={mentor.id}>
-                    {mentor.nome} - {mentor.nomePlataforma}
+                <SelectItem value="all">Todos os escolas</SelectItem>
+                {escolas?.map((escola: any) => (
+                  <SelectItem key={escola.id} value={escola.id}>
+                    {escola.nome} - {escola.nomePlataforma}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -175,7 +175,7 @@ export default function GestorAlunos() {
                   <TableRow>
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Mentor</TableHead>
+                    <TableHead>Escola</TableHead>
                     <TableHead>Data de Cadastro</TableHead>
                     <TableHead className="text-right">Ações</TableHead>
                   </TableRow>
@@ -185,7 +185,7 @@ export default function GestorAlunos() {
                     <TableRow key={aluno.id}>
                       <TableCell className="font-medium">{aluno.nome}</TableCell>
                       <TableCell>{aluno.email}</TableCell>
-                      <TableCell>{getMentorNome(aluno.mentorId)}</TableCell>
+                      <TableCell>{getEscolaNome(aluno.escolaId)}</TableCell>
                       <TableCell>
                         {(() => {
                           let date: Date;
@@ -233,7 +233,7 @@ export default function GestorAlunos() {
             <DialogHeader>
               <DialogTitle>Editar Aluno</DialogTitle>
               <DialogDescription>
-                Atualize as informações do aluno ou altere o mentor vinculado
+                Atualize as informações do aluno ou altere o escola vinculado
               </DialogDescription>
             </DialogHeader>
 
@@ -266,26 +266,26 @@ export default function GestorAlunos() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="mentorId">Mentor *</Label>
+                <Label htmlFor="escolaId">Escola *</Label>
                 <Select
-                  value={formData.mentorId}
+                  value={formData.escolaId}
                   onValueChange={(value) =>
-                    setFormData({ ...formData, mentorId: value })
+                    setFormData({ ...formData, escolaId: value })
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecione um mentor" />
+                    <SelectValue placeholder="Selecione um escola" />
                   </SelectTrigger>
                   <SelectContent>
-                    {mentores?.map((mentor) => (
-                      <SelectItem key={mentor.id} value={mentor.id}>
-                        {mentor.nome} - {mentor.nomePlataforma}
+                    {escolas?.map((escola) => (
+                      <SelectItem key={escola.id} value={escola.id}>
+                        {escola.nome} - {escola.nomePlataforma}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
                 <p className="text-xs text-muted-foreground">
-                  Altere o mentor vinculado a este aluno
+                  Altere o escola vinculado a este aluno
                 </p>
               </div>
             </div>

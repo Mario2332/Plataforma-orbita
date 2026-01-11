@@ -125,14 +125,14 @@ export const CACHE_KEYS = {
   ALUNO_AUTODIAGNOSTICOS: 'aluno:autodiagnosticos',
   ALUNO_DIARIO: 'aluno:diario',
   
-  // Mentor
-  MENTOR_ME: 'mentor:me',
-  MENTOR_ALUNOS: 'mentor:alunos',
-  MENTOR_METRICAS: 'mentor:metricas',
+  // Escola
+  ESCOLA_ME: 'escola:me',
+  ESCOLA_ALUNOS: 'escola:alunos',
+  ESCOLA_METRICAS: 'escola:metricas',
   
-  // Prefixo para dados de aluno específico (usado pelo mentor)
-  MENTOR_ALUNO_DATA: (alunoId: string, collection: string) => 
-    `mentor:aluno:${alunoId}:${collection}`,
+  // Prefixo para dados de aluno específico (usado pelo escola)
+  ESCOLA_ALUNO_DATA: (alunoId: string, collection: string) => 
+    `escola:aluno:${alunoId}:${collection}`,
 };
 
 // TTLs específicos por tipo de dado
@@ -183,8 +183,8 @@ export function invalidateAllAlunoCache(): void {
 }
 
 /**
- * Invalida todo o cache do mentor
+ * Invalida todo o cache do escola
  */
-export function invalidateAllMentorCache(): void {
-  cache.deleteByPrefix('mentor:');
+export function invalidateAllEscolaCache(): void {
+  cache.deleteByPrefix('escola:');
 }

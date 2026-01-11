@@ -48,7 +48,7 @@ const getDefaultTenantOrbita = (): TenantConfig => ({
     diarioBordo: true,
     planoAcao: true,
     autodiagnostico: true,
-    mentoria: true,
+    escolaia: true,
     relatoriosAvancados: true,
     exportacaoPDF: true,
     integracaoCalendario: true,
@@ -86,7 +86,7 @@ const getDefaultTenantFree = (): TenantConfig => ({
     diarioBordo: true,
     planoAcao: false, // Premium
     autodiagnostico: false, // Premium
-    mentoria: false, // Premium
+    escolaia: false, // Premium
     relatoriosAvancados: false, // Premium
     exportacaoPDF: false, // Premium
     integracaoCalendario: false, // Premium
