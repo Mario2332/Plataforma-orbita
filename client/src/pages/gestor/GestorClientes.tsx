@@ -331,25 +331,28 @@ export default function GestorClientes() {
             footer: "",
           },
         },
-        atualizadoEm: Timestamp.now(),
-        ...(editando ? {} : { criadoEm: Timestamp.now() }),
       };
 
-      const tenantRef = doc(adminDb, "tenants", docId);
+      // Usar Cloud Functions em vez de escrever diretamente
+      const { httpsCallable } = await import("firebase/functions");
+      const { adminFunctions } = await import("@/lib/firebase-admin");
       
       if (editando) {
-        await updateDoc(tenantRef, tenantData);
+        const updateTenant = httpsCallable(adminFunctions, "updateTenant");
+        await updateTenant({ tenantId: docId, data: tenantData });
         toast.success("Cliente atualizado com sucesso!");
       } else {
-        await setDoc(tenantRef, tenantData);
+        const createTenant = httpsCallable(adminFunctions, "createTenant");
+        await createTenant(tenantData);
         toast.success("Cliente criado com sucesso!");
       }
 
       setDialogOpen(false);
       carregarClientes();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao salvar cliente:", error);
-      toast.error("Erro ao salvar cliente");
+      const errorMessage = error?.message || "Erro ao salvar cliente";
+      toast.error(errorMessage);
     } finally {
       setIsSaving(false);
     }
@@ -360,30 +363,39 @@ export default function GestorClientes() {
     if (!clienteParaDeletar) return;
 
     try {
-      await deleteDoc(doc(adminDb, "tenants", clienteParaDeletar.id));
+      // Usar Cloud Function em vez de deletar diretamente
+      const { httpsCallable } = await import("firebase/functions");
+      const { adminFunctions } = await import("@/lib/firebase-admin");
+      const deleteTenant = httpsCallable(adminFunctions, "deleteTenant");
+      await deleteTenant({ tenantId: clienteParaDeletar.id });
+      
       toast.success("Cliente excluído com sucesso!");
       setDeleteDialogOpen(false);
       setClienteParaDeletar(null);
       carregarClientes();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao excluir cliente:", error);
-      toast.error("Erro ao excluir cliente");
+      const errorMessage = error?.message || "Erro ao excluir cliente";
+      toast.error(errorMessage);
     }
   };
 
   // Alternar status
   const handleToggleStatus = async (cliente: TenantConfig) => {
     try {
-      const novoStatus = cliente.status === "ativo" ? "inativo" : "ativo";
-      await updateDoc(doc(adminDb, "tenants", cliente.id), {
-        status: novoStatus,
-        atualizadoEm: Timestamp.now(),
-      });
+      // Usar Cloud Function em vez de atualizar diretamente
+      const { httpsCallable } = await import("firebase/functions");
+      const { adminFunctions } = await import("@/lib/firebase-admin");
+      const toggleTenantStatus = httpsCallable(adminFunctions, "toggleTenantStatus");
+      const result: any = await toggleTenantStatus({ tenantId: cliente.id });
+      
+      const novoStatus = result.data.newStatus;
       toast.success(`Cliente ${novoStatus === "ativo" ? "ativado" : "desativado"}!`);
       carregarClientes();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao alterar status:", error);
-      toast.error("Erro ao alterar status");
+      const errorMessage = error?.message || "Erro ao alterar status";
+      toast.error(errorMessage);
     }
   };
 

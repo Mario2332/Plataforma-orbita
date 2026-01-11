@@ -31,3 +31,4 @@ export * from "./triggers/updateMetasProgress";
 export * from "./triggers/processarMetasDiarias";
 export * from "./triggers/rankingWeeklyUpdate";
 export * from "./callable/init-ranking";
+export * from "./callable/tenants";

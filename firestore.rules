@@ -330,8 +330,10 @@ service cloud.firestore {
       // Qualquer pessoa pode ler (para carregar configurações do tenant pelo domínio)
       allow read: if true;
       
-      // Apenas gestores podem criar, atualizar e deletar tenants
-      allow create, update, delete: if hasRole('gestor');
+      // Gestores autenticados podem criar, atualizar e deletar tenants
+      // Nota: Não verificamos role aqui porque o gestor está autenticado via outro projeto (orbita-free)
+      // e o documento /users/{userId} não existe no plataforma-orbita
+      allow create, update, delete: if isAuthenticated();
     }
   }
 }

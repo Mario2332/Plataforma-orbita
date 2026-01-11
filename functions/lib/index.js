@@ -72,4 +72,5 @@ __exportStar(require("./triggers/updateMetasProgress"), exports);
 __exportStar(require("./triggers/processarMetasDiarias"), exports);
 __exportStar(require("./triggers/rankingWeeklyUpdate"), exports);
 __exportStar(require("./callable/init-ranking"), exports);
+__exportStar(require("./callable/tenants"), exports);
 //# sourceMappingURL=index.js.map
